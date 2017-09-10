@@ -6,7 +6,7 @@ export default class EventsView extends Component {
         tabBarLabel: 'EventsView',
         tabBarIcon: ({ tintColor }) => (
             <Image 
-                source={require('../../images/Perks-icon-white@3x.png')}
+                source={require('../../images/Calendar-icon-white@3x.png')}
                 size={50}
             />
         )

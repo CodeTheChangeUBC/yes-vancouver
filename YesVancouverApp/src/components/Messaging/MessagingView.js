@@ -6,7 +6,7 @@ export default class MessagingView extends Component {
         tabBarLabel: 'MessagingView',
         tabBarIcon: ({ tintColor }) => (
             <Image 
-                source={require('../../images/Perks-icon-white@3x.png')}
+                source={require('../../images/Message-icon-white@3x.png')}
                 size={50}
             />
         )

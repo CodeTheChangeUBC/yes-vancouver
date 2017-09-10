@@ -6,7 +6,7 @@ export default class NewsFeedView extends Component {
         tabBarLabel: 'NewsFeedView',
         tabBarIcon: ({ tintColor }) => (
             <Image 
-                source={require('../../images/Perks-icon-white@3x.png')}
+                source={require('../../images/YES-icon-white@3x.png')}
                 size={50}
             />
         )

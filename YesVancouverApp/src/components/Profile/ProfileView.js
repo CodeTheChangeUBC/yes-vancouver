@@ -6,7 +6,7 @@ export default class ProfileView extends Component {
         tabBarLabel: 'ProfileView',
         tabBarIcon: ({ tintColor }) => (
             <Image 
-                source={require('../../images/Perks-icon-white@3x.png')}
+                source={require('../../images/Profile-icon-white@3x.png')}
                 size={50}
             />
         )

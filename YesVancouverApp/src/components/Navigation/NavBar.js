@@ -15,9 +15,11 @@ const NavBar = TabNavigator({
     ProfileView: { screen: ProfileView },
 }, {
     tabBarOptions: {
-        activeTintColor: 'red',
         showIcon: true,
-        
+        showLabel: false,
+        style: {
+            backgroundColor: '#ED4969'
+        }
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom'

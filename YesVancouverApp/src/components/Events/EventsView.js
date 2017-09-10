@@ -6,7 +6,7 @@ export default class EventsView extends Component {
         tabBarLabel: 'EventsView',
         tabBarIcon: ({ tintColor }) => (
             <Image 
-                source={require('/Users/OL/Documents/YesVancouver/yes-vancouver/YesVancouverApp/src/images/Perks-icon-white@3x.png')}
+                source={require('../../images/Perks-icon-white@3x.png')}
                 size={50}
             />
         )

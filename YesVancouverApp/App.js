@@ -1,13 +1,14 @@
 import React from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 import Login from './src/components/Login/login';
+import NavBar from './src/components/Navigation/NavBar';
 
 export default class App extends React.Component {
   render() {
     return (
      
         <Login />
-      
+        // <NavBar />
     );
   }
 }

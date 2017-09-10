@@ -6,10 +6,10 @@ import NavBar from './src/components/Navigation/NavBar';
 export default class App extends React.Component {
   render() {
     return (
-        
-        <NavBar />
-
-      );
+     
+        <Login />
+        // <NavBar />
+    );
   }
 }
 

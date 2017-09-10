@@ -4,11 +4,14 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default class EventsView extends Component {
     static navigationOptions = {
         tabBarLabel: 'EventsView',
-        tabBarIcon: ({ tintColor }) => (
-            <Image 
-                source={require('../../images/Calendar-icon-white@3x.png')}
-                size={50}
-            />
+        tabBarIcon: ({ focused, tintColor }) => focused ?
+        ( <Image 
+            source={require('../../images/Calendar-icon-white@3x.png')}
+            size={50}/> 
+        ) :
+        ( <Image 
+            source={require('../../images/Calendar-icon-orange@3x.png')}
+            size={50}/>
         )
     }
 

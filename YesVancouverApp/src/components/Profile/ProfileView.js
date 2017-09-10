@@ -4,11 +4,14 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default class ProfileView extends Component {
     static navigationOptions = {
         tabBarLabel: 'ProfileView',
-        tabBarIcon: ({ tintColor }) => (
-            <Image 
-                source={require('../../images/Profile-icon-white@3x.png')}
-                size={50}
-            />
+        tabBarIcon: ({ focused, tintColor }) => focused ?
+        ( <Image 
+            source={require('../../images/Profile-icon-white@3x.png')}
+            size={50}/> 
+        ) :
+        ( <Image 
+            source={require('../../images/Profile-icon-orange@3x.png')}
+            size={50}/>
         )
     }
 

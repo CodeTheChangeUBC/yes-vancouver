@@ -4,11 +4,14 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default class NewsFeedView extends Component {
     static navigationOptions = {
         tabBarLabel: 'NewsFeedView',
-        tabBarIcon: ({ tintColor }) => (
-            <Image 
-                source={require('../../images/YES-icon-white@3x.png')}
-                size={50}
-            />
+        tabBarIcon: ({ focused, tintColor }) => focused ?
+        ( <Image 
+            source={require('../../images/YES-icon-white@3x.png')}
+            size={50}/> 
+        ) :
+        ( <Image 
+            source={require('../../images/YES-icon-orange@3x.png')}
+            size={50}/>
         )
     }
 

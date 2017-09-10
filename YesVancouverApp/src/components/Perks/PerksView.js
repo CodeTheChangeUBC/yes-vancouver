@@ -4,12 +4,15 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default class PerksView extends Component {
     static navigationOptions = {
         tabBarLabel: 'PerksView',
-        tabBarIcon: ({ tintColor }) => (
-            <Image 
-                source={require('../../images/Perks-icon-white@3x.png')}
-                size={50}
-            />
-        )
+        tabBarIcon: ({ focused, tintColor }) => focused ?
+        ( <Image 
+            source={require('../../images/Perks-icon-white@3x.png')}
+            size={50}/> 
+        ) :
+        ( <Image 
+            source={require('../../images/Perks-icon-orange@3x.png')}
+            size={50}/>
+        ) 
     }
 
     render() {

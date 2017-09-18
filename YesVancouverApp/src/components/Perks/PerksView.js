@@ -6,11 +6,11 @@ export default class PerksView extends Component {
         tabBarLabel: 'PerksView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
-            source={require('../../images/Perks-icon-white@3x.png')}
+            source={require('../../images/NavBar/Perks-icon-white@3x.png')}
             size={50}/> 
         ) :
         ( <Image 
-            source={require('../../images/Perks-icon-orange@3x.png')}
+            source={require('../../images/NavBar/Perks-icon-orange@3x.png')}
             size={50}/>
         ) 
     }

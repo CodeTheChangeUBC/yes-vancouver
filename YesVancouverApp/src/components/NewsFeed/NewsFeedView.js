@@ -6,11 +6,11 @@ export default class NewsFeedView extends Component {
         tabBarLabel: 'NewsFeedView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
-            source={require('../../images/YES-icon-white@3x.png')}
+            source={require('../../images/NavBar/YES-icon-white@3x.png')}
             size={50}/> 
         ) :
         ( <Image 
-            source={require('../../images/YES-icon-orange@3x.png')}
+            source={require('../../images/NavBar/YES-icon-orange@3x.png')}
             size={50}/>
         )
     }

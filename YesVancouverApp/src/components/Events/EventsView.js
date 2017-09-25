@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 export default class EventsView extends Component {
     static navigationOptions = {
         tabBarLabel: 'EventsView',
+        title: 'EventsView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
             source={require('../../images/Calendar-icon-white@3x.png')}

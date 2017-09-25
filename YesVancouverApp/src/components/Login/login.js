@@ -1,32 +1,33 @@
 
-import React, { Component } from 'react';
-import {StyleSheet,View,Image, Text, KeyboardAvoidingView} from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import {StyleSheet,View,Image, Text, KeyboardAvoidingView, TouchableHighlight} from 'react-native';
 import LoginForm from './LoginForm';
 import { StackNavigator } from 'react-navigation';
 
 export default class Login extends Component {
 
     static navigationOptions = {
-        title: 'Login Screen',
+        title:"Login",
     };
 
-  render() {
-    return (
+    render(){
+        return(
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      
 
-        <View style={styles.bannerContainer}>
-          
-        </View>
-        <View style= {styles.formContainer}>
-        <LoginForm/>
-        </View>
+                <View style={styles.bannerContainer}>
 
-      </KeyboardAvoidingView>
-    );
-  }
+                </View>
+                <View style= {styles.formContainer}>
+                    <LoginForm/>
+                </View>
+
+
+            </KeyboardAvoidingView>
+        )
+    }
 }
+
 
 const styles = StyleSheet.create({
   container: {

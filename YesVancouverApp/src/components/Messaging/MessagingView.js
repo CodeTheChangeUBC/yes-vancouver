@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 export default class MessagingView extends Component {
     static navigationOptions = {
         tabBarLabel: 'MessagingView',
+        title: "MessagingView",
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
             source={require('../../images/Message-icon-white@3x.png')}

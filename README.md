@@ -2,10 +2,10 @@
 Development repo for YES! Vancouver cross-platform mobile app. 
 
 
-install instruction for nodeJS:
+Installation instructions for Node.js:
 
 1. Windows:  
-   Install nodeJS: https://nodejs.org/dist/v6.11.1/node-v6.11.1-x64.msi
+   Install Node.js: https://nodejs.org/dist/v6.11.1/node-v6.11.1-x64.msi
 
    Mac:  
    Install Homebrew:  
@@ -20,10 +20,19 @@ install instruction for nodeJS:
    Connect your phone to the same network as your computer  
    
 
-3. For Windows use PowerShell:
+3. Clone the repository.  In Git Bash or Mac Terminal, run:  
+   `git clone https://github.com/CodeTheChangeUBC/yes-vancouver.git`
+   
+4. Navigate into the project's root directory:  
+   `cd yes-vancouver/YesVancouverApp/`
+   
+5. Install node modules:  
+   `npm install`
+
+6. For Windows use PowerShell:  
    For Mac use Terminal:
 
-   npm start
+   `npm start`
 
-4. Open Expo app and scan the QR code in the shell.
+7. Open Expo app and scan the QR code in the shell.
 

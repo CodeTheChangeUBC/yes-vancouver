@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { Component } from 'react';
+import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import EventsList from './EventsList'
+
 
 export default class EventsView extends Component {
     static navigationOptions = {
@@ -19,18 +21,7 @@ export default class EventsView extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Events View</Text>
-            </View>
+            <EventsList/>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

@@ -1,0 +1,67 @@
+// https://help.wildapricot.com/display/DOC/Events+API+V2+call
+
+// GET
+// https://api.wildapricot.org/v2/Accounts/<ACCOUNT_NUM>/Events
+// Authorization: Bearer <BEARER_TOKEN>
+
+{
+    "Events": [
+        {
+            "Id": 2673364,
+            "Url": "https://api.wildapricot.org/v2/accounts/240782/Events/2673364",
+            "EventType": "Regular",
+            "StartDate": "2019-09-11T08:30:00-07:00",
+            "EndDate": "2019-09-13T12:30:00-07:00",
+            "Location": "The Event Venue",
+            "RegistrationEnabled": true,
+            "RegistrationsLimit": null,
+            "PendingRegistrationsCount": 0,
+            "ConfirmedRegistrationsCount": 2,
+            "CheckedInAttendeesNumber": 0,
+            "Tags": [],
+            "AccessLevel": "Public",
+            "StartTimeSpecified": true,
+            "EndTimeSpecified": true,
+            "HasEnabledRegistrationTypes": true,
+            "Name": "Fall Conference"
+        },
+        {
+            "Id": 2673365,
+            "Url": "https://api.wildapricot.org/v2/accounts/240782/Events/2673365",
+            "EventType": "Regular",
+            "StartDate": "2019-07-31T08:30:00-07:00",
+            "EndDate": "2019-07-31T08:30:00-07:00",
+            "Location": "The Event Venue",
+            "RegistrationEnabled": true,
+            "RegistrationsLimit": null,
+            "PendingRegistrationsCount": 0,
+            "ConfirmedRegistrationsCount": 0,
+            "CheckedInAttendeesNumber": 0,
+            "Tags": [],
+            "AccessLevel": "Public",
+            "StartTimeSpecified": true,
+            "EndTimeSpecified": false,
+            "HasEnabledRegistrationTypes": true,
+            "Name": "Annual General Meeting"
+        },
+        {
+            "Id": 2673366,
+            "Url": "https://api.wildapricot.org/v2/accounts/240782/Events/2673366",
+            "EventType": "Regular",
+            "StartDate": "2019-04-01T19:30:00-07:00",
+            "EndDate": "2019-04-01T19:30:00-07:00",
+            "Location": "The Event Venue",
+            "RegistrationEnabled": true,
+            "RegistrationsLimit": null,
+            "PendingRegistrationsCount": 0,
+            "ConfirmedRegistrationsCount": 0,
+            "CheckedInAttendeesNumber": 0,
+            "Tags": [],
+            "AccessLevel": "Public",
+            "StartTimeSpecified": true,
+            "EndTimeSpecified": false,
+            "HasEnabledRegistrationTypes": true,
+            "Name": "Spring Gala"
+        }
+    ]
+}

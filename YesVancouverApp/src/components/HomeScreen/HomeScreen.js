@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-const util = require('util');
+// const util = require('util');
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {

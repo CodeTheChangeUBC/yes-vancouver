@@ -1,0 +1,223 @@
+// https://help.wildapricot.com/display/DOC/Events+API+V2+call
+
+// GET
+// https://api.wildapricot.org/v2/Accounts/<ACCOUNT_NUM>/Events/<EVENT_ID>
+// Authorization: Bearer <BEARER_TOKEN>
+
+{
+    "Id": 2673364,
+    "Url": "https://api.wildapricot.org/v2/accounts/240782/Events/2673364",
+    "EventType": "Regular",
+    "StartDate": "2019-09-11T08:30:00-07:00",
+    "EndDate": "2019-09-13T12:30:00-07:00",
+    "Location": "The Event Venue",
+    "RegistrationEnabled": true,
+    "RegistrationsLimit": null,
+    "PendingRegistrationsCount": 0,
+    "ConfirmedRegistrationsCount": 2,
+    "CheckedInAttendeesNumber": 0,
+    "Tags": [],
+    "AccessLevel": "Public",
+    "Details": {
+        "DescriptionHtml": "<p>This is another sample event. This one spans several days.</p>\r\n\r\n<p>From the Events module, you can specify the event name, location, date, and cost, and control whether visitors to your site can see and register for the event.</p>To learn more about event management, visit our&nbsp;<a href=\"http://help.wildapricot.com/display/DOC/Events\" target=\"_blank\">Events help</a>&nbsp;section.<br>",
+        "PaymentInstructions": "",
+        "TimeZone": {
+            "ZoneId": "US Mountain Standard Time",
+            "Name": "(UTC-07:00) Arizona",
+            "UtcOffset": -420
+        },
+        "RegistrationTypes": [
+            {
+                "Id": 3708811,
+                "Url": "https://api.wildapricot.org/v2/accounts/240782/EventRegistrationTypes/3708811",
+                "EventId": 2673364,
+                "IsEnabled": true,
+                "Description": "Special price for members",
+                "BasePrice": 80,
+                "GuestPrice": 80,
+                "UseTaxScopeSettings": false,
+                "Availability": "MembersOnly",
+                "AvailableForMembershipLevels": [
+                    {
+                        "Id": 323230,
+                        "Url": "https://api.wildapricot.org/v2/accounts/240782/MembershipLevels/323230"
+                    },
+                    {
+                        "Id": 323231,
+                        "Url": "https://api.wildapricot.org/v2/accounts/240782/MembershipLevels/323231"
+                    }
+                ],
+                "GuestRegistrationPolicy": "Disabled",
+                "CurrentRegistrantsCount": 1,
+                "MultipleRegistrationAllowed": true,
+                "WaitlistBehaviour": "Undefined",
+                "UnavailabilityPolicy": "ShowDisabled",
+                "Name": "Member tickets"
+            },
+            {
+                "Id": 3708812,
+                "Url": "https://api.wildapricot.org/v2/accounts/240782/EventRegistrationTypes/3708812",
+                "EventId": 2673364,
+                "IsEnabled": true,
+                "Description": "",
+                "BasePrice": 100,
+                "GuestPrice": 100,
+                "UseTaxScopeSettings": false,
+                "Availability": "Everyone",
+                "AvailableForMembershipLevels": null,
+                "GuestRegistrationPolicy": "Disabled",
+                "CurrentRegistrantsCount": 1,
+                "MultipleRegistrationAllowed": true,
+                "WaitlistBehaviour": "Undefined",
+                "UnavailabilityPolicy": "ShowDisabled",
+                "Name": "Regular ticket"
+            }
+        ],
+        "EventRegistrationFields": [
+            {
+                "Id": 0,
+                "Kind": "Common",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Description": "This is a system field (first name).   It cannot be deleted.",
+                "Order": 1,
+                "DisplayType": "SingleLineText",
+                "SystemCode": "FirstName",
+                "IsRequired": true,
+                "FieldName": "First name",
+                "Type": "String",
+                "IsSystem": true
+            },
+            {
+                "Id": 0,
+                "Kind": "Common",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Description": "This is a system field (last name).  It cannot be deleted.",
+                "Order": 2,
+                "DisplayType": "SingleLineText",
+                "SystemCode": "LastName",
+                "IsRequired": true,
+                "FieldName": "Last name",
+                "Type": "String",
+                "IsSystem": true
+            },
+            {
+                "Id": 0,
+                "Kind": "Common",
+                "AdminOnly": true,
+                "FieldInstructions": "",
+                "Description": "This is a system field (organization).  It cannot be deleted.",
+                "Order": 3,
+                "DisplayType": "SingleLineText",
+                "SystemCode": "Organization",
+                "IsRequired": false,
+                "FieldName": "Organization",
+                "Type": "String",
+                "IsSystem": true
+            },
+            {
+                "Id": 0,
+                "Kind": "Common",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Description": "This is a system field (email).   It is mandatory for online self-service transactions and cannot be deleted.",
+                "Order": 4,
+                "DisplayType": "SingleLineText",
+                "SystemCode": "Email",
+                "FieldName": "Email",
+                "Type": "String",
+                "IsSystem": true
+            },
+            {
+                "Id": 0,
+                "Kind": "Common",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Description": "This is a system field (phone).  It cannot be deleted.",
+                "Order": 5,
+                "DisplayType": "SingleLineText",
+                "SystemCode": "Phone",
+                "IsRequired": false,
+                "FieldName": "Phone",
+                "Type": "String",
+                "IsSystem": true
+            },
+            {
+                "Id": 0,
+                "Kind": "Custom",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Order": 6,
+                "SystemCode": "custom-9395953",
+                "IsRequired": false,
+                "FieldName": "Sample event fields",
+                "Type": "SectionDivider",
+                "IsSystem": false
+            },
+            {
+                "Id": 0,
+                "Kind": "Custom",
+                "AdminOnly": false,
+                "FieldInstructions": "",
+                "Order": 7,
+                "SystemCode": "custom-9395954",
+                "IsRequired": true,
+                "FieldName": "Meal Choice",
+                "Type": "MultipleChoice",
+                "AllowedValues": [
+                    {
+                        "Id": 10032026,
+                        "Label": "Vegan",
+                        "Value": "10032026",
+                        "SelectedByDefault": false,
+                        "Position": 0
+                    },
+                    {
+                        "Id": 10032027,
+                        "Label": "Vegeterian",
+                        "Value": "10032027",
+                        "SelectedByDefault": false,
+                        "Position": 1
+                    },
+                    {
+                        "Id": 10032028,
+                        "Label": "Kosher",
+                        "Value": "10032028",
+                        "SelectedByDefault": false,
+                        "Position": 2
+                    }
+                ],
+                "IsSystem": false
+            }
+        ],
+        "TotalPaid": 0,
+        "TotalDue": 0,
+        "AccessControl": {
+            "AccessLevel": "Public",
+            "AvailableForAnyLevel": false,
+            "AvailableForLevels": [],
+            "AvailableForAnyGroup": false,
+            "AvailableForGroups": []
+        },
+        "GuestRegistrationSettings": {
+            "Enabled": false,
+            "CreateContactMode": "NeverCreateContact"
+        },
+        "Organizer": null,
+        "PaymentMethod": "OnlineAndOffline",
+        "RegistrationConfirmationExtraInfo": "",
+        "RegistrationMessage": "",
+        "SendEmailCopy": true,
+        "WaitListBehaviour": "Undefined",
+        "MultipleRegistrationAllowed": true,
+        "AttendeesDisplaySettings": {
+            "VisibleTo": "Nobody",
+            "ShowPendingAttendees": false
+        }
+    },
+    "StartTimeSpecified": true,
+    "EndTimeSpecified": true,
+    "HasEnabledRegistrationTypes": true,
+    "Name": "Fall Conference"
+}

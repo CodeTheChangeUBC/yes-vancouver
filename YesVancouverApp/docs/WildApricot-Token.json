@@ -1,0 +1,32 @@
+// https://help.wildapricot.com/display/DOC/Authenticating+API+access+from+a+3rd-party+server+or+application
+
+// POST
+// https://oauth.wildapricot.org/auth/token
+// Content-Type: application/x-www-form-urlencoded
+// Basic Authorization: 
+// Username: APIKEY
+// Password: <APIKEY>
+
+// BODY:
+// grant_type: client_credentials
+// scope: contacts finances events
+
+{
+    "access_token": "-4IcO4j90GHZCQH7SjjpthYS-kg-",
+    "token_type": "Bearer",
+    "expires_in": 1800,
+    "refresh_token": "UGzEn5gr1awQf1P2seulZY3JcTg-",
+    "Permissions": [
+        {
+            "AccountId": 240782,
+            "AvailableScopes": [
+                "contacts_view",
+                "contacts_edit",
+                "finances_view",
+                "finances_edit",
+                "events_view"
+            ]
+        }
+    ]
+}
+

@@ -7,6 +7,7 @@ import NewsFeedView from '../NewsFeed/NewsFeedView';
 import MessagingView from '../Messaging/MessagingView';
 import ProfileView from '../Profile/ProfileView';
 
+
 const NavBar = TabNavigator({
     EventsView: { screen: EventsView },
     PerksView: { screen: PerksView },

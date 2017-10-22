@@ -1,17 +1,29 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet,View,TextInput, TouchableOpacity, Text, StatusBar} from 'react-native';
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
+
+import { StackNavigator } from 'react-navigation';
 
 export default class LoginForm extends Component {
+
+    static navigationOptions = {
+        title:"Login",
+    };
+
+
   render() {
+
+      var {navigate} = this.props.navigation;
+
     return (
+
       <View style={styles.container}>
         <StatusBar
           barStyle="dark-content"
           />
 
-        <TextInput 
+        <TextInput
         placeholder="Email"
         placeholderTextColor="rgba(128,128,128,0.7)"
           returnKeyType="next"
@@ -19,19 +31,26 @@ export default class LoginForm extends Component {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
-          style= {styles.input} 
+          style= {styles.input}
           />
-        <TextInput 
+        <TextInput
         placeholder="Password"
         placeholderTextColor='rgba(128,128,128,0.7)'
         returnKeyType="go"
-        secureTextEntry 
+        secureTextEntry
         style={styles.input}
         ref={(input) => this.passwordInput = input}
         />
 
         <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Button
+              onPress={
+                        ()=> navigate("Third",{})
+                    }
+              title="Login"
+              style={styles.buttonText}
+          />
+
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.passContainer}>
@@ -49,8 +68,8 @@ const styles = StyleSheet.create({
     // borderLeftWidth: 50,
     // borderRightWidth: 50,
     // height: 60
-    
-  
+
+
   },
 
   input: {
@@ -77,25 +96,25 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 19,
     padding: 5
-    
 
-    
+
+
 
   },
 
   passContainer:{
     paddingVertical: 50
-    
+
   },
 
   forgotPassText:{
     textAlign: 'center',
     fontSize: 16,
     color: '#808080',
-    
+
   }
 
- 
+
 
 });
 

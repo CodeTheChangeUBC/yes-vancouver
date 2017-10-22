@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 export default class NewsFeedView extends Component {
+
+    static navigationOptions = {
+        title:"NewsFeedViewPage",
+    };
+
     static navigationOptions = {
         tabBarLabel: 'NewsFeedView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
@@ -13,7 +19,7 @@ export default class NewsFeedView extends Component {
             source={require('../../images/NavBar/YES-icon-orange@3x.png')}
             size={50}/>
         )
-    }
+    };
 
     render() {
         return (

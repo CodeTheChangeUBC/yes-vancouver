@@ -42,6 +42,7 @@ export default class EventsList extends Component {
                             renderSectionHeader={this.renderHeader}
                             sections={datasource}
                             keyExtractor={(item) => item.name}
+                            stickySectionHeadersEnabled={false}
                         />
                     </View>
                 </View>

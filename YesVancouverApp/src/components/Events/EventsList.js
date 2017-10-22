@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, SectionList, Text } from 'react-native';
 import Header from '../Navigation/Header';
+import EventsItem from './EventsItem';
 
 
 const datasource = [
     {data: [ {name: 'Event1'}, {name: 'Event2'} ], key: 'Upcoming'},
-    {data: [ {name: 'Event3'}, {name: 'Event4'} ], key: 'Past Events'}
+    {data: [ {name: 'Event3'}, {name: 'Event4'}, {name: 'Event5'} ], key: 'Past Events'}
 ]
 
 export default class EventsList extends Component {
     renderItem = (item) => {
         return (
-            <Text style={styles.text}>{item.item.name}</Text>
+            <EventsItem />
+            // <Text style={styles.text}>{item.item.name}</Text>
         );
     }
 
@@ -40,6 +42,7 @@ export default class EventsList extends Component {
                             renderSectionHeader={this.renderHeader}
                             sections={datasource}
                             keyExtractor={(item) => item.name}
+                            stickySectionHeadersEnabled={false}
                         />
                     </View>
                 </View>

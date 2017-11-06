@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, ScrollView, Text } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
 import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
 
@@ -35,7 +35,7 @@ export default class EventsDetails extends Component {
                             <Image source={require('../../images/Events/Event-icons/location@3x.png')}/>
                         </View>
                         <View style={styles.eventDetailTextContainer}>
-                            <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location </Text>
+                            <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
                         </View>
                     </View>
 
@@ -51,8 +51,15 @@ export default class EventsDetails extends Component {
                     </View>
 
                     <View style={styles.divider}></View>
-
-                    <Text>Register Button</Text>
+                    
+                    <View style={styles.registerButtonContainer}>
+                        <View style={styles.registerButtonSpacer}></View>
+                        <TouchableOpacity style={styles.registerButtonRectangle}>
+                            <Text style={styles.registerButtonText}>Register</Text>
+                        </TouchableOpacity>
+                        <View style={styles.registerButtonSpacer}></View>
+                    </View>
+                    
                     <Text>Description</Text>
                     <Text>Speakers</Text>
                     <Text>Sponsors</Text>
@@ -86,13 +93,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#EA4B6C',
         textAlign: 'center',
-        paddingTop: 15,
-        paddingBottom: 15
+        paddingVertical: 15,
+        paddingHorizontal: 30
     },
     eventDetailContainer: {
         flexDirection: 'row',
-        paddingTop: 15,
-        paddingBottom: 15
+        paddingVertical: 15
     },
     eventDetailIcon: {
         flex: 1,
@@ -106,9 +112,27 @@ const styles = StyleSheet.create({
         flex: 4,
         justifyContent: 'center',
         alignItems: 'flex-start',
+        paddingRight: 20
     },
     eventDetailText: {
         fontSize: 20,
         color: '#464647'
+    },
+    registerButtonContainer: {
+        flexDirection:'row',
+        paddingVertical: 30
+    },
+    registerButtonRectangle: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 5,
+        alignItems: 'center',
+        flex: 0.6
+    },
+    registerButtonText: {
+        fontSize: 24,
+        color: 'white'
+    },
+    registerButtonSpacer: {
+        flex: 0.2
     }
 });

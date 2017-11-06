@@ -101,6 +101,20 @@ export default class EventsDetails extends Component {
                     </View>
 
                     <Text style={styles.headingGrey}>Share</Text>
+                    <View style={styles.socialMediaContainer}>
+                        <Image
+                            style={styles.shareIcon}
+                            source={require('../../images/Events/Share-icons/Twitter@3x.png')}
+                        />
+                        <Image
+                            style={styles.shareIcon}
+                            source={require('../../images/Events/Share-icons/Facebook@3x.png')}
+                        />
+                        <Image
+                            style={styles.shareIcon}
+                            source={require('../../images/Events/Share-icons/Email@3x.png')}
+                        />
+                        </View>
                     <Text style={styles.copyLinkText}>Copy Link</Text>
                     
                 </ScrollView>
@@ -195,12 +209,20 @@ const styles = StyleSheet.create({
         fontSize: 36,
         color: '#464647',
         textAlign: 'center',
-        paddingBottom: 30
+        paddingBottom: 20
     },
     copyLinkText: {
         fontSize: 15,
         color: '#EA4B6C',
         textAlign: 'center',
         paddingBottom: 30
+    },
+    socialMediaContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    shareIcon: {
+        marginHorizontal: 2.5,
+        marginBottom: 5
     }
 });

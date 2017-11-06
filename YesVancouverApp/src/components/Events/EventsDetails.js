@@ -2,9 +2,26 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
 import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
+import ReadMore from '@expo/react-native-read-more-text';
 
 
 export default class EventsDetails extends Component {
+    renderTruncatedFooter = (handlePress) => {
+        return (
+            <Text style={styles.truncateText} onPress={handlePress}>
+                read more
+            </Text>
+        );
+    }
+    
+    renderRevealedFooter = (handlePress) => {
+        return (
+            <Text style={styles.truncateText} onPress={handlePress}>
+                show less
+            </Text>
+        );
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -60,7 +77,17 @@ export default class EventsDetails extends Component {
                         <View style={styles.registerButtonSpacer}></View>
                     </View>
                     
-                    <Text>Description</Text>
+                    <View style={styles.eventDescriptionContainer}>
+                        <ReadMore
+                            numberOfLines={5}
+                            renderTruncatedFooter={this.renderTruncatedFooter}
+                            renderRevealedFooter={this.renderRevealedFooter}>
+                            <Text style={styles.eventDescriptionText}>
+                                DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
+                            </Text>
+                        </ReadMore>
+                    </View>
+
                     <Text>Speakers</Text>
                     <Text>Sponsors</Text>
                     <Text>Register</Text>
@@ -134,5 +161,19 @@ const styles = StyleSheet.create({
     },
     registerButtonSpacer: {
         flex: 0.2
+    },
+    truncateText: {
+        textAlign: 'right',
+        color: '#464647',
+        textDecorationLine: 'underline',
+        paddingVertical: 5
+    },
+    eventDescriptionContainer: {
+        paddingHorizontal: 30,
+        paddingVertical: 15
+    },
+    eventDescriptionText: {
+        fontSize: 15,
+        color: '#464647'
     }
 });

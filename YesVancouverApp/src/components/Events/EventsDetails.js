@@ -134,6 +134,17 @@ export default class EventsDetails extends Component {
 
                     <Text style={styles.headingPink}>Sponsors</Text>
 
+                    <View style={styles.sponsorImageContainer}>
+                        <Image
+                            style={styles.sponsorImage}
+                            source={require('../../images/Events/Square-Company-Logo.png')}
+                        />
+                        <Image
+                            style={styles.sponsorImage}
+                            source={require('../../images/Events/Rectangular-Company-Logo.png')}
+                        />
+                    </View>
+
                     <View style={styles.registerButtonContainer}>
                         <View style={styles.registerButtonSpacer}></View>
                         <TouchableOpacity style={styles.registerButtonRectangle}>
@@ -305,5 +316,13 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: '#464647',
         marginVertical: 2
+    },
+    sponsorImageContainer:{
+        alignItems: 'center'
+    },
+    sponsorImage: {
+        resizeMode: 'contain',
+        height: 90,
+        marginVertical: 5
     }
 });

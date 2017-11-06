@@ -88,11 +88,20 @@ export default class EventsDetails extends Component {
                         </ReadMore>
                     </View>
 
-                    <Text>Speakers</Text>
-                    <Text>Sponsors</Text>
-                    <Text>Register</Text>
-                    <Text>Share</Text>
-                    <Text>Copy Link</Text>
+                    <Text style={styles.headingPink}>Speakers</Text>
+
+                    <Text style={styles.headingPink}>Sponsors</Text>
+
+                    <View style={styles.registerButtonContainer}>
+                        <View style={styles.registerButtonSpacer}></View>
+                        <TouchableOpacity style={styles.registerButtonRectangle}>
+                            <Text style={styles.registerButtonText}>Register</Text>
+                        </TouchableOpacity>
+                        <View style={styles.registerButtonSpacer}></View>
+                    </View>
+
+                    <Text style={styles.headingGrey}>Share</Text>
+                    <Text style={styles.copyLinkText}>Copy Link</Text>
                     
                 </ScrollView>
             </View>
@@ -175,5 +184,23 @@ const styles = StyleSheet.create({
     eventDescriptionText: {
         fontSize: 15,
         color: '#464647'
+    },
+    headingPink: {
+        fontSize: 36,
+        color: '#EA4B6C',
+        textAlign: 'center',
+        paddingVertical: 15
+    },
+    headingGrey: {
+        fontSize: 36,
+        color: '#464647',
+        textAlign: 'center',
+        paddingBottom: 30
+    },
+    copyLinkText: {
+        fontSize: 15,
+        color: '#EA4B6C',
+        textAlign: 'center',
+        paddingBottom: 30
     }
 });

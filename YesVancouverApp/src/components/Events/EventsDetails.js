@@ -90,6 +90,48 @@ export default class EventsDetails extends Component {
 
                     <Text style={styles.headingPink}>Speakers</Text>
 
+                    <View style={styles.speakerContainer}>
+                        <View style={styles.speakerImageContainer}>
+                            <Image
+                                style={styles.speakerImage}
+                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                            />
+                        </View>
+                        <View style={styles.speakerDescription}>
+                            <Text style={styles.speakerName}>Firstname Lastname</Text>
+                            <Text style={styles.speakerTitle}>Title, Company</Text>
+                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.speakerContainer}>
+                        <View style={styles.speakerImageContainer}>
+                            <Image
+                                style={styles.speakerImage}
+                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                            />
+                        </View>
+                        <View style={styles.speakerDescription}>
+                            <Text style={styles.speakerName}>Firstname Lastname</Text>
+                            <Text style={styles.speakerTitle}>Title, Company</Text>
+                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.speakerContainer}>
+                        <View style={styles.speakerImageContainer}>
+                            <Image
+                                style={styles.speakerImage}
+                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                            />
+                        </View>
+                        <View style={styles.speakerDescription}>
+                            <Text style={styles.speakerName}>Firstname Lastname</Text>
+                            <Text style={styles.speakerTitle}>Title, Company</Text>
+                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                        </View>
+                    </View>
+
                     <Text style={styles.headingPink}>Sponsors</Text>
 
                     <View style={styles.registerButtonContainer}>
@@ -224,5 +266,44 @@ const styles = StyleSheet.create({
     shareIcon: {
         marginHorizontal: 2.5,
         marginBottom: 5
+    },
+    speakerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingVertical: 10
+    },
+    speakerImageContainer: {
+        flex: 1,
+        alignItems: 'flex-end'
+    },
+    speakerImage: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        borderWidth: 1,
+        borderColor: 'rgba(151,151,151,0.4)'
+    },
+    speakerDescription: {
+        flex: 2,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        paddingLeft: 10,
+        paddingRight: 20
+    },
+    speakerName: {
+        fontSize: 20,
+        color: '#EA4B6C',
+        marginVertical: 2
+    },
+    speakerTitle: {
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: '#464647',
+        marginVertical: 2
+    },
+    speakerRole: {
+        fontSize: 11,
+        color: '#464647',
+        marginVertical: 2
     }
 });

@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
         borderColor: '#DCDCDC'
     },
     sectionHeader: {
-        fontSize: 30,
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 36,
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#EA4B6C'

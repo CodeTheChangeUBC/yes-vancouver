@@ -7,8 +7,12 @@ export default class EventsItem extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.dateColumn}>
-                    <Text style={styles.dateText}>MAY</Text>
-                    <Text style={styles.dateText}>28</Text>
+                    <View style={styles.dateMonthTextContainer}>
+                        <Text style={styles.dateMonthText}>MAY</Text>
+                    </View>
+                    <View style={styles.dateDayTextContainer}>
+                        <Text style={styles.dateDayText}>28</Text>
+                    </View>
                 </View>
                 <View style={styles.detailsColumn}>
                     <Text style={styles.title}>Event title</Text>
@@ -34,27 +38,46 @@ const styles = StyleSheet.create({
     },
     dateColumn: {
         flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'center'
     },
-    dateText: {
+    dateMonthTextContainer: {
+        flex: 1,
+        flexDirection:'column',
+        paddingTop: 13
+    },
+    dateMonthText: {
+        fontFamily: 'source-sans-pro-semibold',
         fontSize: 30,
-        fontWeight: 'bold',
+        color: '#464647'
+    },
+    dateDayTextContainer: {
+        flex: 1,
+        flexDirection:'column',
+        paddingBottom: 43
+    },
+    dateDayText: {
+        fontFamily: 'source-sans-pro-semibold',
+        fontSize: 46,
         color: '#464647'
     },
     detailsColumn: {
         flex: 3
     },
     title: {
+        fontFamily: 'source-sans-pro-bold',
         fontSize: 20,
-        fontWeight: 'bold',
         textAlign: 'left',
         color: '#464647'
     },
     time: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 15,
         color: '#464647'
     },
     location: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 15,
         color: '#464647'
     }

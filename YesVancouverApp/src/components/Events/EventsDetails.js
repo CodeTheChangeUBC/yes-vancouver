@@ -192,8 +192,8 @@ const styles = StyleSheet.create({
     },
     eventTitle: {
         flex: 1,
+        fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
-        fontWeight: 'bold',
         color: '#EA4B6C',
         textAlign: 'center',
         paddingVertical: 15,
@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
     eventDetailText: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 20,
         color: '#464647'
     },
@@ -227,11 +228,12 @@ const styles = StyleSheet.create({
     },
     registerButtonRectangle: {
         backgroundColor: '#EA4B6C',
-        paddingVertical: 5,
+        paddingVertical: 10,
         alignItems: 'center',
         flex: 0.6
     },
     registerButtonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: 'white'
     },
@@ -240,6 +242,8 @@ const styles = StyleSheet.create({
     },
     truncateText: {
         textAlign: 'right',
+        fontFamily: 'source-sans-pro-regular',
+        fontSize: 15,
         color: '#464647',
         textDecorationLine: 'underline',
         paddingVertical: 5
@@ -249,22 +253,26 @@ const styles = StyleSheet.create({
         paddingVertical: 15
     },
     eventDescriptionText: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 15,
         color: '#464647'
     },
     headingPink: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 36,
         color: '#EA4B6C',
         textAlign: 'center',
         paddingVertical: 15
     },
     headingGrey: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 36,
         color: '#464647',
         textAlign: 'center',
         paddingBottom: 20
     },
     copyLinkText: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 15,
         color: '#EA4B6C',
         textAlign: 'center',
@@ -302,17 +310,19 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
     speakerName: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 20,
         color: '#EA4B6C',
         marginVertical: 2
     },
     speakerTitle: {
+        fontFamily: 'source-sans-pro-bold',
         fontSize: 11,
-        fontWeight: 'bold',
         color: '#464647',
         marginVertical: 2
     },
     speakerRole: {
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 11,
         color: '#464647',
         marginVertical: 2

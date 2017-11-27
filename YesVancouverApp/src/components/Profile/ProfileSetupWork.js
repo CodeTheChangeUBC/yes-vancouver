@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import Header from '../Navigation/Header';
 
 
@@ -17,7 +17,7 @@ export default class ProfileSetupWork extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     
@@ -117,7 +117,7 @@ export default class ProfileSetupWork extends Component {
                         Skip this step
                     </Text>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

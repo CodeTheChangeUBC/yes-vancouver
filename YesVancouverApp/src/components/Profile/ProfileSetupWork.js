@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar, Platform } from 'react-native';
 import Header from '../Navigation/Header';
+import Expo from 'expo'
 
 
 export default class ProfileSetupWork extends Component {
@@ -18,6 +19,13 @@ export default class ProfileSetupWork extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
+                    <StatusBar
+                        barStyle='dark-content'
+                        backgroundColor='#ffffff'
+                        hidden={false}
+                    />
+                </View>
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     

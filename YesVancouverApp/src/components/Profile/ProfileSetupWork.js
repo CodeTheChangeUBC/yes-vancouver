@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput } from 'react-native';
 import Header from '../Navigation/Header';
 
 
 export default class ProfileSetupWork extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            jobTitle: '',
+            company: '',
+            otherInfo: ''
+        };
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -23,7 +34,22 @@ export default class ProfileSetupWork extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                
+                    <Text style={styles.title}>
+                        Enter information you would like other YES! Members to see
+                    </Text>
+
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Name"
+                            placeholderTextColor='#979797'
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            returnKeyType="go"
+                            onChangeText={(name) => this.setState({name})}
+                            value={this.state.name}
+                        />
+                    </View>
                 </View>
             </View>
         )
@@ -60,6 +86,24 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 7,
-        backgroundColor: 'black'
+        paddingHorizontal: 48,
+        paddingTop: 66
     },
+    title:{
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: '#F74F72',
+        marginBottom: 47
+    },
+    textInput: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'black',
+        height: 40,
+        paddingHorizontal:5
+    },
+    textInputContainer: {
+        borderBottomWidth:1,
+        borderBottomColor: 'black'
+    }
 });

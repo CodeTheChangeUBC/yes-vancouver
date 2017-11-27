@@ -31,39 +31,36 @@ export default class ProfileSetupPhoto extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <View style={styles.contentInputAndDescription}>
-                        <Text style={styles.title}>
-                            Profile photo
-                        </Text>
+                    <Text style={styles.title}>
+                        Profile photo
+                    </Text>
 
-                        <View style={styles.imageContainer}>
-                            <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
-                                style={styles.image}>
-                                <View style={styles.imageTextBackground}>
-                                    <Text style={styles.imageText}>Tap to add</Text>
-                                    <Text style={styles.imageText}>a photo</Text>
-                                </View>
-                            </Image>
-                        </View>
-
-                        <Text style={styles.description}>
-                            You can add a photo to your profile to help other YES! members recognize you.
-                            Keep it professional (think like your LinkedIn profile photo).
-                        </Text>
+                    <View style={styles.imageContainer}>
+                        <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
+                            style={styles.image}>
+                            <View style={styles.imageTextBackground}>
+                                <Text style={styles.imageText}>Tap to add</Text>
+                                <Text style={styles.imageText}>a photo</Text>
+                            </View>
+                        </Image>
                     </View>
-                    <View style={styles.contentSubmit}>
-                        <View style={styles.nextButtonContainer}>
-                            <View style={styles.nextButtonSpacer}></View>
-                                <TouchableOpacity style={styles.nextButtonRectangle}>
-                                    <Text style={styles.nextButtonText}>Next</Text>
-                                </TouchableOpacity>
-                            <View style={styles.nextButtonSpacer}></View>
-                        </View>
 
-                        <Text style={styles.skip}>
-                            Skip this step
-                        </Text>
+                    <Text style={styles.description}>
+                        You can add a photo to your profile to help other YES! members recognize you.
+                        Keep it professional (think like your LinkedIn profile photo).
+                    </Text>
+     
+                    <View style={styles.nextButtonContainer}>
+                        <View style={styles.nextButtonSpacer}></View>
+                            <TouchableOpacity style={styles.nextButtonRectangle}>
+                                <Text style={styles.nextButtonText}>Next</Text>
+                            </TouchableOpacity>
+                        <View style={styles.nextButtonSpacer}></View>
                     </View>
+
+                    <Text style={styles.skip}>
+                        Skip this step
+                    </Text>
                 </View>
             </View>
         )
@@ -103,16 +100,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 48,
         paddingTop: 30
-    },
-    contentInputAndDescription: {
-        flex: 3,
-        alignItems: 'center'
-    },
-    contentSubmit: {
-        flex: 1, 
-        width: '100%',
-        height: '100%',
-        paddingVertical: 10
     },
     title:{
         fontFamily: 'alternate-gothic-no3-d-regular',

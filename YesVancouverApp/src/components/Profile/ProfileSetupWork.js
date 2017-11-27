@@ -40,9 +40,10 @@ export default class ProfileSetupWork extends Component {
 
                     <View style={styles.textInputContainer}>
                         <TextInput
-                            style={styles.textInput}
                             placeholder='Name'
                             placeholderTextColor='#979797'
+                            style={styles.textInput}
+                            underlineColorAndroid='transparent'
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType='go'
@@ -52,9 +53,10 @@ export default class ProfileSetupWork extends Component {
                     </View>
                     <View style={styles.textInputContainer}>
                         <TextInput
-                            style={styles.textInput}
                             placeholder='Email'
                             placeholderTextColor='#979797'
+                            style={styles.textInput}
+                            underlineColorAndroid='transparent'
                             keyboardType='email-address'
                             autoCapitalize='none'
                             autoCorrect={false}
@@ -65,9 +67,10 @@ export default class ProfileSetupWork extends Component {
                     </View>
                     <View style={styles.textInputContainer}>
                         <TextInput
-                            style={styles.textInput}
                             placeholder='Job title (optional)'
                             placeholderTextColor='#979797'
+                            style={styles.textInput}
+                            underlineColorAndroid='transparent'
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType='go'
@@ -77,9 +80,10 @@ export default class ProfileSetupWork extends Component {
                     </View>
                     <View style={styles.textInputContainer}>
                         <TextInput
-                            style={styles.textInput}
                             placeholder='Company (optional)'
                             placeholderTextColor='#979797'
+                            style={styles.textInput}
+                            underlineColorAndroid='transparent'
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType='go'
@@ -89,9 +93,10 @@ export default class ProfileSetupWork extends Component {
                     </View>
                     <View style={styles.textInputContainer}>
                         <TextInput
-                            style={styles.textInput}
                             placeholder='Other info (optional)'
                             placeholderTextColor='#979797'
+                            style={styles.textInput}
+                            underlineColorAndroid='transparent'
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType='go'

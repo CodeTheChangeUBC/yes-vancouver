@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import EventsList from './EventsList'
+import EventsDetails from './EventsDetails'
 
 
 export default class EventsView extends Component {
@@ -21,7 +22,8 @@ export default class EventsView extends Component {
 
     render() {
         return (
-            <EventsList/>
+             <EventsList/>
+            //<EventsDetails/>
         );
     }
 }

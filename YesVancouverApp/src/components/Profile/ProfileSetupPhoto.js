@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar, Platform } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, StatusBar, Platform } from 'react-native';
 import Header from '../Navigation/Header';
 import Expo from 'expo'
 
@@ -7,7 +7,7 @@ import Expo from 'expo'
 export default class ProfileSetupPhoto extends Component {
     render() {
         return (
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+            <View style={styles.container}>
                 <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
                     <StatusBar
                         barStyle='dark-content'
@@ -65,7 +65,7 @@ export default class ProfileSetupPhoto extends Component {
                         </Text>
                     </View>
                 </View>
-            </KeyboardAvoidingView>
+            </View>
         )
     }
 }

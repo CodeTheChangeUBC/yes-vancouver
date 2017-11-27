@@ -2,7 +2,7 @@
  * Created by joycheng on 2017-08-24.
  */
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
 // const util = require('util');
 
 export default class HomeScreen extends React.Component {
@@ -16,6 +16,10 @@ export default class HomeScreen extends React.Component {
 
 
             <View>
+                <StatusBar
+                    barStyle="dark-content"
+                    backgroundColor="#FFFFFF"
+                />
                 <Text>This is homescreen</Text>
                 <Button
                     onPress={

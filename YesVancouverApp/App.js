@@ -1,6 +1,9 @@
 import React from 'react';
 import Navigation from './src/components/Navigation/Navigation';
 import { Font } from 'expo';
+import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
+import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
+import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
 
 export default class App extends React.Component {
     state = {
@@ -22,7 +25,10 @@ export default class App extends React.Component {
             return <Expo.AppLoading />
         }
         return (
-            <Navigation />
+            <Navigation />         
+            //<ProfileSetupWork/>
+            //<ProfileSetupSocial/>
+            //<ProfileSetupPhoto/>
         );
     }
 }

@@ -107,6 +107,10 @@ export default class ProfileSetupWork extends Component {
                             </TouchableOpacity>
                         <View style={styles.nextButtonSpacer}></View>
                     </View>
+
+                    <Text style={styles.skip}>
+                        Skip this step
+                    </Text>
                 </View>
             </View>
         )
@@ -166,7 +170,8 @@ const styles = StyleSheet.create({
     },
     nextButtonContainer: {
         flexDirection:'row',
-        paddingVertical: 30
+        paddingTop: 30,
+        paddingBottom: 20
     },
     nextButtonRectangle: {
         backgroundColor: '#EA4B6C',
@@ -182,4 +187,10 @@ const styles = StyleSheet.create({
     nextButtonSpacer: {
         flex: 3
     },
+    skip: {
+        fontFamily: 'source-sans-pro-regular',
+        fontSize: 20,
+        color: '#464647',
+        textAlign: 'center'
+    }
 });

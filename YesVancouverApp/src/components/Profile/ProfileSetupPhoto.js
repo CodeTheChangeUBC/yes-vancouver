@@ -49,7 +49,12 @@ export default class ProfileSetupPhoto extends Component {
 
                         <View style={styles.imageContainer}>
                             <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
-                                style={styles.image}/>
+                                style={styles.image}>
+                                <View style={styles.imageTextBackground}>
+                                    <Text style={styles.imageText}>Tap to add</Text>
+                                    <Text style={styles.imageText}>a photo</Text>
+                                </View>
+                            </Image>
                         </View>
 
                         <Text style={styles.description}>
@@ -131,7 +136,18 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 200,
-        height: 200
+        height: 200,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    imageTextBackground: {
+        backgroundColor: 'rgba(0,0,0,0)'
+    },
+    imageText: {
+        fontFamily: 'source-sans-pro-regular',
+        fontSize: 20,
+        color: '#464647',
+        textAlign: 'center'
     },
     description: {
         fontFamily: 'source-sans-pro-regular',

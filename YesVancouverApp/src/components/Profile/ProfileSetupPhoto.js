@@ -5,17 +5,6 @@ import Expo from 'expo'
 
 
 export default class ProfileSetupPhoto extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            linkedIn: '',
-            facebook: '',
-            twitter: '',
-            instagram: '',
-            website: ''
-        };
-    }
-
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>

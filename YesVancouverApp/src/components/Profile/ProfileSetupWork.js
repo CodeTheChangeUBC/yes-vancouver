@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import Header from '../Navigation/Header';
 
 
@@ -99,6 +99,14 @@ export default class ProfileSetupWork extends Component {
                             value={this.state.otherInfo}
                         />
                     </View>
+
+                    <View style={styles.nextButtonContainer}>
+                        <View style={styles.nextButtonSpacer}></View>
+                            <TouchableOpacity style={styles.nextButtonRectangle}>
+                                <Text style={styles.nextButtonText}>Next</Text>
+                            </TouchableOpacity>
+                        <View style={styles.nextButtonSpacer}></View>
+                    </View>
                 </View>
             </View>
         )
@@ -155,5 +163,23 @@ const styles = StyleSheet.create({
         borderBottomColor: 'black',
         marginHorizontal: 5,
         marginVertical: 13
-    }
+    },
+    nextButtonContainer: {
+        flexDirection:'row',
+        paddingVertical: 30
+    },
+    nextButtonRectangle: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 4
+    },
+    nextButtonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
+    },
+    nextButtonSpacer: {
+        flex: 3
+    },
 });

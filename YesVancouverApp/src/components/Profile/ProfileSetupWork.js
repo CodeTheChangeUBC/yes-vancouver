@@ -63,6 +63,42 @@ export default class ProfileSetupWork extends Component {
                             value={this.state.email}
                         />
                     </View>
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Job title (optional)'
+                            placeholderTextColor='#979797'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            returnKeyType='go'
+                            onChangeText={(jobTitle) => this.setState({jobTitle})}
+                            value={this.state.jobTitle}
+                        />
+                    </View>
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Company (optional)'
+                            placeholderTextColor='#979797'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            returnKeyType='go'
+                            onChangeText={(company) => this.setState({company})}
+                            value={this.state.company}
+                        />
+                    </View>
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Other info (optional)'
+                            placeholderTextColor='#979797'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            returnKeyType='go'
+                            onChangeText={(otherInfo) => this.setState({otherInfo})}
+                            value={this.state.otherInfo}
+                        />
+                    </View>
                 </View>
             </View>
         )
@@ -112,12 +148,12 @@ const styles = StyleSheet.create({
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: 'black',
-        height: 40
+        height: 24
     },
     textInputContainer: {
         borderBottomWidth: 1,
         borderBottomColor: 'black',
         marginHorizontal: 5,
-        marginVertical: 10
+        marginVertical: 13
     }
 });

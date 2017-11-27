@@ -22,7 +22,7 @@ export default class ProfileSetupPhoto extends Component {
                 <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
                     <StatusBar
                         barStyle='dark-content'
-                        backgroundColor='#ffffff'
+                        backgroundColor='#FFFFFF'
                         hidden={false}
                     />
                 </View>
@@ -42,32 +42,34 @@ export default class ProfileSetupPhoto extends Component {
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <Text style={styles.title}>
-                        Profile photo
-                    </Text>
+                    <View style={styles.contentInputAndDescription}>
+                        <Text style={styles.title}>
+                            Profile photo
+                        </Text>
 
-                    <View>
-                        <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
-                           style={{width: 200, height: 200}} />
+                        <View style={styles.imageContainer}>
+                            <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
+                                style={styles.image}/>
+                        </View>
+
+                        <Text style={styles.description}>
+                            You can add a photo to your profile to help other YES! members recognize you.
+                            Keep it professional (think like your LinkedIn profile photo).
+                        </Text>
                     </View>
+                    <View style={styles.contentSubmit}>
+                        <View style={styles.nextButtonContainer}>
+                            <View style={styles.nextButtonSpacer}></View>
+                                <TouchableOpacity style={styles.nextButtonRectangle}>
+                                    <Text style={styles.nextButtonText}>Next</Text>
+                                </TouchableOpacity>
+                            <View style={styles.nextButtonSpacer}></View>
+                        </View>
 
-                    <Text style={styles.description}>
-                        You can add a photo to your profile to help other YES! members recognize you.
-                        Keep it professional (think like your LinkedIn profile photo).
-                    </Text>
-
-
-                    <View style={styles.nextButtonContainer}>
-                        <View style={styles.nextButtonSpacer}></View>
-                            <TouchableOpacity style={styles.nextButtonRectangle}>
-                                <Text style={styles.nextButtonText}>Next</Text>
-                            </TouchableOpacity>
-                        <View style={styles.nextButtonSpacer}></View>
+                        <Text style={styles.skip}>
+                            Skip this step
+                        </Text>
                     </View>
-
-                    <Text style={styles.skip}>
-                        Skip this step
-                    </Text>
                 </View>
             </KeyboardAvoidingView>
         )
@@ -106,26 +108,43 @@ const styles = StyleSheet.create({
         flex: 7,
         alignItems: 'center',
         paddingHorizontal: 48,
-        paddingTop: 66
+        paddingTop: 30
+    },
+    contentInputAndDescription: {
+        flex: 3,
+        alignItems: 'center'
+    },
+    contentSubmit: {
+        flex: 1, 
+        width: '100%',
+        height: '100%',
+        paddingVertical: 10
     },
     title:{
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: '#F74F72',
-        marginBottom: 37,
         textAlign: 'center'
+    },
+    imageContainer: {
+        paddingVertical: 15
+    },
+    image: {
+        width: 200,
+        height: 200
     },
     description: {
         fontFamily: 'source-sans-pro-regular',
         fontSize: 20,
         color: '#464647',
         textAlign: 'center',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        paddingVertical: 10
     },
     nextButtonContainer: {
         flexDirection:'row',
         paddingTop: 30,
-        paddingBottom: 20
+        paddingBottom: 15
     },
     nextButtonRectangle: {
         backgroundColor: '#EA4B6C',

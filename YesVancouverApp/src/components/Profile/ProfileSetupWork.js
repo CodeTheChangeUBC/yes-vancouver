@@ -41,13 +41,26 @@ export default class ProfileSetupWork extends Component {
                     <View style={styles.textInputContainer}>
                         <TextInput
                             style={styles.textInput}
-                            placeholder="Name"
+                            placeholder='Name'
                             placeholderTextColor='#979797'
-                            autoCapitalize="none"
+                            autoCapitalize='none'
                             autoCorrect={false}
-                            returnKeyType="go"
+                            returnKeyType='go'
                             onChangeText={(name) => this.setState({name})}
                             value={this.state.name}
+                        />
+                    </View>
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Email'
+                            placeholderTextColor='#979797'
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            returnKeyType='go'
+                            onChangeText={(email) => this.setState({email})}
+                            value={this.state.email}
                         />
                     </View>
                 </View>
@@ -93,17 +106,18 @@ const styles = StyleSheet.create({
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: '#F74F72',
-        marginBottom: 47
+        marginBottom: 37
     },
     textInput: {
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: 'black',
-        height: 40,
-        paddingHorizontal:5
+        height: 40
     },
     textInputContainer: {
-        borderBottomWidth:1,
-        borderBottomColor: 'black'
+        borderBottomWidth: 1,
+        borderBottomColor: 'black',
+        marginHorizontal: 5,
+        marginVertical: 10
     }
 });

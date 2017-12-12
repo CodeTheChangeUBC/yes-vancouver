@@ -1,13 +1,17 @@
 import React from 'react';
+import { Text, View } from 'react-native'
 import Navigation from './src/components/Navigation/Navigation';
 import { Font } from 'expo';
 import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
 import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
 import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
+import ApiUtils from './ApiUtils'
+import { ClientSecrets } from './config'
 
 export default class App extends React.Component {
     state = {
         fontLoaded: false,
+        tokenInfo: ''
     };
 
     async componentDidMount() {
@@ -18,6 +22,35 @@ export default class App extends React.Component {
             'alternate-gothic-no3-d-regular' : require('./src/fonts/alternate-gothic-no3-d-regular.ttf')
         });
         this.setState({ fontLoaded: true });
+
+
+        let base64 = require('base-64')
+        username = ClientSecrets.API_USERNAME;
+        password = ClientSecrets.API_PASSWORD;
+        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
+        console.log(basicAuthHeaderValue)
+
+        var requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        };
+        
+        fetch('https://oauth.wildapricot.org/auth/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': basicAuthHeaderValue
+          },
+          body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
+        })
+        .then(response => response.json())
+        .then(responseJson => console.log(responseJson))
+        .catch((error) => {
+            console.error(error);
+        });
+
+        //console.log(this.state.tokenInfo)
+        console.log("DONE")
     }
     
     render() {
@@ -25,10 +58,19 @@ export default class App extends React.Component {
             return <Expo.AppLoading />
         }
         return (
-            <Navigation />         
+            <View>
+                <Text>HI</Text>
+                <Text>HI</Text>
+                <Text>HI</Text>
+                <Text>HI</Text>
+                <Text>HI</Text>
+            </View>
+            //<Navigation />         
             //<ProfileSetupWork/>
             //<ProfileSetupSocial/>
             //<ProfileSetupPhoto/>
         );
     }
+
+    
 }

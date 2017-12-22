@@ -6,13 +6,15 @@ import Login from '../Login/LoginForm';
 import HomeScreen from '../HomeScreen/HomeScreen';
 import NavBar from './NavBar';
 import { StackNavigator } from 'react-navigation';
+import SignUp from "../SignUp/SignUp"
 
 
 
 const Navigation = StackNavigator({
     First:{screen:HomeScreen},
     Second: {screen:Login},
-    Third: {screen:NavBar}
+    Third: {screen:NavBar},
+    SignUp : {screen : SignUp}
 });
 
 export default Navigation;

@@ -2,7 +2,7 @@
  * Created by joycheng on 2017-08-24.
  */
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, StatusBar } from 'react-native';
 // const util = require('util');
 
 export default class HomeScreen extends React.Component {
@@ -13,25 +13,35 @@ export default class HomeScreen extends React.Component {
     render(){
         var {navigate} = this.props.navigation;
         return(
-
-
-            <View>
-                <StatusBar
-                    barStyle="dark-content"
-                    backgroundColor="#FFFFFF"
-                />
-                <Text>This is homescreen</Text>
-                <Button
-                    onPress={
-                        ()=> navigate("Second",{})
-                    }
-                    title="Go to Login"
-                />
-            </View>
+            <Image
+                style={{resizeMode:"center"}}
+                source={require('../../images/Login-Signup/Background-Photo.png')}
+            >
+                <View>
+                    <Image
+                        style={styles.mainLogo}
+                        source={require("../../images/Login-Signup/YES-logo.png")}
+                    />
+                    <Button
+                        color="#ED4969"
+                        onPress={
+                            ()=> navigate("SignUp", {})
+                        }
+                        title="Sign up"
+                    />
+                    <Text
+                        style={{color:"#ffffff", fontSize:20, alignContent:"center"}}>Already have an account?</Text>
+                    <Text
+                        style={{color:"#ffffff", fontSize:20, alignContent:"center", textDecorationLine:'underline'}}
+                        onPress={
+                            ()=> navigate("Second",{})
+                        }>
+                        Sign in
+                    </Text>
+                </View>
+            </Image>
         )
     }
-
-
 }
 
 const styles = StyleSheet.create({
@@ -41,5 +51,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    mainLogo:{
+        alignContent:'center',
+        justifyContent: 'center',
+    }
 });
 

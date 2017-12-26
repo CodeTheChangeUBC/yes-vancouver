@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { StyleSheet, Image, Text, View, Button, StatusBar } from 'react-native';
-// const util = require('util');
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -15,20 +14,22 @@ export default class HomeScreen extends React.Component {
         return(
             <Image
                 style={{resizeMode:"center"}}
-                source={require('../../images/Login-Signup/Background-Photo.png')}
-            >
-                <View>
+                source={require('../../images/Login-Signup/Background-Photo.png')}>
+                <View style = {styles.container}>
                     <Image
                         style={styles.mainLogo}
                         source={require("../../images/Login-Signup/YES-logo.png")}
                     />
-                    <Button
-                        color="#ED4969"
-                        onPress={
-                            ()=> navigate("SignUp", {})
-                        }
-                        title="Sign up"
-                    />
+                    <View style = {styles.buttonStyle}>
+                        <Button
+                            style={styles.button}
+                            color="#ED4969"
+                            onPress={
+                                ()=> navigate("SignUp", {})
+                            }
+                            title="Sign up"
+                        />
+                    </View>
                     <Text
                         style={{color:"#ffffff", fontSize:20, alignContent:"center"}}>Already have an account?</Text>
                     <Text
@@ -46,14 +47,17 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
     mainLogo:{
         alignContent:'center',
         justifyContent: 'center',
+        marginTop: 90,
+        marginBottom: 80
+    },
+    buttonStyle:{
+        alignSelf : 'stretch',
+        marginBottom : 30
     }
 });
-

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import PerksList from './PerksList'
+import PerksList from './PerksList';
+import PerksDetails from './PerksDetails';
 
 
 export default class PerksView extends Component {
@@ -19,7 +20,8 @@ export default class PerksView extends Component {
 
     render() {
         return (
-            <PerksList />
+            // <PerksList />
+            <PerksDetails />
         );
     }
 }

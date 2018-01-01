@@ -4,6 +4,12 @@ import Header from '../Navigation/Header';
 
 
 export default class PerksList extends Component {
+    renderItem = ({item}) => {
+        return (
+            <Text>{item.key}</Text>
+        );
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -66,7 +72,7 @@ export default class PerksList extends Component {
                     {key: '7'}, 
                     {key: '8'},
                     ]}
-                    renderItem={({item}) => <Text>{item.key}</Text>}
+                    renderItem={this.renderItem}
                 />
                 </View>
             </View>

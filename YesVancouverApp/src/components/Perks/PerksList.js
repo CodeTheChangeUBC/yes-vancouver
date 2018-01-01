@@ -4,38 +4,32 @@ import Header from '../Navigation/Header';
 
 
 export default class PerksList extends Component {
-    renderHeader = () => {
-        return (
-            <View style={styles.sortBar}>
-                <View style={styles.aToZTab}>
-                    <Image 
-                        source={require('../../images/Perks/Icons/Alphabetical-Sort-Unselected.png')}
-                        style={styles.sortIcon}/>
-                    <Text style={styles.aToZText}>A-Z</Text>
-                </View>
-                <View style={styles.categoriesTab}>
-                    <Image 
-                        source={require('../../images/Perks/Icons/Category-Sort-Unselected.png')}
-                        style={styles.sortIcon}/>
-                    <Text style={styles.categoriesText}>Categories</Text>
-                </View>
-                <View style={styles.favouritesTab}>
-                    <Image 
-                        source={require('../../images/Perks/Icons/Favourites-Sort-Unselected.png')}
-                        style={styles.sortIcon}/>
-                    <Text style={styles.favouritesText}>Favourites</Text>
-                </View>
-            </View>
-        )
-    };
-
     render() {
         return (
             <View style={styles.container}>
                 <Header style={styles.header}/>
                 <View style={styles.content}>
+                <View style={styles.sortBar}>
+                    <View style={styles.aToZTab}>
+                        <Image 
+                            source={require('../../images/Perks/Icons/Alphabetical-Sort-Unselected.png')}
+                            style={styles.sortIcon}/>
+                        <Text style={styles.aToZText}>A-Z</Text>
+                    </View>
+                    <View style={styles.categoriesTab}>
+                        <Image 
+                            source={require('../../images/Perks/Icons/Category-Sort-Unselected.png')}
+                            style={styles.sortIcon}/>
+                        <Text style={styles.categoriesText}>Categories</Text>
+                    </View>
+                    <View style={styles.favouritesTab}>
+                        <Image 
+                            source={require('../../images/Perks/Icons/Favourites-Sort-Unselected.png')}
+                            style={styles.sortIcon}/>
+                        <Text style={styles.favouritesText}>Favourites</Text>
+                    </View>
+                </View>
                 <FlatList
-                    ListHeaderComponent={this.renderHeader}
                     data={[
                     {key: 'a'}, 
                     {key: 'b'},

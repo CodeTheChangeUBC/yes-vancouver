@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, SectionList, Text, FlatList } from 'react-native';
 import Header from '../Navigation/Header';
+import PerksItem from './PerksItem';
 
 
 export default class PerksList extends Component {
     renderItem = ({item}) => {
         return (
-            <Text>{item.key}</Text>
+            //<Text>{item.key}</Text>
+            <PerksItem />
         );
     }
 

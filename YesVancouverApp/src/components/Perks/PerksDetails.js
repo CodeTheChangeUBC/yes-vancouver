@@ -57,6 +57,7 @@ export default class PerksDetails extends Component {
                         <Text style={styles.emailText}>
                             perks@yesvancouver.org
                         </Text>
+                        <View style={{paddingVertical: 10}}></View>
                     </ScrollView>
                 </View>
             </View>

@@ -35,16 +35,10 @@ export default class PerksDetails extends Component {
                         </Text>
                         <View style={styles.toRedeemCodeContainer}>
                             <Text style={styles.toRedeemCode}>123XYZ72</Text>
-                            <View style={{height: 100, paddingVertical: 10, paddingHorizontal: 35, borderColor: 'green',
-                                        borderWidth: 1}}>
+                            <View style={styles.toRedeemImageContainer}>
                                 <Image
                                     source={require('../../images/Perks/Barcode.png')}
-                                    style={{flex: 1,
-                                        alignSelf: 'stretch',
-                                        width: null,
-                                        height: null,
-                                        borderColor: 'red',
-                                        borderWidth: 1}}
+                                    style={styles.toRedeemImage}
                                 />
                             </View>
                             <View style={{paddingVertical: 10}}></View>
@@ -178,6 +172,21 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderColor: 'orange',
         borderWidth: 1,
+    },
+    toRedeemImageContainer: {
+        height: 100,
+        paddingVertical: 10,
+        paddingHorizontal: 35,
+        borderColor: 'green',
+        borderWidth: 1
+    },
+    toRedeemImage: {
+        flex: 1,
+        alignSelf: 'stretch',
+        width: null,
+        height: null,
+        borderColor: 'red',
+        borderWidth: 1
     },
     memberText: {
         fontFamily: 'alternate-gothic-no3-d-regular',

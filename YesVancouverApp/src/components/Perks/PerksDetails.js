@@ -57,29 +57,6 @@ export default class PerksDetails extends Component {
                         <Text style={styles.emailText}>
                             perks@yesvancouver.org
                         </Text>
-
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
-                        <Text>HI</Text>
                     </ScrollView>
                 </View>
             </View>

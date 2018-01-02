@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     content: {
         flex: 7
     },
+    headerContainer: {
+        flex: 1
+    },
     header: {
         flex: 1,
         width: null,
         height: null
-    },
-    headerContainer: {
-        flex: 1
     },
     headerIconContainer: {
         position: 'absolute',

@@ -33,9 +33,23 @@ export default class PerksDetails extends Component {
                         <Text style={styles.toRedeemInstructions}>
                             Present this screen at the time of payment
                         </Text>
-                        <View style={styles.toRedeemCode}>
+                        <View style={styles.toRedeemCodeContainer}>
+                            <Text style={styles.toRedeemCode}>123XYZ72</Text>
+                            <View style={{height: 100, paddingVertical: 10, paddingHorizontal: 35, borderColor: 'green',
+                                        borderWidth: 1}}>
+                                <Image
+                                    source={require('../../images/Perks/Barcode.png')}
+                                    style={{flex: 1,
+                                        alignSelf: 'stretch',
+                                        width: null,
+                                        height: null,
+                                        borderColor: 'red',
+                                        borderWidth: 1}}
+                                />
+                            </View>
+                            <View style={{paddingVertical: 10}}></View>
                             <Text style={styles.memberText}>Camilla White</Text>
-                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: 5}}>
+                            <View style={styles.yesVancouverLogoContainer}>
                                 <Image
                                     source={require('../../images/Settings/yes-logo@3x.png')}
                                     style={styles.yesVancouverLogo}
@@ -148,18 +162,34 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1
     },
-    toRedeemCode: {
+    toRedeemCodeContainer: {
         marginHorizontal: 25,
         marginVertical: 30,
         paddingVertical: 25,
         borderColor: 'rgba(151,151,151,0.4)',
         borderWidth: 1
     },
+    toRedeemCode: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 45,
+        color: '#464647',
+        textAlign: 'center',
+        paddingHorizontal: 50,
+        paddingVertical: 10,
+        borderColor: 'orange',
+        borderWidth: 1,
+    },
     memberText: {
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 30,
         color: '#464647',
         textAlign: 'center',
+    },
+    yesVancouverLogoContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 5
     },
     yesVancouverLogo: {
         width: 45,

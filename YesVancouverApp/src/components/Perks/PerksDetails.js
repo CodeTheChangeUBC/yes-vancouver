@@ -24,17 +24,25 @@ export default class PerksDetails extends Component {
                             resizeMode='contain'
                             style={styles.favouritesStar}/>
                         </View>
-
                         <Text style={styles.perkDetails}>
                             15% off all salon services and products
                         </Text>
                         <Text style={styles.toRedeemHeader}>
                             TO REDEEM
                         </Text>
-                        <Text style={styles.toRedeemDescription}>
+                        <Text style={styles.toRedeemInstructions}>
                             Present this screen at the time of payment
                         </Text>
-
+                        <View style={styles.toRedeemCode}>
+                            <Text style={styles.memberText}>Camilla White</Text>
+                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: 5}}>
+                                <Image
+                                    source={require('../../images/Settings/yes-logo@3x.png')}
+                                    style={styles.yesVancouverLogo}
+                                />
+                                <Text style={styles.memberText}>YES! Vancouver Member</Text>
+                            </View>
+                        </View>
                         <Text style={styles.questionsText}>
                             Questions? Email
                         </Text>
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1
     },
-    toRedeemDescription: {
+    toRedeemInstructions: {
         fontFamily: 'source-sans-pro-regular',
         fontSize: 20,
         color: '#464647',
@@ -139,6 +147,24 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         borderColor: 'black',
         borderWidth: 1
+    },
+    toRedeemCode: {
+        marginHorizontal: 25,
+        marginVertical: 30,
+        paddingVertical: 25,
+        borderColor: 'rgba(151,151,151,0.4)',
+        borderWidth: 1
+    },
+    memberText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 30,
+        color: '#464647',
+        textAlign: 'center',
+    },
+    yesVancouverLogo: {
+        width: 45,
+        height: 45,
+        marginRight: 5
     },
     questionsText: {
         fontFamily: 'source-sans-pro-regular',

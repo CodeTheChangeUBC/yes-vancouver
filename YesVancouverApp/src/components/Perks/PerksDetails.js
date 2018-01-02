@@ -13,13 +13,16 @@ export default class PerksDetails extends Component {
                         <View style={styles.logoContainer}>
                         <Image 
                             // source={require('../../images/Perks/Aveda.png')}
-                            // source={require('../../images/Perks/Camp-Tech.png')}
+                            source={require('../../images/Perks/Camp-Tech.png')}
                             // source={require('../../images/Perks/Floathouse.png')}
                             // source={require('../../images/Perks/Red-Academy.png')}
-                            source={require('../../images/Perks/Spin-Society.png')}
+                            // source={require('../../images/Perks/Spin-Society.png')}
                             resizeMode='contain'
-                            style={styles.logo}
-                            />
+                            style={styles.logo}/>
+                        <Image 
+                            source={require('../../images/Perks/Icons/Favourites-Item-Unselected.png')}
+                            resizeMode='contain'
+                            style={styles.favouritesStar}/>
                         </View>
 
                         <Text>HI</Text>
@@ -65,7 +68,8 @@ const styles = StyleSheet.create({
         height: null
     },
     content: {
-        flex: 7
+        flex: 7,
+        backgroundColor: 'white'
     },
     logoContainer: {
         flex: 1,
@@ -85,5 +89,12 @@ const styles = StyleSheet.create({
         height: null,
         borderColor: 'black',
         borderWidth: 1
+    },
+    favouritesStar: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
+        width: 30,
+        height: 30
     }
 });

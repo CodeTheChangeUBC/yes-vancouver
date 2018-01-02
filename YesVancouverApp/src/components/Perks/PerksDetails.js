@@ -38,17 +38,19 @@ export default class PerksDetails extends Component {
                             <View style={styles.toRedeemImageContainer}>
                                 <Image
                                     source={require('../../images/Perks/Barcode.png')}
-                                    style={styles.toRedeemImage}
-                                />
+                                    style={styles.toRedeemImage}/>
                             </View>
                             <View style={{paddingVertical: 10}}></View>
-                            <Text style={styles.memberText}>Camilla White</Text>
+                            <Text style={styles.memberText}>
+                                Camilla White
+                            </Text>
                             <View style={styles.yesVancouverLogoContainer}>
                                 <Image
                                     source={require('../../images/Settings/yes-logo@3x.png')}
-                                    style={styles.yesVancouverLogo}
-                                />
-                                <Text style={styles.memberText}>YES! Vancouver Member</Text>
+                                    style={styles.yesVancouverLogo}/>
+                                <Text style={styles.memberText}>
+                                    YES! Vancouver Member
+                                </Text>
                             </View>
                         </View>
                         <Text style={styles.questionsText}>
@@ -85,17 +87,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 50,
         paddingVertical: 20,
-        borderColor: 'red',
-        borderWidth: 1,
         height: 150
     },
     logo: {
         flex: 1,
         alignSelf: 'stretch',
         width: null,
-        height: null,
-        borderColor: 'black',
-        borderWidth: 1
+        height: null
     },
     favouritesStar: {
         position: 'absolute',
@@ -110,9 +108,7 @@ const styles = StyleSheet.create({
         color: '#464647',
         textAlign: 'center',
         paddingHorizontal: 58,
-        paddingVertical: 5,
-        borderColor: 'black',
-        borderWidth: 1
+        paddingVertical: 5
     },
     toRedeemHeader: {
         fontFamily: 'alternate-gothic-no3-d-regular',
@@ -120,9 +116,7 @@ const styles = StyleSheet.create({
         color: '#EA4B6C',
         textAlign: 'center',
         paddingTop: 40,
-        paddingBottom: 5,
-        borderColor: 'black',
-        borderWidth: 1
+        paddingBottom: 5
     },
     toRedeemInstructions: {
         fontFamily: 'source-sans-pro-regular',
@@ -130,9 +124,7 @@ const styles = StyleSheet.create({
         color: '#464647',
         textAlign: 'center',
         paddingHorizontal: 58,
-        paddingVertical: 5,
-        borderColor: 'black',
-        borderWidth: 1
+        paddingVertical: 5
     },
     toRedeemCodeContainer: {
         marginHorizontal: 25,
@@ -147,24 +139,18 @@ const styles = StyleSheet.create({
         color: '#464647',
         textAlign: 'center',
         paddingHorizontal: 50,
-        paddingVertical: 10,
-        borderColor: 'orange',
-        borderWidth: 1,
+        paddingVertical: 10
     },
     toRedeemImageContainer: {
         height: 100,
         paddingVertical: 10,
-        paddingHorizontal: 35,
-        borderColor: 'green',
-        borderWidth: 1
+        paddingHorizontal: 35
     },
     toRedeemImage: {
         flex: 1,
         alignSelf: 'stretch',
         width: null,
-        height: null,
-        borderColor: 'red',
-        borderWidth: 1
+        height: null
     },
     memberText: {
         fontFamily: 'alternate-gothic-no3-d-regular',

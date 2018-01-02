@@ -9,7 +9,46 @@ export default class PerksDetails extends Component {
             <View style={styles.container}>
                 <Header style={styles.header}/>
                 <View style={styles.content}>
-                    <Text>HI</Text>
+                    <ScrollView>
+                        <View style={styles.logoContainer}>
+                        <Image 
+                            // source={require('../../images/Perks/Aveda.png')}
+                            // source={require('../../images/Perks/Camp-Tech.png')}
+                            // source={require('../../images/Perks/Floathouse.png')}
+                            // source={require('../../images/Perks/Red-Academy.png')}
+                            source={require('../../images/Perks/Spin-Society.png')}
+                            resizeMode='contain'
+                            style={styles.logo}
+                            />
+                        </View>
+
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                        <Text>HI</Text>
+                    </ScrollView>
                 </View>
             </View>
         );
@@ -27,5 +66,24 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 7
+    },
+    logoContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 50,
+        paddingVertical: 20,
+        borderColor: 'red',
+        borderWidth: 1,
+        height: 150
+    },
+    logo: {
+        flex: 1,
+        alignSelf: 'stretch',
+        width: null,
+        height: null,
+        borderColor: 'black',
+        borderWidth: 1
     }
 });

@@ -7,7 +7,22 @@ export default class PerksDetails extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header style={styles.header}/>
+                <View style={styles.headerContainer}>
+                    <Header style={styles.header}/>
+                    <View style={styles.headerIconContainer}>
+                        <View style={styles.backArrowContainer}>
+                            <Image source={require('../../images/Header/White-arrow@3x.png')}/>
+                        </View>
+                        <View style={styles.perksPartnerTitleContainer}>
+                            <Text style={styles.perksPartnerTitleText}>
+                                Aveda
+                            </Text>
+                        </View>
+                        <View style={styles.backArrowContainer}>
+                            <Image source={require('../../images/Header/Menu-icon-white@3x.png')}/>
+                        </View>
+                    </View>
+                </View>
                 <View style={styles.content}>
                     <ScrollView>
                         <View style={styles.logoContainer}>
@@ -71,10 +86,36 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
+    headerContainer: {
+        flex: 1
+    },
     header: {
         flex: 1,
         width: null,
         height: null
+    },
+    headerIconContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    backArrowContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    perksPartnerTitleContainer: {
+        flex: 4,
+        alignItems: 'center'
+    },
+    perksPartnerTitleText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: '#FFFFFF',
+        backgroundColor: 'transparent',
+        textAlign: 'center'
     },
     content: {
         flex: 7,

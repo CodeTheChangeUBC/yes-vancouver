@@ -20,8 +20,8 @@ export default class PerksView extends Component {
 
     render() {
         return (
-            // <PerksList />
-            <PerksDetails />
+            <PerksList />
+            // <PerksDetails />
         );
     }
 }

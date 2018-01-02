@@ -15,7 +15,20 @@ export default class PerksList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header style={styles.header}/>
+                <View style={styles.headerContainer}>
+                    <Header style={styles.header}/>
+                    <View style={styles.headerIconContainer}>
+                        <View style={styles.menuContainer}></View>
+                        <View style={styles.perksPartnerTitleContainer}>
+                            <Text style={styles.perksPartnerTitleText}>
+                                Perks Partners
+                            </Text>
+                        </View>
+                        <View style={styles.menuContainer}>
+                            <Image source={require('../../images/Header/Menu-icon-white@3x.png')}/>
+                        </View>
+                    </View>
+                </View>
                 <View style={styles.content}>
                 <View style={styles.sortBar}>
                     <View style={styles.aToZTab}>
@@ -83,6 +96,43 @@ export default class PerksList extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    content: {
+        flex: 7
+    },
+    header: {
+        flex: 1,
+        width: null,
+        height: null
+    },
+    headerContainer: {
+        flex: 1
+    },
+    headerIconContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    menuContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    perksPartnerTitleContainer: {
+        flex: 4,
+        alignItems: 'center'
+    },
+    perksPartnerTitleText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: '#FFFFFF',
+        backgroundColor: 'transparent',
+        textAlign: 'center'
+    },
     sortBar: {
         flexDirection: 'row',
         backgroundColor: 'white',
@@ -129,16 +179,5 @@ const styles = StyleSheet.create({
         color: '#979797',
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24
-    },
-    container: {
-        flex: 1
-    },
-    content: {
-        flex: 7
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
     }
 });

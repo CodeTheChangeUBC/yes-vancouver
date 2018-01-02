@@ -57,7 +57,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     favouriteStarColumn: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        paddingHorizontal: 20
     },
     favouriteStarIcon: {
         width: 30,

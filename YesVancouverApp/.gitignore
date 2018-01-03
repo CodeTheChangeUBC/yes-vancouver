@@ -1,6 +1,6 @@
 node_modules/
 .expo/
 .idea/
+config/
 npm-debug.*
 .DS_Store
-config.js

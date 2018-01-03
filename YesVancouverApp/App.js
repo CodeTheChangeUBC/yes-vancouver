@@ -6,8 +6,8 @@ import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
 import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
 import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
 // =========================================================================
-import ApiUtils from './ApiUtils'
-import { ClientSecrets } from './config'
+import ApiUtils from './src/utils/ApiUtils'
+import { ClientSecrets } from './config/config'
 // =========================================================================
 
 export default class App extends React.Component {

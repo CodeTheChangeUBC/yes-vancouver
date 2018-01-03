@@ -5,13 +5,14 @@ import { Font } from 'expo';
 import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
 import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
 import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
+// =========================================================================
 import ApiUtils from './ApiUtils'
 import { ClientSecrets } from './config'
+// =========================================================================
 
 export default class App extends React.Component {
     state = {
         fontLoaded: false,
-        tokenInfo: ''
     };
 
     async componentDidMount() {
@@ -24,6 +25,7 @@ export default class App extends React.Component {
         this.setState({ fontLoaded: true });
 
 
+        // =========================================================================
         let base64 = require('base-64')
         username = ClientSecrets.API_USERNAME;
         password = ClientSecrets.API_PASSWORD;
@@ -49,8 +51,8 @@ export default class App extends React.Component {
             console.error(error);
         });
 
-        //console.log(this.state.tokenInfo)
         console.log("DONE")
+        // =========================================================================
     }
     
     render() {
@@ -58,14 +60,7 @@ export default class App extends React.Component {
             return <Expo.AppLoading />
         }
         return (
-            <View>
-                <Text>HI</Text>
-                <Text>HI</Text>
-                <Text>HI</Text>
-                <Text>HI</Text>
-                <Text>HI</Text>
-            </View>
-            //<Navigation />         
+            <Navigation />         
             //<ProfileSetupWork/>
             //<ProfileSetupSocial/>
             //<ProfileSetupPhoto/>

@@ -6,16 +6,11 @@ import EventsItem from './EventsItem';
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
-const datasource = [
+var datasource = [
     {
         key: 'Upcoming',
         data: [ 
-            {
-                eventId: '1',
-                eventTitle: 'eventTitle1',
-                eventTime: 'eventTime1',
-                eventLocation: 'eventLocation1'
-            },
+            new eventEntry('8', 'eventName8', 'eventTime8', 'eventLocation8'),
             {
                 eventId: '2',
                 eventTitle: 'eventTitle2',
@@ -43,11 +38,19 @@ const datasource = [
     }
 ]
 
+function eventEntry(eventId, eventName, eventTime, eventLocation){
+    this.eventId = eventId
+    this.eventTitle = eventName
+    this.eventTime = eventTime
+    this.eventLocation = eventLocation
+}
+
 export default class EventsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            sectionListDs: datasource
         }
     }
 
@@ -102,13 +105,38 @@ export default class EventsList extends Component {
     }
 
     async componentDidMount() {
+        // console.log(new eventEntry('8', 'eventName8', 'eventTime8', 'eventLocation8'))
         bearerToken = await this.getBearerToken()
-        console.log(await this.getEventsList(bearerToken))
+        eventsListResponse = await this.getEventsList(bearerToken)
+        eventsList = eventsListResponse.Events
+        
+        var upcomingEvents = []
+        var pastEvents = []
+        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
+        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
+
+        for (i = 0; i < eventsList.length; i++) { 
+            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
+            console.log(entry)
+            upcomingEvents.push(entry)
+        }
+        
+        datasource = [
+            {
+                key: 'Upcoming',
+                data: upcomingEvents
+            },
+            {   
+                key: 'Past Events',
+                data: pastEvents
+            }
+        ]
+        this.setState({ sectionListDs: datasource});
     }
 
     renderItem = (item) => {
         return (
-            <EventsItem eventId={item.item.eventId}
+            <EventsItem eventId={Number(item.item.eventId)}
                 eventTitle={item.item.eventTitle}
                 eventTime={item.item.eventTime}
                 eventLocation={item.item.eventLocation}/>
@@ -152,7 +180,7 @@ export default class EventsList extends Component {
                         <SectionList
                             renderItem={this.renderItem}
                             renderSectionHeader={this.renderHeader}
-                            sections={datasource}
+                            sections={this.state.sectionListDs}
                             keyExtractor={(item) => item.eventId}
                             stickySectionHeadersEnabled={false}
                         />

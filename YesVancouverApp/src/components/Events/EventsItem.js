@@ -15,9 +15,9 @@ export default class EventsItem extends Component {
                     </View>
                 </View>
                 <View style={styles.detailsColumn}>
-                    <Text style={styles.title}>Event title</Text>
-                    <Text style={styles.time}>Event time</Text>
-                    <Text style={styles.location}>Event location</Text>
+                    <Text style={styles.title}>{this.props.eventTitle}</Text>
+                    <Text style={styles.time}>{this.props.eventTime}</Text>
+                    <Text style={styles.location}>{this.props.eventLocation}</Text>
                 </View>
             </View>
         );

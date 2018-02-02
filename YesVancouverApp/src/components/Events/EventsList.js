@@ -7,8 +7,40 @@ import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
 const datasource = [
-    {data: [ {name: 'Event1'}, {name: 'Event2'} ], key: 'Upcoming'},
-    {data: [ {name: 'Event3'}, {name: 'Event4'}, {name: 'Event5'} ], key: 'Past Events'}
+    {
+        key: 'Upcoming',
+        data: [ 
+            {
+                eventId: '1',
+                eventTitle: 'eventTitle1',
+                eventTime: 'eventTime1',
+                eventLocation: 'eventLocation1'
+            },
+            {
+                eventId: '2',
+                eventTitle: 'eventTitle2',
+                eventTime: 'eventTime2',
+                eventLocation: 'eventLocation2'
+            }
+        ]
+    },
+    {   
+        key: 'Past Events',
+        data: [ 
+            {
+                eventId: '3',
+                eventTitle: 'eventTitle3',
+                eventTime: 'eventTime3',
+                eventLocation: 'eventLocation3'
+            },
+            {
+                eventId: '4',
+                eventTitle: 'eventTitle4',
+                eventTime: 'eventTime4',
+                eventLocation: 'eventLocation4'
+            }
+        ]
+    }
 ]
 
 export default class EventsList extends Component {
@@ -76,7 +108,10 @@ export default class EventsList extends Component {
 
     renderItem = (item) => {
         return (
-            <EventsItem />
+            <EventsItem eventId={item.item.eventId}
+                eventTitle={item.item.eventTitle}
+                eventTime={item.item.eventTime}
+                eventLocation={item.item.eventLocation}/>
             // <Text style={styles.text}>{item.item.name}</Text>
         );
     }
@@ -118,7 +153,7 @@ export default class EventsList extends Component {
                             renderItem={this.renderItem}
                             renderSectionHeader={this.renderHeader}
                             sections={datasource}
-                            keyExtractor={(item) => item.name}
+                            keyExtractor={(item) => item.eventId}
                             stickySectionHeadersEnabled={false}
                         />
                     </View>

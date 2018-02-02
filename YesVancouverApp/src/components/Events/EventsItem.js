@@ -26,7 +26,7 @@ export default class EventsItem extends Component {
 }
 
 EventsItem.propTypes = {
-    eventId: PropTypes.string.isRequired,
+    eventId: PropTypes.number.isRequired,
     eventTitle: PropTypes.string.isRequired,
     eventTime: PropTypes.string.isRequired,
     eventLocation: PropTypes.string.isRequired
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 100,
         borderStyle: 'solid',
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderColor: 'rgba(151,151,151,0.2)',
         backgroundColor: 'rgba(255,255,255,0.5)'
     },

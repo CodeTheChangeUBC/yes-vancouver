@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 
 export default class EventsItem extends Component {
@@ -23,6 +24,13 @@ export default class EventsItem extends Component {
         );
     }
 }
+
+EventsItem.propTypes = {
+    eventId: PropTypes.string.isRequired,
+    eventTitle: PropTypes.string.isRequired,
+    eventTime: PropTypes.string.isRequired,
+    eventLocation: PropTypes.string.isRequired
+};
 
 const styles = StyleSheet.create({
     container: {

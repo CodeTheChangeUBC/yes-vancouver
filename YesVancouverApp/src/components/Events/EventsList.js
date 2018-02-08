@@ -106,32 +106,32 @@ export default class EventsList extends Component {
 
     async componentDidMount() {
         // console.log(new eventEntry('8', 'eventName8', 'eventTime8', 'eventLocation8'))
-        bearerToken = await this.getBearerToken()
-        eventsListResponse = await this.getEventsList(bearerToken)
-        eventsList = eventsListResponse.Events
+        // bearerToken = await this.getBearerToken()
+        // eventsListResponse = await this.getEventsList(bearerToken)
+        // eventsList = eventsListResponse.Events
         
-        var upcomingEvents = []
-        var pastEvents = []
-        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
-        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
+        // var upcomingEvents = []
+        // var pastEvents = []
+        // pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
+        // pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
 
-        for (i = 0; i < eventsList.length; i++) { 
-            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
-            console.log(entry)
-            upcomingEvents.push(entry)
-        }
+        // for (i = 0; i < eventsList.length; i++) { 
+        //     var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
+        //     console.log(entry)
+        //     upcomingEvents.push(entry)
+        // }
         
-        datasource = [
-            {
-                key: 'Upcoming',
-                data: upcomingEvents
-            },
-            {   
-                key: 'Past Events',
-                data: pastEvents
-            }
-        ]
-        this.setState({ sectionListDs: datasource});
+        // datasource = [
+        //     {
+        //         key: 'Upcoming',
+        //         data: upcomingEvents
+        //     },
+        //     {   
+        //         key: 'Past Events',
+        //         data: pastEvents
+        //     }
+        // ]
+        // this.setState({ sectionListDs: datasource});
     }
 
     renderItem = (item) => {
@@ -165,7 +165,7 @@ export default class EventsList extends Component {
                             </Text>
                         </View>
                         <View style={styles.menuContainer}>
-                            <Image source={require('../../images/Header/Menu-icon-white@3x.png')}/>
+                            <Image source={require('../../images/Header/Menu-icon-white-3x.png')}/>
                         </View>
                     </View>
                 </View>

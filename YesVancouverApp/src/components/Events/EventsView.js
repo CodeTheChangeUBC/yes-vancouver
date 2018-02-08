@@ -12,11 +12,13 @@ export default class EventsView extends Component {
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
             source={require('../../images/NavBar/Calendar-icon-white-3x.png')}
-            size={50}/> 
+            resizeMode="contain"
+            style={{height:30}}/> 
         ) :
         ( <Image 
             source={require('../../images/NavBar/Calendar-icon-orange-3x.png')}
-            size={50}/>
+            resizeMode="contain"
+            style={{height:30}}/>
         )
     }
 

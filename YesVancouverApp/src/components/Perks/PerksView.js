@@ -10,11 +10,13 @@ export default class PerksView extends Component {
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
             source={require('../../images/NavBar/Perks-icon-white-3x.png')}
-            size={50}/> 
+            resizeMode="contain"
+            style={{height:30}}/> 
         ) :
         ( <Image 
             source={require('../../images/NavBar/Perks-icon-orange-3x.png')}
-            size={50}/>
+            resizeMode="contain"
+            style={{height:30}}/>
         ) 
     }
 

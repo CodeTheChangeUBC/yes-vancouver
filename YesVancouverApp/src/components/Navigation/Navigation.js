@@ -15,6 +15,13 @@ const Navigation = StackNavigator({
     Third: {screen:NavBar},
     SignUp : {screen : SignUp},
     ResetPassword : {screen : ResetPassword}
-});
+},
+// {
+//     headerMode: 'none',
+//     navigationOptions: {
+//       headerVisible: false,
+//     }
+// }
+);
 
 export default Navigation;

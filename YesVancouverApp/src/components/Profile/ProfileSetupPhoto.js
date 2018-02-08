@@ -20,11 +20,11 @@ export default class ProfileSetupPhoto extends Component {
                     
                     <View style={styles.headerIconContainer}>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/White-arrow@3x.png')}/>
+                            <Image source={require('../../images/Header/White-arrow-3x.png')}/>
                         </View>
 
                         <View style={styles.pageIndicatorContainer}>
-                            <Image source={require('../../images/Login-Signup/Pagination/Pagination3@3x.png')}/>
+                            <Image source={require('../../images/Login-Signup/Pagination/Pagination3-3x.png')}/>
                         </View>
 
                         <View style={styles.backArrowContainer}></View>

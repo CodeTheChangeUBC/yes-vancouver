@@ -11,7 +11,7 @@ export default class PerksDetails extends Component {
                     <Header style={styles.header}/>
                     <View style={styles.headerIconContainer}>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/White-arrow@3x.png')}/>
+                            <Image source={require('../../images/Header/White-arrow-3x.png')}/>
                         </View>
                         <View style={styles.perksPartnerTitleContainer}>
                             <Text style={styles.perksPartnerTitleText}>
@@ -19,7 +19,7 @@ export default class PerksDetails extends Component {
                             </Text>
                         </View>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/Menu-icon-white@3x.png')}/>
+                            <Image source={require('../../images/Header/Menu-icon-white-3x.png')}/>
                         </View>
                     </View>
                 </View>
@@ -61,7 +61,7 @@ export default class PerksDetails extends Component {
                             </Text>
                             <View style={styles.yesVancouverLogoContainer}>
                                 <Image
-                                    source={require('../../images/Settings/yes-logo@3x.png')}
+                                    source={require('../../images/Settings/yes-logo-3x.png')}
                                     style={styles.yesVancouverLogo}/>
                                 <Text style={styles.memberText}>
                                     YES! Vancouver Member

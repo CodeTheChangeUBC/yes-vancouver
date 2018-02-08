@@ -7,11 +7,11 @@ export default class ProfileView extends Component {
         tabBarLabel: 'ProfileView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
-            source={require('../../images/NavBar/Profile-icon-white@3x.png')}
+            source={require('../../images/NavBar/Profile-icon-white-3x.png')}
             size={50}/> 
         ) :
         ( <Image 
-            source={require('../../images/NavBar/Profile-icon-orange@3x.png')}
+            source={require('../../images/NavBar/Profile-icon-orange-3x.png')}
             size={50}/>
         )
     };

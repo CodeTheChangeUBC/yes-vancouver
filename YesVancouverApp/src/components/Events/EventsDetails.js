@@ -38,7 +38,7 @@ export default class EventsDetails extends Component {
 
                     <View style={styles.eventDetailContainer}>
                         <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/calendar@3x.png')}/>
+                            <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}/>
                         </View>
                         <View style={styles.eventDetailTextContainer}>
                             <Text style={styles.eventDetailText}>May 15, 10:30PM - 11:30PM</Text>
@@ -49,7 +49,7 @@ export default class EventsDetails extends Component {
 
                     <View style={styles.eventDetailContainer}>
                         <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/location@3x.png')}/>
+                            <Image source={require('../../images/Events/Event-icons/location-3x.png')}/>
                         </View>
                         <View style={styles.eventDetailTextContainer}>
                             <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
@@ -60,7 +60,7 @@ export default class EventsDetails extends Component {
 
                     <View style={styles.eventDetailContainer}>
                         <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/message@3x.png')}/>
+                            <Image source={require('../../images/Events/Event-icons/message-3x.png')}/>
                         </View>
                         <View style={styles.eventDetailTextContainer}>
                             <Text style={styles.eventDetailText}>Discussion Board</Text>
@@ -157,15 +157,15 @@ export default class EventsDetails extends Component {
                     <View style={styles.socialMediaContainer}>
                         <Image
                             style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Twitter@3x.png')}
+                            source={require('../../images/Events/Share-icons/Twitter-3x.png')}
                         />
                         <Image
                             style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Facebook@3x.png')}
+                            source={require('../../images/Events/Share-icons/Facebook-3x.png')}
                         />
                         <Image
                             style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Email@3x.png')}
+                            source={require('../../images/Events/Share-icons/Email-3x.png')}
                         />
                         </View>
                     <Text style={styles.copyLinkText}>Copy Link</Text>

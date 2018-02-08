@@ -8,7 +8,7 @@ const Header = () => {
             <Image 
                 style={styles.headerImage}
                 resizeMode='stretch'
-                source={require('../../images/Header/Top-header-bar@3x.png')}
+                source={require('../../images/Header/Top-header-bar-3x.png')}
             />
         </View>
     );

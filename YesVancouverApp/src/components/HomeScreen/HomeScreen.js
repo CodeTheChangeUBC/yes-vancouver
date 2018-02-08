@@ -12,9 +12,9 @@ export default class HomeScreen extends React.Component {
     render(){
         var {navigate} = this.props.navigation;
         return(
-            <Image
-                style={{resizeMode:"center"}}
-                source={require('../../images/Login-Signup/Background-Photo.png')}>
+            // <Image
+            //     style={{resizeMode:"center"}}
+            //     source={require('../../images/Login-Signup/Background-Photo.png')}>
                 <View style = {styles.container}>
                     <Image
                         style={styles.mainLogo}
@@ -40,7 +40,7 @@ export default class HomeScreen extends React.Component {
                         Sign in
                     </Text>
                 </View>
-            </Image>
+            // </Image>
         )
     }
 }

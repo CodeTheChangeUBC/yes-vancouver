@@ -53,10 +53,11 @@ var datasource = [
     }
 ]
 
-function eventEntry(eventId, eventName, eventMonth, eventTime, eventLocation){
+function eventEntry(eventId, eventName, eventMonth, eventDate, eventTime, eventLocation) {
     this.eventId = eventId
     this.eventTitle = eventName
     this.eventMonth = eventMonth
+    this.eventDate = eventDate
     this.eventTime = eventTime
     this.eventLocation = eventLocation
 }
@@ -147,13 +148,13 @@ export default class EventsList extends Component {
             
         var upcomingEvents = []
         var pastEvents = []
-        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventMonthA', 'eventTimeA', 'eventLocationA'))
-        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventMonthB', 'eventTimeB', 'eventLocationB'))
+        pastEvents.push(new eventEntry(1234, 'eventTitleA', 'JAN', 12, 'eventTimeA', 'eventLocationA'))
+        pastEvents.push(new eventEntry(5678, 'eventTitleB', 'JAN', 12, 'eventTimeB', 'eventLocationB'))
 
         for (i = 0; i < eventsList.length; i++) { 
             let date = new Date(Date.parse(eventsList[i].StartDate))
             console.log(date)
-            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, monthsAbbrev[date.getMonth()-1], eventsList[i].StartDate, eventsList[i].Location)
+            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, monthsAbbrev[date.getMonth()], date.getDate(), eventsList[i].StartDate, eventsList[i].Location)
             console.log(entry)
             upcomingEvents.push(entry)
         }
@@ -179,6 +180,7 @@ export default class EventsList extends Component {
             <EventsItem eventId={Number(item.item.eventId)}
                 eventTitle={item.item.eventTitle}
                 eventMonth={item.item.eventMonth}
+                eventDate={Number(item.item.eventDate)}
                 eventTime={item.item.eventTime}
                 eventLocation={item.item.eventLocation}/>
             // <Text style={styles.text}>{item.item.name}</Text>

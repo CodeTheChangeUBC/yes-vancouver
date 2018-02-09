@@ -12,7 +12,7 @@ export default class EventsItem extends Component {
                         <Text style={styles.dateMonthText}>{this.props.eventMonth}</Text>
                     </View>
                     <View style={styles.dateDayTextContainer}>
-                        <Text style={styles.dateDayText}>28</Text>
+                        <Text style={styles.dateDayText}>{this.props.eventDate}</Text>
                     </View>
                 </View>
                 <View style={styles.detailsColumn}>
@@ -29,6 +29,7 @@ EventsItem.propTypes = {
     eventId: PropTypes.number.isRequired,
     eventTitle: PropTypes.string.isRequired,
     eventMonth: PropTypes.string.isRequired,
+    eventDate: PropTypes.number.isRequired,
     eventTime: PropTypes.string.isRequired,
     eventLocation: PropTypes.string.isRequired
 };

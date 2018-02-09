@@ -6,6 +6,21 @@ import EventsItem from './EventsItem';
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
+var monthsAbbrev = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+]
+
 var datasource = [
     {
         key: 'Upcoming',
@@ -38,9 +53,10 @@ var datasource = [
     }
 ]
 
-function eventEntry(eventId, eventName, eventTime, eventLocation){
+function eventEntry(eventId, eventName, eventMonth, eventTime, eventLocation){
     this.eventId = eventId
     this.eventTitle = eventName
+    this.eventMonth = eventMonth
     this.eventTime = eventTime
     this.eventLocation = eventLocation
 }
@@ -131,11 +147,13 @@ export default class EventsList extends Component {
             
         var upcomingEvents = []
         var pastEvents = []
-        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
-        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
+        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventMonthA', 'eventTimeA', 'eventLocationA'))
+        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventMonthB', 'eventTimeB', 'eventLocationB'))
 
         for (i = 0; i < eventsList.length; i++) { 
-            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
+            let date = new Date(Date.parse(eventsList[i].StartDate))
+            console.log(date)
+            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, monthsAbbrev[date.getMonth()-1], eventsList[i].StartDate, eventsList[i].Location)
             console.log(entry)
             upcomingEvents.push(entry)
         }
@@ -160,6 +178,7 @@ export default class EventsList extends Component {
         return (
             <EventsItem eventId={Number(item.item.eventId)}
                 eventTitle={item.item.eventTitle}
+                eventMonth={item.item.eventMonth}
                 eventTime={item.item.eventTime}
                 eventLocation={item.item.eventLocation}/>
             // <Text style={styles.text}>{item.item.name}</Text>

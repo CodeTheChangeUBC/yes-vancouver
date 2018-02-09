@@ -9,7 +9,7 @@ export default class EventsItem extends Component {
             <View style={styles.container}>
                 <View style={styles.dateColumn}>
                     <View style={styles.dateMonthTextContainer}>
-                        <Text style={styles.dateMonthText}>MAY</Text>
+                        <Text style={styles.dateMonthText}>{this.props.eventMonth}</Text>
                     </View>
                     <View style={styles.dateDayTextContainer}>
                         <Text style={styles.dateDayText}>28</Text>
@@ -28,6 +28,7 @@ export default class EventsItem extends Component {
 EventsItem.propTypes = {
     eventId: PropTypes.number.isRequired,
     eventTitle: PropTypes.string.isRequired,
+    eventMonth: PropTypes.string.isRequired,
     eventTime: PropTypes.string.isRequired,
     eventLocation: PropTypes.string.isRequired
 };

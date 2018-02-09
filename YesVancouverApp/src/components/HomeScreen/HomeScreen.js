@@ -2,7 +2,7 @@
  * Created by joycheng on 2017-08-24.
  */
 import React from 'react';
-import { StyleSheet, Image, Text, View, Button, StatusBar } from 'react-native';
+import { StyleSheet, Image, Text, View, Button, StatusBar, ImageBackground } from 'react-native';
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -12,9 +12,10 @@ export default class HomeScreen extends React.Component {
     render(){
         var {navigate} = this.props.navigation;
         return(
-            // <Image
-            //     style={{resizeMode:"center"}}
-            //     source={require('../../images/Login-Signup/Background-Photo.png')}>
+            <ImageBackground 
+                source={require('../../images/Login-Signup/Background-Photo.png')}
+                style={{width: '100%', height: '100%'}}
+                resizeMode='stretch'>
                 <View style = {styles.container}>
                     <Image
                         style={styles.mainLogo}
@@ -40,7 +41,7 @@ export default class HomeScreen extends React.Component {
                         Sign in
                     </Text>
                 </View>
-            // </Image>
+            </ImageBackground>
         )
     }
 }

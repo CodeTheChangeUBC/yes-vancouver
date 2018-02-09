@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, SectionList, Text } from 'react-native';
+import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'react-native';
 import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
 
@@ -49,7 +49,7 @@ export default class EventsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
+            isEventListLoading: true,
             sectionListDs: datasource
         }
     }
@@ -80,6 +80,7 @@ export default class EventsList extends Component {
             return responseJson['access_token']
         } catch(error) {
             console.error(error);
+            return null
         }
     }
 
@@ -98,40 +99,61 @@ export default class EventsList extends Component {
                     'Authorization': 'Bearer ' + bearerToken
                 }
             })
-            return await response.json()
+            
+            if(response.status != 200) {
+                console.log(reponse.status)
+                return null
+            }
+            return response.json()
+
         } catch(error) {
-            console.error(error);
+            console.error(error)
+            return null
         }
     }
 
     async componentDidMount() {
-        // console.log(new eventEntry('8', 'eventName8', 'eventTime8', 'eventLocation8'))
-        // bearerToken = await this.getBearerToken()
-        // eventsListResponse = await this.getEventsList(bearerToken)
-        // eventsList = eventsListResponse.Events
-        
-        // var upcomingEvents = []
-        // var pastEvents = []
-        // pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
-        // pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
+        bearerToken = await this.getBearerToken()
+        if(!bearerToken) {
+            console.log("Failed to get bearer token")
+        }
 
-        // for (i = 0; i < eventsList.length; i++) { 
-        //     var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
-        //     console.log(entry)
-        //     upcomingEvents.push(entry)
-        // }
+        eventsListResponse = await this.getEventsList(bearerToken)
+        if(!eventsListResponse) {
+            console.log("Failed to get events list")
+        }
         
-        // datasource = [
-        //     {
-        //         key: 'Upcoming',
-        //         data: upcomingEvents
-        //     },
-        //     {   
-        //         key: 'Past Events',
-        //         data: pastEvents
-        //     }
-        // ]
-        // this.setState({ sectionListDs: datasource});
+        if(!eventsListResponse.hasOwnProperty('Events')) {
+            console.log("Failed to get events property")
+        }
+            
+        eventsList = eventsListResponse.Events
+            
+        var upcomingEvents = []
+        var pastEvents = []
+        pastEvents.push(new eventEntry('A', 'eventTitleA', 'eventTimeA', 'eventLocationA'))
+        pastEvents.push(new eventEntry('B', 'eventTitleB', 'eventTimeB', 'eventLocationB'))
+
+        for (i = 0; i < eventsList.length; i++) { 
+            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, eventsList[i].StartDate, eventsList[i].Location)
+            console.log(entry)
+            upcomingEvents.push(entry)
+        }
+        
+        datasource = [
+            {
+                key: 'Upcoming',
+                data: upcomingEvents
+            },
+            {   
+                key: 'Past Events',
+                data: pastEvents
+            }
+        ]
+        this.setState({ 
+            sectionListDs: datasource,
+            isEventListLoading: false,
+        });
     }
 
     renderItem = (item) => {
@@ -153,45 +175,61 @@ export default class EventsList extends Component {
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <Header style={styles.header}/>
-                    <View style={styles.headerIconContainer}>
-                        <View style={styles.menuContainer}></View>
-                        <View style={styles.eventsTitleContainer}>
-                            <Text style={styles.eventsTitleText}>
-                                Events
-                            </Text>
+        if(this.state.isEventListLoading) {
+            return (
+                <View style={styles.activityIndicator}>
+                    <ActivityIndicator size="large" color="#ED4969" />
+                </View>
+            )
+        }
+        else {
+            return (
+                <View style={styles.container}>
+                    <View style={styles.headerContainer}>
+                        <Header style={styles.header}/>
+                        <View style={styles.headerIconContainer}>
+                            <View style={styles.menuContainer}></View>
+                            <View style={styles.eventsTitleContainer}>
+                                <Text style={styles.eventsTitleText}>
+                                    Events
+                                </Text>
+                            </View>
+                            <View style={styles.menuContainer}>
+                                <Image source={require('../../images/Header/Menu-icon-white-3x.png')}/>
+                            </View>
                         </View>
-                        <View style={styles.menuContainer}>
-                            <Image source={require('../../images/Header/Menu-icon-white-3x.png')}/>
+                    </View>
+                    <View style={styles.content}>
+                        <View style={styles.backgroundContainer}>
+                            <Image style={styles.backgroundImage}
+                                resizeMode='stretch'
+                                source={require('../../images/Events/Events-background.png')}
+                            />
+                        </View>
+                        <View style={styles.overlay}>
+                            <SectionList
+                                renderItem={this.renderItem}
+                                renderSectionHeader={this.renderHeader}
+                                sections={this.state.sectionListDs}
+                                keyExtractor={(item) => item.eventId}
+                                stickySectionHeadersEnabled={false}
+                            />
                         </View>
                     </View>
                 </View>
-                <View style={styles.content}>
-                    <View style={styles.backgroundContainer}>
-                        <Image style={styles.backgroundImage}
-                            resizeMode='stretch'
-                            source={require('../../images/Events/Events-background.png')}
-                        />
-                    </View>
-                    <View style={styles.overlay}>
-                        <SectionList
-                            renderItem={this.renderItem}
-                            renderSectionHeader={this.renderHeader}
-                            sections={this.state.sectionListDs}
-                            keyExtractor={(item) => item.eventId}
-                            stickySectionHeadersEnabled={false}
-                        />
-                    </View>
-                </View>
-            </View>
-        );
+            );
+        }
     }
 }
 
 const styles = StyleSheet.create({
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    },
     container: {
         flex: 1
     },

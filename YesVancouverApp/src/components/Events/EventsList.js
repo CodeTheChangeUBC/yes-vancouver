@@ -21,6 +21,18 @@ var monthsAbbrev = [
     "DEC"
 ]
 
+function formatAMPM(date) {
+    // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
 var datasource = [
     {
         key: 'Upcoming',
@@ -139,7 +151,8 @@ export default class EventsList extends Component {
         if(!eventsListResponse) {
             console.log("Failed to get events list")
         }
-        
+        console.log(eventsListResponse)
+
         if(!eventsListResponse.hasOwnProperty('Events')) {
             console.log("Failed to get events property")
         }
@@ -152,9 +165,33 @@ export default class EventsList extends Component {
         pastEvents.push(new eventEntry(5678, 'eventTitleB', 'JAN', 12, 'eventTimeB', 'eventLocationB'))
 
         for (i = 0; i < eventsList.length; i++) { 
-            let date = new Date(Date.parse(eventsList[i].StartDate))
-            console.log(date)
-            var entry = new eventEntry(eventsList[i].Id, eventsList[i].Name, monthsAbbrev[date.getMonth()], date.getDate(), eventsList[i].StartDate, eventsList[i].Location)
+            let startDate = new Date(Date.parse(eventsList[i].StartDate))
+            let endDate = new Date(Date.parse(eventsList[i].EndDate))
+            let eventTime = null
+
+            // If multi-day event, just display startDate's month, day and time
+            if(startDate.toLocaleDateString() != endDate.toLocaleDateString()) {
+                eventTime = formatAMPM(startDate)
+            }
+            else {
+                // If start time and end time same, just display one
+                if(startDate.toLocaleTimeString() == endDate.toLocaleTimeString()) {
+                    eventTime = formatAMPM(startDate)
+                }
+                else {
+                    eventTime = formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
+                }
+            }
+
+            var entry = new eventEntry (
+                eventsList[i].Id,
+                eventsList[i].Name,
+                monthsAbbrev[startDate.getMonth()],
+                startDate.getDate(),
+                eventTime,
+                eventsList[i].Location
+            )
+
             console.log(entry)
             upcomingEvents.push(entry)
         }

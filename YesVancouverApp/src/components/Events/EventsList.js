@@ -253,7 +253,9 @@ export default class EventsList extends Component {
                                 </Text>
                             </View>
                             <View style={styles.menuContainer}>
-                                <Image source={require('../../images/Header/Menu-icon-white-3x.png')}/>
+                                <Image source={require('../../images/Header/Menu-icon-white-3x.png')}
+                                    resizeMode="contain"
+                                    style={{height:30}}/>
                             </View>
                         </View>
                     </View>

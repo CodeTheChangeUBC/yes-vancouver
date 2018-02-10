@@ -16,6 +16,15 @@ export default class ProfileView extends Component {
         )
     };
 
+    setString(){
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("POST", 'https://oauth.wildapricot.org/auth/token', true);
+        xmlHttp.open("GET", "https://yvsuper.wildapricot.org/admin/contacts/", true);
+        console.log(xmlHttp.responseText);
+        return xmlHttp.responseText.length;
+        //return 5
+    }
+
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
@@ -37,6 +46,9 @@ export default class ProfileView extends Component {
                         ()=> ToastAndroid.show("Extended membership" ,ToastAndroid.SHORT)
                     }/>
                 </View>
+
+                <Text style={styles.nameFont}>{this.setString()} accounts</Text>
+
                 <Text style={styles.nameFont}>My contact information</Text>
                 <Text style={styles.contactInfo}>
                     <Image

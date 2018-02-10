@@ -7,12 +7,14 @@ export default class MessagingView extends Component {
         title: "MessagingView",
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
-            source={require('../../images/NavBar/Message-icon-white@3x.png')}
-            size={50}/> 
+            source={require('../../images/NavBar/Message-icon-white-3x.png')}
+            resizeMode="contain"
+            style={{height:30}}/> 
         ) :
         ( <Image 
-            source={require('../../images/NavBar/Message-icon-orange@3x.png')}
-            size={50}/>
+            source={require('../../images/NavBar/Message-icon-orange-3x.png')}
+            resizeMode="contain"
+            style={{height:30}}/>
         )
     }
 

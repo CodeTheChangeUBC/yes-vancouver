@@ -6,6 +6,7 @@ import Header from '../Navigation/Header';
 export default class SignUp extends React.Component{
     render (){
         //<Header style={styles.header}/>
+        var {navigate} = this.props.navigation;
         return(
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput style={{height:100}} placeholder="First name" autoCapitalize="words"></TextInput>
@@ -13,7 +14,10 @@ export default class SignUp extends React.Component{
                 <TextInput style={{height:100}} placeholder="Email" keyboardType="email-address"></TextInput>
                 <TextInput style={{height:100}} placeholder="Password" secureTextEntry={true}></TextInput>
                 <Button color="#ED4969" title="Sign up" onPress={
-                    ()=> ToastAndroid.show("Signed Up" ,ToastAndroid.SHORT)
+                    ()=> {
+                        navigate("ProfileSetupWork", {})
+                        ToastAndroid.show("Signed Up" ,ToastAndroid.SHORT)
+                    }
                 }/>
             </ScrollView>
         )

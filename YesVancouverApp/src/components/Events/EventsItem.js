@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 
 export default class EventsItem extends Component {
@@ -8,21 +9,30 @@ export default class EventsItem extends Component {
             <View style={styles.container}>
                 <View style={styles.dateColumn}>
                     <View style={styles.dateMonthTextContainer}>
-                        <Text style={styles.dateMonthText}>MAY</Text>
+                        <Text style={styles.dateMonthText}>{this.props.eventMonth}</Text>
                     </View>
                     <View style={styles.dateDayTextContainer}>
-                        <Text style={styles.dateDayText}>28</Text>
+                        <Text style={styles.dateDayText}>{this.props.eventDate}</Text>
                     </View>
                 </View>
                 <View style={styles.detailsColumn}>
-                    <Text style={styles.title}>Event title</Text>
-                    <Text style={styles.time}>Event time</Text>
-                    <Text style={styles.location}>Event location</Text>
+                    <Text style={styles.title}>{this.props.eventTitle}</Text>
+                    <Text style={styles.time}>{this.props.eventTime}</Text>
+                    <Text style={styles.location}>{this.props.eventLocation}</Text>
                 </View>
             </View>
         );
     }
 }
+
+EventsItem.propTypes = {
+    eventId: PropTypes.number.isRequired,
+    eventTitle: PropTypes.string.isRequired,
+    eventMonth: PropTypes.string.isRequired,
+    eventDate: PropTypes.number,
+    eventTime: PropTypes.string.isRequired,
+    eventLocation: PropTypes.string.isRequired
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -32,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 100,
         borderStyle: 'solid',
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderColor: 'rgba(151,151,151,0.2)',
         backgroundColor: 'rgba(255,255,255,0.5)'
     },

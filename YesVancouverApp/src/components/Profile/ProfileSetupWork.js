@@ -5,6 +5,10 @@ import Expo from 'expo'
 
 
 export default class ProfileSetupWork extends Component {
+    static navigationOptions = {
+        title:"ProfileSetupWork",
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -17,25 +21,30 @@ export default class ProfileSetupWork extends Component {
     }
 
     render() {
+        var {navigate} = this.props.navigation
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
+                {/* <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
                     <StatusBar
                         barStyle='dark-content'
                         backgroundColor='#ffffff'
                         hidden={false}
                     />
-                </View>
+                </View> */}
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     
                     <View style={styles.headerIconContainer}>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/White-arrow@3x.png')}/>
+                            <Image source={require('../../images/Header/White-arrow-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'50%'}}/>
                         </View>
 
                         <View style={styles.pageIndicatorContainer}>
-                            <Image source={require('../../images/Login-Signup/Pagination/Pagination1@3x.png')}/>
+                            <Image source={require('../../images/Login-Signup/Pagination/Pagination1-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'25%'}}/>
                         </View>
 
                         <View style={styles.backArrowContainer}></View>
@@ -115,7 +124,8 @@ export default class ProfileSetupWork extends Component {
 
                     <View style={styles.nextButtonContainer}>
                         <View style={styles.nextButtonSpacer}></View>
-                            <TouchableOpacity style={styles.nextButtonRectangle}>
+                            <TouchableOpacity style={styles.nextButtonRectangle}
+                                onPress={()=> navigate("ProfileSetupSocial",{})}>
                                 <Text style={styles.nextButtonText}>Next</Text>
                             </TouchableOpacity>
                         <View style={styles.nextButtonSpacer}></View>

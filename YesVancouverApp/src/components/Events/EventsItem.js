@@ -29,7 +29,7 @@ EventsItem.propTypes = {
     eventId: PropTypes.number.isRequired,
     eventTitle: PropTypes.string.isRequired,
     eventMonth: PropTypes.string.isRequired,
-    eventDate: PropTypes.number.isRequired,
+    eventDate: PropTypes.number,
     eventTime: PropTypes.string.isRequired,
     eventLocation: PropTypes.string.isRequired
 };

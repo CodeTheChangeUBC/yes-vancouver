@@ -33,34 +33,18 @@ function formatAMPM(date) {
     return strTime;
 }
 
+// Default datasource to be displayed when events list cannot be fetched
 var datasource = [
     {
         key: 'Upcoming',
         data: [ 
-            new eventEntry('8', 'eventName8', 'eventTime8', 'eventLocation8'),
-            {
-                eventId: '2',
-                eventTitle: 'eventTitle2',
-                eventTime: 'eventTime2',
-                eventLocation: 'eventLocation2'
-            }
+            new eventEntry(null, 'Failed to retrieve events', '', null, '', '')
         ]
     },
     {   
         key: 'Past Events',
         data: [ 
-            {
-                eventId: '3',
-                eventTitle: 'eventTitle3',
-                eventTime: 'eventTime3',
-                eventLocation: 'eventLocation3'
-            },
-            {
-                eventId: '4',
-                eventTitle: 'eventTitle4',
-                eventTime: 'eventTime4',
-                eventLocation: 'eventLocation4'
-            }
+            new eventEntry(null, 'Failed to retrieve events', '', null, '', '')
         ]
     }
 ]
@@ -74,6 +58,123 @@ function eventEntry(eventId, eventName, eventMonth, eventDate, eventTime, eventL
     this.eventLocation = eventLocation
 }
 
+async function getBearerToken() {
+    try {
+        let base64 = require('base-64')
+        username = ClientSecrets.API_USERNAME;
+        password = ClientSecrets.API_PASSWORD;
+        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
+        console.log(basicAuthHeaderValue)
+
+        let requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        };
+
+        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': basicAuthHeaderValue
+            },
+            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
+        })
+        let responseJson = await response.json()
+        return responseJson['access_token']
+    } catch(error) {
+        console.error(error);
+        return null
+    }
+}
+
+async function getEventsList(bearerToken) {
+    try {
+        let requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        };
+        
+        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events'
+        let response = await fetch(getUrl, 
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + bearerToken
+            }
+        })
+        
+        if(response.status != 200) {
+            console.log(response.status)
+            return null
+        }
+        return response.json()
+
+    } catch(error) {
+        console.error(error)
+        return null
+    }
+}
+
+function getEventsListDataSource(response) {
+    let eventsList = null
+    try {
+        eventsList = eventsListResponse.Events
+    } catch (error) {
+        console.log("Failed to get events property")
+        return null
+    }
+        
+    var upcomingEvents = []
+    var pastEvents = []
+    pastEvents.push(new eventEntry(1234, 'eventTitleA', 'JAN', 12, 'eventTimeA', 'eventLocationA'))
+    pastEvents.push(new eventEntry(5678, 'eventTitleB', 'JAN', 12, 'eventTimeB', 'eventLocationB'))
+
+    for (i = 0; i < eventsList.length; i++) { 
+        let startDate = new Date(Date.parse(eventsList[i].StartDate))
+        let endDate = new Date(Date.parse(eventsList[i].EndDate))
+        let eventTime = null
+
+        // If multi-day event, just display startDate's month, day and time
+        if(startDate.toLocaleDateString() != endDate.toLocaleDateString()) {
+            eventTime = formatAMPM(startDate)
+        }
+        else {
+            // If start time and end time same, just display one
+            if(startDate.toLocaleTimeString() == endDate.toLocaleTimeString()) {
+                eventTime = formatAMPM(startDate)
+            }
+            else {
+                eventTime = formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
+            }
+        }
+
+        var entry = new eventEntry (
+            eventsList[i].Id,
+            eventsList[i].Name,
+            monthsAbbrev[startDate.getMonth()],
+            startDate.getDate(),
+            eventTime,
+            eventsList[i].Location
+        )
+
+        console.log(entry)
+        upcomingEvents.push(entry)
+    }
+
+    datasource = [
+        {
+            key: 'Upcoming',
+            data: upcomingEvents
+        },
+        {   
+            key: 'Past Events',
+            data: pastEvents
+        }
+    ]
+    return datasource
+}
+
 export default class EventsList extends Component {
     constructor(props) {
         super(props);
@@ -83,133 +184,28 @@ export default class EventsList extends Component {
         }
     }
 
-    async getBearerToken() {
-        try {
-            let base64 = require('base-64')
-            username = ClientSecrets.API_USERNAME;
-            password = ClientSecrets.API_PASSWORD;
-            basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-            console.log(basicAuthHeaderValue)
-
-            let requestAuthTokenBody = {
-                'grant_type': 'client_credentials',
-                'scope': 'contacts finances events'
-            };
-
-            let response = await fetch('https://oauth.wildapricot.org/auth/token', 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': basicAuthHeaderValue
-                },
-                body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-            })
-            let responseJson = await response.json()
-            return responseJson['access_token']
-        } catch(error) {
-            console.error(error);
-            return null
-        }
-    }
-
-    async getEventsList(bearerToken) {
-        try {
-            let requestAuthTokenBody = {
-                'grant_type': 'client_credentials',
-                'scope': 'contacts finances events'
-            };
-            
-            let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events'
-            let response = await fetch(getUrl, 
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + bearerToken
-                }
-            })
-            
-            if(response.status != 200) {
-                console.log(reponse.status)
-                return null
-            }
-            return response.json()
-
-        } catch(error) {
-            console.error(error)
-            return null
-        }
-    }
-
     async componentDidMount() {
-        bearerToken = await this.getBearerToken()
+        bearerToken = await getBearerToken()
         if(!bearerToken) {
             console.log("Failed to get bearer token")
         }
 
-        eventsListResponse = await this.getEventsList(bearerToken)
+        eventsListResponse = await getEventsList(bearerToken)
         if(!eventsListResponse) {
             console.log("Failed to get events list")
         }
         console.log(eventsListResponse)
 
-        if(!eventsListResponse.hasOwnProperty('Events')) {
-            console.log("Failed to get events property")
+        datasourceResult = getEventsListDataSource(eventsListResponse)
+        if(!datasourceResult) {
+            this.setState({isEventListLoading: false});
         }
-            
-        eventsList = eventsListResponse.Events
-            
-        var upcomingEvents = []
-        var pastEvents = []
-        pastEvents.push(new eventEntry(1234, 'eventTitleA', 'JAN', 12, 'eventTimeA', 'eventLocationA'))
-        pastEvents.push(new eventEntry(5678, 'eventTitleB', 'JAN', 12, 'eventTimeB', 'eventLocationB'))
-
-        for (i = 0; i < eventsList.length; i++) { 
-            let startDate = new Date(Date.parse(eventsList[i].StartDate))
-            let endDate = new Date(Date.parse(eventsList[i].EndDate))
-            let eventTime = null
-
-            // If multi-day event, just display startDate's month, day and time
-            if(startDate.toLocaleDateString() != endDate.toLocaleDateString()) {
-                eventTime = formatAMPM(startDate)
-            }
-            else {
-                // If start time and end time same, just display one
-                if(startDate.toLocaleTimeString() == endDate.toLocaleTimeString()) {
-                    eventTime = formatAMPM(startDate)
-                }
-                else {
-                    eventTime = formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
-                }
-            }
-
-            var entry = new eventEntry (
-                eventsList[i].Id,
-                eventsList[i].Name,
-                monthsAbbrev[startDate.getMonth()],
-                startDate.getDate(),
-                eventTime,
-                eventsList[i].Location
-            )
-
-            console.log(entry)
-            upcomingEvents.push(entry)
+        else {
+            this.setState({ 
+                sectionListDs: datasource,
+                isEventListLoading: false,
+            });
         }
-        
-        datasource = [
-            {
-                key: 'Upcoming',
-                data: upcomingEvents
-            },
-            {   
-                key: 'Past Events',
-                data: pastEvents
-            }
-        ]
-        this.setState({ 
-            sectionListDs: datasource,
-            isEventListLoading: false,
-        });
     }
 
     renderItem = (item) => {
@@ -217,7 +213,7 @@ export default class EventsList extends Component {
             <EventsItem eventId={Number(item.item.eventId)}
                 eventTitle={item.item.eventTitle}
                 eventMonth={item.item.eventMonth}
-                eventDate={Number(item.item.eventDate)}
+                eventDate={Number.isInteger(item.item.eventDate) ? Number(item.item.eventDate) : null}
                 eventTime={item.item.eventTime}
                 eventLocation={item.item.eventLocation}/>
             // <Text style={styles.text}>{item.item.name}</Text>
@@ -297,6 +293,7 @@ const styles = StyleSheet.create({
         flex: 7
     },
     overlay: {
+        flex: 1,
         opacity: 1,
         backgroundColor: 'rgba(0, 0, 0, 0)'
     },

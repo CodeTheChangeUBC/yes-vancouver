@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'react-native';
-import Header from '../Navigation/Header';
-import EventsItem from './EventsItem';
+import React, { Component } from 'react'
+import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'react-native'
+import Header from '../Navigation/Header'
+import EventsItem from './EventsItem'
 
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
@@ -23,14 +23,14 @@ var monthsAbbrev = [
 
 function formatAMPM(date) {
     // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
+    var hours = date.getHours()
+    var minutes = date.getMinutes()
+    var ampm = hours >= 12 ? 'PM' : 'AM'
+    hours = hours % 12
+    hours = hours ? hours : 12 // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes
+    var strTime = hours + ':' + minutes + ' ' + ampm
+    return strTime
 }
 
 // Default datasource to be displayed when events list cannot be fetched
@@ -61,15 +61,15 @@ function eventEntry(eventId, eventName, eventMonth, eventDate, eventTime, eventL
 async function getBearerToken() {
     try {
         let base64 = require('base-64')
-        username = ClientSecrets.API_USERNAME;
-        password = ClientSecrets.API_PASSWORD;
+        username = ClientSecrets.API_USERNAME
+        password = ClientSecrets.API_PASSWORD
         basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
         console.log(basicAuthHeaderValue)
 
         let requestAuthTokenBody = {
             'grant_type': 'client_credentials',
             'scope': 'contacts finances events'
-        };
+        }
 
         let response = await fetch('https://oauth.wildapricot.org/auth/token', 
         {
@@ -83,7 +83,7 @@ async function getBearerToken() {
         let responseJson = await response.json()
         return responseJson['access_token']
     } catch(error) {
-        console.error(error);
+        console.error(error)
         return null
     }
 }
@@ -93,7 +93,7 @@ async function getEventsList(bearerToken) {
         let requestAuthTokenBody = {
             'grant_type': 'client_credentials',
             'scope': 'contacts finances events'
-        };
+        }
         
         let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events'
         let response = await fetch(getUrl, 
@@ -177,7 +177,7 @@ function getEventsListDataSource(response) {
 
 export default class EventsList extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isEventListLoading: true,
             sectionListDs: datasource
@@ -188,24 +188,29 @@ export default class EventsList extends Component {
         bearerToken = await getBearerToken()
         if(!bearerToken) {
             console.log("Failed to get bearer token")
+            this.setState({isEventListLoading: false})
+            return
         }
 
         eventsListResponse = await getEventsList(bearerToken)
         if(!eventsListResponse) {
-            console.log("Failed to get events list")
+            console.log("Failed to get events list from API call")
+            this.setState({isEventListLoading: false})
+            return
         }
         console.log(eventsListResponse)
 
         datasourceResult = getEventsListDataSource(eventsListResponse)
         if(!datasourceResult) {
-            this.setState({isEventListLoading: false});
+            console.log("Failed to format events list datasource")
+            this.setState({isEventListLoading: false})
+            return
         }
-        else {
-            this.setState({ 
-                sectionListDs: datasource,
-                isEventListLoading: false,
-            });
-        }
+
+        this.setState({ 
+            sectionListDs: datasource,
+            isEventListLoading: false,
+        })
     }
 
     renderItem = (item) => {
@@ -217,7 +222,7 @@ export default class EventsList extends Component {
                 eventTime={item.item.eventTime}
                 eventLocation={item.item.eventLocation}/>
             // <Text style={styles.text}>{item.item.name}</Text>
-        );
+        )
     }
 
     renderHeader = (headerItem) => {
@@ -225,7 +230,7 @@ export default class EventsList extends Component {
             <View style={styles.sectionContainer}>
                 <Text style={styles.sectionHeader}>{headerItem.section.key}</Text>
             </View>
-        );
+        )
     }
 
     render() {
@@ -273,7 +278,7 @@ export default class EventsList extends Component {
                         </View>
                     </View>
                 </View>
-            );
+            )
         }
     }
 }
@@ -360,4 +365,4 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'rgba(0,0,0,1)',
     }
-});
+})

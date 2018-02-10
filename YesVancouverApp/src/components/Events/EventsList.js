@@ -125,8 +125,8 @@ function getEventsListDataSource(response) {
         return null
     }
         
-    var upcomingEvents = []
-    var pastEvents = []
+    let upcomingEvents = []
+    let pastEvents = []
     let currentDateInMs = Date.now()
 
     for (i = 0; i < eventsList.length; i++) { 
@@ -168,6 +168,14 @@ function getEventsListDataSource(response) {
         else {
             upcomingEvents.push(entry)
         }
+    }
+
+    if(upcomingEvents.length == 0) {
+        upcomingEvents.push(new eventEntry(null, 'No upcoming events', '', null, '', ''))
+    }
+
+    if(pastEvents.length == 0) {
+        pastEvents.push(new eventEntry(null, 'No past events', '', null, '', ''))
     }
 
     datasource = [

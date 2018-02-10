@@ -24,13 +24,13 @@ export default class ProfileSetupWork extends Component {
         var {navigate} = this.props.navigation
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
+                {/* <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
                     <StatusBar
                         barStyle='dark-content'
                         backgroundColor='#ffffff'
                         hidden={false}
                     />
-                </View>
+                </View> */}
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     

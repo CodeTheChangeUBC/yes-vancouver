@@ -13,13 +13,13 @@ export default class ProfileSetupPhoto extends Component {
         var {navigate} = this.props.navigation
         return (
             <View style={styles.container}>
-                <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
+                {/* <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
                     <StatusBar
                         barStyle='dark-content'
                         backgroundColor='#FFFFFF'
                         hidden={false}
                     />
-                </View>
+                </View> */}
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     

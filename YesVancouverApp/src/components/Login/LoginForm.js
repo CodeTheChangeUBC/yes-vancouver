@@ -42,7 +42,7 @@ export default class LoginForm extends Component {
                             style={styles.buttonText}
                             color="#ED4969"
                             onPress={
-                                () => navigate("Third", {})
+                                () => navigate("NavBar", {})
                             }
                             title="Login"
                         />

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, StatusBar, Platform } from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, StatusBar, Platform, ImageBackground } from 'react-native';
 import Header from '../Navigation/Header';
 import Expo from 'expo'
 
 
 export default class ProfileSetupPhoto extends Component {
+    static navigationOptions = {
+        title:"ProfileSetupPhoto",
+    }
+
     render() {
+        var {navigate} = this.props.navigation
         return (
             <View style={styles.container}>
                 <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
@@ -36,13 +41,13 @@ export default class ProfileSetupPhoto extends Component {
                     </Text>
 
                     <View style={styles.imageContainer}>
-                        <Image source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
+                        <ImageBackground source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
                             style={styles.image}>
                             <View style={styles.imageTextBackground}>
                                 <Text style={styles.imageText}>Tap to add</Text>
                                 <Text style={styles.imageText}>a photo</Text>
                             </View>
-                        </Image>
+                        </ImageBackground>
                     </View>
 
                     <Text style={styles.description}>
@@ -52,7 +57,8 @@ export default class ProfileSetupPhoto extends Component {
      
                     <View style={styles.nextButtonContainer}>
                         <View style={styles.nextButtonSpacer}></View>
-                            <TouchableOpacity style={styles.nextButtonRectangle}>
+                            <TouchableOpacity style={styles.nextButtonRectangle}
+                                onPress={()=> navigate("NavBar",{})}>
                                 <Text style={styles.nextButtonText}>Next</Text>
                             </TouchableOpacity>
                         <View style={styles.nextButtonSpacer}></View>

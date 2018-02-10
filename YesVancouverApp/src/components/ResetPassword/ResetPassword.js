@@ -24,7 +24,7 @@ export default class ResetPassword extends React.Component{
                     </View>
                     <View style={styles.button}>
                         <Button color="#ED4969" title="Cancel" onPress={
-                            ()=> navigate("Second", {})
+                            ()=> navigate("Login", {})
                         }/>
                     </View>
                 </View>

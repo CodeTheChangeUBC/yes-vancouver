@@ -5,6 +5,10 @@ import Expo from 'expo'
 
 
 export default class ProfileSetupSocial extends Component {
+    static navigationOptions = {
+        title:"ProfileSetupSocial",
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +21,7 @@ export default class ProfileSetupSocial extends Component {
     }
 
     render() {
+        var {navigate} = this.props.navigation
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <View paddingTop={(Platform.OS === 'ios') ? Expo.Constants.statusBarHeight : 0}>
@@ -114,7 +119,8 @@ export default class ProfileSetupSocial extends Component {
 
                     <View style={styles.nextButtonContainer}>
                         <View style={styles.nextButtonSpacer}></View>
-                            <TouchableOpacity style={styles.nextButtonRectangle}>
+                            <TouchableOpacity style={styles.nextButtonRectangle}
+                                onPress={()=> navigate("ProfileSetupPhoto",{})}>
                                 <Text style={styles.nextButtonText}>Next</Text>
                             </TouchableOpacity>
                         <View style={styles.nextButtonSpacer}></View>

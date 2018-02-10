@@ -36,7 +36,7 @@ export default class HomeScreen extends React.Component {
                     <Text
                         style={{color:"#ffffff", fontSize:20, alignContent:"center", textDecorationLine:'underline'}}
                         onPress={
-                            ()=> navigate("Second",{})
+                            ()=> navigate("Login",{})
                         }>
                         Sign in
                     </Text>

@@ -130,6 +130,10 @@ function getEventsListDataSource(response) {
     let currentDateInMs = Date.now()
 
     for (i = 0; i < eventsList.length; i++) { 
+        if(eventsList[i].AccessLevel != "Public") {
+            continue
+        }
+
         let startDate = new Date(Date.parse(eventsList[i].StartDate))
         let endDate = new Date(Date.parse(eventsList[i].EndDate))
         let eventTime = null

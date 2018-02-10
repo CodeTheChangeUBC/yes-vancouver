@@ -127,8 +127,7 @@ function getEventsListDataSource(response) {
         
     var upcomingEvents = []
     var pastEvents = []
-    pastEvents.push(new eventEntry(1234, 'eventTitleA', 'JAN', 12, 'eventTimeA', 'eventLocationA'))
-    pastEvents.push(new eventEntry(5678, 'eventTitleB', 'JAN', 12, 'eventTimeB', 'eventLocationB'))
+    let currentDateInMs = Date.now()
 
     for (i = 0; i < eventsList.length; i++) { 
         let startDate = new Date(Date.parse(eventsList[i].StartDate))
@@ -159,7 +158,12 @@ function getEventsListDataSource(response) {
         )
 
         console.log(entry)
-        upcomingEvents.push(entry)
+        if(startDate.getTime() < currentDateInMs) {
+            pastEvents.push(entry)
+        }
+        else {
+            upcomingEvents.push(entry)
+        }
     }
 
     datasource = [

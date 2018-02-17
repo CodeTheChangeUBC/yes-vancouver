@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
 import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
 import ReadMore from '@expo/react-native-read-more-text';
@@ -28,11 +28,12 @@ export default class EventsDetails extends Component {
                 <View style={styles.headerContainer}>
                     <Header style={styles.header}/>
                     <View style={styles.headerIconContainer}>
-                        <View style={styles.backArrowContainer}>
+                        <TouchableHighlight onPress={() => {this.props.navigation.pop()}} 
+                                style={styles.backArrowContainer}>
                             <Image source={require('../../images/Header/White-arrow-3x.png')}
                                 resizeMode='contain'
                                 style={{height:'50%'}}/>
-                        </View>
+                        </TouchableHighlight>
                         <View style={styles.eventsTitleContainer}>
                             <Text style={styles.eventsTitleText}>
                                 Events

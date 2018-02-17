@@ -50,12 +50,12 @@ const EventsView = StackNavigator({
         })
     }
 },
-// {
-//     headerMode: 'none',
-//     navigationOptions: {
-//         headerVisible: false,
-//     }
-// }
+{
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+}
 )
 
 export default EventsView

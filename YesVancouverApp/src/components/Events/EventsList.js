@@ -236,7 +236,8 @@ export default class EventsList extends Component {
                 eventMonth={item.item.eventMonth}
                 eventDate={Number.isInteger(item.item.eventDate) ? Number(item.item.eventDate) : null}
                 eventTime={item.item.eventTime}
-                eventLocation={item.item.eventLocation}/>
+                eventLocation={item.item.eventLocation}
+                navigation={this.props.navigation}/>
             // <Text style={styles.text}>{item.item.name}</Text>
         )
     }

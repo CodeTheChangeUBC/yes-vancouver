@@ -25,152 +25,174 @@ export default class EventsDetails extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView>
-                    <Image 
-                        style={styles.bannerImage}
-                        resizeMode='stretch'
-                        source={require('../../images/Events/Event-Detail-Banner.png')}
-                    />
-
-                    <Text style={styles.eventTitle}>Event Title</Text>
-
-                    <View style={styles.divider}></View>
-
-                    <View style={styles.eventDetailContainer}>
-                        <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}/>
+                <View style={styles.headerContainer}>
+                    <Header style={styles.header}/>
+                    <View style={styles.headerIconContainer}>
+                        <View style={styles.backArrowContainer}>
+                            <Image source={require('../../images/Header/White-arrow-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'50%'}}/>
                         </View>
-                        <View style={styles.eventDetailTextContainer}>
-                            <Text style={styles.eventDetailText}>May 15, 10:30PM - 11:30PM</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.divider}></View>
-
-                    <View style={styles.eventDetailContainer}>
-                        <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/location-3x.png')}/>
-                        </View>
-                        <View style={styles.eventDetailTextContainer}>
-                            <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.divider}></View>
-
-                    <View style={styles.eventDetailContainer}>
-                        <View style={styles.eventDetailIcon}>
-                            <Image source={require('../../images/Events/Event-icons/message-3x.png')}/>
-                        </View>
-                        <View style={styles.eventDetailTextContainer}>
-                            <Text style={styles.eventDetailText}>Discussion Board</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.divider}></View>
-                    
-                    <View style={styles.registerButtonContainer}>
-                        <View style={styles.registerButtonSpacer}></View>
-                        <TouchableOpacity style={styles.registerButtonRectangle}>
-                            <Text style={styles.registerButtonText}>Register</Text>
-                        </TouchableOpacity>
-                        <View style={styles.registerButtonSpacer}></View>
-                    </View>
-                    
-                    <View style={styles.eventDescriptionContainer}>
-                        <ReadMore
-                            numberOfLines={5}
-                            renderTruncatedFooter={this.renderTruncatedFooter}
-                            renderRevealedFooter={this.renderRevealedFooter}>
-                            <Text style={styles.eventDescriptionText}>
-                                DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
+                        <View style={styles.eventsTitleContainer}>
+                            <Text style={styles.eventsTitleText}>
+                                Events
                             </Text>
-                        </ReadMore>
+                        </View>
+                        <View style={styles.backArrowContainer}>
+                            <Image source={require('../../images/Header/Menu-icon-white-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'50%'}}/>
+                        </View>
                     </View>
+                </View>
+                <View style={styles.content}>
+                    <ScrollView>
+                        <Image 
+                            style={styles.bannerImage}
+                            resizeMode='stretch'
+                            source={require('../../images/Events/Event-Detail-Banner.png')}
+                        />
 
-                    <Text style={styles.headingPink}>Speakers</Text>
+                        <Text style={styles.eventTitle}>Event Title</Text>
 
-                    <View style={styles.speakerContainer}>
-                        <View style={styles.speakerImageContainer}>
+                        <View style={styles.divider}></View>
+
+                        <View style={styles.eventDetailContainer}>
+                            <View style={styles.eventDetailIcon}>
+                                <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}/>
+                            </View>
+                            <View style={styles.eventDetailTextContainer}>
+                                <Text style={styles.eventDetailText}>May 15, 10:30PM - 11:30PM</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.divider}></View>
+
+                        <View style={styles.eventDetailContainer}>
+                            <View style={styles.eventDetailIcon}>
+                                <Image source={require('../../images/Events/Event-icons/location-3x.png')}/>
+                            </View>
+                            <View style={styles.eventDetailTextContainer}>
+                                <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.divider}></View>
+
+                        <View style={styles.eventDetailContainer}>
+                            <View style={styles.eventDetailIcon}>
+                                <Image source={require('../../images/Events/Event-icons/message-3x.png')}/>
+                            </View>
+                            <View style={styles.eventDetailTextContainer}>
+                                <Text style={styles.eventDetailText}>Discussion Board</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.divider}></View>
+                        
+                        <View style={styles.registerButtonContainer}>
+                            <View style={styles.registerButtonSpacer}></View>
+                            <TouchableOpacity style={styles.registerButtonRectangle}>
+                                <Text style={styles.registerButtonText}>Register</Text>
+                            </TouchableOpacity>
+                            <View style={styles.registerButtonSpacer}></View>
+                        </View>
+                        
+                        <View style={styles.eventDescriptionContainer}>
+                            <ReadMore
+                                numberOfLines={5}
+                                renderTruncatedFooter={this.renderTruncatedFooter}
+                                renderRevealedFooter={this.renderRevealedFooter}>
+                                <Text style={styles.eventDescriptionText}>
+                                    DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
+                                </Text>
+                            </ReadMore>
+                        </View>
+
+                        <Text style={styles.headingPink}>Speakers</Text>
+
+                        <View style={styles.speakerContainer}>
+                            <View style={styles.speakerImageContainer}>
+                                <Image
+                                    style={styles.speakerImage}
+                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                />
+                            </View>
+                            <View style={styles.speakerDescription}>
+                                <Text style={styles.speakerName}>Firstname Lastname</Text>
+                                <Text style={styles.speakerTitle}>Title, Company</Text>
+                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.speakerContainer}>
+                            <View style={styles.speakerImageContainer}>
+                                <Image
+                                    style={styles.speakerImage}
+                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                />
+                            </View>
+                            <View style={styles.speakerDescription}>
+                                <Text style={styles.speakerName}>Firstname Lastname</Text>
+                                <Text style={styles.speakerTitle}>Title, Company</Text>
+                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.speakerContainer}>
+                            <View style={styles.speakerImageContainer}>
+                                <Image
+                                    style={styles.speakerImage}
+                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                />
+                            </View>
+                            <View style={styles.speakerDescription}>
+                                <Text style={styles.speakerName}>Firstname Lastname</Text>
+                                <Text style={styles.speakerTitle}>Title, Company</Text>
+                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
+                            </View>
+                        </View>
+
+                        <Text style={styles.headingPink}>Sponsors</Text>
+
+                        <View style={styles.sponsorImageContainer}>
                             <Image
-                                style={styles.speakerImage}
-                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                style={styles.sponsorImage}
+                                source={require('../../images/Events/Square-Company-Logo.png')}
+                            />
+                            <Image
+                                style={styles.sponsorImage}
+                                source={require('../../images/Events/Rectangular-Company-Logo.png')}
                             />
                         </View>
-                        <View style={styles.speakerDescription}>
-                            <Text style={styles.speakerName}>Firstname Lastname</Text>
-                            <Text style={styles.speakerTitle}>Title, Company</Text>
-                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                        </View>
-                    </View>
 
-                    <View style={styles.speakerContainer}>
-                        <View style={styles.speakerImageContainer}>
+                        <View style={styles.registerButtonContainer}>
+                            <View style={styles.registerButtonSpacer}></View>
+                            <TouchableOpacity style={styles.registerButtonRectangle}>
+                                <Text style={styles.registerButtonText}>Register</Text>
+                            </TouchableOpacity>
+                            <View style={styles.registerButtonSpacer}></View>
+                        </View>
+
+                        <Text style={styles.headingGrey}>Share</Text>
+                        <View style={styles.socialMediaContainer}>
                             <Image
-                                style={styles.speakerImage}
-                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                style={styles.shareIcon}
+                                source={require('../../images/Events/Share-icons/Twitter-3x.png')}
                             />
-                        </View>
-                        <View style={styles.speakerDescription}>
-                            <Text style={styles.speakerName}>Firstname Lastname</Text>
-                            <Text style={styles.speakerTitle}>Title, Company</Text>
-                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.speakerContainer}>
-                        <View style={styles.speakerImageContainer}>
                             <Image
-                                style={styles.speakerImage}
-                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                style={styles.shareIcon}
+                                source={require('../../images/Events/Share-icons/Facebook-3x.png')}
                             />
-                        </View>
-                        <View style={styles.speakerDescription}>
-                            <Text style={styles.speakerName}>Firstname Lastname</Text>
-                            <Text style={styles.speakerTitle}>Title, Company</Text>
-                            <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                        </View>
-                    </View>
-
-                    <Text style={styles.headingPink}>Sponsors</Text>
-
-                    <View style={styles.sponsorImageContainer}>
-                        <Image
-                            style={styles.sponsorImage}
-                            source={require('../../images/Events/Square-Company-Logo.png')}
-                        />
-                        <Image
-                            style={styles.sponsorImage}
-                            source={require('../../images/Events/Rectangular-Company-Logo.png')}
-                        />
-                    </View>
-
-                    <View style={styles.registerButtonContainer}>
-                        <View style={styles.registerButtonSpacer}></View>
-                        <TouchableOpacity style={styles.registerButtonRectangle}>
-                            <Text style={styles.registerButtonText}>Register</Text>
-                        </TouchableOpacity>
-                        <View style={styles.registerButtonSpacer}></View>
-                    </View>
-
-                    <Text style={styles.headingGrey}>Share</Text>
-                    <View style={styles.socialMediaContainer}>
-                        <Image
-                            style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Twitter-3x.png')}
-                        />
-                        <Image
-                            style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Facebook-3x.png')}
-                        />
-                        <Image
-                            style={styles.shareIcon}
-                            source={require('../../images/Events/Share-icons/Email-3x.png')}
-                        />
-                        </View>
-                    <Text style={styles.copyLinkText}>Copy Link</Text>
-                    
-                </ScrollView>
+                            <Image
+                                style={styles.shareIcon}
+                                source={require('../../images/Events/Share-icons/Email-3x.png')}
+                            />
+                            </View>
+                        <Text style={styles.copyLinkText}>Copy Link</Text>
+                        
+                    </ScrollView>
+                </View>
             </View>
         );
     }
@@ -181,6 +203,40 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'white'
+    },
+    content: {
+        flex: 7
+    },
+    headerContainer: {
+        flex: 1
+    },
+    header: {
+        flex: 1,
+        width: null,
+        height: null
+    },
+    headerIconContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    menuContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    eventsTitleContainer: {
+        flex: 4,
+        alignItems: 'center'
+    },
+    eventsTitleText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: '#FFFFFF',
+        backgroundColor: 'transparent',
+        textAlign: 'center'
     },
     divider: {
         borderBottomColor: 'rgba(151,151,151,0.5)',

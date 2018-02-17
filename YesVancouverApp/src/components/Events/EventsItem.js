@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 export default class EventsItem extends Component {
     render() {
         return (
-            <TouchableHighlight onPress={() => this.props.navigation.navigate("EventsDetails")}>
+            <TouchableHighlight onPress={() => {
+                    this.props.navigation.navigate("EventsDetails", {eventId: this.props.eventId})
+                }
+            }>
                 <View style={styles.container}>
                     <View style={styles.dateColumn}>
                         <View style={styles.dateMonthTextContainer}>

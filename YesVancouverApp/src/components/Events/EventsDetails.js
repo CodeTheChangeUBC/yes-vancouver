@@ -22,6 +22,10 @@ export default class EventsDetails extends Component {
         );
     }
 
+    componentDidMount(){
+        console.log(this.props.navigation.state.params.eventId)
+    }
+
     render() {
         return (
             <View style={styles.container}>

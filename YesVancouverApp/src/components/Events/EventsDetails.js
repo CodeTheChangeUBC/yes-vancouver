@@ -4,6 +4,9 @@ import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
 import ReadMore from '@expo/react-native-read-more-text';
 
+import ApiUtils from '../../utils/ApiUtils'
+import { ClientSecrets } from '../../../config/config'
+
 
 export default class EventsDetails extends Component {
     renderTruncatedFooter = (handlePress) => {
@@ -22,8 +25,22 @@ export default class EventsDetails extends Component {
         );
     }
 
-    componentDidMount(){
-        console.log(this.props.navigation.state.params.eventId)
+    async componentDidMount(){
+        bearerToken = await getBearerToken()
+        if(!bearerToken) {
+            console.log("Failed to get bearer token")
+            this.setState({isEventListLoading: false})
+            return
+        }
+
+        let eventId = this.props.navigation.state.params.eventId
+        eventsListResponse = await getEventsDetails(bearerToken, eventId)
+        if(!eventsListResponse) {
+            console.log("Failed to get events list from API call")
+            this.setState({isEventListLoading: false})
+            return
+        }
+        console.log(eventsListResponse)
     }
 
     render() {
@@ -209,6 +226,64 @@ export default class EventsDetails extends Component {
                 </View>
             </View>
         );
+    }
+}
+
+async function getBearerToken() {
+    try {
+        let base64 = require('base-64')
+        username = ClientSecrets.API_USERNAME
+        password = ClientSecrets.API_PASSWORD
+        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
+        console.log(basicAuthHeaderValue)
+
+        let requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        }
+
+        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': basicAuthHeaderValue
+            },
+            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
+        })
+        let responseJson = await response.json()
+        return responseJson['access_token']
+    } catch(error) {
+        console.error(error)
+        return null
+    }
+}
+
+async function getEventsDetails(bearerToken, eventId) {
+    try {
+        let requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        }
+        
+        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events/' + eventId
+        let response = await fetch(getUrl, 
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + bearerToken
+            }
+        })
+        
+        if(response.status != 200) {
+            console.log(response.status)
+            return null
+        }
+        return response.json()
+
+    } catch(error) {
+        console.error(error)
+        return null
     }
 }
 

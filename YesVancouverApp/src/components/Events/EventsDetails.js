@@ -60,7 +60,9 @@ export default class EventsDetails extends Component {
 
                         <View style={styles.eventDetailContainer}>
                             <View style={styles.eventDetailIcon}>
-                                <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}/>
+                                <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}
+                                    resizeMode='contain'
+                                    style={{width:'50%'}}/>
                             </View>
                             <View style={styles.eventDetailTextContainer}>
                                 <Text style={styles.eventDetailText}>May 15, 10:30PM - 11:30PM</Text>
@@ -71,7 +73,9 @@ export default class EventsDetails extends Component {
 
                         <View style={styles.eventDetailContainer}>
                             <View style={styles.eventDetailIcon}>
-                                <Image source={require('../../images/Events/Event-icons/location-3x.png')}/>
+                                <Image source={require('../../images/Events/Event-icons/location-3x.png')}
+                                    resizeMode='contain'
+                                    style={{width:'35%'}}/>
                             </View>
                             <View style={styles.eventDetailTextContainer}>
                                 <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
@@ -82,7 +86,9 @@ export default class EventsDetails extends Component {
 
                         <View style={styles.eventDetailContainer}>
                             <View style={styles.eventDetailIcon}>
-                                <Image source={require('../../images/Events/Event-icons/message-3x.png')}/>
+                                <Image source={require('../../images/Events/Event-icons/message-3x.png')}
+                                    resizeMode='contain'
+                                    style={{width:'50%'}}/>
                             </View>
                             <View style={styles.eventDetailTextContainer}>
                                 <Text style={styles.eventDetailText}>Discussion Board</Text>
@@ -178,16 +184,19 @@ export default class EventsDetails extends Component {
                         <Text style={styles.headingGrey}>Share</Text>
                         <View style={styles.socialMediaContainer}>
                             <Image
-                                style={styles.shareIcon}
                                 source={require('../../images/Events/Share-icons/Twitter-3x.png')}
+                                style={styles.shareIcon}
+                                resizeMode='contain'
                             />
                             <Image
-                                style={styles.shareIcon}
                                 source={require('../../images/Events/Share-icons/Facebook-3x.png')}
+                                style={styles.shareIcon}
+                                resizeMode='contain'
                             />
                             <Image
-                                style={styles.shareIcon}
                                 source={require('../../images/Events/Share-icons/Email-3x.png')}
+                                style={styles.shareIcon}
+                                resizeMode='contain'
                             />
                             </View>
                         <Text style={styles.copyLinkText}>Copy Link</Text>
@@ -341,7 +350,8 @@ const styles = StyleSheet.create({
     },
     shareIcon: {
         marginHorizontal: 2.5,
-        marginBottom: 5
+        marginBottom: 5,
+        width: '10%'
     },
     speakerContainer: {
         flexDirection: 'row',

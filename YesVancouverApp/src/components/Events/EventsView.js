@@ -43,7 +43,7 @@ const EventsView = StackNavigator({
             headerStyle: { paddingRight: 10, paddingLeft: 10 }
         })
     },
-    EventsDetail: {
+    EventsDetails: {
         screen: EventsDetails,
         navigationOptions: (props) => ({
             title: "Detail",

@@ -1,12 +1,38 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
+import {getBearerToken, getContactsList, getIndividualContactsList, getResultURL} from '../Profile/FetchUserDetails'
+
+let clientUsername = "";
+let clientPassword = "";
 
 export default class LoginForm extends Component {
 
     static navigationOptions = {
         title:"Login",
     };
+
+    async authenticateLogin(){
+        let {navigate} = this.props.navigation;
+        // let bearerToken = await getBearerToken();
+        // if(!bearerToken) {
+        //     console.log("Failed to get bearer token");
+        //     this.setState({isEventListLoading: false});
+        //     return
+        // }
+        // let resultURLObject = await getResultURL(bearerToken);
+        // let resultURLString = resultURLObject["ResultUrl"];
+        // let contactsList = await getContactsList(bearerToken, resultURLString);
+        // let contactsListArray = contactsList["Contacts"];
+        let contactsListArray = await getIndividualContactsList();
+        for (let e in contactsListArray){
+            if (contactsListArray[e]["Email"] === clientUsername){
+                navigate("NavBar", {'userEmail' : contactsListArray[e]});
+                return;
+            }
+        }
+        console.log("Invalid Email Supplied");
+    }
 
     render() {
         var {navigate} = this.props.navigation;
@@ -21,19 +47,21 @@ export default class LoginForm extends Component {
                         placeholder="Email"
                         placeholderTextColor="rgba(128,128,128,0.7)"
                         returnKeyType="next"
-                        onSubmitEditing={() => this.passwordInput.focus()}
+                        //onSubmitEditing={() => this.passwordInput.focus()}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
+                        onChangeText={(text)=> clientUsername = text}
                     />
                     <TextInput
                         placeholder="Password"
                         placeholderTextColor='rgba(128,128,128,0.7)'
                         returnKeyType="go"
                         secureTextEntry
+                        onChangeText={(text)=> clientPassword = text}
                         style={styles.input}
-                        ref={(input) => this.passwordInput = input}
+                        //ref={(input) => this.passwordInput = input}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
@@ -42,7 +70,8 @@ export default class LoginForm extends Component {
                             style={styles.buttonText}
                             color="#ED4969"
                             onPress={
-                                () => navigate("NavBar", {})
+                                () => this.authenticateLogin()
+                                    //navigate("NavBar", {})
                             }
                             title="Login"
                         />

@@ -5,6 +5,11 @@ import PerksDetails from './PerksDetails';
 
 
 export default class PerksView extends Component {
+
+    static navigationOptions = {
+        title: 'PerksView',
+    }
+
     static navigationOptions = {
         tabBarLabel: 'PerksView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
@@ -21,8 +26,10 @@ export default class PerksView extends Component {
     }
 
     render() {
+        let {navigate} = this.props.navigation;
         return (
-            <PerksList />
+
+            <PerksList navigation={this.props.navigation} />
             // <PerksDetails />
         );
     }

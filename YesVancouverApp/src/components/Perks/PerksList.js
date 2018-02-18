@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, SectionList, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Image, SectionList, Text, FlatList, TouchableHighlight } from 'react-native';
 import Header from '../Navigation/Header';
 import PerksItem from './PerksItem';
 
+import { List, ListItem } from "react-native-elements";
+
+
 
 export default class PerksList extends Component {
+
+    static navigationOptions = {
+        title: "PerksList",
+    };
+
+    constructor(props)  {
+        super(props);
+    }
+
+
+
+    goToNextScreen = () => {
+        let {navigate} = this.props.navigation;
+        return navigate('Aveda');
+    }
+
     renderItem = ({item}) => {
+
         return (
-            //<Text>{item.key}</Text>
-            <PerksItem />
+
+            <TouchableHighlight onPress={() => this.goToNextScreen()}>
+                <View>
+                    <PerksItem imageA={item.image} />
+                </View>
+            </TouchableHighlight>
+        //    <Text>{image}</Text>
         );
     }
 
     render() {
+
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
@@ -52,45 +78,26 @@ export default class PerksList extends Component {
                         <Text style={styles.favouritesText}>Favourites</Text>
                     </View>
                 </View>
-                <FlatList
-                    data={[
-                    {key: 'a'}, 
-                    {key: 'b'},
-                    {key: 'c'}, 
-                    {key: 'd'},
-                    {key: 'e'}, 
-                    {key: 'f'},
-                    {key: 'g'}, 
-                    {key: 'h'},
-                    {key: 'i'}, 
-                    {key: 'j'},
-                    {key: 'k'}, 
-                    {key: 'l'},
-                    {key: 'm'}, 
-                    {key: 'n'},
-                    {key: 'o'}, 
-                    {key: 'p'},
-                    {key: 'q'}, 
-                    {key: 'r'},
-                    {key: 's'}, 
-                    {key: 't'},
-                    {key: 'u'}, 
-                    {key: 'v'},
-                    {key: 'w'}, 
-                    {key: 'x'},
-                    {key: 'y'}, 
-                    {key: 'z'},
-                    {key: '1'}, 
-                    {key: '2'},
-                    {key: '3'}, 
-                    {key: '4'},
-                    {key: '5'}, 
-                    {key: '6'},
-                    {key: '7'}, 
-                    {key: '8'},
-                    ]}
-                    renderItem={this.renderItem}
-                />
+                    <List>
+                        <FlatList
+                            data={[
+                                {key: 'Aveda',
+                                    image: require('../../images/Perks/Aveda.png')},
+                                {key: 'Camp-Tech',
+                                    image: require('../../images/Perks/Camp-Tech.png')},
+                                {key: 'FloatHouse',
+                                    image: require('../../images/Perks/Floathouse.png')},
+                                {key: 'Red-Academy',
+                                    image: require('../../images/Perks/Red-Academy.png')},
+                                {key: 'Spin-Society',
+                                    image: require('../../images/Perks/Spin-Society.png')},
+
+
+                            ]}
+                            renderItem={this.renderItem}
+                        />
+                    </List>
+
                 </View>
             </View>
         );

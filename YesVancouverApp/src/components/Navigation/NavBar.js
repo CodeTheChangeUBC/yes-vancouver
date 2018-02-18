@@ -24,7 +24,8 @@ const NavBar = TabNavigator({
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    initialRouteName: 'NewsFeedView'
+    initialRouteName: 'NewsFeedView',
+    drawUnderTabBar: true,
 });
 
 export default NavBar;

@@ -11,6 +11,9 @@ import ProfileSetupWork from '../Profile/ProfileSetupWork'
 import ResetPassword from '../ResetPassword/ResetPassword'
 import NavBar from './NavBar'
 import { StackNavigator } from 'react-navigation'
+import Aveda from '../Perks/aveda'
+import PerksView from '../Perks/PerksView'
+import PerksList from '../Perks/PerksList'
 
 const Navigation = StackNavigator({
     HomeScreen : {screen : HomeScreen},
@@ -20,7 +23,12 @@ const Navigation = StackNavigator({
     ProfileSetupPhoto : {screen : ProfileSetupPhoto},
     ProfileSetupSocial : {screen : ProfileSetupSocial},
     ProfileSetupWork : {screen : ProfileSetupWork},
-    ResetPassword : {screen : ResetPassword}
+    ResetPassword : {screen : ResetPassword},
+    Aveda : {screen : Aveda},
+    PerksView: {screen: PerksView},
+    PerksList: {screen: PerksList},
+
+
 },
 // {
 //     headerMode: 'none',

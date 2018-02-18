@@ -5,7 +5,10 @@ import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
 
-
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 
 async function getBearerToken() {
@@ -95,6 +98,10 @@ async function getBearerToken() {
 
 export default class SignUp extends React.Component{
 
+static navigationOptions = {
+        title:"SignUp",
+    }; 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -108,41 +115,57 @@ export default class SignUp extends React.Component{
 
     
     render (){
-        //<Header style={styles.header}/>
+        <Header 
+                style={styles.header}
+        />
         var {navigate} = this.props.navigation
         return(
-        
+           <KeyboardAvoidingView behavior='padding' style={styles.container}>
+
+               <View style={styles.headerContainer}>
+              
+                    <View style={styles.headerIconContainer}>
+                        <View style={styles.backArrowContainer}>
+                           <Image source={require('../../images/Header/White-arrow-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'10%'}}/>
+                        </View>
+                        <View style={styles.backArrowContainer}>
+                        </View>
+                     </View>
+               </View>
+
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput
-                    style={{height:100}}
+                    style={styles.input}
                     placeholder="First name"
                     autoCapitalize="words"
                     onChangeText={(firstName) => this.setState({firstName})}
                     value={this.state.firstName}
                 ></TextInput>
                 <TextInput  
-                    style={{height:100}}
+                    style={styles.input}
                     placeholder="Last name"
                     autoCapitalize="words"
                     onChangeText={(lastName) => this.setState({lastName})}
                     value={this.state.lastName}
                 ></TextInput>
                 <TextInput
-                    style={{height:100}}
+                    style={styles.input}
                     placeholder="Email"
                     keyboardType="email-address"
                     onChangeText={(email) => this.setState({email})}
                     value={this.state.email}
                 ></TextInput>
                 <TextInput
-                    style={{height:100}}
+                    style={styles.input}
                     placeholder="Password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({password})}
                     value={this.state.password}
                 ></TextInput>
                <TextInput
-                    style={{height:100}}
+                    style={styles.input}
                     placeholder="Confirm Password"
                     secureTextEntry={true}
                     onChangeText={(confirmPassword) => this.setState({confirmPassword})}
@@ -166,16 +189,28 @@ export default class SignUp extends React.Component{
                         console.log(vEmail);
                         console.log(vPassword);
                         console.log(vConfirmPassword);
-               
+
+
+                        if(!validateEmail(vEmail)){
+                            console.log("email is invalid");
+                            return;    
+                        }
                         // end tester
-                        if (vPassword>7 && vPassword == vConfirmPassword) {
+                        if (vPassword.length>7 && vPassword == vConfirmPassword) {
                             updateContacts(vFirstName, vSecondName, vEmail, vPassword);
                             navigate("ProfileSetupWork", {})
                             }
+                        if (vPassword.length<8)
+                            console.log("password needs to be longer than 7 characters");
+                        if (vPassword != vConfirmPassword)
+                            console.log("password doesn't' match");
+
                         
-                    }
+                    }  
                 }/>
             </ScrollView>
+          </KeyboardAvoidingView>
+
         )
     }
 }
@@ -184,8 +219,8 @@ const styles = StyleSheet.create({
             flex:1,
             backgroundColor: '#ffffff',
             justifyContent: 'center',
-            paddingLeft:40,
-            paddingRight:40
+            paddingLeft:20,
+            paddingRight:20
         },
         header: {
             flex: 1,
@@ -197,4 +232,13 @@ const styles = StyleSheet.create({
             paddingHorizontal: 48,
             paddingTop: 66
         },
+        input: {
+            height: 40,
+            marginTop : 20,
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            marginBottom: 20,
+            //paddingHorizontal: 5,
+            borderBottomWidth: 1,
+    },
+
 });

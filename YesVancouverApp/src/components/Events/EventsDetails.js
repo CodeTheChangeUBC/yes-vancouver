@@ -83,9 +83,9 @@ export default class EventsDetails extends Component {
             new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
         ]
 
-        return speakersArr.map((speaker) => {
+        return speakersArr.map((speaker, index) => {
             return (
-                <View style={styles.speakerContainer}>
+                <View key={index} style={styles.speakerContainer}>
                     <View style={styles.speakerImageContainer}>
                         <Image
                             style={styles.speakerImage}

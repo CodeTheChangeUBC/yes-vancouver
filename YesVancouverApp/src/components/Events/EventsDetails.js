@@ -16,6 +16,49 @@ function speaker(firstName, lastName, title, company, role) {
     this.role = role
 }
 
+var monthsMixedCaseAbbrev = [
+    "Jan.",
+    "Feb.",
+    "Mar.",
+    "Apr.",
+    "May",
+    "June",
+    "July",
+    "Aug.",
+    "Sep.",
+    "Oct.",
+    "Nov.",
+    "Dec."
+]
+
+function formatAMPM(date) {
+    // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
+    var hours = date.getHours()
+    var minutes = date.getMinutes()
+    var ampm = hours >= 12 ? 'PM' : 'AM'
+    hours = hours % 12
+    hours = hours ? hours : 12 // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes
+    var strTime = hours + ':' + minutes + ' ' + ampm
+    return strTime
+}
+
+function formatDateTime(startDate, endDate) {
+    let formattedDateTime = ''
+    if(startDate.toLocaleDateString() == endDate.toLocaleDateString()){
+        formattedDateTime = monthsMixedCaseAbbrev[startDate.getMonth()] + ' ' + startDate.getDate() + ', '
+        formattedDateTime += formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
+    }
+    else {
+        formattedDateTime = monthsMixedCaseAbbrev[startDate.getMonth()] + ' ' + startDate.getDate() + ', '
+        formattedDateTime += formatAMPM(startDate) 
+        formattedDateTime += ' — \n'
+        formattedDateTime += monthsMixedCaseAbbrev[endDate.getMonth()] + ' ' + endDate.getDate() + ', '
+        formattedDateTime += formatAMPM(endDate)
+    }
+    return formattedDateTime
+}
+
 export default class EventsDetails extends Component {
     constructor(props) {
         super(props)
@@ -64,10 +107,16 @@ export default class EventsDetails extends Component {
         }
         console.log(eventsListResponse)
 
+        let eventTitle = eventsListResponse.Name
+        let eventLocation = eventsListResponse.Location
+        let eventStartDateTime = new Date(Date.parse(eventsListResponse.StartDate))
+        let eventEndDateTime = new Date(Date.parse(eventsListResponse.EndDate))
+        let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
+
         this.setState({
-            eventTitle: 'Sample Event Title',
-            eventDateTime: 'Sample Date',
-            eventLocation: 'Sample Location',
+            eventTitle: eventTitle,
+            eventDateTime: eventDateTimeFormatted,
+            eventLocation: eventLocation,
             eventDescription: 'Sample Description',
         })
     }

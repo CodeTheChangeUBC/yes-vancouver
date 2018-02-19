@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, Text, TouchableOpacity, TouchableHighlight, FlatList, Button } from 'react-native';
 import Header from '../Navigation/Header';
 import EventsItem from './EventsItem';
 import ReadMore from '@expo/react-native-read-more-text';
@@ -8,7 +8,29 @@ import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
 
+function speaker(firstName, lastName, title, company, role) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.title = title
+    this.company = company
+    this.role = role
+}
+
 export default class EventsDetails extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isEventDetailsLoading: true,
+            eventBanner: '',
+            eventTitle: '',
+            eventDateTime: '',
+            eventLocation: '',
+            eventDescription: '',
+            eventSpeakers: [],
+            eventSponsors: []
+        }
+    }
+
     renderTruncatedFooter = (handlePress) => {
         return (
             <Text style={styles.truncateText} onPress={handlePress}>
@@ -41,9 +63,49 @@ export default class EventsDetails extends Component {
             return
         }
         console.log(eventsListResponse)
+
+        this.setState({
+            eventTitle: 'Sample Event Title',
+            eventDateTime: 'Sample Date',
+            eventLocation: 'Sample Location',
+            eventDescription: 'Sample Description',
+        })
     }
 
+    
+
+    renderSpeakers() {
+        let speakersArr = [
+            new speaker('FirstName1', 'LastName1', 'Title1', 'Company1', 'Role1'),
+            new speaker('FirstName2', 'LastName2', 'Title2', 'Company2', 'Role2'),
+            new speaker('FirstName3', 'LastName3', 'Title3', 'Company3', 'Role3'),
+            new speaker('FirstName4', 'LastName4', 'Title4', 'Company4', 'Role4'),
+            new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
+        ]
+
+        return speakersArr.map((speaker) => {
+            return (
+                <View style={styles.speakerContainer}>
+                    <View style={styles.speakerImageContainer}>
+                        <Image
+                            style={styles.speakerImage}
+                            source={require('../../images/Events/Blank-Profile-Picture.png')}
+                        />
+                    </View>
+                    <View style={styles.speakerDescription}>
+                        <Text style={styles.speakerName}>{speaker.firstName} {speaker.lastName}</Text>
+                        <Text style={styles.speakerTitle}>{speaker.title}, {speaker.company}</Text>
+                        <Text style={styles.speakerRole}>{speaker.role}</Text>
+                    </View>
+                </View>
+            )
+        })
+    }
+    
+
     render() {
+        
+
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
@@ -75,7 +137,9 @@ export default class EventsDetails extends Component {
                             source={require('../../images/Events/Event-Detail-Banner.png')}
                         />
 
-                        <Text style={styles.eventTitle}>Event Title</Text>
+                        <Text style={styles.eventTitle}>
+                            {this.state.eventTitle}
+                        </Text>
 
                         <View style={styles.divider}></View>
 
@@ -86,7 +150,9 @@ export default class EventsDetails extends Component {
                                     style={{width:'50%'}}/>
                             </View>
                             <View style={styles.eventDetailTextContainer}>
-                                <Text style={styles.eventDetailText}>May 15, 10:30PM - 11:30PM</Text>
+                                <Text style={styles.eventDetailText}>
+                                    {this.state.eventDateTime}
+                                </Text>
                             </View>
                         </View>
 
@@ -99,7 +165,9 @@ export default class EventsDetails extends Component {
                                     style={{width:'35%'}}/>
                             </View>
                             <View style={styles.eventDetailTextContainer}>
-                                <Text style={styles.eventDetailText}>Location Location Location Location Location Location Location</Text>
+                                <Text style={styles.eventDetailText}>
+                                    {this.state.eventLocation}
+                                </Text>
                             </View>
                         </View>
 
@@ -132,54 +200,13 @@ export default class EventsDetails extends Component {
                                 renderTruncatedFooter={this.renderTruncatedFooter}
                                 renderRevealedFooter={this.renderRevealedFooter}>
                                 <Text style={styles.eventDescriptionText}>
-                                    DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
+                                    {this.state.eventDescription}
                                 </Text>
                             </ReadMore>
                         </View>
 
                         <Text style={styles.headingPink}>Speakers</Text>
-
-                        <View style={styles.speakerContainer}>
-                            <View style={styles.speakerImageContainer}>
-                                <Image
-                                    style={styles.speakerImage}
-                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
-                                />
-                            </View>
-                            <View style={styles.speakerDescription}>
-                                <Text style={styles.speakerName}>Firstname Lastname</Text>
-                                <Text style={styles.speakerTitle}>Title, Company</Text>
-                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.speakerContainer}>
-                            <View style={styles.speakerImageContainer}>
-                                <Image
-                                    style={styles.speakerImage}
-                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
-                                />
-                            </View>
-                            <View style={styles.speakerDescription}>
-                                <Text style={styles.speakerName}>Firstname Lastname</Text>
-                                <Text style={styles.speakerTitle}>Title, Company</Text>
-                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.speakerContainer}>
-                            <View style={styles.speakerImageContainer}>
-                                <Image
-                                    style={styles.speakerImage}
-                                    source={require('../../images/Events/Blank-Profile-Picture.png')}
-                                />
-                            </View>
-                            <View style={styles.speakerDescription}>
-                                <Text style={styles.speakerName}>Firstname Lastname</Text>
-                                <Text style={styles.speakerTitle}>Title, Company</Text>
-                                <Text style={styles.speakerRole}>Role and responsibilities</Text>
-                            </View>
-                        </View>
+                        {this.renderSpeakers()}
 
                         <Text style={styles.headingPink}>Sponsors</Text>
 

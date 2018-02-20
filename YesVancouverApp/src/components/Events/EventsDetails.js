@@ -86,7 +86,8 @@ export default class EventsDetails extends Component {
             eventTitle: '',
             eventDateTime: '',
             eventLocation: '',
-            eventDescription: '',
+            eventDescriptionHTML: '',
+            eventDescriptionText: '',
             eventSpeakers: [],
             eventSponsors: []
         }
@@ -112,32 +113,63 @@ export default class EventsDetails extends Component {
         bearerToken = await getBearerToken()
         if(!bearerToken) {
             console.log("Failed to get bearer token")
-            this.setState({isEventListLoading: false})
+            this.setState({isEventDetailsLoading: false})
             return
         }
 
         let eventId = this.props.navigation.state.params.eventId
-        eventsListResponse = await getEventsDetails(bearerToken, eventId)
-        if(!eventsListResponse) {
-            console.log("Failed to get events list from API call")
-            this.setState({isEventListLoading: false})
+        eventDetailsResponse = await getEventDetails(bearerToken, eventId)
+        if(!eventDetailsResponse) {
+            console.log("Failed to get event details from API call")
+            this.setState({isEventDetailsLoading: false})
             return
         }
-        console.log(eventsListResponse)
+        console.log(eventDetailsResponse)
 
-        let eventTitle = eventsListResponse.Name
-        let eventLocation = eventsListResponse.Location
-        let eventStartDateTime = new Date(Date.parse(eventsListResponse.StartDate))
-        let eventEndDateTime = new Date(Date.parse(eventsListResponse.EndDate))
+        let eventTitle = eventDetailsResponse.Name
+        let eventLocation = eventDetailsResponse.Location
+
+        let eventStartDateTime = new Date(Date.parse(eventDetailsResponse.StartDate))
+        let eventEndDateTime = new Date(Date.parse(eventDetailsResponse.EndDate))
         let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
+
+        let eventDescriptionHTML = eventDetailsResponse.Details.DescriptionHtml
 
         this.setState({
             eventTitle: eventTitle,
             eventDateTime: eventDateTimeFormatted,
             eventLocation: eventLocation,
-            eventDescription: 'Sample Description',
+            eventDescriptionHTML: eventDescriptionHTML,
+            eventDescriptionText: 'Sample Description',
             isEventDetailsLoading: false
         })
+    }
+
+    renderDescriptionHTML() {
+        return (
+            <View style={{paddingHorizontal: 30, paddingVertical: 30}}>
+                <HTML html={this.state.eventDescriptionHTML} 
+                    imagesMaxWidth={Dimensions.get('window').width - 60}
+                    ignoredTags={['br','img']}
+                    ignoredStyles={['line-height']}
+                />
+            </View>
+        )
+    }
+     
+    renderDescriptionText() {
+        return (
+            <View style={styles.eventDescriptionContainer}>
+                <ReadMore
+                    numberOfLines={5}
+                    renderTruncatedFooter={this.renderTruncatedFooter}
+                    renderRevealedFooter={this.renderRevealedFooter}>
+                    <Text style={styles.eventDescriptionText}>
+                        {this.state.eventDescriptionText}
+                    </Text>
+                </ReadMore>
+            </View>
+        )            
     }
 
     renderSpeakers() {
@@ -268,24 +300,7 @@ export default class EventsDetails extends Component {
                                 <View style={styles.registerButtonSpacer}></View>
                             </View>
                             
-                            <View style={{paddingHorizontal: 30, paddingVertical: 30}}>
-                                <HTML html={htmlContent} 
-                                    imagesMaxWidth={Dimensions.get('window').width - 60}
-                                    ignoredTags={['br','img']}
-                                    ignoredStyles={['line-height']}
-                                />
-                            </View>
-
-                            <View style={styles.eventDescriptionContainer}>
-                                <ReadMore
-                                    numberOfLines={5}
-                                    renderTruncatedFooter={this.renderTruncatedFooter}
-                                    renderRevealedFooter={this.renderRevealedFooter}>
-                                    <Text style={styles.eventDescriptionText}>
-                                        {this.state.eventDescription}
-                                    </Text>
-                                </ReadMore>
-                            </View>
+                            {this.renderDescriptionHTML()}
 
                             <Text style={styles.headingPink}>Speakers</Text>
                             {this.renderSpeakers()}
@@ -369,7 +384,7 @@ async function getBearerToken() {
     }
 }
 
-async function getEventsDetails(bearerToken, eventId) {
+async function getEventDetails(bearerToken, eventId) {
     try {
         let requestAuthTokenBody = {
             'grant_type': 'client_credentials',

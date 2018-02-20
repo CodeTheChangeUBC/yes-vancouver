@@ -214,7 +214,7 @@ export default class EventsDetails extends Component {
         let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
 
         let eventDescriptionHtml = eventDetailsResponse.Details.DescriptionHtml
-        let eventAdditionalDetails = getAdditionalDetails(sampleEventDescriptionHtml)
+        let eventAdditionalDetails = getAdditionalDetails(eventDescriptionHtml)
         console.log(eventAdditionalDetails)
       
         let eventSpeakersList = []

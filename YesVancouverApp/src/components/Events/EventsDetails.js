@@ -26,6 +26,29 @@ const htmlContent = `
 // <p>This is another sample event. This one spans several days.</p>    <p>From the Events module, you can specify the event name, location, date, and cost, and control whether visitors to your site can see and register for the event.</p>To learn more about event management, visit our&nbsp;<a href="http://help.wildapricot.com/display/DOC/Events" target="_blank">Events help</a>&nbsp;section.<br>
 // `
 
+var sampleEventDescriptionHtml = `<div></div>
+<!--
+{
+	"Speakers": [
+		{
+			"FirstName": "FirstName1",
+			"LastName": "LastName1",
+			"Title": "Title1",
+			"Company": "Company1",
+			"Role": "Role1"
+		},
+		{
+			"FirstName": "FirstName2",
+			"LastName": "LastName2",
+			"Title": "Title2",
+			"Company": "Company2",
+			"Role": "Role2"
+		}
+	]
+}
+-->
+`
+
 function speaker(firstName, lastName, title, company, role) {
     this.firstName = firstName
     this.lastName = lastName
@@ -75,6 +98,63 @@ function formatDateTime(startDate, endDate) {
         formattedDateTime += formatAMPM(endDate)
     }
     return formattedDateTime
+}
+
+/* 
+ * Additional details like the speakers and sponsors are specified in
+ * the comment at the end of the event DescriptionHtml
+ */
+function getAdditionalDetails(eventDescriptionHtml) {
+    let openingCommentTag = "<!--"
+    let closingCommentTag = '-->'
+
+    let indexOfCommentStart = eventDescriptionHtml.lastIndexOf(openingCommentTag)
+    if(indexOfCommentStart == -1) {
+        console.log('No additional details recorded for this event')
+        return null
+    }
+    let indexOfJsonStart = indexOfCommentStart + openingCommentTag.length
+
+    let indexOfCommentEnd = eventDescriptionHtml.lastIndexOf(closingCommentTag)
+	if(indexOfCommentEnd == -1) {
+        console.log('No additional details recorded for this event')
+        return null
+    }
+
+    let jsonString = eventDescriptionHtml.substring(indexOfJsonStart, indexOfCommentEnd).trim();
+	let jsonObj = null
+	try {
+		jsonObj = JSON.parse(jsonString)
+    }
+	catch(error){
+        console.log("Syntax error in additional details. Details must be in valid JSON format.")
+    }
+
+    return jsonObj
+}
+
+function getSpeakersList(eventAdditionalDetails) {
+    if(!eventAdditionalDetails) {
+        console.log('No additional details found for event')
+        return null
+    }
+    
+    if(!eventAdditionalDetails.Speakers) {
+        console.log('No speakers found in additional details of event')
+        return null
+    }
+
+    let speakersResult = [] 
+    let speakersList = eventAdditionalDetails.Speakers
+    for(let i = 0; i < speakersList.length; i++) {
+        let firstName = speakersList[i].FirstName
+        let lastName = speakersList[i].LastName
+        let title = speakersList[i].Title
+        let company = speakersList[i].Company
+        let role = speakersList[i].Role
+        speakersResult.push(new speaker(firstName, lastName, title, company, role))
+    }
+    return speakersResult
 }
 
 export default class EventsDetails extends Component {
@@ -133,14 +213,23 @@ export default class EventsDetails extends Component {
         let eventEndDateTime = new Date(Date.parse(eventDetailsResponse.EndDate))
         let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
 
-        let eventDescriptionHTML = eventDetailsResponse.Details.DescriptionHtml
+        let eventDescriptionHtml = eventDetailsResponse.Details.DescriptionHtml
+        let eventAdditionalDetails = getAdditionalDetails(sampleEventDescriptionHtml)
+        console.log(eventAdditionalDetails)
+      
+        let eventSpeakersList = []
+        if(eventAdditionalDetails) {
+            eventSpeakersList = getSpeakersList(eventAdditionalDetails)
+            console.log(eventSpeakersList)
+        }
 
         this.setState({
             eventTitle: eventTitle,
             eventDateTime: eventDateTimeFormatted,
             eventLocation: eventLocation,
-            eventDescriptionHTML: eventDescriptionHTML,
+            eventDescriptionHTML: eventDescriptionHtml,
             eventDescriptionText: 'Sample Description',
+            eventSpeakers: eventSpeakersList,
             isEventDetailsLoading: false
         })
     }
@@ -173,15 +262,16 @@ export default class EventsDetails extends Component {
     }
 
     renderSpeakers() {
-        let speakersArr = [
-            new speaker('FirstName1', 'LastName1', 'Title1', 'Company1', 'Role1'),
-            new speaker('FirstName2', 'LastName2', 'Title2', 'Company2', 'Role2'),
-            new speaker('FirstName3', 'LastName3', 'Title3', 'Company3', 'Role3'),
-            new speaker('FirstName4', 'LastName4', 'Title4', 'Company4', 'Role4'),
-            new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
-        ]
+        // let speakersArr = [
+        //     new speaker('FirstName1', 'LastName1', 'Title1', 'Company1', 'Role1'),
+        //     new speaker('FirstName2', 'LastName2', 'Title2', 'Company2', 'Role2'),
+        //     new speaker('FirstName3', 'LastName3', 'Title3', 'Company3', 'Role3'),
+        //     new speaker('FirstName4', 'LastName4', 'Title4', 'Company4', 'Role4'),
+        //     new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
+        // ]
+        let speakersArray = this.state.eventSpeakers
 
-        return speakersArr.map((speaker, index) => {
+        return speakersArray.map((speaker, index) => {
             return (
                 <View key={index} style={styles.speakerContainer}>
                     <View style={styles.speakerImageContainer}>
@@ -206,9 +296,6 @@ export default class EventsDetails extends Component {
                 <View style={styles.activityIndicator}>
                     <ActivityIndicator size="large" color="#ED4969" />
                 </View>
-                // <ScrollView style={{ flex: 1 }}>
-                
-            // </ScrollView>
             )
         }
         else {

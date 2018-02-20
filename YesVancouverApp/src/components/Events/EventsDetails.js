@@ -261,7 +261,22 @@ export default class EventsDetails extends Component {
         )            
     }
 
-    renderSpeakers() {
+    renderSpeakersSection(eventSpeakersList) {
+        if(eventSpeakersList.length > 0) {
+            return (
+                <View>
+                    {this.renderSpeakersTitle()}
+                    {this.renderSpeakersList(eventSpeakersList)}
+                </View>
+            )
+        }
+    }
+
+    renderSpeakersTitle() {
+        return <Text style={styles.headingPink}>Speakers</Text>
+    }
+
+    renderSpeakersList(eventSpeakersList) {
         // let speakersArr = [
         //     new speaker('FirstName1', 'LastName1', 'Title1', 'Company1', 'Role1'),
         //     new speaker('FirstName2', 'LastName2', 'Title2', 'Company2', 'Role2'),
@@ -269,25 +284,25 @@ export default class EventsDetails extends Component {
         //     new speaker('FirstName4', 'LastName4', 'Title4', 'Company4', 'Role4'),
         //     new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
         // ]
-        let speakersArray = this.state.eventSpeakers
-
-        return speakersArray.map((speaker, index) => {
-            return (
-                <View key={index} style={styles.speakerContainer}>
-                    <View style={styles.speakerImageContainer}>
-                        <Image
-                            style={styles.speakerImage}
-                            source={require('../../images/Events/Blank-Profile-Picture.png')}
-                        />
+        return (
+            eventSpeakersList.map((speaker, index) => {
+                return (
+                    <View key={index} style={styles.speakerContainer}>
+                        <View style={styles.speakerImageContainer}>
+                            <Image
+                                style={styles.speakerImage}
+                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                            />
+                        </View>
+                        <View style={styles.speakerDescription}>
+                            <Text style={styles.speakerName}>{speaker.firstName} {speaker.lastName}</Text>
+                            <Text style={styles.speakerTitle}>{speaker.title}, {speaker.company}</Text>
+                            <Text style={styles.speakerRole}>{speaker.role}</Text>
+                        </View>
                     </View>
-                    <View style={styles.speakerDescription}>
-                        <Text style={styles.speakerName}>{speaker.firstName} {speaker.lastName}</Text>
-                        <Text style={styles.speakerTitle}>{speaker.title}, {speaker.company}</Text>
-                        <Text style={styles.speakerRole}>{speaker.role}</Text>
-                    </View>
-                </View>
-            )
-        })
+                )
+            })
+        )
     }
     
     render() {
@@ -389,8 +404,7 @@ export default class EventsDetails extends Component {
                             
                             {this.renderDescriptionHTML()}
 
-                            <Text style={styles.headingPink}>Speakers</Text>
-                            {this.renderSpeakers()}
+                            {this.renderSpeakersSection(this.state.eventSpeakers)}
 
                             <Text style={styles.headingPink}>Sponsors</Text>
 

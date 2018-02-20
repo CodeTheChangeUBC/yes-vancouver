@@ -1,40 +1,244 @@
 import React from 'react';
-import { StyleSheet, ToastAndroid, View, Button, StatusBar, TextInput, ScrollView} from 'react-native';
+import { StyleSheet, ToastAndroid, View, Button, StatusBar, TextInput, ScrollView, KeyboardAvoidingView, Platform, Image, Text, TouchableOpacity} from 'react-native';
 import Header from '../Navigation/Header';
+import ApiUtils from '../../utils/ApiUtils'
+import { ClientSecrets } from '../../../config/config'
 
 
-export default class SignUp extends React.Component{
-    render (){
-        //<Header style={styles.header}/>
-        var {navigate} = this.props.navigation;
-        return(
-            <ScrollView contentContainerStyle={styles.container}>
-                <TextInput style={{height:100}} placeholder="First name" autoCapitalize="words"></TextInput>
-                <TextInput style={{height:100}} placeholder="Last name" autoCapitalize="words"></TextInput>
-                <TextInput style={{height:100}} placeholder="Email" keyboardType="email-address"></TextInput>
-                <TextInput style={{height:100}} placeholder="Password" secureTextEntry={true}></TextInput>
-                <Button color="#ED4969" title="Sign up" onPress={
-                    ()=> {
-                        navigate("ProfileSetupWork", {})
-                        ToastAndroid.show("Signed Up" ,ToastAndroid.SHORT)
-                    }
-                }/>
-            </ScrollView>
-        )
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
+async function getBearerToken() {
+    try {
+        let base64 = require('base-64')
+        username = ClientSecrets.API_USERNAME
+        password = ClientSecrets.API_PASSWORD
+        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
+        console.log(basicAuthHeaderValue)
+        console.log ('above is header value')
+
+        let requestAuthTokenBody = {
+            'grant_type': 'client_credentials',
+            'scope': 'contacts finances events'
+        }
+
+        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': basicAuthHeaderValue
+            },
+            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
+        })
+        let responseJson = await response.json()
+        console.log(responseJson['access_token']);
+        console.log('above is token');
+        return responseJson['access_token']
+    } catch(error) {
+        console.error(error)
+        return null
     }
 }
 
+
+ async function updateContacts(pFirstName, pLastName, pEmail, pPassword) {
+    try {
+         bearerToken = '';
+         bearerToken = await getBearerToken();
+         if(!bearerToken) {
+            console.log("Failed to get bearer token")
+            return
+        }
+
+         console.log("here it is");
+         console.log(bearerToken);
+        let requestAuthTokenBody = {
+            'FirstName' : pFirstName,
+            'LastName' : pLastName,
+            'Email' : pEmail,
+            'Password' : pPassword
+        }
+        
+        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Contacts?$async=false'
+        let response = await fetch(getUrl, 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer ' + bearerToken
+              },
+            body:  ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
+
+        })
+
+         if(!response) {
+            console.log("Failed to get events list from API call")
+            return
+        }
+
+        console.log('update contacts finished running');
+        return false;
+
+
+    } catch(error) {
+        console.error(error)
+        return null
+    }
+}
+
+
+
+
+
+// do stuff here
+
+export default class SignUp extends React.Component{
+
+static navigationOptions = {
+        title:"SignUp",
+    }; 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        confirmPassword: '',
+        };
+    }
+
+
+    
+    render (){
+        <Header 
+                style={styles.header}
+        />
+        var {navigate} = this.props.navigation
+        return(
+           <KeyboardAvoidingView behavior='padding' style={styles.container}>
+
+               <View style={styles.headerContainer}>
+              
+                    <View style={styles.headerIconContainer}>
+                        <View style={styles.backArrowContainer}>
+                           <Image source={require('../../images/Header/White-arrow-3x.png')}
+                                resizeMode='contain'
+                                style={{height:'10%'}}/>
+                        </View>
+                        <View style={styles.backArrowContainer}>
+                        </View>
+                     </View>
+               </View>
+
+            <ScrollView contentContainerStyle={styles.container}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="First name"
+                    autoCapitalize="words"
+                    onChangeText={(firstName) => this.setState({firstName})}
+                    value={this.state.firstName}
+                ></TextInput>
+                <TextInput  
+                    style={styles.input}
+                    placeholder="Last name"
+                    autoCapitalize="words"
+                    onChangeText={(lastName) => this.setState({lastName})}
+                    value={this.state.lastName}
+                ></TextInput>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    onChangeText={(email) => this.setState({email})}
+                    value={this.state.email}
+                ></TextInput>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    onChangeText={(password) => this.setState({password})}
+                    value={this.state.password}
+                ></TextInput>
+               <TextInput
+                    style={styles.input}
+                    placeholder="Confirm Password"
+                    secureTextEntry={true}
+                    onChangeText={(confirmPassword) => this.setState({confirmPassword})}
+                    value={this.state.confirmPassword}
+               ></TextInput>
+               
+               
+                <Button color="#ED4969" title="Sign up" onPress={
+                    ()=> {
+                        // tester
+                       
+               
+                        let vFirstName = this.state.firstName;
+                        let vSecondName = this.state.lastName;
+                        let vEmail = this.state.email;
+                        let vPassword = this.state.password;
+                        let vConfirmPassword = this.state.confirmPassword;
+               
+                        console.log(vFirstName);
+                        console.log(vSecondName);
+                        console.log(vEmail);
+                        console.log(vPassword);
+                        console.log(vConfirmPassword);
+
+
+                        if(!validateEmail(vEmail)){
+                            console.log("email is invalid");
+                            return;    
+                        }
+                        // end tester
+                        if (vPassword.length>7 && vPassword == vConfirmPassword) {
+                            updateContacts(vFirstName, vSecondName, vEmail, vPassword);
+                            navigate("ProfileSetupWork", {})
+                            }
+                        if (vPassword.length<8)
+                            console.log("password needs to be longer than 7 characters");
+                        if (vPassword != vConfirmPassword)
+                            console.log("password doesn't' match");
+
+                        
+                    }  
+                }/>
+            </ScrollView>
+          </KeyboardAvoidingView>
+
+        )
+    }
+}
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        paddingLeft:40,
-        paddingRight:40
+        container: {
+            flex:1,
+            backgroundColor: '#ffffff',
+            justifyContent: 'center',
+            paddingLeft:20,
+            paddingRight:20
+        },
+        header: {
+            flex: 1,
+            width: null,
+            height: null
+        },
+        content: {
+            flex: 7,
+            paddingHorizontal: 48,
+            paddingTop: 66
+        },
+        input: {
+            height: 40,
+            marginTop : 20,
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            marginBottom: 20,
+            //paddingHorizontal: 5,
+            borderBottomWidth: 1,
     },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    },
+
 });

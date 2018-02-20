@@ -1,32 +1,50 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 
 
 export default class PerksItem extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            image: props.imageA,
+        };
+
+    }
+    componentWillReceiveProps(nextProps) {
+        // update original states
+        this.setState({
+            image: nextProps.imageA,
+        });
+    }
     render() {
+
         return (
             <View style={styles.container}>
                 <View style={styles.perksPartnerColumn}>
-                    <Image 
-                        source={require('../../images/Perks/Aveda.png')}
-                        // source={require('../../images/Perks/Camp-Tech.png')}
-                        // source={require('../../images/Perks/Floathouse.png')}
-                        // source={require('../../images/Perks/Red-Academy.png')}
-                        // source={require('../../images/Perks/Spin-Society.png')}
+                    <Image
+                        source={this.state.image}
                         resizeMode='contain'
                         style={styles.perksPartnerLogo}/>
                 </View>
                 <View style={styles.spacerColumn}></View>
                 <View style={styles.favouriteStarColumn}>
-                    <Image 
+                    <Image
                         source={require('../../images/Perks/Icons/Favourites-Item-Unselected.png')}
                         style={styles.favouriteStarIcon}/>
                 </View>
+
             </View>
+
+
         );
     }
 }
 
+/*
+
+*/
 const styles = StyleSheet.create({
     container: {
         flex: 1,

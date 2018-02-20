@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Button, ToastAndroid, FlatList} from 'react-native';
+import {getIndividualContactsList} from "./FetchUserDetails";
 
 export default class ProfileView extends Component {
-
     static navigationOptions = {
         tabBarLabel: 'ProfileView',
         tabBarIcon: ({ focused, tintColor }) => focused ?
@@ -19,44 +19,57 @@ export default class ProfileView extends Component {
     };
 
     render() {
+        const { params } = this.props.navigation.state;
+        const givenUserDetails = params ? params.userEmail : null;
+        console.log(givenUserDetails);
+
+        let userEmail = givenUserDetails["Email"];
+        let userPhone = givenUserDetails["FieldValues"][25]["Value"];
+        let userMemberSince = givenUserDetails["FieldValues"][27]["Value"];
+        let userMemberDue = givenUserDetails["FieldValues"][28]["Value"];
+        let userLinkedin = givenUserDetails["FieldValues"][37]["Value"];
+        let userCreationDate = givenUserDetails["FieldValues"][14]["Value"];
+
         return (
             <ScrollView contentContainerStyle={styles.container}>
                 <Image
                     style={styles.profileLogo}
                     source={require('../../images/Login-Signup/Profile-Pic-Cropped.png')}/>
-                <Text style={styles.nameFont}>Camilla White</Text>
+                <Text style={styles.nameFont}>{givenUserDetails["FirstName"] + " " +givenUserDetails["LastName"]}</Text>
                 <Text style={styles.subHeading}>
                     <Image
                         style={styles.imageLogo}
                         source={require('../../images/Login-Signup/YES-logo.png')}/>
                         YES! Vancouver Member
                 </Text>
-                <Text style={styles.paragraphWithMargin}>First joined on June 23, 2004</Text>
+                <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate}</Text>
                 <Text style={styles.paragraph}>Current Membership</Text>
-                <Text style={styles.paragraph}>July 04, 2016 - July 04, 2017</Text>
+                <Text style={styles.paragraph}>Since : {userMemberSince}</Text>
+                <Text style={styles.paragraph}>Upto : {userMemberDue} </Text>
                 <View style={styles.buttonView}>
                     <Button color="#ED4969" title="Extend membership" onPress={
                         ()=> ToastAndroid.show("Extended membership" ,ToastAndroid.SHORT)
                     }/>
                 </View>
+
                 <Text style={styles.nameFont}>My contact information</Text>
                 <Text style={styles.contactInfo}>
                     <Image
                         style={styles.imageLogo}
                         source={require('../../images/Settings/iconmonstr-email-4.png')}/>
-                       |     camilla.white@gmail.com
+                       |     {userEmail}
                 </Text>
                 <Text style={styles.contactInfo}>
                     <Image
                         style={styles.imageLogo}
                         source={require('../../images/Settings/iconmonstr-phone-1.png')}/>
-                    |     604.123.4567
+                    |     {userPhone}
                 </Text>
                 <Text style={styles.contactInfo}>
                     <Image
                         style={styles.imageLogo}
                         source={require('../../images/Settings/iconmonstr-linkedin-1.png')}/>
-                   |     linkedin.com/in/camillawhite
+                   |     {userLinkedin}
                 </Text>
                 <Text style={styles.dropDown}>
                     <Image

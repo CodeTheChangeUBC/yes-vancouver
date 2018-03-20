@@ -7,13 +7,10 @@ async function getBearerToken() {
         username = ClientSecrets.API_USERNAME;
         password = ClientSecrets.API_PASSWORD;
         basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password);
-        console.log(basicAuthHeaderValue);
-
         let requestAuthTokenBody = {
             'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
+            'scope': 'contacts finances events event_registrations_view'
         };
-
         let response = await fetch('https://oauth.wildapricot.org/auth/token',
             {
                 method: 'POST',
@@ -24,7 +21,6 @@ async function getBearerToken() {
                 body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
             });
         let responseJson = await response.json();
-        //return responseJson;
         return responseJson['access_token']
     } catch(error) {
         console.error(error);
@@ -34,11 +30,6 @@ async function getBearerToken() {
 
 async function getResultURL(bearerToken) {
     try {
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        };
-
         let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Contacts';
         let response = await fetch(getUrl,
             {
@@ -49,7 +40,7 @@ async function getResultURL(bearerToken) {
             });
 
         if(response.status !== 200) {
-            console.log("S:" + response.status);
+            console.log(response.status);
             return null
         }
         return response.json();
@@ -62,11 +53,6 @@ async function getResultURL(bearerToken) {
 
 async function getContactsList(bearerToken, resultURL) {
     try {
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        };
-
         let response = await fetch(resultURL,
             {
                 method: 'GET',
@@ -100,4 +86,39 @@ async function getIndividualContactsList(){
     return contactsList["Contacts"];
 }
 
-export {getBearerToken, getResultURL, getContactsList, getIndividualContactsList};
+async function getEventRegistrationList(bearerToken, contactId){
+    try {
+        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM +
+            '/EventRegistrations?contactId=' + contactId.toString();
+        let response = await fetch(getUrl,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + bearerToken
+                }
+            });
+
+        if(response.status !== 200) {
+            console.log("Failed to get registration list");
+            return null
+        }
+        return response.json();
+
+    } catch(error) {
+        console.error(error);
+        return null
+    }
+}
+
+async function getContactEventRegistrationList(contactId){
+    let bearerToken = await getBearerToken();
+    if(!bearerToken) {
+        console.log("Failed to get bearer token");
+        this.setState({isEventListLoading: false});
+        return
+    }
+    let eventRegistrationList = await getEventRegistrationList(bearerToken, contactId);
+    return eventRegistrationList;
+}
+
+export {getBearerToken, getResultURL, getContactsList, getIndividualContactsList, getContactEventRegistrationList};

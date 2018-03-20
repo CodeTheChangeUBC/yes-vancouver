@@ -1,7 +1,10 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
-import {getBearerToken, getContactsList, getIndividualContactsList, getResultURL} from '../Profile/FetchUserDetails'
+import {
+    getBearerToken, getContactEventRegistrationList, getContactsList, getIndividualContactsList,
+    getResultURL
+} from '../Profile/FetchUserDetails'
 
 let clientUsername = "";
 let clientPassword = "";
@@ -14,20 +17,13 @@ export default class LoginForm extends Component {
 
     async authenticateLogin(){
         let {navigate} = this.props.navigation;
-        // let bearerToken = await getBearerToken();
-        // if(!bearerToken) {
-        //     console.log("Failed to get bearer token");
-        //     this.setState({isEventListLoading: false});
-        //     return
-        // }
-        // let resultURLObject = await getResultURL(bearerToken);
-        // let resultURLString = resultURLObject["ResultUrl"];
-        // let contactsList = await getContactsList(bearerToken, resultURLString);
-        // let contactsListArray = contactsList["Contacts"];
         let contactsListArray = await getIndividualContactsList();
         for (let e in contactsListArray){
             if (contactsListArray[e]["Email"] === clientUsername){
-                navigate("NavBar", {'userEmail' : contactsListArray[e]});
+                console.log(contactsListArray[e]);
+                let contactEventRegistrationDetails = await getContactEventRegistrationList(contactsListArray[e]["Id"]);
+                navigate("NavBar", {'userData' : contactsListArray[e],
+                                    'userEvent' : contactEventRegistrationDetails});
                 return;
             }
         }

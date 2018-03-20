@@ -64,7 +64,7 @@ async function getBearerToken() {
         username = ClientSecrets.API_USERNAME
         password = ClientSecrets.API_PASSWORD
         basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        console.log(basicAuthHeaderValue)
+        //console.log(basicAuthHeaderValue)
 
         let requestAuthTokenBody = {
             'grant_type': 'client_credentials',
@@ -105,7 +105,7 @@ async function getEventsList(bearerToken) {
         })
         
         if(response.status != 200) {
-            console.log(response.status)
+            //console.log(response.status)
             return null
         }
         return response.json()
@@ -161,7 +161,7 @@ function getEventsListDataSource(response) {
             eventsList[i].Location
         )
 
-        console.log(entry)
+        //console.log(entry)
         if(startDate.getTime() < currentDateInMs) {
             pastEvents.push(entry)
         }
@@ -214,7 +214,7 @@ export default class EventsList extends Component {
             this.setState({isEventListLoading: false})
             return
         }
-        console.log(eventsListResponse)
+        //console.log(eventsListResponse)
 
         datasourceResult = getEventsListDataSource(eventsListResponse)
         if(!datasourceResult) {

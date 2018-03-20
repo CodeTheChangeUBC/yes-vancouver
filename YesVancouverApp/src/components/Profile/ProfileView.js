@@ -20,14 +20,28 @@ export default class ProfileView extends Component {
 
     render() {
         const { params } = this.props.navigation.state;
-        const givenUserDetails = params ? params.userEmail : null;
-        console.log(givenUserDetails);
+        const givenUserDetails = params ? params.userData : null;
+        const givenUserEvents = params ? params.userEvent : null;
+        //let eventName = [];
+        //let eventDate = [];
+        let upcomingEventsDictionaryList = [];
+        for (let a in givenUserEvents){
+            //console.log(givenUserEvents[a]["Event"]["StartDate"].substring(0, 10));
+            //console.log(givenUserEvents[a]["Event"]["Name"]);
+            //eventName.concat(givenUserEvents[a]["Event"]["StartDate"].substring(0, 10));
+            //eventDate.concat();
+            upcomingEventsDictionaryList.concat({date : givenUserEvents[a]["Event"]["StartDate"].substring(0, 10),
+                                                 name : givenUserEvents[a]["Event"]["Name"]})
+        }
+        console.log(upcomingEventsDictionaryList);
+        // extraData = {this.state}
 
+        // TODO: Add secondary check to raw index value below
         let userEmail = givenUserDetails["Email"];
         let userPhone = givenUserDetails["FieldValues"][25]["Value"];
-        let userMemberSince = givenUserDetails["FieldValues"][27]["Value"];
-        let userMemberDue = givenUserDetails["FieldValues"][28]["Value"];
-        let userLinkedin = givenUserDetails["FieldValues"][37]["Value"];
+        let userMemberSince = givenUserDetails["FieldValues"][29]["Value"];
+        let userMemberDue = givenUserDetails["FieldValues"][30]["Value"];
+        let userLinkedin = givenUserDetails["FieldValues"][39]["Value"];
         let userCreationDate = givenUserDetails["FieldValues"][14]["Value"];
 
         return (
@@ -42,10 +56,10 @@ export default class ProfileView extends Component {
                         source={require('../../images/Login-Signup/YES-logo.png')}/>
                         YES! Vancouver Member
                 </Text>
-                <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate}</Text>
-                <Text style={styles.paragraph}>Current Membership</Text>
-                <Text style={styles.paragraph}>Since : {userMemberSince}</Text>
-                <Text style={styles.paragraph}>Upto : {userMemberDue} </Text>
+                <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate.substring(0, 10)}</Text>
+                <Text style={styles.subHeading}>Current Membership:</Text>
+                <Text style={styles.paragraph}>Since : {userMemberSince.substring(0, 10)}</Text>
+                <Text style={styles.paragraph}>Upto : {userMemberDue.substring(0, 10)} </Text>
                 <View style={styles.buttonView}>
                     <Button color="#ED4969" title="Extend membership" onPress={
                         ()=> ToastAndroid.show("Extended membership" ,ToastAndroid.SHORT)
@@ -78,8 +92,9 @@ export default class ProfileView extends Component {
                     My events
                 </Text>
                 <FlatList
-                    data={[{key: 'May 1 | Game Changers'}]}
-                    renderItem={({item}) => <Text>{item.key}</Text>}
+                    //data={[{key: 'May 1 | Game Changers'}]}
+                    data = {upcomingEventsDictionaryList}
+                    renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
                 />
                 <Text style={styles.dropDown}>
                     <Image
@@ -114,6 +129,8 @@ const styles = StyleSheet.create({
         marginRight : 30
     },
     nameFont:{
+        marginTop : 20,
+        marginBottom: 15,
         fontSize:25,
         fontWeight:'bold'
     },

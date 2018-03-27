@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, WebView } from 'react-native'
 import Header from '../Navigation/Header'
 import ReadMore from '@expo/react-native-read-more-text'
+import AutoHeightImage from 'react-native-auto-height-image';
 
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
@@ -223,6 +224,14 @@ export default class EventsDetails extends Component {
             console.log(eventSpeakersList)
         }
 
+        let myUri = 'https://yvsuper.wildapricot.org/resources/Pictures/treehouse_clean.jpg'
+        Image.getSize(myUri, (width, height) => console.log("W " + width + " H " + height))
+
+        // var sMyString = '<a id="a"><b id="b">hey!</b></a>';
+        // var oParser = new DOMParser();
+        // var oDOM = oParser.parseFromString(sMyString, "text/xml");
+        // console.log(oDOM.documentElement.nodeName == "parsererror" ? "error while parsing" : oDOM.documentElement.nodeName); 
+        
         this.setState({
             eventTitle: eventTitle,
             eventDateTime: eventDateTimeFormatted,
@@ -304,7 +313,7 @@ export default class EventsDetails extends Component {
             })
         )
     }
-    
+
     render() {
         if(this.state.isEventDetailsLoading) {
             return (
@@ -339,10 +348,11 @@ export default class EventsDetails extends Component {
                     </View>
                     <View style={styles.content}>
                         <ScrollView>
-                            <Image 
-                                style={styles.bannerImage}
-                                resizeMode='stretch'
-                                source={require('../../images/Events/Event-Detail-Banner.png')}
+                            
+                             <AutoHeightImage
+                                resizeMode='contain'
+                                width={Dimensions.get('window').width}
+                                source={{uri: 'https://yvsuper.wildapricot.org/resources/Pictures/Events/Event-Detail-Banner.png'}}
                             />
 
                             <Text style={styles.eventTitle}>
@@ -565,8 +575,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     bannerImage: {
+        // flex: 1,
+        // width: null,
+
         flex: 1,
-        width: null
+        alignSelf: 'stretch',
+        width: Dimensions.get('window').width
     },
     eventTitle: {
         flex: 1,

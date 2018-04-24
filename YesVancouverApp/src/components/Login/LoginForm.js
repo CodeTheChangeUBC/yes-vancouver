@@ -1,12 +1,9 @@
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
-import {
-    getBearerToken, getContactEventRegistrationList, getContactsList, getIndividualContactsList,
-    getResultURL
-} from '../Profile/FetchUserDetails'
+import {getContactEventRegistrationList, getIndividualContactsList} from '../Profile/FetchUserDetails'
 
-let clientUsername = "";
+let clientEmail = "";
 let clientPassword = "";
 
 export default class LoginForm extends Component {
@@ -17,21 +14,58 @@ export default class LoginForm extends Component {
 
     async authenticateLogin(){
         let {navigate} = this.props.navigation;
-        let contactsListArray = await getIndividualContactsList();
-        for (let e in contactsListArray){
-            if (contactsListArray[e]["Email"] === clientUsername){
-                console.log(contactsListArray[e]);
-                let contactEventRegistrationDetails = await getContactEventRegistrationList(contactsListArray[e]["Id"]);
-                navigate("NavBar", {'userData' : contactsListArray[e],
-                                    'userEvent' : contactEventRegistrationDetails});
-                return;
-            }
+        let contactsListArray = await getIndividualContactsList(clientEmail);
+        if (contactsListArray.length === 1){
+            let contact = contactsListArray[0];
+            let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
+            navigate("NavBar", {'userData' : contact,
+                                'upcomingEvents' : contactEventRegistrationDetails});
         }
-        console.log("Invalid Email Supplied");
+        else{
+            console.log("Invalid Email Supplied");
+        }
     }
 
+    // async authenticateLogin(){
+    //     let {navigate} = this.props.navigation;
+    //     let contactsListArray = await getIndividualContactsList();
+    //
+    //     let resultsList = [];
+    //     for (let e in contactsListArray) {
+    //         resultsList.push(new Promise(function (resolve, reject) {
+    //             if (contactsListArray[e]["Email"] === clientEmail) {
+    //                 resolve(contactsListArray[e]);
+    //             }
+    //             resolve();
+    //         }));
+    //     }
+    //     Promise.all(resultsList)
+    //         .then(function (values) {
+    //             let definedValues = values.filter(value => value !== undefined);
+    //             if (definedValues.length === 1){
+    //                 let retrieveEventDetails = new Promise(function (resolve, reject) {
+    //                     let contactRegistrationDetails = getContactEventRegistrationList(definedValues[0]["Id"]);
+    //                     resolve(contactRegistrationDetails );
+    //                 });
+    //                 retrieveEventDetails.then(function (contactRegistrationDetails ) {
+    //                     navigate("NavBar", {'userData' : definedValues[0],
+    //                         'upcomingEvents' : contactRegistrationDetails });
+    //                 }).catch(function (error) {
+    //                     console.log("ERROR: " + error)
+    //                 });
+    //             }
+    //             else{
+    //                 console.log("Invalid Email Supplied");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log("ERROR Occured");
+    //             console.log(error);
+    //         });
+    // }
+
     render() {
-        var {navigate} = this.props.navigation;
+        let {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -43,12 +77,11 @@ export default class LoginForm extends Component {
                         placeholder="Email"
                         placeholderTextColor="rgba(128,128,128,0.7)"
                         returnKeyType="next"
-                        //onSubmitEditing={() => this.passwordInput.focus()}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        onChangeText={(text)=> clientUsername = text}
+                        onChangeText={(text)=> clientEmail = text}
                     />
                     <TextInput
                         placeholder="Password"
@@ -57,7 +90,6 @@ export default class LoginForm extends Component {
                         secureTextEntry
                         onChangeText={(text)=> clientPassword = text}
                         style={styles.input}
-                        //ref={(input) => this.passwordInput = input}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
@@ -67,7 +99,6 @@ export default class LoginForm extends Component {
                             color="#ED4969"
                             onPress={
                                 () => this.authenticateLogin()
-                                    //navigate("NavBar", {})
                             }
                             title="Login"
                         />
@@ -88,7 +119,6 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        //paddingHorizontal: 50,
         backgroundColor: '#FFFFFF',
         width: '100%',
         height: '100%'
@@ -102,12 +132,10 @@ const styles = StyleSheet.create({
         marginTop : 80,
         backgroundColor: 'rgba(255,255,255,0.7)',
         marginBottom: 20,
-        //paddingHorizontal: 5,
         borderBottomWidth: 1,
     },
     button: {
         backgroundColor: '#ff0066',
-        //paddingVertical: 10,
         marginTop: 60
     },
     buttonText: {
@@ -120,7 +148,6 @@ const styles = StyleSheet.create({
     },
     passContainer: {
         marginTop : 40
-        //paddingVertical: 50
     },
     forgotPassText: {
         textAlign: 'center',
@@ -132,4 +159,3 @@ const styles = StyleSheet.create({
         marginRight : 80
     }
 });
-

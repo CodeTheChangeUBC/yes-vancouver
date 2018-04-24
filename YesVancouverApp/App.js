@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native'
 import Navigation from './src/components/Navigation/Navigation';
 import { Font } from 'expo';
-import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
-import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
-import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
+import ProfileSetupWork from './src/components/Profile/Old Views/ProfileSetupWork'
+import ProfileSetupSocial from './src/components/Profile/Old Views/ProfileSetupSocial'
+import ProfileSetupPhoto from './src/components/Profile/Old Views/ProfileSetupPhoto'
 // =========================================================================
 import ApiUtils from './src/utils/ApiUtils'
 import { ClientSecrets } from './config/config'

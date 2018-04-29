@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, ScrollView, View, Image, Text, TextInput, ToastAndroid,
-    Button } from 'react-native';
+import {ScrollView, View, Text, TextInput, Button, Alert} from 'react-native';
 import {styles} from './ProfileStyleSheet'
 import {updateContactDetails, getContactEventRegistrationList, getIndividualContactsList} from './FetchUserDetails'
 
@@ -14,8 +13,6 @@ export default class EditProfile extends Component{
     newContactLinkedIn = '';
 
     async updateProfileDetails(){
-        // go back to profile screen, show updated data
-
         let {navigate} = this.props.navigation;
         let apiDetails = {
             "Id" : this.userID,
@@ -36,15 +33,27 @@ export default class EditProfile extends Component{
 
         let updateResult = await updateContactDetails(this.userID, apiDetails);
         if (updateResult !== null){
-            ToastAndroid.show("Details Updated" ,ToastAndroid.SHORT);
-            let contact = await getIndividualContactsList(this.newContactEmail);
+            Alert.alert(
+                'Details Updated',
+                'Your profile details have been updated',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            );
+            let contact = await getIndividualContactsList(this.userID);
             contact = contact[0];
             let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
             navigate("NavBar", {'userData' : contact,
                                 'upcomingEvents' : contactEventRegistrationDetails});
         }
         else{
-            ToastAndroid.show("Update Failed, Try Again" ,ToastAndroid.SHORT)
+            Alert.alert(
+                'Update Failed',
+                'Please try to update your details again',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            );
         }
     }
 
@@ -126,7 +135,13 @@ export default class EditProfile extends Component{
                     </View>
                     <View>
                         <Button color="#ED4969" title="Cancel" style={styles.buttonView} onPress={
-                            ()=> ToastAndroid.show("Click Back...." ,ToastAndroid.SHORT)
+                            ()=> Alert.alert(
+                                'Click Back',
+                                'Click the back button',
+                                [
+                                    {text: "Ok", style:'cancel'}
+                                ]
+                            )
                         }/>
                     </View>
                 </View>

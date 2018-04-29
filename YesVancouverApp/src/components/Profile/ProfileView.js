@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, Image, ScrollView, Button, ToastAndroid, FlatList} from 'react-native';
+import {Text, View, Image, ScrollView, Button, FlatList, Alert} from 'react-native';
 import {styles} from './ProfileStyleSheet'
 
 export default class ProfileView extends Component {
@@ -55,7 +55,7 @@ export default class ProfileView extends Component {
     }
 
     returnProfileScreenView(userID, userFirstName, userLastName, userEmail, userPhone, userMemberSince, userRenewalDue,
-                            userLinkedIn, userCreationDate, upcomingEventsList){
+                            userLinkedIn, userCreationDate, upcomingEventsList, userProfilePictureUrl){
         let {navigate} = this.props.navigation;
         return (
             <ScrollView contentContainerStyle={styles.container}>
@@ -75,7 +75,13 @@ export default class ProfileView extends Component {
                 <Text style={styles.paragraph}>Upto : {userRenewalDue.substring(0, 10)} </Text>
                 <View style={styles.extendMembershipButtonView}>
                     <Button color="#ED4969" title="Extend membership" onPress={
-                        ()=> ToastAndroid.show("Extended membership" ,ToastAndroid.SHORT)
+                        ()=> Alert.alert(
+                        'Extended membership',
+                        'Your membership has been extended',
+                        [
+                            {text: "Ok", style:'cancel'}
+                        ]
+                        )
                     }/>
                 </View>
 
@@ -110,7 +116,13 @@ export default class ProfileView extends Component {
                 </View>
                 <View style={styles.buttonView}>
                     <Button color="#ED4969" title="Change Password" onPress={
-                        ()=> ToastAndroid.show("Password Changed...." ,ToastAndroid.SHORT)
+                        ()=> Alert.alert(
+                            'Password Changed',
+                            'Your password has been changed',
+                            [
+                                {text: "Ok", style:'cancel'}
+                            ]
+                        )
                     }/>
                 </View>
                 <Text style={styles.dropDown}>
@@ -128,22 +140,3 @@ export default class ProfileView extends Component {
         );
     }
 }
-
-/*
-    Past Events documentation
-
-        <Text style={styles.dropDown}>
-        <Image
-            style={styles.imageLogo}
-            source={require('../../images/Settings/Arrow-open.png')}/>
-        My past events
-    </Text>
-    <FlatList
-        style = {styles.flatList}
-        data={[{key: 'February 19 | Sample Event 1'},
-            {key: 'March 24 | Sample Event 2'},
-            {key: 'April 20 | Sample Event 3'}]}
-        renderItem={({item}) => <Text>{item.key}</Text>}
-    />
-
- */

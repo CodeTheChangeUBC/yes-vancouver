@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
-import {getContactEventRegistrationList, getIndividualContactsList} from '../Profile/FetchUserDetails'
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button, Alert} from 'react-native';
+import {getIndividualContactsList, authenticateContactLogin, getContactEventRegistrationList,
+    retrieveCurrentContactDetails} from '../Profile/FetchUserDetails'
 
 let clientEmail = "";
 let clientPassword = "";
@@ -14,55 +15,24 @@ export default class LoginForm extends Component {
 
     async authenticateLogin(){
         let {navigate} = this.props.navigation;
-        let contactsListArray = await getIndividualContactsList(clientEmail);
-        if (contactsListArray.length === 1){
-            let contact = contactsListArray[0];
-            let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
-            navigate("NavBar", {'userData' : contact,
+        let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
+        if (contactAuthenticationToken !== null){
+            let currentUserDetails = await retrieveCurrentContactDetails(contactAuthenticationToken);
+            let contactsListArray = await getIndividualContactsList(currentUserDetails["Id"]);
+            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentUserDetails["Id"]);
+            await navigate("NavBar", {'userData' : contactsListArray[0],
                                 'upcomingEvents' : contactEventRegistrationDetails});
         }
         else{
-            console.log("Invalid Email Supplied");
+            Alert.alert(
+                'Incorrect Credentials',
+                'Either your username or password is incorrect',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            )
         }
     }
-
-    // async authenticateLogin(){
-    //     let {navigate} = this.props.navigation;
-    //     let contactsListArray = await getIndividualContactsList();
-    //
-    //     let resultsList = [];
-    //     for (let e in contactsListArray) {
-    //         resultsList.push(new Promise(function (resolve, reject) {
-    //             if (contactsListArray[e]["Email"] === clientEmail) {
-    //                 resolve(contactsListArray[e]);
-    //             }
-    //             resolve();
-    //         }));
-    //     }
-    //     Promise.all(resultsList)
-    //         .then(function (values) {
-    //             let definedValues = values.filter(value => value !== undefined);
-    //             if (definedValues.length === 1){
-    //                 let retrieveEventDetails = new Promise(function (resolve, reject) {
-    //                     let contactRegistrationDetails = getContactEventRegistrationList(definedValues[0]["Id"]);
-    //                     resolve(contactRegistrationDetails );
-    //                 });
-    //                 retrieveEventDetails.then(function (contactRegistrationDetails ) {
-    //                     navigate("NavBar", {'userData' : definedValues[0],
-    //                         'upcomingEvents' : contactRegistrationDetails });
-    //                 }).catch(function (error) {
-    //                     console.log("ERROR: " + error)
-    //                 });
-    //             }
-    //             else{
-    //                 console.log("Invalid Email Supplied");
-    //             }
-    //         })
-    //         .catch(function (error) {
-    //             console.log("ERROR Occured");
-    //             console.log(error);
-    //         });
-    // }
 
     render() {
         let {navigate} = this.props.navigation;

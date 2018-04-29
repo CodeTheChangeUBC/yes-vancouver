@@ -1,14 +1,24 @@
 import { ClientSecrets } from '../../../config/config'
 import ApiUtils from '../../utils/ApiUtils'
 
-/*
+/**
+ * Takes in the users entered email address and password on the login screen
+ * and checks for authentication in the members database
+ *
+ * @param username: The users entered email address
+ * @param password: The users entered password
+ * @returns {Promise.<*>}
+ */
 async function authenticateContactLogin(username, password){
     try {
         let base64 = require('base-64');
-        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password);
+        let basicAuthHeaderValue = 'Basic ' +
+            base64.encode(ClientSecrets.CLIENT_ID + ":" + ClientSecrets.CLIENT_SECRET);
         let requestAuthTokenBody = {
             'grant_type': 'password',
-            'scope': 'contacts finances events event_registrations_view'
+            'username': username,
+            'password': password,
+            'scope': 'auto'
         };
         let response = await fetch('https://oauth.wildapricot.org/auth/token',
             {
@@ -19,19 +29,21 @@ async function authenticateContactLogin(username, password){
                 },
                 body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
             });
+        if (response.status !== 200){
+            return null;
+        }
         let responseJson = await response.json();
-        return responseJson;
-        //return responseJson['access_token']
+        return responseJson['access_token'];
     } catch(error) {
         console.error(error);
         return null
     }
 }
-*/
 
 /**
  * Retrieves an authentication token based on the API details that are listed in the
- * config.js file
+ * config.js file (NOT THE USER LOGIN TOKEN, AS IT'S SCOPE ISN'T AS WIDE AS THE GENERAL
+ * API ONE)
  *
  * @returns {Promise.<*>}
  */
@@ -66,21 +78,51 @@ async function getBearerToken() {
 // ------------------------------------------------------------------------------
 
 /**
- * Retrieves data for all contacts stored in the contact database for
- * the current email address provided
+ * Returns details for the currently logged in contact
  *
- * @param userEmail: The email address to search for
+ * @param bearerToken: Token retrieved after contact authentication
+ * @returns {Promise.<*>}
+ */
+async function retrieveCurrentContactDetails(bearerToken){
+    try {
+        let getUrl = "https://api.wildapricot.org/v2/Accounts/" + ClientSecrets.ACCOUNT_NUM +
+            "/Contacts/me/";
+        let response = await fetch(getUrl,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + bearerToken
+                }
+            });
+
+        if(response.status !== 200) {
+            console.log(response.status);
+            return null
+        }
+        return response.json();
+
+    } catch(error) {
+        console.error(error);
+        return null
+    }
+}
+
+/**
+ * Retrieves data for all contacts stored in the contact database for
+ * the ID provided
+ *
+ * @param userID: The user ID to search for
  * @returns {Promise.<*>}
  */
 
-async function getIndividualContactsList(userEmail){
+async function getIndividualContactsList(userID){
     let bearerToken = await getBearerToken();
     if(!bearerToken) {
         console.log("Failed to get bearer token");
         this.setState({isEventListLoading: false});
         return
     }
-    let resultURLObject = await getResultURL(bearerToken, userEmail);
+    let resultURLObject = await getResultURL(bearerToken, userID);
     let resultURLString = resultURLObject["ResultUrl"];
     let contactsList = await getContactsList(bearerToken, resultURLString);
     return contactsList["Contacts"];
@@ -91,13 +133,13 @@ async function getIndividualContactsList(userEmail){
  * This will be used to further query data from the contacts table
  *
  * @param bearerToken: The authentication token
+ * @param userId: The user ID for which to retrieve the Result URL for
  * @returns {Promise.<*>}
  */
-async function getResultURL(bearerToken, userEmail) {
+async function getResultURL(bearerToken, userId) {
     try {
-        //let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Contacts';
-        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM +
-            '/Contacts?$filter=Email eq ' + userEmail;
+        let getUrl = 'https://api.wildapricot.org/v2.1/Accounts/' + ClientSecrets.ACCOUNT_NUM +
+            '/Contacts?$filter=Id eq ' + userId;
         let response = await fetch(getUrl,
             {
                 method: 'GET',
@@ -120,8 +162,12 @@ async function getResultURL(bearerToken, userEmail) {
 
 /**
  *
+ * Retrieves data from the contacts table for a specified contact
+ * whose details will be composed in the resultURL. This returns
+ * ALL details for the user, for display on the Profile Screen
+ *
  * @param bearerToken: The authentication token
- * @param resultURL: The Result URL for accessing data from the contacts table
+ * @param resultURL: The Result URL constructed for accessing data from the contacts table
  * @returns {Promise.<*>}
  */
 async function getContactsList(bearerToken, resultURL) {
@@ -148,8 +194,8 @@ async function getContactsList(bearerToken, resultURL) {
 
 /**
  *
- * Updates new contact details for a given contact ID given a bearer
- * token
+ * Updates new contact details for a given contact ID given the ID and its
+ * new contact details
  *
  * @param contactId
  * @param newContactDetails
@@ -246,7 +292,7 @@ async function getUpcomingEvents(upcomingEventsList){
     let upcomingEventsDictionaryList = [];
     await upcomingEventsList.forEach(function (value) {
         upcomingEventsDictionaryList.push(
-            {key: value["Id"], // ["Event"]["Id"]
+            {key: value["Id"],
              name: value["Event"]["Name"],
              date: value["Event"]["StartDate"].substring(0, 10)}
         );
@@ -257,4 +303,5 @@ async function getUpcomingEvents(upcomingEventsList){
 // ------------------------------------------------------------------------------
 
 export {getBearerToken, getResultURL, getContactsList,
-    getIndividualContactsList, getContactEventRegistrationList, getUpcomingEvents, updateContactDetails};
+    getIndividualContactsList, getContactEventRegistrationList, getUpcomingEvents, updateContactDetails,
+    authenticateContactLogin, retrieveCurrentContactDetails};

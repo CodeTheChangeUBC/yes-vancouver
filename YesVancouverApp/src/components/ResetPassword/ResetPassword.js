@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ToastAndroid} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 
 export default class ResetPassword extends React.Component{
     render(){
@@ -19,7 +19,13 @@ export default class ResetPassword extends React.Component{
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
                         <Button color="#ED4969" title="Send" onPress={
-                            ()=> ToastAndroid.show("Reset Email Sent" ,ToastAndroid.SHORT)
+                            ()=> Alert.alert(
+                                'Reset Password Email Sent',
+                                'Check your email to view the reset password link',
+                                [
+                                    {text: "Ok", style:'cancel'}
+                                ]
+                            )
                         }/>
                     </View>
                     <View style={styles.button}>

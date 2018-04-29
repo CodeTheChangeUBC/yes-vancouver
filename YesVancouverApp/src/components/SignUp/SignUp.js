@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ToastAndroid, View, Button, StatusBar, TextInput, ScrollView, KeyboardAvoidingView, Platform, Image, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Button, TextInput, ScrollView, KeyboardAvoidingView, Image} from 'react-native';
 import Header from '../Navigation/Header';
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'

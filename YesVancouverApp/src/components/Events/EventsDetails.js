@@ -126,7 +126,7 @@ export default class EventsDetails extends Component {
         super(props)
         this.state = {
             isEventDetailsLoading: true,
-            eventBanner: '',
+            eventBannerImage: '',
             eventTitle: '',
             eventDateTime: '',
             eventLocation: '',
@@ -179,11 +179,12 @@ export default class EventsDetails extends Component {
 
         let eventDescriptionHtml = eventDetailsResponse.Details.DescriptionHtml
 
-        
+
         let eventAdditionalDetails = getAdditionalDetails(eventDescriptionHtml)
         console.log(eventAdditionalDetails)
       
         let eventDescriptionText = eventAdditionalDetails.additionaldetails.eventdetails
+        let eventBannerImage = eventAdditionalDetails.additionaldetails.eventbannerimageurl[0]
 
         let eventSpeakersList = []
         if(eventAdditionalDetails) {
@@ -191,15 +192,8 @@ export default class EventsDetails extends Component {
             console.log(eventSpeakersList)
         }
 
-        let myUri = 'https://yvsuper.wildapricot.org/resources/Pictures/treehouse_clean.jpg'
-        Image.getSize(myUri, (width, height) => console.log("W " + width + " H " + height))
-
-        // var sMyString = '<a id="a"><b id="b">hey!</b></a>';
-        // var oParser = new DOMParser();
-        // var oDOM = oParser.parseFromString(sMyString, "text/xml");
-        // console.log(oDOM.documentElement.nodeName == "parsererror" ? "error while parsing" : oDOM.documentElement.nodeName); 
-        
         this.setState({
+            eventBannerImage: eventBannerImage,
             eventTitle: eventTitle,
             eventDateTime: eventDateTimeFormatted,
             eventLocation: eventLocation,
@@ -325,7 +319,7 @@ export default class EventsDetails extends Component {
                              <AutoHeightImage
                                 resizeMode='contain'
                                 width={Dimensions.get('window').width}
-                                source={{uri: 'https://yvsuper.wildapricot.org/resources/Pictures/Events/Event-Detail-Banner.png'}}
+                                source={{uri: this.state.eventBannerImage}}
                             />
 
                             <Text style={styles.eventTitle}>

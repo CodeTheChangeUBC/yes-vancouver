@@ -7,6 +7,8 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
 
+import { parseString } from 'react-native-xml2js'
+
 import HTML from 'react-native-render-html';
 // const htmlContent = `
 //     <h1>This HTML snippet is now rendered with native components !</h1>
@@ -102,8 +104,8 @@ function formatDateTime(startDate, endDate) {
 }
 
 /* 
- * Additional details like the speakers and sponsors are specified in
- * the comment at the end of the event DescriptionHtml
+ * Additional details (banner image, event description, speakers, sponsors)
+ * specified in the comment at the end of the event DescriptionHtml
  */
 function getAdditionalDetails(eventDescriptionHtml) {
     let openingCommentTag = "<!--"
@@ -114,7 +116,7 @@ function getAdditionalDetails(eventDescriptionHtml) {
         console.log('No additional details recorded for this event')
         return null
     }
-    let indexOfJsonStart = indexOfCommentStart + openingCommentTag.length
+    let indexOfXmlStart = indexOfCommentStart + openingCommentTag.length
 
     let indexOfCommentEnd = eventDescriptionHtml.lastIndexOf(closingCommentTag)
 	if(indexOfCommentEnd == -1) {
@@ -122,16 +124,16 @@ function getAdditionalDetails(eventDescriptionHtml) {
         return null
     }
 
-    let jsonString = eventDescriptionHtml.substring(indexOfJsonStart, indexOfCommentEnd).trim();
-	let jsonObj = null
-	try {
-		jsonObj = JSON.parse(jsonString)
-    }
-	catch(error){
-        console.log("Syntax error in additional details. Details must be in valid JSON format.")
-    }
+    let xmlString = eventDescriptionHtml.substring(indexOfXmlStart, indexOfCommentEnd).trim();
 
-    return jsonObj
+	let xmlDoc = null
+    parseString(xmlString, {trim: true}, function (err, result) {
+        if(!err){
+            console.dir(result)
+            xmlDoc = result
+        }
+    })
+    return xmlDoc
 }
 
 function getSpeakersList(eventAdditionalDetails) {

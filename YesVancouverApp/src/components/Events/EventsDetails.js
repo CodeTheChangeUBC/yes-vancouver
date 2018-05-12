@@ -10,47 +10,6 @@ import { ClientSecrets } from '../../../config/config'
 import { parseString } from 'react-native-xml2js'
 
 import HTML from 'react-native-render-html';
-// const htmlContent = `
-//     <h1>This HTML snippet is now rendered with native components !</h1>
-//     <h2>Enjoy a webview-free and blazing fast application</h2>
-//     <img src="https://i.imgur.com/dHLmxfO.jpg?2" />
-//     <em style="textAlign: center;">Look at how happy this native cat is</em>
-// `;
-
-const htmlContent = `
-<p>This is a sample event. You can modify or delete it from the Events module.</p>    <div>    <br>      <div>      <font size="2"><img src="/Resources/Pictures/imageWA.png" title="" alt="" height="160" align="left" border="0" width="160" style="margin: 7px;"></font>    </div>      <div>      <span style="line-height: 1.5;">You can&nbsp;</span><em style="line-height: 1.5;"><strong>format</strong></em><span style="line-height: 1.5;">&nbsp;the description&nbsp;of the event, and include&nbsp;and links to pages, sites, and documents.</span>    </div>  </div><!-- Comment -->
-`
-
-// const htmlContent = `
-// <p>This is another sample event. With Wild Apricot's Events module, you can set up any number of events and publish them in an events calendar on your Wild Apricot site (or another website). From the events calendar, visitors can view event details, sign up for events, register guests, and pay registration fees online.</p>    <p style="margin-top: 0px;"><br>  You can organize various types of events, including:<br></p>    <ul>    <li>conventions, conferences, and seminars<br></li>      <li>board meetings<br></li>      <li>training sessions and webinars<br></li>      <li>social events<br></li>  </ul>    <div>    If you want to learn more, please visit our&nbsp;<a href="http://help.wildapricot.com/display/DOC/Getting+started+with+events">Events help page</a>.  </div>
-// `
-
-// const htmlContent = `
-// <p>This is another sample event. This one spans several days.</p>    <p>From the Events module, you can specify the event name, location, date, and cost, and control whether visitors to your site can see and register for the event.</p>To learn more about event management, visit our&nbsp;<a href="http://help.wildapricot.com/display/DOC/Events" target="_blank">Events help</a>&nbsp;section.<br>
-// `
-
-var sampleEventDescriptionHtml = `<div></div>
-<!--
-{
-	"Speakers": [
-		{
-			"FirstName": "FirstName1",
-			"LastName": "LastName1",
-			"Title": "Title1",
-			"Company": "Company1",
-			"Role": "Role1"
-		},
-		{
-			"FirstName": "FirstName2",
-			"LastName": "LastName2",
-			"Title": "Title2",
-			"Company": "Company2",
-			"Role": "Role2"
-		}
-	]
-}
--->
-`
 
 function speaker(firstName, lastName, title, company, role, imageurl) {
     this.firstName = firstName
@@ -219,9 +178,13 @@ export default class EventsDetails extends Component {
         let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
 
         let eventDescriptionHtml = eventDetailsResponse.Details.DescriptionHtml
+
+        
         let eventAdditionalDetails = getAdditionalDetails(eventDescriptionHtml)
         console.log(eventAdditionalDetails)
       
+        let eventDescriptionText = eventAdditionalDetails.additionaldetails.eventdetails
+
         let eventSpeakersList = []
         if(eventAdditionalDetails) {
             eventSpeakersList = getSpeakersList(eventAdditionalDetails)
@@ -241,10 +204,16 @@ export default class EventsDetails extends Component {
             eventDateTime: eventDateTimeFormatted,
             eventLocation: eventLocation,
             eventDescriptionHTML: eventDescriptionHtml,
-            eventDescriptionText: 'Sample Description',
+            eventDescriptionText: eventDescriptionText,
             eventSpeakers: eventSpeakersList,
             isEventDetailsLoading: false
         })
+    }
+
+    renderDescriptionSection(){
+        if(this.state.eventDescriptionText != '')
+            return this.renderDescriptionText()
+        return this.renderDescriptionHTML()
     }
 
     renderDescriptionHTML() {
@@ -416,7 +385,7 @@ export default class EventsDetails extends Component {
                                 <View style={styles.registerButtonSpacer}></View>
                             </View>
                             
-                            {this.renderDescriptionHTML()}
+                            {this.renderDescriptionSection()}
 
                             {this.renderSpeakersSection(this.state.eventSpeakers)}
 

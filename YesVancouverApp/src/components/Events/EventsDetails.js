@@ -186,6 +186,8 @@ export default class EventsDetails extends Component {
         let eventDescriptionText = eventAdditionalDetails.additionaldetails.eventdetails
         let eventBannerImage = eventAdditionalDetails.additionaldetails.eventbannerimageurl[0]
 
+        let eventSponsors = eventAdditionalDetails.additionaldetails.sponsorimageurl
+
         let eventSpeakersList = []
         if(eventAdditionalDetails) {
             eventSpeakersList = getSpeakersList(eventAdditionalDetails)
@@ -200,6 +202,7 @@ export default class EventsDetails extends Component {
             eventDescriptionHTML: eventDescriptionHtml,
             eventDescriptionText: eventDescriptionText,
             eventSpeakers: eventSpeakersList,
+            eventSponsors: eventSponsors,
             isEventDetailsLoading: false
         })
     }
@@ -237,29 +240,18 @@ export default class EventsDetails extends Component {
         )            
     }
 
-    renderSpeakersSection(eventSpeakersList) {
-        if(eventSpeakersList.length > 0) {
+    renderSpeakersSection() {
+        if(this.state.eventSpeakers.length > 0) {
             return (
                 <View>
-                    {this.renderSpeakersTitle()}
-                    {this.renderSpeakersList(eventSpeakersList)}
+                    <Text style={styles.headingPink}>Speakers</Text>
+                    {this.renderSpeakersList(this.state.eventSpeakers)}
                 </View>
             )
         }
     }
 
-    renderSpeakersTitle() {
-        return <Text style={styles.headingPink}>Speakers</Text>
-    }
-
     renderSpeakersList(eventSpeakersList) {
-        // let speakersArr = [
-        //     new speaker('FirstName1', 'LastName1', 'Title1', 'Company1', 'Role1'),
-        //     new speaker('FirstName2', 'LastName2', 'Title2', 'Company2', 'Role2'),
-        //     new speaker('FirstName3', 'LastName3', 'Title3', 'Company3', 'Role3'),
-        //     new speaker('FirstName4', 'LastName4', 'Title4', 'Company4', 'Role4'),
-        //     new speaker('FirstName5', 'LastName5', 'Title5', 'Company5', 'Role5'),
-        // ]
         return (
             eventSpeakersList.map((speaker, index) => {
                 return (
@@ -278,6 +270,27 @@ export default class EventsDetails extends Component {
                     </View>
                 )
             })
+        )
+    }
+
+    renderSponsorsSection() {
+        return (
+            <View style={{alignItems: 'center'}}>
+                <Text style={styles.headingPink}>Sponsors</Text>
+                {
+                    this.state.eventSponsors.map((sponsorImageUrl, index) => {
+                        return (
+                            <AutoHeightImage
+                                key={index}
+                                resizeMode='contain'
+                                width={Dimensions.get('window').width / 3}
+                                source={{uri: sponsorImageUrl}}
+                                style={{marginVertical: 5}}
+                            />
+                        )
+                    })
+                }
+            </View>
         )
     }
 
@@ -381,20 +394,9 @@ export default class EventsDetails extends Component {
                             
                             {this.renderDescriptionSection()}
 
-                            {this.renderSpeakersSection(this.state.eventSpeakers)}
+                            {this.renderSpeakersSection()}
 
-                            <Text style={styles.headingPink}>Sponsors</Text>
-
-                            <View style={styles.sponsorImageContainer}>
-                                <Image
-                                    style={styles.sponsorImage}
-                                    source={require('../../images/Events/Square-Company-Logo.png')}
-                                />
-                                <Image
-                                    style={styles.sponsorImage}
-                                    source={require('../../images/Events/Rectangular-Company-Logo.png')}
-                                />
-                            </View>
+                            {this.renderSponsorsSection()}
 
                             <View style={styles.registerButtonContainer}>
                                 <View style={styles.registerButtonSpacer}></View>
@@ -688,7 +690,7 @@ const styles = StyleSheet.create({
         marginVertical: 2
     },
     sponsorImageContainer:{
-        alignItems: 'center'
+        
     },
     sponsorImage: {
         resizeMode: 'contain',

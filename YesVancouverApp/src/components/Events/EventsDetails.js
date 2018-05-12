@@ -52,12 +52,13 @@ var sampleEventDescriptionHtml = `<div></div>
 -->
 `
 
-function speaker(firstName, lastName, title, company, role) {
+function speaker(firstName, lastName, title, company, role, imageurl) {
     this.firstName = firstName
     this.lastName = lastName
     this.title = title
     this.company = company
     this.role = role
+    this.imageurl = imageurl
 }
 
 var monthsMixedCaseAbbrev = [
@@ -137,25 +138,26 @@ function getAdditionalDetails(eventDescriptionHtml) {
 }
 
 function getSpeakersList(eventAdditionalDetails) {
-    if(!eventAdditionalDetails) {
+    if(!eventAdditionalDetails.additionaldetails) {
         console.log('No additional details found for event')
         return null
     }
     
-    if(!eventAdditionalDetails.Speakers) {
+    if(!eventAdditionalDetails.additionaldetails.speaker) {
         console.log('No speakers found in additional details of event')
         return null
     }
 
     let speakersResult = [] 
-    let speakersList = eventAdditionalDetails.Speakers
+    let speakersList = eventAdditionalDetails.additionaldetails.speaker
     for(let i = 0; i < speakersList.length; i++) {
-        let firstName = speakersList[i].FirstName
-        let lastName = speakersList[i].LastName
-        let title = speakersList[i].Title
-        let company = speakersList[i].Company
-        let role = speakersList[i].Role
-        speakersResult.push(new speaker(firstName, lastName, title, company, role))
+        let firstName = speakersList[i].firstname
+        let lastName = speakersList[i].lastname
+        let title = speakersList[i].title
+        let company = speakersList[i].company
+        let role = speakersList[i].role
+        let imageurl = speakersList[i].imageurl[0]
+        speakersResult.push(new speaker(firstName, lastName, title, company, role, imageurl))
     }
     return speakersResult
 }
@@ -302,7 +304,7 @@ export default class EventsDetails extends Component {
                         <View style={styles.speakerImageContainer}>
                             <Image
                                 style={styles.speakerImage}
-                                source={require('../../images/Events/Blank-Profile-Picture.png')}
+                                source={{uri: speaker.imageurl}}
                             />
                         </View>
                         <View style={styles.speakerDescription}>

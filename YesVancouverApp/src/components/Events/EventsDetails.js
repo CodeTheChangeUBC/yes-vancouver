@@ -4,77 +4,8 @@ import Header from '../Navigation/Header'
 import ReadMore from '@expo/react-native-read-more-text'
 import AutoHeightImage from 'react-native-auto-height-image'
 import HTML from 'react-native-render-html';
-import { parseString } from 'react-native-xml2js'
 
-import { getEventDetails } from '../../apicalls/Events'
-import { formatDateTime } from '../../lib/DateTimeFormat'
-
-function speaker(firstName, lastName, title, company, role, imageurl) {
-    this.firstName = firstName
-    this.lastName = lastName
-    this.title = title
-    this.company = company
-    this.role = role
-    this.imageurl = imageurl
-}
-
-/* 
- * Additional details (banner image, event description, speakers, sponsors)
- * specified in the comment at the end of the event DescriptionHtml
- */
-function getAdditionalDetails(eventDescriptionHtml) {
-    let openingCommentTag = "<!--"
-    let closingCommentTag = '-->'
-
-    let indexOfCommentStart = eventDescriptionHtml.lastIndexOf(openingCommentTag)
-    if(indexOfCommentStart == -1) {
-        console.log('No additional details recorded for this event')
-        return null
-    }
-    let indexOfXmlStart = indexOfCommentStart + openingCommentTag.length
-
-    let indexOfCommentEnd = eventDescriptionHtml.lastIndexOf(closingCommentTag)
-	if(indexOfCommentEnd == -1) {
-        console.log('No additional details recorded for this event')
-        return null
-    }
-
-    let xmlString = eventDescriptionHtml.substring(indexOfXmlStart, indexOfCommentEnd).trim();
-
-	let xmlDoc = null
-    parseString(xmlString, {trim: true}, function (err, result) {
-        if(!err){
-            console.dir(result)
-            xmlDoc = result
-        }
-    })
-    return xmlDoc
-}
-
-function getSpeakersList(eventAdditionalDetails) {
-    if(!eventAdditionalDetails.additionaldetails) {
-        console.log('No additional details found for event')
-        return null
-    }
-    
-    if(!eventAdditionalDetails.additionaldetails.speaker) {
-        console.log('No speakers found in additional details of event')
-        return null
-    }
-
-    let speakersResult = [] 
-    let speakersList = eventAdditionalDetails.additionaldetails.speaker
-    for(let i = 0; i < speakersList.length; i++) {
-        let firstName = speakersList[i].firstname
-        let lastName = speakersList[i].lastname
-        let title = speakersList[i].title
-        let company = speakersList[i].company
-        let role = speakersList[i].role
-        let imageurl = speakersList[i].imageurl[0]
-        speakersResult.push(new speaker(firstName, lastName, title, company, role, imageurl))
-    }
-    return speakersResult
-}
+import { EventDetailsObj } from '../../lib/Events'
 
 export default class EventsDetails extends Component {
     constructor(props) {
@@ -109,49 +40,20 @@ export default class EventsDetails extends Component {
     }
 
     async componentDidMount(){
-
         let eventId = this.props.navigation.state.params.eventId
-        eventDetailsResponse = await getEventDetails(bearerToken, eventId)
-        if(!eventDetailsResponse) {
-            console.log("Failed to get event details from API call")
-            this.setState({isEventDetailsLoading: false})
-            return
-        }
-        console.log(eventDetailsResponse)
-
-        let eventTitle = eventDetailsResponse.Name
-        let eventLocation = eventDetailsResponse.Location
-
-        let eventStartDateTime = new Date(Date.parse(eventDetailsResponse.StartDate))
-        let eventEndDateTime = new Date(Date.parse(eventDetailsResponse.EndDate))
-        let eventDateTimeFormatted = formatDateTime(eventStartDateTime, eventEndDateTime)
-
-        let eventDescriptionHtml = eventDetailsResponse.Details.DescriptionHtml
-
-
-        let eventAdditionalDetails = getAdditionalDetails(eventDescriptionHtml)
-        console.log(eventAdditionalDetails)
-      
-        let eventDescriptionText = eventAdditionalDetails.additionaldetails.eventdetails
-        let eventBannerImage = eventAdditionalDetails.additionaldetails.eventbannerimageurl[0]
-
-        let eventSponsors = eventAdditionalDetails.additionaldetails.sponsorimageurl
-
-        let eventSpeakersList = []
-        if(eventAdditionalDetails) {
-            eventSpeakersList = getSpeakersList(eventAdditionalDetails)
-            console.log(eventSpeakersList)
-        }
+        let eventsDetailsObj = new EventDetailsObj(eventId)
+        let result = await eventsDetailsObj.processEventDetails()
+        console.dir(eventsDetailsObj)
 
         this.setState({
-            eventBannerImage: eventBannerImage,
-            eventTitle: eventTitle,
-            eventDateTime: eventDateTimeFormatted,
-            eventLocation: eventLocation,
-            eventDescriptionHTML: eventDescriptionHtml,
-            eventDescriptionText: eventDescriptionText,
-            eventSpeakers: eventSpeakersList,
-            eventSponsors: eventSponsors,
+            eventBannerImage: eventsDetailsObj.bannerImage,
+            eventTitle: eventsDetailsObj.title,
+            eventDateTime: eventsDetailsObj.dateTime,
+            eventLocation: eventsDetailsObj.location,
+            eventDescriptionHTML: eventsDetailsObj.descriptionHTML,
+            eventDescriptionText: eventsDetailsObj.descriptionText,
+            eventSpeakers: eventsDetailsObj.speakers,
+            eventSponsors: eventsDetailsObj.sponsors,
             isEventDetailsLoading: false
         })
     }

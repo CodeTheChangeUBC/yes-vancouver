@@ -2,7 +2,7 @@ import ApiUtils from '../utils/ApiUtils'
 import { ClientSecrets } from '../../config/config'
 import { getBearerToken } from './AuthToken'
 
-export async function getEventDetails(bearerToken, eventId) {
+async function getEventDetails(eventId) {
     try {
         bearerToken = await getBearerToken()
         if(!bearerToken) {
@@ -35,3 +35,5 @@ export async function getEventDetails(bearerToken, eventId) {
         return null
     }
 }
+
+export { getEventDetails }

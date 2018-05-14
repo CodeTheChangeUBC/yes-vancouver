@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, WebView } from 'react-native'
 import Header from '../Navigation/Header'
 import ReadMore from '@expo/react-native-read-more-text'
-import AutoHeightImage from 'react-native-auto-height-image';
-
-import ApiUtils from '../../utils/ApiUtils'
-import { ClientSecrets } from '../../../config/config'
-
+import AutoHeightImage from 'react-native-auto-height-image'
+import HTML from 'react-native-render-html';
 import { parseString } from 'react-native-xml2js'
 
-import HTML from 'react-native-render-html';
+import { getEventDetails } from '../../apicalls/Events'
+import { formatDateTime } from '../../lib/DateTimeFormat'
 
 function speaker(firstName, lastName, title, company, role, imageurl) {
     this.firstName = firstName
@@ -18,49 +16,6 @@ function speaker(firstName, lastName, title, company, role, imageurl) {
     this.company = company
     this.role = role
     this.imageurl = imageurl
-}
-
-var monthsMixedCaseAbbrev = [
-    "Jan.",
-    "Feb.",
-    "Mar.",
-    "Apr.",
-    "May",
-    "June",
-    "July",
-    "Aug.",
-    "Sep.",
-    "Oct.",
-    "Nov.",
-    "Dec."
-]
-
-function formatAMPM(date) {
-    // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
-    var hours = date.getHours()
-    var minutes = date.getMinutes()
-    var ampm = hours >= 12 ? 'PM' : 'AM'
-    hours = hours % 12
-    hours = hours ? hours : 12 // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes
-    var strTime = hours + ':' + minutes + ' ' + ampm
-    return strTime
-}
-
-function formatDateTime(startDate, endDate) {
-    let formattedDateTime = ''
-    if(startDate.toLocaleDateString() == endDate.toLocaleDateString()){
-        formattedDateTime = monthsMixedCaseAbbrev[startDate.getMonth()] + ' ' + startDate.getDate() + ', '
-        formattedDateTime += formatAMPM(startDate) + ' — ' + formatAMPM(endDate)
-    }
-    else {
-        formattedDateTime = monthsMixedCaseAbbrev[startDate.getMonth()] + ' ' + startDate.getDate() + ', '
-        formattedDateTime += formatAMPM(startDate) 
-        formattedDateTime += ' — \n'
-        formattedDateTime += monthsMixedCaseAbbrev[endDate.getMonth()] + ' ' + endDate.getDate() + ', '
-        formattedDateTime += formatAMPM(endDate)
-    }
-    return formattedDateTime
 }
 
 /* 
@@ -154,12 +109,6 @@ export default class EventsDetails extends Component {
     }
 
     async componentDidMount(){
-        bearerToken = await getBearerToken()
-        if(!bearerToken) {
-            console.log("Failed to get bearer token")
-            this.setState({isEventDetailsLoading: false})
-            return
-        }
 
         let eventId = this.props.navigation.state.params.eventId
         eventDetailsResponse = await getEventDetails(bearerToken, eventId)
@@ -431,64 +380,6 @@ export default class EventsDetails extends Component {
                 </View>
             )
         }
-    }
-}
-
-async function getBearerToken() {
-    try {
-        let base64 = require('base-64')
-        username = ClientSecrets.API_USERNAME
-        password = ClientSecrets.API_PASSWORD
-        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        console.log(basicAuthHeaderValue)
-
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-
-        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': basicAuthHeaderValue
-            },
-            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-        })
-        let responseJson = await response.json()
-        return responseJson['access_token']
-    } catch(error) {
-        console.error(error)
-        return null
-    }
-}
-
-async function getEventDetails(bearerToken, eventId) {
-    try {
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-        
-        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events/' + eventId
-        let response = await fetch(getUrl, 
-        {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + bearerToken
-            }
-        })
-        
-        if(response.status != 200) {
-            console.log(response.status)
-            return null
-        }
-        return response.json()
-
-    } catch(error) {
-        console.error(error)
-        return null
     }
 }
 

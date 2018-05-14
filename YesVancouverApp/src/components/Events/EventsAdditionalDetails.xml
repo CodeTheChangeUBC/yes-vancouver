@@ -1,0 +1,26 @@
+<additionaldetails>
+    <eventbannerimageurl>
+        https://yvsuper.wildapricot.org/resources/Pictures/Events/Event-Detail-Banner.png
+    </eventbannerimageurl>
+    <eventdetails>
+        Event Description
+    </eventdetails>
+    <speaker>
+        <firstname>FirstA</firstname>
+		<lastname>LastA</lastname>
+        <title>TitleA</title>
+        <company>CompanyA</company>
+		<role>RoleA</role>
+        <imageurl>https://yvsuper.wildapricot.org/resources/Pictures/Events/Blank-Profile-Picture.png</imageurl>
+    </speaker>
+    <speaker>
+        <firstname>FirstB</firstname>
+		<lastname>LastB</lastname>
+        <title>TitleB</title>
+        <company>CompanyB</company>
+		<role>RoleB</role>
+        <imageurl>https://yvsuper.wildapricot.org/resources/Pictures/Events/Blank-Profile-Picture.png</imageurl>
+    </speaker>
+    <sponsorimageurl>https://hootsuite.com/uploads/images/craft/components/polaroid-images/HootsuiteLogo-Black.png</sponsorimageurl>
+    <sponsorimageurl>https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg</sponsorimageurl>
+</additionaldetails>

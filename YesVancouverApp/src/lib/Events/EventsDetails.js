@@ -1,7 +1,7 @@
 import { parseString } from 'react-native-xml2js'
 
 import { getEventDetails } from '../../apicalls/Events/EventsDetails'
-import { formatDateTime } from '../Utils/DateTimeFormat'
+import { DateTimeUtil } from '../Utils/DateTimeUtil'
 
 
 class EventDetailsObj {
@@ -26,7 +26,7 @@ class EventDetailsObj {
 
         let eventStartDateTime = new Date(Date.parse(eventDetailsRawData.StartDate))
         let eventEndDateTime = new Date(Date.parse(eventDetailsRawData.EndDate))
-        this.dateTime = formatDateTime(eventStartDateTime, eventEndDateTime)
+        this.dateTime = DateTimeUtil.formatDateTime(eventStartDateTime, eventEndDateTime)
 
         this.descriptionHTML = eventDetailsRawData.Details.DescriptionHtml
 

@@ -1,5 +1,5 @@
 import { getEventsList } from '../../apicalls/Events/EventsList'
-import { monthsAbbrevUpperCase, formatAMPM } from '../Utils/DateTimeFormat'
+import { DateTimeUtil } from '../Utils/DateTimeUtil'
 
 
 class EventEntry {
@@ -60,22 +60,22 @@ class EventsListObj {
     
             // If multi-day event, just display startDate's month, day and time
             if(startDate.toLocaleDateString() != endDate.toLocaleDateString()) {
-                eventTime = formatAMPM(startDate)
+                eventTime = DateTimeUtil.formatAMPM(startDate)
             }
             else {
                 // If start time and end time same, just display one
                 if(startDate.toLocaleTimeString() == endDate.toLocaleTimeString()) {
-                    eventTime = formatAMPM(startDate)
+                    eventTime = DateTimeUtil.formatAMPM(startDate)
                 }
                 else {
-                    eventTime = formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
+                    eventTime = DateTimeUtil.formatAMPM(startDate) + ' - ' + DateTimeUtil.formatAMPM(endDate)
                 }
             }
     
             var entry = new EventEntry (
                 eventsList[i].Id,
                 eventsList[i].Name,
-                monthsAbbrevUpperCase[startDate.getMonth()],
+                DateTimeUtil.monthsAbbrevUpperCase()[startDate.getMonth()],
                 startDate.getDate(),
                 eventTime,
                 eventsList[i].Location

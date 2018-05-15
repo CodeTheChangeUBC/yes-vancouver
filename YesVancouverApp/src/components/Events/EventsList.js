@@ -17,7 +17,6 @@ export default class EventsList extends Component {
 
     async componentDidMount() {
         let datasourceResult = await new EventsListObj().getDataSource()
-        datasourceResult = null
         if(!datasourceResult) {
             console.log("Failed to format events list datasource")
             this.setState({isEventListLoading: false})

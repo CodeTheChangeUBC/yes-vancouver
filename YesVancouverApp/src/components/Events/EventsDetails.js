@@ -5,7 +5,7 @@ import ReadMore from '@expo/react-native-read-more-text'
 import AutoHeightImage from 'react-native-auto-height-image'
 import HTML from 'react-native-render-html';
 
-import { EventDetailsObj } from '../../lib/Events'
+import { EventDetailsObj } from '../../lib/Events/EventsDetails'
 
 export default class EventsDetails extends Component {
     constructor(props) {

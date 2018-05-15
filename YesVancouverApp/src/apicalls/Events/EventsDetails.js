@@ -1,6 +1,6 @@
-import ApiUtils from '../utils/ApiUtils'
-import { ClientSecrets } from '../../config/config'
-import { getBearerToken } from './AuthToken'
+import ApiUtils from '../../utils/ApiUtils'
+import { ClientSecrets } from '../../../config/config'
+import { getBearerToken } from '../Authentication/AuthToken'
 
 async function getEventDetails(eventId) {
     try {

@@ -1,7 +1,7 @@
 import { parseString } from 'react-native-xml2js'
 
-import { getEventDetails } from '../apicalls/Events'
-import { formatDateTime } from './DateTimeFormat'
+import { getEventDetails } from '../../apicalls/Events/EventsDetails'
+import { formatDateTime } from '../Utils/DateTimeFormat'
 
 
 class EventDetailsObj {

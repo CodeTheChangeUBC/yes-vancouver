@@ -1,5 +1,5 @@
-import { ClientSecrets } from '../../config/config'
-import ApiUtils from '../utils/ApiUtils'
+import { ClientSecrets } from '../../../config/config'
+import ApiUtils from '../../utils/ApiUtils'
 
 export async function getBearerToken() {
     try {

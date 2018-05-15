@@ -8,7 +8,7 @@ var ApiUtils = {
           formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-        console.log(formBody)
+        //console.log(formBody)
         return formBody;
     }
   };

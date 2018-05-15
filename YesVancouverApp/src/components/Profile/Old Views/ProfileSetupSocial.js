@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, StatusBar, Platform } from 'react-native';
-import Header from '../Navigation/Header';
+import Header from '../../Navigation/Header';
 import Expo from 'expo'
 
 
@@ -36,13 +36,13 @@ export default class ProfileSetupSocial extends Component {
                     
                     <View style={styles.headerIconContainer}>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/White-arrow-3x.png')}
+                            <Image source={require('../../../images/Header/White-arrow-3x.png')}
                                 resizeMode='contain'
                                 style={{height:'50%'}}/>
                         </View>
 
                         <View style={styles.pageIndicatorContainer}>
-                            <Image source={require('../../images/Login-Signup/Pagination/Pagination2-3x.png')}
+                            <Image source={require('../../../images/Login-Signup/Pagination/Pagination2-3x.png')}
                                 resizeMode='contain'
                                 style={{height:'25%'}}/>
                         </View>

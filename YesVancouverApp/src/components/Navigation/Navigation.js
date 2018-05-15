@@ -5,15 +5,16 @@
 import Login from '../Login/LoginForm'
 import HomeScreen from '../HomeScreen/HomeScreen'
 import SignUp from '../SignUp/SignUp'
-import ProfileSetupPhoto from '../Profile/ProfileSetupPhoto'
-import ProfileSetupSocial from '../Profile/ProfileSetupSocial'
-import ProfileSetupWork from '../Profile/ProfileSetupWork'
+import ProfileSetupPhoto from '../Profile/Old Views/ProfileSetupPhoto'
+import ProfileSetupSocial from '../Profile/Old Views/ProfileSetupSocial'
+import ProfileSetupWork from '../Profile/Old Views/ProfileSetupWork'
 import ResetPassword from '../ResetPassword/ResetPassword'
 import NavBar from './NavBar'
 import { StackNavigator } from 'react-navigation'
 import Aveda from '../Perks/aveda'
 import PerksView from '../Perks/PerksView'
 import PerksList from '../Perks/PerksList'
+import EditProfile from "../Profile/EditProfile";
 
 const Navigation = StackNavigator({
     HomeScreen : {screen : HomeScreen},
@@ -21,14 +22,13 @@ const Navigation = StackNavigator({
     NavBar : {screen : NavBar},
     SignUp : {screen : SignUp},
     ProfileSetupPhoto : {screen : ProfileSetupPhoto},
+    EditProfile : {screen : EditProfile},
     ProfileSetupSocial : {screen : ProfileSetupSocial},
     ProfileSetupWork : {screen : ProfileSetupWork},
     ResetPassword : {screen : ResetPassword},
     Aveda : {screen : Aveda},
     PerksView: {screen: PerksView},
     PerksList: {screen: PerksList},
-
-
 },
 // {
 //     headerMode: 'none',

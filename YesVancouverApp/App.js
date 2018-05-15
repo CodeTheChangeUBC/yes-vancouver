@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native'
 import Navigation from './src/components/Navigation/Navigation';
 import { Font } from 'expo';
-import ProfileSetupWork from './src/components/Profile/ProfileSetupWork'
-import ProfileSetupSocial from './src/components/Profile/ProfileSetupSocial'
-import ProfileSetupPhoto from './src/components/Profile/ProfileSetupPhoto'
+import ProfileSetupWork from './src/components/Profile/Old Views/ProfileSetupWork'
+import ProfileSetupSocial from './src/components/Profile/Old Views/ProfileSetupSocial'
+import ProfileSetupPhoto from './src/components/Profile/Old Views/ProfileSetupPhoto'
 // =========================================================================
 import ApiUtils from './src/utils/ApiUtils'
 import { ClientSecrets } from './config/config'
@@ -30,7 +30,7 @@ export default class App extends React.Component {
         username = ClientSecrets.API_USERNAME;
         password = ClientSecrets.API_PASSWORD;
         basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        console.log(basicAuthHeaderValue)
+        //console.log(basicAuthHeaderValue)
 
         var requestAuthTokenBody = {
             'grant_type': 'client_credentials',
@@ -46,12 +46,12 @@ export default class App extends React.Component {
           body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
         })
         .then(response => response.json())
-        .then(responseJson => console.log(responseJson))
+        //.then(responseJson => console.log(responseJson))
         .catch((error) => {
             console.error(error);
         });
 
-        console.log("DONE")
+        //console.log("DONE")
         // =========================================================================
     }
     

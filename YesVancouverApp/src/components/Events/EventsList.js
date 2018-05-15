@@ -3,8 +3,7 @@ import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'r
 import Header from '../Navigation/Header'
 import EventsItem from './EventsItem'
 
-import ApiUtils from '../../utils/ApiUtils'
-import { ClientSecrets } from '../../../config/config'
+import { getEventsList } from '../../apicalls/Events/EventsList'
 
 var monthsAbbrev = [
     "JAN",
@@ -56,64 +55,6 @@ function eventEntry(eventId, eventName, eventMonth, eventDate, eventTime, eventL
     this.eventDate = eventDate
     this.eventTime = eventTime
     this.eventLocation = eventLocation
-}
-
-async function getBearerToken() {
-    try {
-        let base64 = require('base-64')
-        username = ClientSecrets.API_USERNAME
-        password = ClientSecrets.API_PASSWORD
-        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        console.log(basicAuthHeaderValue)
-
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-
-        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': basicAuthHeaderValue
-            },
-            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-        })
-        let responseJson = await response.json()
-        return responseJson['access_token']
-    } catch(error) {
-        console.error(error)
-        return null
-    }
-}
-
-async function getEventsList(bearerToken) {
-    try {
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-        
-        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events'
-        let response = await fetch(getUrl, 
-        {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + bearerToken
-            }
-        })
-        
-        if(response.status != 200) {
-            console.log(response.status)
-            return null
-        }
-        return response.json()
-
-    } catch(error) {
-        console.error(error)
-        return null
-    }
 }
 
 function getEventsListDataSource(response) {
@@ -201,14 +142,16 @@ export default class EventsList extends Component {
     }
 
     async componentDidMount() {
-        bearerToken = await getBearerToken()
-        if(!bearerToken) {
-            console.log("Failed to get bearer token")
-            this.setState({isEventListLoading: false})
-            return
-        }
+        // bearerToken = await getBearerToken()
+        // if(!bearerToken) {
+        //     console.log("Failed to get bearer token")
+        //     this.setState({isEventListLoading: false})
+        //     return
+        // }
 
-        eventsListResponse = await getEventsList(bearerToken)
+        // eventsListResponse = await getEventsList(bearerToken)
+
+        eventsListResponse = await getEventsList()
         if(!eventsListResponse) {
             console.log("Failed to get events list from API call")
             this.setState({isEventListLoading: false})

@@ -7,12 +7,7 @@ async function getEventDetails(eventId) {
         bearerToken = await getBearerToken()
         if(!bearerToken) {
             console.error("Failed to get bearer token")
-            return
-        }
-
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
+            return null
         }
         
         let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events/' + eventId

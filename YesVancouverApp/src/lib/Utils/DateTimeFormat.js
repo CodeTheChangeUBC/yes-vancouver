@@ -1,3 +1,18 @@
+var monthsAbbrevUpperCase = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC"
+]
+
 var monthsMixedCaseAbbrev = [
     "Jan.",
     "Feb.",
@@ -41,4 +56,4 @@ function formatDateTime(startDate, endDate) {
     return formattedDateTime
 }
 
-export { formatDateTime }
+export { monthsAbbrevUpperCase, formatAMPM, formatDateTime }

@@ -1,5 +1,6 @@
 import { parseString } from 'react-native-xml2js'
 
+import { ClientSecrets } from '../../../config/config'
 import { getEventDetails } from '../../apicalls/Events/EventsDetails'
 import { DateTimeUtil } from '../Utils/DateTimeUtil'
 
@@ -15,12 +16,14 @@ class EventDetailsObj {
         this.descriptionText = undefined
         this.speakers = undefined
         this.sponsors = undefined
+        this.url = undefined
     }
 
     async processEventDetails() {
         let eventDetailsRawData = await getEventDetails(this.id)
         console.log(eventDetailsRawData)
 
+        this.url = ClientSecrets.FQDN + '/event-' + eventDetailsRawData.Id
         this.title = eventDetailsRawData.Name
         this.location = eventDetailsRawData.Location
 

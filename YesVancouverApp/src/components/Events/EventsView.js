@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React, { Component } from 'react'
+import { Image } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'
+import EventsRegistration from './EventsRegistration'
 
 
 // export default class EventsView extends Component {
@@ -46,7 +47,13 @@ const EventsView = StackNavigator({
     EventsDetails: {
         screen: EventsDetails,
         navigationOptions: (props) => ({
-            title: "Detail",
+            title: "EventsDetail",
+        })
+    },
+    EventsRegistration: {
+        screen: EventsRegistration,
+        navigationOptions: (props) => ({
+            title: "EventsRegistration",
         })
     }
 },

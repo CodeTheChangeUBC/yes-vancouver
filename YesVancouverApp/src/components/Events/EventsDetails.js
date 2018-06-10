@@ -12,6 +12,7 @@ export default class EventsDetails extends Component {
         super(props)
         this.state = {
             isEventDetailsLoading: true,
+            eventUrl: '',
             eventBannerImage: '',
             eventTitle: '',
             eventDateTime: '',
@@ -46,6 +47,7 @@ export default class EventsDetails extends Component {
         console.dir(eventsDetailsObj)
 
         this.setState({
+            eventUrl: eventsDetailsObj.url,
             eventBannerImage: eventsDetailsObj.bannerImage,
             eventTitle: eventsDetailsObj.title,
             eventDateTime: eventsDetailsObj.dateTime,
@@ -237,7 +239,12 @@ export default class EventsDetails extends Component {
                             
                             <View style={styles.registerButtonContainer}>
                                 <View style={styles.registerButtonSpacer}></View>
-                                <TouchableOpacity style={styles.registerButtonRectangle}>
+                                <TouchableOpacity style={styles.registerButtonRectangle}
+                                    onPress={() => {
+                                        this.props.navigation.navigate("EventsRegistration", 
+                                        {eventUrl: this.state.eventUrl})
+                                    }
+                                }>
                                     <Text style={styles.registerButtonText}>Register</Text>
                                 </TouchableOpacity>
                                 <View style={styles.registerButtonSpacer}></View>
@@ -251,7 +258,12 @@ export default class EventsDetails extends Component {
 
                             <View style={styles.registerButtonContainer}>
                                 <View style={styles.registerButtonSpacer}></View>
-                                <TouchableOpacity style={styles.registerButtonRectangle}>
+                                <TouchableOpacity style={styles.registerButtonRectangle}
+                                    onPress={() => {
+                                        this.props.navigation.navigate("EventsRegistration", 
+                                        {eventUrl: this.state.eventUrl})
+                                    }
+                                }>
                                     <Text style={styles.registerButtonText}>Register</Text>
                                 </TouchableOpacity>
                                 <View style={styles.registerButtonSpacer}></View>

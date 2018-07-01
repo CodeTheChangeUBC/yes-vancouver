@@ -33,14 +33,19 @@ class EventDetailsObj {
 
         this.descriptionHTML = eventDetailsRawData.Details.DescriptionHtml
 
-
         let eventAdditionalDetails = this._getEventAdditionalDetails()
-        console.log(eventAdditionalDetails)
-      
-        this.bannerImage = eventAdditionalDetails.additionaldetails.eventbannerimageurl[0]
-        this.descriptionText = eventAdditionalDetails.additionaldetails.eventdetails
-        this.speakers = this._getSpeakersList(eventAdditionalDetails)
-        this.sponsors = eventAdditionalDetails.additionaldetails.sponsorimageurl
+        if(eventAdditionalDetails){
+            this.bannerImage = eventAdditionalDetails.additionaldetails.eventbannerimageurl[0]
+            this.descriptionText = eventAdditionalDetails.additionaldetails.eventdetails
+            this.speakers = this._getSpeakersList(eventAdditionalDetails)
+            this.sponsors = eventAdditionalDetails.additionaldetails.sponsorimageurl
+        }
+        else {
+            this.bannerImage = null
+            this.descriptionText = null
+            this.speakers = []
+            this.sponsors = []
+        }
     }
 
     /* 

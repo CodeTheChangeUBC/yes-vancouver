@@ -17,8 +17,8 @@ export default class EventsDetails extends Component {
             eventTitle: '',
             eventDateTime: '',
             eventLocation: '',
-            eventDescriptionHTML: '',
-            eventDescriptionText: '',
+            eventDescriptionHTML: null,
+            eventDescriptionText: null,
             eventSpeakers: [],
             eventSponsors: []
         }
@@ -60,8 +60,30 @@ export default class EventsDetails extends Component {
         })
     }
 
-    renderDescriptionSection(){
-        if(this.state.eventDescriptionText != '')
+    renderBannerImageSection() {
+        if(!this.state.eventBannerImage){
+            return (
+                <AutoHeightImage
+                    resizeMode='contain'
+                    width={Dimensions.get('window').width}
+                    source={require('../../images/Events/Event-Detail-Banner.png')}
+                    defaultSource={require('../../images/Events/Event-Detail-Banner.png')}
+                />
+            )
+        }
+        
+        return (
+            <AutoHeightImage
+                resizeMode='contain'
+                width={Dimensions.get('window').width}
+                source={{uri: this.state.eventBannerImage}}
+                defaultSource={require('../../images/Events/Event-Detail-Banner.png')}
+            />
+        )
+    }
+
+    renderDescriptionSection() {
+        if(!this.state.eventDescriptionText)
             return this.renderDescriptionText()
         return this.renderDescriptionHTML()
     }
@@ -98,53 +120,70 @@ export default class EventsDetails extends Component {
             return (
                 <View>
                     <Text style={styles.headingPink}>Speakers</Text>
-                    {this.renderSpeakersList(this.state.eventSpeakers)}
+                    {
+                        this.state.eventSpeakers.map((speaker, index) => {
+                            return (
+                                <View key={index} style={styles.speakerContainer}>
+                                    <View style={styles.speakerImageContainer}>
+                                        <Image
+                                            style={styles.speakerImage}
+                                            source={{uri: speaker.imageurl}}
+                                        />
+                                    </View>
+                                    <View style={styles.speakerDescription}>
+                                        <Text style={styles.speakerName}>{speaker.firstName} {speaker.lastName}</Text>
+                                        <Text style={styles.speakerTitle}>{speaker.title}, {speaker.company}</Text>
+                                        <Text style={styles.speakerRole}>{speaker.role}</Text>
+                                    </View>
+                                </View>
+                            )
+                        })
+                    }
                 </View>
             )
         }
     }
 
-    renderSpeakersList(eventSpeakersList) {
-        return (
-            eventSpeakersList.map((speaker, index) => {
-                return (
-                    <View key={index} style={styles.speakerContainer}>
-                        <View style={styles.speakerImageContainer}>
-                            <Image
-                                style={styles.speakerImage}
-                                source={{uri: speaker.imageurl}}
-                            />
-                        </View>
-                        <View style={styles.speakerDescription}>
-                            <Text style={styles.speakerName}>{speaker.firstName} {speaker.lastName}</Text>
-                            <Text style={styles.speakerTitle}>{speaker.title}, {speaker.company}</Text>
-                            <Text style={styles.speakerRole}>{speaker.role}</Text>
-                        </View>
-                    </View>
-                )
-            })
-        )
+    renderSponsorsSection() {
+        if(this.state.eventSponsors.length > 0) {
+            return (
+                <View style={{alignItems: 'center'}}>
+                    <Text style={styles.headingPink}>Sponsors</Text>
+                    {
+                        this.state.eventSponsors.map((sponsorImageUrl, index) => {
+                            return (
+                                <AutoHeightImage
+                                    key={index}
+                                    resizeMode='contain'
+                                    width={Dimensions.get('window').width / 3}
+                                    source={{uri: sponsorImageUrl}}
+                                    style={{marginVertical: 5}}
+                                />
+                            )
+                        })
+                    }
+                </View>
+            )
+        }
     }
 
-    renderSponsorsSection() {
-        return (
-            <View style={{alignItems: 'center'}}>
-                <Text style={styles.headingPink}>Sponsors</Text>
-                {
-                    this.state.eventSponsors.map((sponsorImageUrl, index) => {
-                        return (
-                            <AutoHeightImage
-                                key={index}
-                                resizeMode='contain'
-                                width={Dimensions.get('window').width / 3}
-                                source={{uri: sponsorImageUrl}}
-                                style={{marginVertical: 5}}
-                            />
-                        )
-                    })
-                }
-            </View>
-        )
+    renderRegisterButton(isVisible) {
+        if(isVisible) {
+            return(
+                <View style={styles.registerButtonContainer}>
+                    <View style={styles.registerButtonSpacer}></View>
+                    <TouchableOpacity style={styles.registerButtonRectangle}
+                        onPress={() => {
+                            this.props.navigation.navigate("EventsRegistration", 
+                            {eventUrl: this.state.eventUrl})
+                        }
+                    }>
+                        <Text style={styles.registerButtonText}>Register</Text>
+                    </TouchableOpacity>
+                    <View style={styles.registerButtonSpacer}></View>
+                </View>
+            )
+        }
     }
 
     render() {
@@ -161,12 +200,12 @@ export default class EventsDetails extends Component {
                     <View style={styles.headerContainer}>
                         <Header style={styles.header}/>
                         <View style={styles.headerIconContainer}>
-                            <TouchableHighlight onPress={() => {this.props.navigation.pop()}} 
+                            <TouchableOpacity onPress={() => {this.props.navigation.pop()}} 
                                     style={styles.backArrowContainer}>
                                 <Image source={require('../../images/Header/White-arrow-3x.png')}
                                     resizeMode='contain'
                                     style={{height:'50%'}}/>
-                            </TouchableHighlight>
+                            </TouchableOpacity>
                             <View style={styles.eventsTitleContainer}>
                                 <Text style={styles.eventsTitleText}>
                                     Events
@@ -181,12 +220,8 @@ export default class EventsDetails extends Component {
                     </View>
                     <View style={styles.content}>
                         <ScrollView>
-                            
-                             <AutoHeightImage
-                                resizeMode='contain'
-                                width={Dimensions.get('window').width}
-                                source={{uri: this.state.eventBannerImage}}
-                            />
+
+                            {this.renderBannerImageSection()}
 
                             <Text style={styles.eventTitle}>
                                 {this.state.eventTitle}
@@ -237,18 +272,7 @@ export default class EventsDetails extends Component {
 
                             <View style={styles.divider}></View>
                             
-                            <View style={styles.registerButtonContainer}>
-                                <View style={styles.registerButtonSpacer}></View>
-                                <TouchableOpacity style={styles.registerButtonRectangle}
-                                    onPress={() => {
-                                        this.props.navigation.navigate("EventsRegistration", 
-                                        {eventUrl: this.state.eventUrl})
-                                    }
-                                }>
-                                    <Text style={styles.registerButtonText}>Register</Text>
-                                </TouchableOpacity>
-                                <View style={styles.registerButtonSpacer}></View>
-                            </View>
+                            {this.renderRegisterButton(true)}
                             
                             {this.renderDescriptionSection()}
 
@@ -256,18 +280,7 @@ export default class EventsDetails extends Component {
 
                             {this.renderSponsorsSection()}
 
-                            <View style={styles.registerButtonContainer}>
-                                <View style={styles.registerButtonSpacer}></View>
-                                <TouchableOpacity style={styles.registerButtonRectangle}
-                                    onPress={() => {
-                                        this.props.navigation.navigate("EventsRegistration", 
-                                        {eventUrl: this.state.eventUrl})
-                                    }
-                                }>
-                                    <Text style={styles.registerButtonText}>Register</Text>
-                                </TouchableOpacity>
-                                <View style={styles.registerButtonSpacer}></View>
-                            </View>
+                            {this.renderRegisterButton(!(this.state.eventSpeakers.length == 0 && this.state.eventSponsors.length == 0))}
 
                             <Text style={styles.headingGrey}>Share</Text>
                             <View style={styles.socialMediaContainer}>

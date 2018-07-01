@@ -83,8 +83,9 @@ export default class EventsDetails extends Component {
     }
 
     renderDescriptionSection() {
-        if(!this.state.eventDescriptionText)
+        if(this.state.eventDescriptionText != null) {
             return this.renderDescriptionText()
+        }
         return this.renderDescriptionHTML()
     }
 
@@ -448,7 +449,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         color: '#464647',
         textAlign: 'center',
-        paddingBottom: 20
+        paddingBottom: 10
     },
     copyLinkText: {
         fontFamily: 'source-sans-pro-regular',
@@ -506,9 +507,6 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: '#464647',
         marginVertical: 2
-    },
-    sponsorImageContainer:{
-        
     },
     sponsorImage: {
         resizeMode: 'contain',

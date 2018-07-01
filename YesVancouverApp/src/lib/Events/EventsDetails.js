@@ -8,15 +8,15 @@ import { DateTimeUtil } from '../Utils/DateTimeUtil'
 class EventDetailsObj {
     constructor(id) {
         this.id = id
-        this.bannerImage = undefined
-        this.title = undefined
-        this.dateTime = undefined
-        this.location = undefined
-        this.descriptionHTML = undefined
-        this.descriptionText = undefined
-        this.speakers = undefined
-        this.sponsors = undefined
-        this.url = undefined
+        this.bannerImage = null
+        this.title = null
+        this.dateTime = null
+        this.location = null
+        this.descriptionHTML = null
+        this.descriptionText = null
+        this.speakers = []
+        this.sponsors = []
+        this.url = null
     }
 
     async processEventDetails() {

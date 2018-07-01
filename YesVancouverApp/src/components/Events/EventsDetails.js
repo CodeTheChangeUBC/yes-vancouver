@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, WebView } from 'react-native'
+import { ActivityIndicator, Dimensions, Image, ScrollView, Share, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, WebView } from 'react-native'
 import Header from '../Navigation/Header'
 import ReadMore from '@expo/react-native-read-more-text'
 import AutoHeightImage from 'react-native-auto-height-image'
@@ -187,6 +187,24 @@ export default class EventsDetails extends Component {
         }
     }
 
+    shareEventDetails() {
+        Share.share({   
+            title: this.state.eventTitle,
+            message: 'Check out this awesome event! ' + this.state.eventTitle + ' - ' + this.state.eventUrl
+        })
+        .then(result => console.log(result))
+        .catch(errorMsg => console.log(errorMsg))
+    }
+
+    shareEventLink() {
+        Share.share({   
+            title: this.state.eventTitle,
+            message: this.state.eventUrl
+        })
+        .then(result => console.log(result))
+        .catch(errorMsg => console.log(errorMsg))
+    }
+
     render() {
         if(this.state.isEventDetailsLoading) {
             return (
@@ -284,24 +302,37 @@ export default class EventsDetails extends Component {
                             {this.renderRegisterButton(!(this.state.eventSpeakers.length == 0 && this.state.eventSponsors.length == 0))}
 
                             <Text style={styles.headingGrey}>Share</Text>
+
                             <View style={styles.socialMediaContainer}>
-                                <Image
-                                    source={require('../../images/Events/Share-icons/Twitter-3x.png')}
-                                    style={styles.shareIcon}
-                                    resizeMode='contain'
-                                />
-                                <Image
-                                    source={require('../../images/Events/Share-icons/Facebook-3x.png')}
-                                    style={styles.shareIcon}
-                                    resizeMode='contain'
-                                />
-                                <Image
-                                    source={require('../../images/Events/Share-icons/Email-3x.png')}
-                                    style={styles.shareIcon}
-                                    resizeMode='contain'
-                                />
-                                </View>
-                            <Text style={styles.copyLinkText}>Copy Link</Text>
+                                <View style={{flex:2}}></View>
+                                <TouchableOpacity style={styles.shareIcon}
+                                    onPress={() => this.shareEventDetails()}>
+                                    <Image
+                                        source={require('../../images/Events/Share-icons/Twitter-3x.png')}
+                                        resizeMode='center'
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.shareIcon}
+                                    onPress={() => this.shareEventDetails()}>
+                                    <Image
+                                        source={require('../../images/Events/Share-icons/Facebook-3x.png')}
+                                        resizeMode='center'
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.shareIcon}
+                                    onPress={() => this.shareEventDetails()}>
+                                    <Image
+                                        source={require('../../images/Events/Share-icons/Email-3x.png')}
+                                        resizeMode='center'
+                                    />
+                                </TouchableOpacity>
+                                <View style={{flex:2}}></View>
+                            </View>
+
+                            <Text style={styles.copyLinkText}
+                                onPress={() => {this.shareEventLink()}}>
+                                Copy Link
+                            </Text>
                             
                         </ScrollView>
                     </View>
@@ -463,9 +494,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     shareIcon: {
-        marginHorizontal: 2.5,
-        marginBottom: 5,
-        width: '10%'
+        flex: 1,
+        alignItems: 'center',
+        paddingHorizontal: 5
     },
     speakerContainer: {
         flexDirection: 'row',
@@ -513,4 +544,4 @@ const styles = StyleSheet.create({
         height: 90,
         marginVertical: 5
     }
-});
+})

@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 
 
 export default class EventsItem extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.dateColumn}>
-                    <View style={styles.dateMonthTextContainer}>
-                        <Text style={styles.dateMonthText}>{this.props.eventMonth}</Text>
+            <TouchableHighlight onPress={() => {
+                    if(this.props.eventId != 0)
+                        this.props.navigation.navigate("EventsDetails", {eventId: this.props.eventId})
+                }
+            }>
+                <View style={styles.container}>
+                    <View style={styles.dateColumn}>
+                        <View style={styles.dateMonthTextContainer}>
+                            <Text style={styles.dateMonthText}>{this.props.eventMonth}</Text>
+                        </View>
+                        <View style={styles.dateDayTextContainer}>
+                            <Text style={styles.dateDayText}>{this.props.eventDate}</Text>
+                        </View>
                     </View>
-                    <View style={styles.dateDayTextContainer}>
-                        <Text style={styles.dateDayText}>{this.props.eventDate}</Text>
+                    <View style={styles.detailsColumn}>
+                        <Text style={styles.title}>{this.props.eventTitle}</Text>
+                        <Text style={styles.time}>{this.props.eventTime}</Text>
+                        <Text style={styles.location}>{this.props.eventLocation}</Text>
                     </View>
                 </View>
-                <View style={styles.detailsColumn}>
-                    <Text style={styles.title}>{this.props.eventTitle}</Text>
-                    <Text style={styles.time}>{this.props.eventTime}</Text>
-                    <Text style={styles.location}>{this.props.eventLocation}</Text>
-                </View>
-            </View>
-        );
+            </TouchableHighlight>
+        )
     }
 }
 

@@ -3,240 +3,43 @@ import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'r
 import Header from '../Navigation/Header'
 import EventsItem from './EventsItem'
 
-import ApiUtils from '../../utils/ApiUtils'
-import { ClientSecrets } from '../../../config/config'
+import { EventsListObj } from '../../lib/Events/EventsList'
 
-var monthsAbbrev = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC"
-]
-
-function formatAMPM(date) {
-    // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
-    var hours = date.getHours()
-    var minutes = date.getMinutes()
-    var ampm = hours >= 12 ? 'PM' : 'AM'
-    hours = hours % 12
-    hours = hours ? hours : 12 // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes
-    var strTime = hours + ':' + minutes + ' ' + ampm
-    return strTime
-}
-
-// Default datasource to be displayed when events list cannot be fetched
-var datasource = [
-    {
-        key: 'Upcoming',
-        data: [ 
-            new eventEntry(null, 'Failed to retrieve events', '', null, '', '')
-        ]
-    },
-    {   
-        key: 'Past Events',
-        data: [ 
-            new eventEntry(null, 'Failed to retrieve events', '', null, '', '')
-        ]
-    }
-]
-
-function eventEntry(eventId, eventName, eventMonth, eventDate, eventTime, eventLocation) {
-    this.eventId = eventId
-    this.eventTitle = eventName
-    this.eventMonth = eventMonth
-    this.eventDate = eventDate
-    this.eventTime = eventTime
-    this.eventLocation = eventLocation
-}
-
-async function getBearerToken() {
-    try {
-        let base64 = require('base-64')
-        username = ClientSecrets.API_USERNAME
-        password = ClientSecrets.API_PASSWORD
-        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        //console.log(basicAuthHeaderValue)
-
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-
-        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': basicAuthHeaderValue
-            },
-            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-        })
-        let responseJson = await response.json()
-        return responseJson['access_token']
-    } catch(error) {
-        console.error(error)
-        return null
-    }
-}
-
-async function getEventsList(bearerToken) {
-    try {
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
-        }
-        
-        let getUrl = 'https://api.wildapricot.org/v2/Accounts/' + ClientSecrets.ACCOUNT_NUM + '/Events'
-        let response = await fetch(getUrl, 
-        {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + bearerToken
-            }
-        })
-        
-        if(response.status != 200) {
-            //console.log(response.status)
-            return null
-        }
-        return response.json()
-
-    } catch(error) {
-        console.error(error)
-        return null
-    }
-}
-
-function getEventsListDataSource(response) {
-    let eventsList = null
-    try {
-        eventsList = eventsListResponse.Events
-    } catch (error) {
-        console.log("Failed to get events property")
-        return null
-    }
-        
-    let upcomingEvents = []
-    let pastEvents = []
-    let currentDateInMs = Date.now()
-
-    for (i = 0; i < eventsList.length; i++) { 
-        if(eventsList[i].AccessLevel != "Public") {
-            continue
-        }
-
-        let startDate = new Date(Date.parse(eventsList[i].StartDate))
-        let endDate = new Date(Date.parse(eventsList[i].EndDate))
-        let eventTime = null
-
-        // If multi-day event, just display startDate's month, day and time
-        if(startDate.toLocaleDateString() != endDate.toLocaleDateString()) {
-            eventTime = formatAMPM(startDate)
-        }
-        else {
-            // If start time and end time same, just display one
-            if(startDate.toLocaleTimeString() == endDate.toLocaleTimeString()) {
-                eventTime = formatAMPM(startDate)
-            }
-            else {
-                eventTime = formatAMPM(startDate) + ' - ' + formatAMPM(endDate)
-            }
-        }
-
-        var entry = new eventEntry (
-            eventsList[i].Id,
-            eventsList[i].Name,
-            monthsAbbrev[startDate.getMonth()],
-            startDate.getDate(),
-            eventTime,
-            eventsList[i].Location
-        )
-
-        //console.log(entry)
-        if(startDate.getTime() < currentDateInMs) {
-            pastEvents.push(entry)
-        }
-        else {
-            upcomingEvents.push(entry)
-        }
-    }
-
-    if(upcomingEvents.length == 0) {
-        upcomingEvents.push(new eventEntry(null, 'No upcoming events', '', null, '', ''))
-    }
-
-    if(pastEvents.length == 0) {
-        pastEvents.push(new eventEntry(null, 'No past events', '', null, '', ''))
-    }
-
-    datasource = [
-        {
-            key: 'Upcoming',
-            data: upcomingEvents
-        },
-        {   
-            key: 'Past Events',
-            data: pastEvents
-        }
-    ]
-    return datasource
-}
 
 export default class EventsList extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isEventListLoading: true,
-            sectionListDs: datasource
+            sectionListDs: new EventsListObj().getDatasourceFailed()
         }
     }
 
     async componentDidMount() {
-        bearerToken = await getBearerToken()
-        if(!bearerToken) {
-            console.log("Failed to get bearer token")
-            this.setState({isEventListLoading: false})
-            return
-        }
-
-        eventsListResponse = await getEventsList(bearerToken)
-        if(!eventsListResponse) {
-            console.log("Failed to get events list from API call")
-            this.setState({isEventListLoading: false})
-            return
-        }
-        //console.log(eventsListResponse)
-
-        datasourceResult = getEventsListDataSource(eventsListResponse)
+        let datasourceResult = await new EventsListObj().getDataSource()
         if(!datasourceResult) {
             console.log("Failed to format events list datasource")
             this.setState({isEventListLoading: false})
             return
         }
-
-        this.setState({ 
-            sectionListDs: datasource,
-            isEventListLoading: false,
-        })
+        else{
+            this.setState({ 
+                sectionListDs: datasourceResult,
+                isEventListLoading: false,
+            })
+        }
     }
 
     renderItem = (item) => {
         return (
-            <EventsItem eventId={Number(item.item.eventId)}
-                eventTitle={item.item.eventTitle}
-                eventMonth={item.item.eventMonth}
-                eventDate={Number.isInteger(item.item.eventDate) ? Number(item.item.eventDate) : null}
-                eventTime={item.item.eventTime}
-                eventLocation={item.item.eventLocation}/>
+            <EventsItem
+                eventId={Number(item.item.id)}
+                eventTitle={item.item.title}
+                eventMonth={item.item.month}
+                eventDate={Number.isInteger(item.item.date) ? Number(item.item.date) : null}
+                eventTime={item.item.time}
+                eventLocation={item.item.location}
+                navigation={this.props.navigation}/>
             // <Text style={styles.text}>{item.item.name}</Text>
         )
     }
@@ -288,7 +91,7 @@ export default class EventsList extends Component {
                                 renderItem={this.renderItem}
                                 renderSectionHeader={this.renderHeader}
                                 sections={this.state.sectionListDs}
-                                keyExtractor={(item) => item.eventId}
+                                keyExtractor={(item) => item.id}
                                 stickySectionHeadersEnabled={false}
                             />
                         </View>

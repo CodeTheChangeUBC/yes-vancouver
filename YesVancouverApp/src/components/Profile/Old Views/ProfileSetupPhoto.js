@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, TextInput, TouchableOpacity, StatusBar, Platform, ImageBackground } from 'react-native';
-import Header from '../Navigation/Header';
+import Header from '../../Navigation/Header';
 import Expo from 'expo'
 
 
@@ -25,13 +25,13 @@ export default class ProfileSetupPhoto extends Component {
                     
                     <View style={styles.headerIconContainer}>
                         <View style={styles.backArrowContainer}>
-                            <Image source={require('../../images/Header/White-arrow-3x.png')}
+                            <Image source={require('../../../images/Header/White-arrow-3x.png')}
                                 resizeMode='contain'
                                 style={{height:'50%'}}/>
                         </View>
 
                         <View style={styles.pageIndicatorContainer}>
-                            <Image source={require('../../images/Login-Signup/Pagination/Pagination3-3x.png')}
+                            <Image source={require('../../../images/Login-Signup/Pagination/Pagination3-3x.png')}
                                 resizeMode='contain'
                                 style={{height:'25%'}}/>
                         </View>
@@ -45,7 +45,7 @@ export default class ProfileSetupPhoto extends Component {
                     </Text>
 
                     <View style={styles.imageContainer}>
-                        <ImageBackground source={require('../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
+                        <ImageBackground source={require('../../../images/Login-Signup/Profile-Photo-Click-To-Add.png')}
                             style={styles.image}>
                             <View style={styles.imageTextBackground}>
                                 <Text style={styles.imageText}>Tap to add</Text>

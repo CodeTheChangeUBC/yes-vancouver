@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button} from 'react-native';
-import {getBearerToken, getContactsList, getIndividualContactsList, getResultURL} from '../Profile/FetchUserDetails'
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button, Alert} from 'react-native';
+import {getIndividualContactsList, authenticateContactLogin, getContactEventRegistrationList,
+    retrieveCurrentContactDetails} from '../Profile/FetchUserDetails'
 
-let clientUsername = "";
+let clientEmail = "";
 let clientPassword = "";
 
 export default class LoginForm extends Component {
@@ -14,28 +15,27 @@ export default class LoginForm extends Component {
 
     async authenticateLogin(){
         let {navigate} = this.props.navigation;
-        // let bearerToken = await getBearerToken();
-        // if(!bearerToken) {
-        //     console.log("Failed to get bearer token");
-        //     this.setState({isEventListLoading: false});
-        //     return
-        // }
-        // let resultURLObject = await getResultURL(bearerToken);
-        // let resultURLString = resultURLObject["ResultUrl"];
-        // let contactsList = await getContactsList(bearerToken, resultURLString);
-        // let contactsListArray = contactsList["Contacts"];
-        let contactsListArray = await getIndividualContactsList();
-        for (let e in contactsListArray){
-            if (contactsListArray[e]["Email"] === clientUsername){
-                navigate("NavBar", {'userEmail' : contactsListArray[e]});
-                return;
-            }
+        let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
+        if (contactAuthenticationToken !== null){
+            let currentUserDetails = await retrieveCurrentContactDetails(contactAuthenticationToken);
+            let contactsListArray = await getIndividualContactsList(currentUserDetails["Id"]);
+            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentUserDetails["Id"]);
+            await navigate("NavBar", {'userData' : contactsListArray[0],
+                                'upcomingEvents' : contactEventRegistrationDetails});
         }
-        console.log("Invalid Email Supplied");
+        else{
+            Alert.alert(
+                'Incorrect Credentials',
+                'Either your username or password is incorrect',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            )
+        }
     }
 
     render() {
-        var {navigate} = this.props.navigation;
+        let {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -47,12 +47,11 @@ export default class LoginForm extends Component {
                         placeholder="Email"
                         placeholderTextColor="rgba(128,128,128,0.7)"
                         returnKeyType="next"
-                        //onSubmitEditing={() => this.passwordInput.focus()}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        onChangeText={(text)=> clientUsername = text}
+                        onChangeText={(text)=> clientEmail = text}
                     />
                     <TextInput
                         placeholder="Password"
@@ -61,7 +60,6 @@ export default class LoginForm extends Component {
                         secureTextEntry
                         onChangeText={(text)=> clientPassword = text}
                         style={styles.input}
-                        //ref={(input) => this.passwordInput = input}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
@@ -71,7 +69,6 @@ export default class LoginForm extends Component {
                             color="#ED4969"
                             onPress={
                                 () => this.authenticateLogin()
-                                    //navigate("NavBar", {})
                             }
                             title="Login"
                         />
@@ -92,7 +89,6 @@ export default class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        //paddingHorizontal: 50,
         backgroundColor: '#FFFFFF',
         width: '100%',
         height: '100%'
@@ -106,12 +102,10 @@ const styles = StyleSheet.create({
         marginTop : 80,
         backgroundColor: 'rgba(255,255,255,0.7)',
         marginBottom: 20,
-        //paddingHorizontal: 5,
         borderBottomWidth: 1,
     },
     button: {
         backgroundColor: '#ff0066',
-        //paddingVertical: 10,
         marginTop: 60
     },
     buttonText: {
@@ -124,7 +118,6 @@ const styles = StyleSheet.create({
     },
     passContainer: {
         marginTop : 40
-        //paddingVertical: 50
     },
     forgotPassText: {
         textAlign: 'center',
@@ -136,4 +129,3 @@ const styles = StyleSheet.create({
         marginRight : 80
     }
 });
-

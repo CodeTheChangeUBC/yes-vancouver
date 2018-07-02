@@ -1,49 +1,40 @@
 import React from 'react';
-import { StyleSheet, ToastAndroid, View, Button, StatusBar, TextInput, ScrollView, KeyboardAvoidingView, Platform, Image, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Button, TextInput, ScrollView, KeyboardAvoidingView, Image} from 'react-native';
 import Header from '../Navigation/Header';
 import ApiUtils from '../../utils/ApiUtils'
 import { ClientSecrets } from '../../../config/config'
+import {getBearerToken, getContactsList, getIndividualContactsList, getResultURL} from '../Profile/FetchUserDetails'
 
+var contactsList;
 
-function validateEmail(email) {
+//updated this havent added/committed 
+function validateEmail(email) { 
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    var temp1 = re.test(String(email).toLowerCase()) ;
+    if (!temp1)
+        alert("email is invalid");
+    var temp2 = authenticateLogin(email);
+    return (temp1 && temp2);
 }
 
+// updated bug = wont check with email list currently, may be due to global variable or added in render function
+async function updateContactListPrivate(){
+    var contactsList2 = await getIndividualContactsList();
+}
 
-async function getBearerToken() {
-    try {
-        let base64 = require('base-64')
-        username = ClientSecrets.API_USERNAME
-        password = ClientSecrets.API_PASSWORD
-        basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password)
-        console.log(basicAuthHeaderValue)
-        console.log ('above is header value')
-
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events'
+// added this recently havent commited
+ async function authenticateLogin(email){
+        let contactsListArray = await getIndividualContactsList();
+        for (let e in contactsListArray){
+            if (contactsListArray[e]["Email"] == email.toLowerCase()){
+                console.log("Email already being used");
+                window.alert("Email already being used");
+                return false;
+            }
         }
-
-        let response = await fetch('https://oauth.wildapricot.org/auth/token', 
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': basicAuthHeaderValue
-            },
-            body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-        })
-        let responseJson = await response.json()
-        console.log(responseJson['access_token']);
-        console.log('above is token');
-        return responseJson['access_token']
-    } catch(error) {
-        console.error(error)
-        return null
+        console.log("New Email Supplied");
+        return true;
     }
-}
-
 
  async function updateContacts(pFirstName, pLastName, pEmail, pPassword) {
     try {
@@ -119,6 +110,7 @@ static navigationOptions = {
                 style={styles.header}
         />
         var {navigate} = this.props.navigation
+
         return(
            <KeyboardAvoidingView behavior='padding' style={styles.container}>
 
@@ -176,7 +168,9 @@ static navigationOptions = {
                 <Button color="#ED4969" title="Sign up" onPress={
                     ()=> {
                         // tester
-                       
+
+
+                     
                
                         let vFirstName = this.state.firstName;
                         let vSecondName = this.state.lastName;
@@ -190,20 +184,47 @@ static navigationOptions = {
                         console.log(vPassword);
                         console.log(vConfirmPassword);
 
+                        // checks name
+                        if(!vFirstName){
+                            alert("First name is empty");
+                            return;
+                         }
+
+                         if (!vSecondName){  
+                            alert("Last name is empty");
+                            return;
+                         }
 
                         if(!validateEmail(vEmail)){
                             console.log("email is invalid");
                             return;    
                         }
-                        // end tester
+
+
+                        if (!vPassword){
+                            alert("Password is not given");
+                            return;    
+                        }
+
+                        if (!vConfirmPassword){
+                            alert("Confirm your password");
+                            return;    
+                        }
+
                         if (vPassword.length>7 && vPassword == vConfirmPassword) {
                             updateContacts(vFirstName, vSecondName, vEmail, vPassword);
                             navigate("ProfileSetupWork", {})
                             }
-                        if (vPassword.length<8)
+                        if (vPassword.length<8){
+                            alert("password needs to be longer than 7 characters");
                             console.log("password needs to be longer than 7 characters");
-                        if (vPassword != vConfirmPassword)
+                            return;
+                            }
+                        if (vPassword != vConfirmPassword){
+                            alert("password doesn't' match");
                             console.log("password doesn't' match");
+                            return;
+                            }
 
                         
                     }  

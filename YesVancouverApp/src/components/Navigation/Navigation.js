@@ -38,6 +38,7 @@ const Navigation = StackNavigator({
 },
 {
     navigationOptions: ({ navigation }) => ({
+        headerMode: 'screen',
         headerStyle:{
             
         },

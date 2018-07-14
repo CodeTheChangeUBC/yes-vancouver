@@ -1,16 +1,13 @@
-/**
- * Created by joycheng on 2017-08-24.
- */
-import React from 'react';
-import { StyleSheet, Image, Text, View, Button, StatusBar, ImageBackground } from 'react-native';
+import React from 'react'
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
-        title:"HomeScreen",
-    };
+        header: null
+    }
 
-    render(){
-        var {navigate} = this.props.navigation;
+    render() {
+        var { navigate } = this.props.navigation
         return(
             <ImageBackground 
                 source={require('../../images/Login-Signup/Background-Photo.png')}
@@ -21,23 +18,23 @@ export default class HomeScreen extends React.Component {
                         style={styles.mainLogo}
                         source={require("../../images/Login-Signup/YES-logo.png")}
                     />
-                    <View style = {styles.buttonStyle}>
-                        <Button
-                            style={styles.button}
-                            color="#ED4969"
-                            onPress={
-                                ()=> navigate("SignUp", {})
-                            }
-                            title="Sign up"
-                        />
+
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.buttonSpacer} />
+                        <TouchableOpacity style={styles.button}
+                            onPress={()=> navigate("SignUp", {})}>
+                            <Text style={styles.buttonText}>Sign up</Text>
+                        </TouchableOpacity>
+                        <View style={styles.buttonSpacer} />
                     </View>
+
+                    <Text style={styles.signInText}>
+                        Already have an account?
+                    </Text>
+
                     <Text
-                        style={{color:"#ffffff", fontSize:20, alignContent:"center"}}>Already have an account?</Text>
-                    <Text
-                        style={{color:"#ffffff", fontSize:20, alignContent:"center", textDecorationLine:'underline'}}
-                        onPress={
-                            ()=> navigate("Login",{})
-                        }>
+                        style={[styles.signInText, {textDecorationLine:'underline'}]}
+                        onPress={()=> navigate("Login",{})}>
                         Sign in
                     </Text>
                 </View>
@@ -51,14 +48,37 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    mainLogo:{
+    mainLogo: {
         alignContent:'center',
         justifyContent: 'center',
         marginTop: 90,
         marginBottom: 80
     },
-    buttonStyle:{
-        alignSelf : 'stretch',
-        marginBottom : 30
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom:20
+    },
+    button: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 0.6
+    },
+    buttonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
+    },
+    buttonSpacer: {
+        flex: 0.2
+    },
+    signInText: {
+        backgroundColor: 'transparent',
+        color: 'white',
+        fontFamily: 'source-sans-pro-regular',
+        fontSize: 20,
+        alignContent: 'center',
+        marginBottom: 5
     }
-});
+})

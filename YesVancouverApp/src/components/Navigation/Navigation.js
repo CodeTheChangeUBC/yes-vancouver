@@ -39,7 +39,7 @@ const Navigation = StackNavigator({
 {
     navigationOptions: ({ navigation }) => ({
         headerStyle:{
-            marginTop: Expo.Constants.statusBarHeight,
+            
         },
         headerVisible: true,
         headerTitleStyle: {
@@ -55,7 +55,7 @@ const Navigation = StackNavigator({
             <View style={styles.headerContainer}>
                 <Header style={styles.header}/>
             </View>,
-        // headerLeft: (Platform.OS === 'android' && ()) ? <View /> : null,
+        // headerLeft: options.hasLeftComponent ? <View/> : null,
         // <View style={{backgroundColor:'transparent'}}/>,
         // headerRight: <View />,
     })

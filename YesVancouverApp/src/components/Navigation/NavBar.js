@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import EventsView from '../Events/EventsView';
-import PerksView from '../Perks/PerksView';
-import NewsFeedView from '../NewsFeed/NewsFeedView';
-import MessagingView from '../Messaging/MessagingView';
-import ProfileView from '../Profile/ProfileView';
+import React from 'react'
+import { Image } from 'react-native'
+import { TabBarBottom, TabNavigator } from 'react-navigation'
+import EventsView from '../Events/EventsView'
+import PerksView from '../Perks/PerksView'
+import NewsFeedView from '../NewsFeed/NewsFeedView'
+// import MessagingView from '../Messaging/MessagingView'
+import ProfileView from '../Profile/ProfileView'
 
 
 const NavBar = TabNavigator({
     EventsView: { 
         screen: EventsView,
         navigationOptions: {
+            header: null,
             tabBarLabel: 'EventsView',
             title: 'EventsView',
             tabBarIcon: ({ focused }) => { 
@@ -32,7 +33,7 @@ const NavBar = TabNavigator({
     },
     PerksView: { screen: PerksView },
     NewsFeedView: { screen: NewsFeedView },
-    MessagingView: { screen: MessagingView },
+    // MessagingView: { screen: MessagingView },
     ProfileView: { screen: ProfileView },
 }, {
     tabBarOptions: {
@@ -46,6 +47,6 @@ const NavBar = TabNavigator({
     tabBarPosition: 'bottom',
     initialRouteName: 'NewsFeedView',
     drawUnderTabBar: true,
-});
+})
 
-export default NavBar;
+export default NavBar

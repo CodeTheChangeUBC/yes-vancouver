@@ -1,37 +1,60 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
+import React, { Component } from 'react'
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-export default class ResetPassword extends React.Component{
+
+export default class ResetPassword extends Component {
+    static navigationOptions = {
+        header: null
+    }
+
     render(){
-        let {navigate} = this.props.navigation;
+        let { navigate } = this.props.navigation
         return(
-            <View style={styles.parentView}>
-                <Text style={styles.boxTitle}>Reset Password</Text>
-                <Text style={styles.boxBody}>
-                    We'll send you an email with instructions to reset your password
-                </Text>
-                <View style={styles.emailView}>
-                    <TextInput style={{height:100}}
-                               placeholder="Email"
-                               keyboardType="email-address">
-                    </TextInput>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <View style={styles.button}>
-                        <Button color="#ED4969" title="Send" onPress={
-                            ()=> Alert.alert(
-                                'Reset Password Email Sent',
-                                'Check your email to view the reset password link',
-                                [
-                                    {text: "Ok", style:'cancel'}
-                                ]
-                            )
-                        }/>
+            <View style={styles.container}>
+                <View style={styles.parentView}>
+                    <View style={styles.boxTitleContainer}>
+                        <Text style={styles.boxTitle}>Reset Password</Text>
                     </View>
-                    <View style={styles.button}>
-                        <Button color="#ED4969" title="Cancel" onPress={
-                            ()=> navigate("Login", {})
-                        }/>
+
+                    <Text style={styles.boxBody}>
+                        We'll send you an email with instructions to reset your password.
+                    </Text>
+
+                    <View style={styles.emailView}>
+                        <TextInput style={styles.emailTextInput}
+                            placeholder="Email"
+                            keyboardType="email-address"
+                            placeholderTextColor='#979797'
+                            returnKeyType="next"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            underlineColorAndroid='transparent'/>
+                    </View>
+
+                    <View style={styles.buttonContainer}>
+                        <View style={{flex:0.1}}/>
+
+                        <View style={styles.button}>
+                            <TouchableOpacity
+                                onPress={()=> navigate("HomeScreen", {})}>
+                                <Text style={styles.buttonText}>Cancel</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:0.2}}/>
+
+                         <View style={styles.button}>
+                            <TouchableOpacity
+                                onPress={()=> Alert.alert(
+                                    'Reset Password Email Sent',
+                                    'Check your email to view the reset password link',
+                                    [{text: "Ok", style:'cancel'}]
+                                )}>
+                                <Text style={styles.buttonText}>Send</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:0.1}}/>
                     </View>
                 </View>
             </View>
@@ -40,35 +63,65 @@ export default class ResetPassword extends React.Component{
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 30,
+        backgroundColor: 'black'
+    },
     parentView: {
-        backgroundColor: '#000000',
-        flex:1,
-        justifyContent: 'center'
+        backgroundColor: 'white',
+        justifyContent: 'center',
     },
-    boxTitle:{
-        textAlign: "center",
-        backgroundColor: "#ED4969",
-        fontSize: 28,
-        color: "#ffffff",
-        height:80
+    boxTitleContainer: {
+        backgroundColor: '#ED4969',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 80
     },
-    boxBody:{
+    boxTitle: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: '#ffffff',
+        
+    },
+    boxBody: {
         textAlign: "center",
-        backgroundColor: "#ffffff",
+        backgroundColor: '#ffffff',
+        fontFamily: 'source-sans-pro-regular',
         fontSize: 20,
-        color: "#000000"
+        color: 'black',
+        marginVertical: 15,
+        marginHorizontal: 15
     },
-    emailView:{
-        backgroundColor: "#ffffff"
+    emailView: {
+        paddingHorizontal: 20,
+        marginBottom: 20
     },
-    buttonsContainer:{
-        flex:1,
+    emailTextInput: {
+        height: 40,
+        borderBottomWidth: 1,
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'black'
+    },
+    buttonContainer:{
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'center',
+        paddingVertical: 15
     },
-    button:{
-        height:40,
-        width : '100%',
-        backgroundColor: "#ffffff"
+    button: {
+        flex: 0.3,
+        height: 40,
+        width: '100%',
+        backgroundColor: '#ED4969',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
     }
-});
+})

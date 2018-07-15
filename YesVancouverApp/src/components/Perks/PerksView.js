@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import PerksList from './PerksList';
 import PerksDetails from './PerksDetails';
 
@@ -7,11 +7,8 @@ import PerksDetails from './PerksDetails';
 export default class PerksView extends Component {
 
     static navigationOptions = {
-        title: 'PerksView',
-    }
-
-    static navigationOptions = {
-        tabBarLabel: 'PerksView',
+        title: 'Perks Partners',
+        headerLeft: (<View></View>),
         tabBarIcon: ({ focused, tintColor }) => focused ?
         ( <Image 
             source={require('../../images/NavBar/Perks-icon-white-3x.png')}

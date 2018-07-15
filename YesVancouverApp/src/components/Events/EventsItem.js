@@ -7,8 +7,15 @@ export default class EventsItem extends Component {
     render() {
         return (
             <TouchableHighlight onPress={() => {
-                    if(this.props.eventId != 0)
-                        this.props.navigation.navigate("EventsDetails", {eventId: this.props.eventId})
+                    if(this.props.eventId != 0) {
+                        this.props.navigation.navigate(
+                            "EventsDetails", 
+                            {
+                                eventId: this.props.eventId,
+                                eventTitle: this.props.eventTitle
+                            }
+                        )
+                    }
                 }
             }>
                 <View style={styles.container}>

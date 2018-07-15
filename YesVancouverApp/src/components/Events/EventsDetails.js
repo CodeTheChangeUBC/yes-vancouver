@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Dimensions, Image, ScrollView, Share, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, WebView } from 'react-native'
-import Header from '../Navigation/Header'
+import { ActivityIndicator, Dimensions, Image, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import ReadMore from '@expo/react-native-read-more-text'
 import AutoHeightImage from 'react-native-auto-height-image'
-import HTML from 'react-native-render-html';
+import HTML from 'react-native-render-html'
 
 import { EventDetailsObj } from '../../lib/Events/EventsDetails'
 
@@ -175,8 +174,13 @@ export default class EventsDetails extends Component {
                     <View style={styles.registerButtonSpacer}></View>
                     <TouchableOpacity style={styles.registerButtonRectangle}
                         onPress={() => {
-                            this.props.navigation.navigate("EventsRegistration", 
-                            {eventUrl: this.state.eventUrl})
+                            this.props.navigation.navigate(
+                                "EventsRegistration", 
+                                {
+                                    eventUrl: this.state.eventUrl,
+                                    eventTitle: this.state.eventTitle
+                                }
+                            )
                         }
                     }>
                         <Text style={styles.registerButtonText}>Register</Text>
@@ -215,128 +219,103 @@ export default class EventsDetails extends Component {
         }
         else {
             return (
-                <View style={styles.container}>
-                    <View style={styles.headerContainer}>
-                        <Header style={styles.header}/>
-                        <View style={styles.headerIconContainer}>
-                            <TouchableOpacity onPress={() => {this.props.navigation.pop()}} 
-                                    style={styles.backArrowContainer}>
-                                <Image source={require('../../images/Header/White-arrow-3x.png')}
-                                    resizeMode='contain'
-                                    style={{height:'50%'}}/>
-                            </TouchableOpacity>
-                            <View style={styles.eventsTitleContainer}>
-                                <Text style={styles.eventsTitleText}>
-                                    Events
-                                </Text>
-                            </View>
-                            <View style={styles.backArrowContainer}>
-                                <Image source={require('../../images/Header/Menu-icon-white-3x.png')}
-                                    resizeMode='contain'
-                                    style={{height:'50%'}}/>
-                            </View>
+                <ScrollView style={styles.scrollView}>
+
+                    {this.renderBannerImageSection()}
+
+                    <Text style={styles.eventTitle}>
+                        {this.state.eventTitle}
+                    </Text>
+
+                    <View style={styles.divider}></View>
+
+                    <View style={styles.eventDetailContainer}>
+                        <View style={styles.eventDetailIcon}>
+                            <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}
+                                resizeMode='contain'
+                                style={{width:'50%'}}/>
+                        </View>
+                        <View style={styles.eventDetailTextContainer}>
+                            <Text style={styles.eventDetailText}>
+                                {this.state.eventDateTime}
+                            </Text>
                         </View>
                     </View>
-                    <View style={styles.content}>
-                        <ScrollView>
 
-                            {this.renderBannerImageSection()}
+                    <View style={styles.divider}></View>
 
-                            <Text style={styles.eventTitle}>
-                                {this.state.eventTitle}
+                    <View style={styles.eventDetailContainer}>
+                        <View style={styles.eventDetailIcon}>
+                            <Image source={require('../../images/Events/Event-icons/location-3x.png')}
+                                resizeMode='contain'
+                                style={{width:'35%'}}/>
+                        </View>
+                        <View style={styles.eventDetailTextContainer}>
+                            <Text style={styles.eventDetailText}>
+                                {this.state.eventLocation}
                             </Text>
-
-                            <View style={styles.divider}></View>
-
-                            <View style={styles.eventDetailContainer}>
-                                <View style={styles.eventDetailIcon}>
-                                    <Image source={require('../../images/Events/Event-icons/calendar-3x.png')}
-                                        resizeMode='contain'
-                                        style={{width:'50%'}}/>
-                                </View>
-                                <View style={styles.eventDetailTextContainer}>
-                                    <Text style={styles.eventDetailText}>
-                                        {this.state.eventDateTime}
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.divider}></View>
-
-                            <View style={styles.eventDetailContainer}>
-                                <View style={styles.eventDetailIcon}>
-                                    <Image source={require('../../images/Events/Event-icons/location-3x.png')}
-                                        resizeMode='contain'
-                                        style={{width:'35%'}}/>
-                                </View>
-                                <View style={styles.eventDetailTextContainer}>
-                                    <Text style={styles.eventDetailText}>
-                                        {this.state.eventLocation}
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.divider}></View>
-
-                            <View style={styles.eventDetailContainer}>
-                                <View style={styles.eventDetailIcon}>
-                                    <Image source={require('../../images/Events/Event-icons/message-3x.png')}
-                                        resizeMode='contain'
-                                        style={{width:'50%'}}/>
-                                </View>
-                                <View style={styles.eventDetailTextContainer}>
-                                    <Text style={styles.eventDetailText}>Discussion Board</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.divider}></View>
-                            
-                            {this.renderRegisterButton(true)}
-                            
-                            {this.renderDescriptionSection()}
-
-                            {this.renderSpeakersSection()}
-
-                            {this.renderSponsorsSection()}
-
-                            {this.renderRegisterButton(!(this.state.eventSpeakers.length == 0 && this.state.eventSponsors.length == 0))}
-
-                            <Text style={styles.headingGrey}>Share</Text>
-
-                            <View style={styles.socialMediaContainer}>
-                                <View style={{flex:2}}></View>
-                                <TouchableOpacity style={styles.shareIcon}
-                                    onPress={() => this.shareEventDetails()}>
-                                    <Image
-                                        source={require('../../images/Events/Share-icons/Twitter-3x.png')}
-                                        resizeMode='center'
-                                    />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.shareIcon}
-                                    onPress={() => this.shareEventDetails()}>
-                                    <Image
-                                        source={require('../../images/Events/Share-icons/Facebook-3x.png')}
-                                        resizeMode='center'
-                                    />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.shareIcon}
-                                    onPress={() => this.shareEventDetails()}>
-                                    <Image
-                                        source={require('../../images/Events/Share-icons/Email-3x.png')}
-                                        resizeMode='center'
-                                    />
-                                </TouchableOpacity>
-                                <View style={{flex:2}}></View>
-                            </View>
-
-                            <Text style={styles.copyLinkText}
-                                onPress={() => {this.shareEventLink()}}>
-                                Copy Link
-                            </Text>
-                            
-                        </ScrollView>
+                        </View>
                     </View>
-                </View>
+
+                    <View style={styles.divider}></View>
+
+                    <View style={styles.eventDetailContainer}>
+                        <View style={styles.eventDetailIcon}>
+                            <Image source={require('../../images/Events/Event-icons/message-3x.png')}
+                                resizeMode='contain'
+                                style={{width:'50%'}}/>
+                        </View>
+                        <View style={styles.eventDetailTextContainer}>
+                            <Text style={styles.eventDetailText}>Discussion Board</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.divider}></View>
+                    
+                    {this.renderRegisterButton(true)}
+                    
+                    {this.renderDescriptionSection()}
+
+                    {this.renderSpeakersSection()}
+
+                    {this.renderSponsorsSection()}
+
+                    {this.renderRegisterButton(!(this.state.eventSpeakers.length == 0 && this.state.eventSponsors.length == 0))}
+
+                    <Text style={styles.headingGrey}>Share</Text>
+
+                    <View style={styles.socialMediaContainer}>
+                        <View style={{flex:2}}></View>
+                        <TouchableOpacity style={styles.shareIcon}
+                            onPress={() => this.shareEventDetails()}>
+                            <Image
+                                source={require('../../images/Events/Share-icons/Twitter-3x.png')}
+                                resizeMode='center'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.shareIcon}
+                            onPress={() => this.shareEventDetails()}>
+                            <Image
+                                source={require('../../images/Events/Share-icons/Facebook-3x.png')}
+                                resizeMode='center'
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.shareIcon}
+                            onPress={() => this.shareEventDetails()}>
+                            <Image
+                                source={require('../../images/Events/Share-icons/Email-3x.png')}
+                                resizeMode='center'
+                            />
+                        </TouchableOpacity>
+                        <View style={{flex:2}}></View>
+                    </View>
+
+                    <Text style={styles.copyLinkText}
+                        onPress={() => {this.shareEventLink()}}>
+                        Copy Link
+                    </Text>
+                    
+                </ScrollView>
             )
         }
     }
@@ -350,33 +329,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         padding: 10
     },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
+    scrollView: {
         backgroundColor: 'white'
-    },
-    content: {
-        flex: 7
-    },
-    headerContainer: {
-        flex: 1
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    },
-    headerIconContainer: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    menuContainer: {
-        flex: 1,
-        alignItems: 'center'
     },
     eventsTitleContainer: {
         flex: 4,

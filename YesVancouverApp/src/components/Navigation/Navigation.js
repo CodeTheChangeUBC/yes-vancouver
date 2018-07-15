@@ -2,9 +2,9 @@
  * Created by joycheng on 2017-10-21.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { Header, StackNavigator } from 'react-navigation'
 
 import Login from '../Login/LoginForm'
 import HomeScreen from '../HomeScreen/HomeScreen'
@@ -18,8 +18,7 @@ import Aveda from '../Perks/aveda'
 import PerksView from '../Perks/PerksView'
 import PerksList from '../Perks/PerksList'
 import EditProfile from "../Profile/EditProfile"
-import Header from './Header'
-import Expo from 'expo'
+import CustomHeader from './Header'
 
 
 const Navigation = StackNavigator({
@@ -39,14 +38,20 @@ const Navigation = StackNavigator({
 {
     navigationOptions: ({ navigation }) => ({
         headerMode: 'screen',
-        headerStyle:{
-            
+        headerStyle: {
+            paddingVertical: (Header.HEIGHT - 24) / 2,
+            paddingLeft: 10
         },
         headerVisible: true,
         headerTitleStyle: {
             flex: 1,
             textAlign: 'center',
-            alignSelf: 'center'
+            alignSelf: 'center',
+            fontFamily: 'alternate-gothic-no3-d-regular',
+            fontWeight: 'normal',
+            lineHeight: 24,
+            fontSize: 24,
+            padding: 30
         },
         headerBackImage: require('../../images/Header/White-arrow-3x.png'),
         headerBackTitle: null,
@@ -54,11 +59,9 @@ const Navigation = StackNavigator({
         headerTransparent: false,
         headerBackground: 
             <View style={styles.headerContainer}>
-                <Header style={styles.header}/>
+                <CustomHeader style={styles.header}/>
             </View>,
-        // headerLeft: options.hasLeftComponent ? <View/> : null,
-        // <View style={{backgroundColor:'transparent'}}/>,
-        // headerRight: <View />,
+        headerRight: (<View></View>)
     })
 })
 

@@ -1,6 +1,6 @@
 
-import React, { Component } from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, Button, Alert} from 'react-native';
+import React, { Component } from 'react'
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import {getIndividualContactsList, authenticateContactLogin, getContactEventRegistrationList,
     retrieveCurrentContactDetails} from '../Profile/FetchUserDetails'
 
@@ -38,10 +38,6 @@ export default class LoginForm extends Component {
         let {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <StatusBar
-                    barStyle="dark-content"
-                    backgroundColor="#FFFFFF"
-                />
                 <View style={styles.inputContainer}>
                     <TextInput
                         placeholder="Email"
@@ -62,17 +58,17 @@ export default class LoginForm extends Component {
                         style={styles.input}
                     />
                 </View>
+
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
-                        <Button
-                            style={styles.buttonText}
-                            color="#ED4969"
-                            onPress={
-                                () => this.authenticateLogin()
-                            }
-                            title="Login"
-                        />
+                    <View style={styles.buttonSpacer} />
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => this.authenticateLogin()}>
+                        <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
+                    <View style={styles.buttonSpacer} />
+                </View>
+
+                <View>
                     <TouchableOpacity style={styles.passContainer}>
                         <Text style={styles.forgotPassText}
                               onPress={
@@ -104,28 +100,32 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderBottomWidth: 1,
     },
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 20
+    },
     button: {
-        backgroundColor: '#ff0066',
-        marginTop: 60
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 0.6
     },
     buttonText: {
-        backgroundColor: '#ff0066',
-        textAlign: 'center',
-        color: '#FFFFFF',
-        fontWeight: '600',
-        fontSize: 19,
-        padding: 5
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
+    },
+    buttonSpacer: {
+        flex: 0.2
     },
     passContainer: {
-        marginTop : 40
+        marginTop : 20
     },
     forgotPassText: {
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: 20,
         color: '#808080',
-    },
-    buttonContainer:{
-        marginLeft : 80,
-        marginRight : 80
+        fontFamily: 'source-sans-pro-regular'
     }
-});
+})

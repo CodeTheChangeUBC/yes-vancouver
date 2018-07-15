@@ -36,7 +36,7 @@ export default class ResetPassword extends Component {
 
                         <View style={styles.button}>
                             <TouchableOpacity
-                                onPress={()=> navigate("Login", {})}>
+                                onPress={()=> navigate("HomeScreen", {})}>
                                 <Text style={styles.buttonText}>Cancel</Text>
                             </TouchableOpacity>
                         </View>

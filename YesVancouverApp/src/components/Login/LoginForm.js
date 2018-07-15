@@ -41,21 +41,26 @@ export default class LoginForm extends Component {
                 <View style={styles.inputContainer}>
                     <TextInput
                         placeholder="Email"
-                        placeholderTextColor="rgba(128,128,128,0.7)"
+                        placeholderTextColor='#979797'
                         returnKeyType="next"
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
                         onChangeText={(text)=> clientEmail = text}
+                        underlineColorAndroid='transparent'
                     />
+                </View>
+
+                <View style={styles.inputContainer}>
                     <TextInput
                         placeholder="Password"
-                        placeholderTextColor='rgba(128,128,128,0.7)'
+                        placeholderTextColor='#979797'
                         returnKeyType="go"
                         secureTextEntry
                         onChangeText={(text)=> clientPassword = text}
                         style={styles.input}
+                        underlineColorAndroid='transparent'
                     />
                 </View>
 
@@ -79,7 +84,7 @@ export default class LoginForm extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-        );
+        )
     }
 }
 
@@ -96,9 +101,11 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         marginTop : 80,
-        backgroundColor: 'rgba(255,255,255,0.7)',
         marginBottom: 20,
         borderBottomWidth: 1,
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'black'
     },
     buttonContainer: {
         flexDirection: 'row',

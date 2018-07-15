@@ -1,68 +1,71 @@
-import React, { Component } from 'react'
-import { Image } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Header, StackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'
 import EventsRegistration from './EventsRegistration'
+import CustomHeader from '../Navigation/Header'
 
-
-// export default class EventsView extends Component {
-//     // static navigationOptions = {
-//     //     tabBarLabel: 'EventsView',
-//     //     title: 'EventsView',
-//     //     tabBarIcon: ({ focused, tintColor }) => focused ?
-//     //     ( <Image 
-//     //         source={require('../../images/NavBar/Calendar-icon-white-3x.png')}
-//     //         resizeMode="contain"
-//     //         style={{height:30}}/> 
-//     //     ) :
-//     //     ( <Image 
-//     //         source={require('../../images/NavBar/Calendar-icon-orange-3x.png')}
-//     //         resizeMode="contain"
-//     //         style={{height:30}}/>
-//     //     )
-//     // }
-
-//     render() {
-//         return (
-//              <EventsList/>
-//             //<EventsDetails/>
-//         );
-//     }
-// }
+const styles = StyleSheet.create({
+    headerContainer: {
+        flex: 1
+    },
+    header: {
+        flex: 1,
+        width: null,
+        height: null
+    }
+})
 
 const EventsView = StackNavigator({
     EventsList: {
         screen: EventsList,
         navigationOptions:({navigation}) => ({
-            title: "EventsList",
-            // headerLeft:(
-            //   <TouchableOpacity onPress={() => navigation.navigate("DrawerOpen")}>
-            //     <IOSIcon name="ios-menu" size={30} />
-            //   </TouchableOpacity>
-            // ),
-            headerStyle: { paddingRight: 10, paddingLeft: 10 }
+            title: 'Events',
+            headerLeft: (<View></View>)
         })
     },
     EventsDetails: {
         screen: EventsDetails,
         navigationOptions: (props) => ({
-            title: "EventsDetail",
+            title: 'EventsDetail',
         })
     },
     EventsRegistration: {
         screen: EventsRegistration,
         navigationOptions: (props) => ({
-            title: "EventsRegistration",
+            title: 'EventsRegistration',
         })
     }
 },
 {
-    headerMode: 'none',
     navigationOptions: {
-        headerVisible: false,
+        headerMode: 'screen',
+        headerStyle: {
+            paddingVertical: (Header.HEIGHT - 24) / 2,
+            paddingLeft: 10
+        },
+        headerVisible: true,
+        headerTitleStyle: {
+            flex: 1,
+            textAlign: 'center',
+            alignSelf: 'center',
+            fontFamily: 'alternate-gothic-no3-d-regular',
+            fontWeight: 'normal',
+            lineHeight: 24,
+            fontSize: 24,
+            padding: 30
+        },
+        headerBackImage: require('../../images/Header/White-arrow-3x.png'),
+        headerBackTitle: null,
+        headerTintColor: 'white',
+        headerTransparent: false,
+        headerBackground: 
+            <View style={styles.headerContainer}>
+                <CustomHeader style={styles.header}/>
+            </View>,
+        headerRight: (<View></View>)
     }
-}
-)
+})
 
 export default EventsView

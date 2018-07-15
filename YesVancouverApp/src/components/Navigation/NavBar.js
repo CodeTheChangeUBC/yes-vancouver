@@ -12,6 +12,7 @@ const NavBar = TabNavigator({
     EventsView: { 
         screen: EventsView,
         navigationOptions: {
+            header: null,
             tabBarLabel: 'EventsView',
             title: 'EventsView',
             tabBarIcon: ({ focused }) => { 

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, SectionList, Text, ActivityIndicator } from 'react-native'
-import Header from '../Navigation/Header'
+import { ActivityIndicator, Image, SectionList, StyleSheet, Text, View } from 'react-native'
 import EventsItem from './EventsItem'
-
 import { EventsListObj } from '../../lib/Events/EventsList'
 
 
@@ -63,38 +61,20 @@ export default class EventsList extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    <View style={styles.headerContainer}>
-                        <Header style={styles.header}/>
-                        <View style={styles.headerIconContainer}>
-                            <View style={styles.menuContainer}></View>
-                            <View style={styles.eventsTitleContainer}>
-                                <Text style={styles.eventsTitleText}>
-                                    Events
-                                </Text>
-                            </View>
-                            <View style={styles.menuContainer}>
-                                <Image source={require('../../images/Header/Menu-icon-white-3x.png')}
-                                    resizeMode="contain"
-                                    style={{height:30}}/>
-                            </View>
-                        </View>
+                    <View style={styles.backgroundContainer}>
+                        <Image style={styles.backgroundImage}
+                            resizeMode='stretch'
+                            source={require('../../images/Events/Events-background.png')}
+                        />
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.backgroundContainer}>
-                            <Image style={styles.backgroundImage}
-                                resizeMode='stretch'
-                                source={require('../../images/Events/Events-background.png')}
-                            />
-                        </View>
-                        <View style={styles.overlay}>
-                            <SectionList
-                                renderItem={this.renderItem}
-                                renderSectionHeader={this.renderHeader}
-                                sections={this.state.sectionListDs}
-                                keyExtractor={(item) => item.id}
-                                stickySectionHeadersEnabled={false}
-                            />
-                        </View>
+                    <View style={styles.overlay}>
+                        <SectionList
+                            renderItem={this.renderItem}
+                            renderSectionHeader={this.renderHeader}
+                            sections={this.state.sectionListDs}
+                            keyExtractor={(item) => item.id}
+                            stickySectionHeadersEnabled={false}
+                        />
                     </View>
                 </View>
             )
@@ -113,33 +93,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    content: {
-        flex: 7
-    },
     overlay: {
         flex: 1,
         opacity: 1,
         backgroundColor: 'rgba(0, 0, 0, 0)'
-    },
-    headerContainer: {
-        flex: 1
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    },
-    headerIconContainer: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    menuContainer: {
-        flex: 1,
-        alignItems: 'center'
     },
     eventsTitleContainer: {
         flex: 4,

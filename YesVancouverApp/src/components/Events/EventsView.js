@@ -27,13 +27,13 @@ const EventsView = StackNavigator({
     },
     EventsDetails: {
         screen: EventsDetails,
-        navigationOptions: (props) => ({
-            title: 'EventsDetail',
+        navigationOptions: ({navigation}) => ({
+            title: navigation.getParam('eventTitle', 'Event Details'),
         })
     },
     EventsRegistration: {
         screen: EventsRegistration,
-        navigationOptions: (props) => ({
+        navigationOptions: (navigation) => ({
             title: 'EventsRegistration',
         })
     }

@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, ImageBackground } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React, { Component } from 'react'
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
 
 export default class NewsFeedView extends Component {
 
     static navigationOptions = {
-        title:"NewsFeedViewPage",
-    };
-
-    static navigationOptions = {
-        tabBarLabel: 'NewsFeedView',
+        title:"News Feed",
+        headerLeft: (<View></View>),
         tabBarIcon: ({ focused, tintColor }) => focused ?
             ( <Image
                     source={require('../../images/NavBar/YES-icon-white-3x.png')}
@@ -21,12 +17,11 @@ export default class NewsFeedView extends Component {
                     resizeMode="contain"
                     style={{height:30}}/>
             )
-    };
+    }
 
     render() {
         return (
             <View style={styles.container}>
-
                 <ScrollView>
                     <View style={{width: 30, height: 50}} />
                     <View>
@@ -46,7 +41,7 @@ export default class NewsFeedView extends Component {
                         source={require('../../images/Events/Event-Detail-Banner.png')}/>
                 </ScrollView>
             </View>
-        );
+        )
     }
 }
 
@@ -83,4 +78,4 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 30,
     }
-});
+})

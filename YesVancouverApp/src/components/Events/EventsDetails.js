@@ -174,8 +174,13 @@ export default class EventsDetails extends Component {
                     <View style={styles.registerButtonSpacer}></View>
                     <TouchableOpacity style={styles.registerButtonRectangle}
                         onPress={() => {
-                            this.props.navigation.navigate("EventsRegistration", 
-                            {eventUrl: this.state.eventUrl})
+                            this.props.navigation.navigate(
+                                "EventsRegistration", 
+                                {
+                                    eventUrl: this.state.eventUrl,
+                                    eventTitle: this.state.eventTitle
+                                }
+                            )
                         }
                     }>
                         <Text style={styles.registerButtonText}>Register</Text>

@@ -33,8 +33,8 @@ const EventsView = StackNavigator({
     },
     EventsRegistration: {
         screen: EventsRegistration,
-        navigationOptions: (navigation) => ({
-            title: 'EventsRegistration',
+        navigationOptions: ({navigation}) => ({
+            title: navigation.getParam('eventTitle', 'Event Registration'),
         })
     }
 },

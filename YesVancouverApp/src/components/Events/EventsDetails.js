@@ -43,7 +43,6 @@ export default class EventsDetails extends Component {
         let eventId = this.props.navigation.state.params.eventId
         let eventsDetailsObj = new EventDetailsObj(eventId)
         let result = await eventsDetailsObj.processEventDetails()
-        console.dir(eventsDetailsObj)
 
         this.setState({
             eventUrl: eventsDetailsObj.url,

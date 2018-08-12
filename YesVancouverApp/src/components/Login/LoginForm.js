@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {getIndividualContactsList, getContactEventRegistrationList,
-    retrieveCurrentContactDetails} from '../Profile/FetchUserDetails'
+import { getContactEventRegistrationList } from '../Profile/FetchUserDetails'
 import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
+import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 
 let clientEmail = "";
 let clientPassword = "";
@@ -19,12 +19,10 @@ export default class LoginForm extends Component {
         let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
         console.log(contactAuthenticationToken)
         if (contactAuthenticationToken !== null){
-            let currentUserDetails = await retrieveCurrentContactDetails(contactAuthenticationToken);
-            let contactsListArray = await getIndividualContactsList(currentUserDetails["Id"]);
-            console.log(contactsListArray)
-            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentUserDetails["Id"]);
-            console.log(contactEventRegistrationDetails)
-            await navigate("NavBar", {'userData' : contactsListArray[0],
+            let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
+            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentContactDetails["Id"]);
+            await navigate("NavBar", {'userData' : currentContactDetails,
+        
                                 'upcomingEvents' : contactEventRegistrationDetails});
         }
         else{

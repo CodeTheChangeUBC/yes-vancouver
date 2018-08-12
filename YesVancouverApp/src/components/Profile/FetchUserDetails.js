@@ -1,78 +1,7 @@
 import { ClientSecrets } from '../../../config/config'
 import ApiUtils from '../../utils/ApiUtils'
+import { getBearerToken } from '../../apicalls/Authentication/AuthToken'
 
-/**
- * Takes in the users entered email address and password on the login screen
- * and checks for authentication in the members database
- *
- * @param username: The users entered email address
- * @param password: The users entered password
- * @returns {Promise.<*>}
- */
-async function authenticateContactLogin(username, password){
-    try {
-        let base64 = require('base-64');
-        let basicAuthHeaderValue = 'Basic ' +
-            base64.encode(ClientSecrets.CLIENT_ID + ":" + ClientSecrets.CLIENT_SECRET);
-        let requestAuthTokenBody = {
-            'grant_type': 'password',
-            'username': username,
-            'password': password,
-            'scope': 'auto'
-        };
-        let response = await fetch('https://oauth.wildapricot.org/auth/token',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': basicAuthHeaderValue
-                },
-                body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-            });
-        if (response.status !== 200){
-            return null;
-        }
-        let responseJson = await response.json();
-        return responseJson['access_token'];
-    } catch(error) {
-        console.error(error);
-        return null
-    }
-}
-
-/**
- * Retrieves an authentication token based on the API details that are listed in the
- * config.js file (NOT THE USER LOGIN TOKEN, AS IT'S SCOPE ISN'T AS WIDE AS THE GENERAL
- * API ONE)
- *
- * @returns {Promise.<*>}
- */
-async function getBearerToken() {
-    try {
-        let base64 = require('base-64');
-        let username = ClientSecrets.API_USERNAME;
-        let password = ClientSecrets.API_PASSWORD;
-        let basicAuthHeaderValue = 'Basic ' + base64.encode(username + ":" + password);
-        let requestAuthTokenBody = {
-            'grant_type': 'client_credentials',
-            'scope': 'contacts finances events event_registrations_view'
-        };
-        let response = await fetch('https://oauth.wildapricot.org/auth/token',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': basicAuthHeaderValue
-                },
-                body: ApiUtils.constructFormUrlEncodedBody(requestAuthTokenBody)
-            });
-        let responseJson = await response.json();
-        return responseJson['access_token']
-    } catch(error) {
-        console.error(error);
-        return null
-    }
-}
 
 // Contacts Data Retrieval
 // ------------------------------------------------------------------------------
@@ -140,6 +69,7 @@ async function getResultURL(bearerToken, userId) {
     try {
         let getUrl = 'https://api.wildapricot.org/v2.1/Accounts/' + ClientSecrets.ACCOUNT_NUM +
             '/Contacts?$filter=Id eq ' + userId;
+        console.log(getUrl)
         let response = await fetch(getUrl,
             {
                 method: 'GET',
@@ -302,6 +232,6 @@ async function getUpcomingEvents(upcomingEventsList){
 
 // ------------------------------------------------------------------------------
 
-export {getBearerToken, getResultURL, getContactsList,
+export {getResultURL, getContactsList,
     getIndividualContactsList, getContactEventRegistrationList, getUpcomingEvents, updateContactDetails,
-    authenticateContactLogin, retrieveCurrentContactDetails};
+    retrieveCurrentContactDetails};

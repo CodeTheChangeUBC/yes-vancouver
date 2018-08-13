@@ -7,8 +7,9 @@ class ContactDetailsObj {
         this.lastName = ContactDetailsJson["LastName"]
         this.email = ContactDetailsJson["Email"]
         this.phone = ContactDetailsJson["Phone"]
+
         this.memberSince = ContactDetailsJson["MemberSince"]
-        this.membershipLevel = ContactDetailsJson["MembershipLevel"]
+        this.membershipLevel = ContactDetailsObj.getMembershipLevel(ContactDetailsJson)
         this.renewalDue = ContactDetailsJson["RenewalDue"]
 
         this.company = ContactDetailsObj.getCustomField(customContactFields, "Company")
@@ -17,7 +18,7 @@ class ContactDetailsObj {
         this.twitter = ContactDetailsObj.getCustomField(customContactFields, "Twitter")
         this.instagram = ContactDetailsObj.getCustomField(customContactFields, "Instagram")
         this.linkedIn = ContactDetailsObj.getCustomField(customContactFields, "LinkedIn")
-        this.profilePhoto = ContactDetailsObj.getCustomField(customContactFields, "ProfilePhoto")["Url"]
+        this.profilePhoto = ContactDetailsObj.getProfilePic(customContactFields)
 
         this.eventsList = []
     }
@@ -35,6 +36,18 @@ class ContactDetailsObj {
             return "No Value";
         }
         return dictionary[key];
+    }
+
+    static getMembershipLevel(ContactDetailsJson){
+        if(ContactDetailsJson["MembershipLevel"])
+            return ContactDetailsJson["MembershipLevel"]["Name"]
+        return "No membership"
+    }
+
+    static getProfilePic(customContactFields){
+        if(customContactFields["ProfilePhoto"])
+            return customContactFields["ProfilePhoto"]["Url"]
+        return "No profile pic"
     }
 }
 

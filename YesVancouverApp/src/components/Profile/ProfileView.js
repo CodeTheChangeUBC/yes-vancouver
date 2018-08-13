@@ -1,9 +1,17 @@
-import React, { Component } from 'react';
-import {Text, View, Image, ScrollView, Button, FlatList, Alert} from 'react-native';
+import React, { Component } from 'react'
+import { ActivityIndicator, Text, View, Image, ScrollView, Button, FlatList, Alert} from 'react-native'
 import { styles } from './ProfileStyleSheet'
 import { ContactDetailsObj } from '../../lib/Profile/ContactDetails'
 
 export default class ProfileView extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isProfileLoading: true,
+            contactDetails: null,
+            upcomingEvents: null
+        }
+    }
 
     static navigationOptions = {
         tabBarLabel: 'ProfileView',
@@ -28,14 +36,20 @@ export default class ProfileView extends Component {
         let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
         let contactUpcomingEvents = await contactDetailsObj.getContactEventRegistrationList()
         console.log(contactUpcomingEvents)
-        
+
         // let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
         // console.log(contactDetailsObj)
+
+        this.setState({
+            contactDetails: contactDetailsObj,
+            upcomingEvents: contactUpcomingEvents,
+            isProfileLoading: false,
+        })
     }
 
     render() {
-        const { params } = this.props.navigation.state;
-        const givenUserDetails = params ? params.userData : null;
+        // const { params } = this.props.navigation.state;
+        // const givenUserDetails = params ? params.userData : null;
         // const upcomingEventsList = params ? params.upcomingEvents : null;
 
         // let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
@@ -43,22 +57,31 @@ export default class ProfileView extends Component {
         // console.log("HEEHEE")
         // console.log(contactUpcomingEvents)
         // return this.returnProfileScreenView(contactDetailsObj, contactUpcomingEvents)
-        return <View><Text>HI</Text></View>
+        if(this.state.isProfileLoading) {
+            return (
+                <View style={styles.activityIndicator}>
+                    <ActivityIndicator size="large" color="#ED4969" />
+                </View>
+            )
+        }
+        else {
+            return this.returnProfileScreenView()
+        }
     }
 
-    returnProfileScreenView(contactDetailsObj, contactUpcomingEvents){
+    returnProfileScreenView(){
         
-        let userID = contactDetailsObj.id
-        let userFirstName = contactDetailsObj.firstName
-        let userLastName = contactDetailsObj.lastName
-        let userEmail = contactDetailsObj.email       
-        let userPhone = contactDetailsObj.phone
-        let userMemberSince = contactDetailsObj.memberSince
-        let userRenewalDue = contactDetailsObj.renewalDue
-        let userLinkedIn = contactDetailsObj.linkedIn
+        let userID = this.state.contactDetails.id
+        let userFirstName = this.state.contactDetails.firstName
+        let userLastName = this.state.contactDetails.lastName
+        let userEmail = this.state.contactDetails.email       
+        let userPhone = this.state.contactDetails.phone
+        let userMemberSince = this.state.contactDetails.memberSince
+        let userRenewalDue = this.state.contactDetails.renewalDue
+        let userLinkedIn = this.state.contactDetails.linkedIn
         let userCreationDate = "NO VALUE"
-        let upcomingEventsList = contactUpcomingEvents
-        let userProfilePictureUrl = contactDetailsObj.profilePhoto
+        let upcomingEventsList = this.state.upcomingEvents
+        let userProfilePictureUrl = this.state.contactDetails.profilePhoto
 
         let { navigate } = this.props.navigation;
         return (

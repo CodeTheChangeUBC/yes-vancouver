@@ -20,11 +20,15 @@ export default class ProfileView extends Component {
         )
     };
 
-    componentDidMount(){
+    async componentDidMount(){
         const { params } = this.props.navigation.state;
         const givenUserDetails = params ? params.userData : null;
         // const upcomingEventsList = params ? params.upcomingEvents : null;
 
+        let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
+        let contactUpcomingEvents = await contactDetailsObj.getContactEventRegistrationList()
+        console.log(contactUpcomingEvents)
+        
         // let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
         // console.log(contactDetailsObj)
     }
@@ -34,12 +38,15 @@ export default class ProfileView extends Component {
         const givenUserDetails = params ? params.userData : null;
         // const upcomingEventsList = params ? params.upcomingEvents : null;
 
-        let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
-        console.log(contactDetailsObj)
-        return this.returnProfileScreenView(contactDetailsObj)
+        // let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
+        // let contactUpcomingEvents = await contactDetailsObj.getContactEventRegistrationList()
+        // console.log("HEEHEE")
+        // console.log(contactUpcomingEvents)
+        // return this.returnProfileScreenView(contactDetailsObj, contactUpcomingEvents)
+        return <View><Text>HI</Text></View>
     }
 
-    returnProfileScreenView(contactDetailsObj){
+    returnProfileScreenView(contactDetailsObj, contactUpcomingEvents){
         
         let userID = contactDetailsObj.id
         let userFirstName = contactDetailsObj.firstName
@@ -50,7 +57,7 @@ export default class ProfileView extends Component {
         let userRenewalDue = contactDetailsObj.renewalDue
         let userLinkedIn = contactDetailsObj.linkedIn
         let userCreationDate = "NO VALUE"
-        let upcomingEventsList = contactDetailsObj.eventsList
+        let upcomingEventsList = contactUpcomingEvents
         let userProfilePictureUrl = contactDetailsObj.profilePhoto
 
         let { navigate } = this.props.navigation;

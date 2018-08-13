@@ -23,8 +23,6 @@ class ContactDetailsObj {
         this.instagram = ContactDetailsObj.getCustomField(customContactFields, "Instagram")
         this.linkedIn = ContactDetailsObj.getCustomField(customContactFields, "LinkedIn")
         this.profilePhoto = ContactDetailsObj.getProfilePic(customContactFields)
-
-        this.eventsList = []
     }
 
     static createCustomFieldDict(ContactDetailsJson){
@@ -57,8 +55,6 @@ class ContactDetailsObj {
     /**
      * Returns the upcoming event registration data for a given contact
      * in a FlatList readable format
-     *
-     * @returns {Promise.<*>}
      */
     async getContactEventRegistrationList(){
         let bearerToken = await getBearerToken();
@@ -77,16 +73,16 @@ class ContactDetailsObj {
      * into a FlatList readable format
      *
      * @param upcomingEventsList
-     * @returns {Promise.<Array>}
+     * @returns upcoming events formatted in a FlatList format
      */
     async getUpcomingEvents(upcomingEventsList){
         let upcomingEventsDictionaryList = [];
         await upcomingEventsList.forEach(function (value) {
-            upcomingEventsDictionaryList.push(
-                {key: value["Id"],
+            upcomingEventsDictionaryList.push({
+                key: value["Id"],
                 name: value["Event"]["Name"],
-                date: value["Event"]["StartDate"].substring(0, 10)}
-            );
+                date: value["Event"]["StartDate"].substring(0, 10)
+            });
         });
         return upcomingEventsDictionaryList;
     }

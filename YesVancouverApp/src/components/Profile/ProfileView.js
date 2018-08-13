@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Text, View, Image, ScrollView, Button, FlatList, Alert} from 'react-native';
-import {styles} from './ProfileStyleSheet'
+import { styles } from './ProfileStyleSheet'
+import { ContactDetailsObj } from '../../lib/Profile/ContactDetails'
 
 export default class ProfileView extends Component {
 
@@ -19,44 +20,40 @@ export default class ProfileView extends Component {
         )
     };
 
+    componentDidMount(){
+        const { params } = this.props.navigation.state;
+        const givenUserDetails = params ? params.userData : null;
+        // const upcomingEventsList = params ? params.upcomingEvents : null;
+
+        // let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
+        // console.log(contactDetailsObj)
+    }
+
     render() {
         const { params } = this.props.navigation.state;
         const givenUserDetails = params ? params.userData : null;
-        const upcomingEventsList = params ? params.upcomingEvents : null;
+        // const upcomingEventsList = params ? params.upcomingEvents : null;
 
-        let profileFieldTableDictionary = this.constructProfileFieldTableDictionary(givenUserDetails);
-        let userID = Number(this.accessProfileFieldTableDictionary(givenUserDetails, "Id"));
-        let userFirstName = this.accessProfileFieldTableDictionary(givenUserDetails, "FirstName");
-        let userLastName = this.accessProfileFieldTableDictionary(givenUserDetails, "LastName");
-        let userEmail = this.accessProfileFieldTableDictionary(givenUserDetails, "Email");
-        let userPhone = this.accessProfileFieldTableDictionary(profileFieldTableDictionary, "Phone");
-        let userMemberSince = this.accessProfileFieldTableDictionary(profileFieldTableDictionary, "Member since");
-        let userRenewalDue = this.accessProfileFieldTableDictionary(profileFieldTableDictionary, "Renewal due");
-        let userLinkedIn = this.accessProfileFieldTableDictionary(profileFieldTableDictionary, "Linkedin");
-        let userCreationDate = this.accessProfileFieldTableDictionary(profileFieldTableDictionary, "Creation date");
-
-        return this.returnProfileScreenView(userID, userFirstName, userLastName, userEmail, userPhone, userMemberSince,
-            userRenewalDue, userLinkedIn, userCreationDate, upcomingEventsList);
+        let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
+        console.log(contactDetailsObj)
+        return this.returnProfileScreenView(contactDetailsObj)
     }
 
-    constructProfileFieldTableDictionary(givenUserDetails){
-        let profileDictionary = {};
-        givenUserDetails["FieldValues"].forEach(function (miniObject) {
-            profileDictionary[miniObject["FieldName"].toString()] = miniObject["Value"]
-        });
-        return profileDictionary;
-    }
+    returnProfileScreenView(contactDetailsObj){
+        
+        let userID = contactDetailsObj.id
+        let userFirstName = contactDetailsObj.firstName
+        let userLastName = contactDetailsObj.lastName
+        let userEmail = contactDetailsObj.email       
+        let userPhone = contactDetailsObj.phone
+        let userMemberSince = contactDetailsObj.memberSince
+        let userRenewalDue = contactDetailsObj.renewalDue
+        let userLinkedIn = contactDetailsObj.linkedIn
+        let userCreationDate = "NO VALUE"
+        let upcomingEventsList = contactDetailsObj.eventsList
+        let userProfilePictureUrl = contactDetailsObj.profilePhoto
 
-    accessProfileFieldTableDictionary(dictionary, key){
-        if (dictionary[key] === undefined){
-            return "No Value";
-        }
-        return dictionary[key];
-    }
-
-    returnProfileScreenView(userID, userFirstName, userLastName, userEmail, userPhone, userMemberSince, userRenewalDue,
-                            userLinkedIn, userCreationDate, upcomingEventsList, userProfilePictureUrl){
-        let {navigate} = this.props.navigation;
+        let { navigate } = this.props.navigation;
         return (
             <ScrollView contentContainerStyle={styles.container}>
                 <Image

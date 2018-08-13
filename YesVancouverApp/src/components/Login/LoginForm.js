@@ -20,10 +20,10 @@ export default class LoginForm extends Component {
         console.log(contactAuthenticationToken)
         if (contactAuthenticationToken !== null){
             let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
-            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentContactDetails["Id"]);
-            await navigate("NavBar", {'userData' : currentContactDetails,
-        
-                                'upcomingEvents' : contactEventRegistrationDetails});
+            
+            // let contactEventRegistrationDetails = await getContactEventRegistrationList(currentContactDetails["Id"]);
+            await navigate("NavBar", {'userData' : currentContactDetails});
+                                // 'upcomingEvents' : contactEventRegistrationDetails});
         }
         else{
             Alert.alert(

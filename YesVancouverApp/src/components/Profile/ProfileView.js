@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Text, View, Image, ScrollView, Button, FlatList, Alert} from 'react-native'
+import { ActivityIndicator, Alert, Button, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './ProfileStyleSheet'
 import { ContactDetailsObj } from '../../lib/Profile/ContactDetails'
 
@@ -99,26 +99,37 @@ export default class ProfileView extends Component {
                         <Text style={styles.subHeading}>
                             YES! Vancouver Member
                         </Text>
-                        <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate.substring(0, 10)}</Text>
+                        <Text style={styles.paragraph}>
+                            First joined on : {userCreationDate.substring(0, 10)}
+                        </Text>
                     </View>
                 </View>
 
                 <View style={{marginBottom: 30}}/>
-                
-                <Text style={styles.subHeading}>Current Membership:</Text>
-                <Text style={styles.paragraph}>Since : {userMemberSince.substring(0, 10)}</Text>
-                <Text style={styles.paragraph}>Upto : {userRenewalDue.substring(0, 10)} </Text>
-                <View style={styles.extendMembershipButtonView}>
-                    <Button color="#ED4969" title="Extend membership" onPress={
-                        ()=> Alert.alert(
-                        'Extended membership',
-                        'Your membership has been extended',
-                        [
-                            {text: "Ok", style:'cancel'}
-                        ]
-                        )
-                    }/>
+
+                <Text style={styles.subHeading}>Membership Information</Text>
+                <Text style={styles.paragraph}>Level: membershiplevel</Text>
+                <Text style={styles.paragraph}>Status: {userMemberSince.substring(0, 10)}</Text>
+                <Text style={styles.paragraph}>Renewal due: {userRenewalDue.substring(0, 10)} </Text>
+
+                <View style={{marginBottom: 30}}/>
+
+                <View style={styles.buttonContainer}>
+                    <View style={styles.buttonSpacer} />
+                    <TouchableOpacity style={styles.button}
+                        onPress={()=> Alert.alert(
+                            'Extended membership',
+                            'Your membership has been extended',
+                            [
+                                {text: "Ok", style:'cancel'}
+                            ]
+                            )}>
+                        <Text style={styles.buttonText}>Extend membership</Text>
+                    </TouchableOpacity>
+                    <View style={styles.buttonSpacer} />
                 </View>
+
+                <View style={{marginBottom: 30}}/>
 
                 <Text style={styles.nameFont}>My contact information</Text>
                 <Text style={styles.contactInfo}>

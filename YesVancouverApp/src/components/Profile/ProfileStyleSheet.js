@@ -14,25 +14,25 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: 20
     },
-    editProfileContainer:{
+    editProfileContainer: {
         backgroundColor: '#fff'
     },
-    internalView:{
+    internalView: {
         width: '100%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    profileLogo:{
+    profileLogo: {
         alignContent:'center',
         justifyContent: 'center',
         borderRadius: 40
     },
-    editTextTitles:{
+    editTextTitles: {
         textAlign: 'center',
         fontSize: 20
     },
-    imageLogo:{
+    imageLogo: {
         width: 50,
         height: 50
     },
@@ -51,40 +51,48 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'alternate-gothic-no3-d-regular'
     },
-    subHeading:{
+    subHeading: {
         textAlign: 'center',
         fontSize: 28,
         fontWeight: 'bold',
         fontFamily: 'alternate-gothic-no3-d-regular'
     },
-    paragraph:{
-        fontSize:16
+    paragraph: {
+        fontSize: 16,
+        fontFamily: 'source-sans-pro-regular'
     },
-    paragraphWithMargin:{
-        fontSize:16,
-        marginBottom: 15
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 20
     },
-    extendMembershipButtonView:{
-        marginBottom: 30,
-        marginTop: 20
+    button: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 0.6
     },
-    buttonView:{
-        marginBottom: 30,
-        marginTop: 10
+    buttonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
     },
-    contactInfo:{
+    buttonSpacer: {
+        flex: 0.2
+    },
+    contactInfo: {
         fontSize:18
     },
-    dropDown:{
+    dropDown: {
         fontSize: 22,
         fontWeight:"bold",
         marginTop: 16,
         marginBottom:10
     },
-    imageButtonView:{
+    imageButtonView: {
         marginRight:30
     },
-    flatList:{
+    flatList: {
         marginBottom: 20
     }
-});
+})

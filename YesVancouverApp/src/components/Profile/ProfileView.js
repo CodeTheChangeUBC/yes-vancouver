@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { ActivityIndicator, Alert, Button, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './ProfileStyleSheet'
 import { ContactDetailsObj } from '../../lib/Profile/ContactDetails'
+import Accordion from 'react-native-collapsible/Accordion'
+
 
 export default class ProfileView extends Component {
     constructor(props) {
@@ -9,7 +11,17 @@ export default class ProfileView extends Component {
         this.state = {
             isProfileLoading: true,
             contactDetails: null,
-            upcomingEvents: null
+            upcomingEvents: null,
+            sections: [
+                {
+                    title: 'My Upcoming Events',
+                    content: 'Lorem ipsum...'
+                },
+                {
+                    title: 'Second',
+                    content: 'Lorem ipsum...'
+                }
+            ]
         }
     }
 
@@ -55,6 +67,55 @@ export default class ProfileView extends Component {
             return this.returnProfileScreenView()
         }
     }
+
+    static Sections = [
+            {
+                title: 'My Upcoming Events',
+                content: 'Lorem ipsum...'
+            },
+            {
+                title: 'Second',
+                content: 'Lorem ipsum...'
+            }
+    ];
+
+    _renderSectionTitle(section) {
+        return (
+          <View style={styles.content}>
+            <Text>{section.content}</Text>
+          </View>
+        );
+      }
+     
+      _renderHeader(section) {
+        return (
+          <View style={{flexDirection: 'row'}}>
+                <Image
+                    style={{width:25, height: 25}}
+                    source={require('../../images/Settings/Arrow-open.png')}/>
+                <Text style={styles.subHeading}>
+                    {section.title}
+                </Text>
+          </View>
+        );
+      }
+     
+      _renderContent(section) {
+        return (
+            <FlatList
+                style = {styles.flatList}
+                data = {[
+                    {
+                        key: 123,
+                        name: "Name of event",
+                        date: "Date of event"
+                    }
+                    ]}
+                renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
+            />
+        );
+      }
+
 
     returnProfileScreenView(){
         
@@ -296,9 +357,15 @@ export default class ProfileView extends Component {
 
                 <View style={{marginBottom: 30}}/>
 
+                <Accordion
+                    sections={this.state.sections}
+                    renderHeader={this._renderHeader}
+                    renderContent={this._renderContent}
+                />
+
                 <Text style={styles.dropDown}>
                     <Image
-                        style={styles.imageLogo}
+                        style={{width:25, height: 25}}
                         source={require('../../images/Settings/Arrow-open.png')}/>
                     My events
                 </Text>

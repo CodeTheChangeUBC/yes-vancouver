@@ -72,18 +72,39 @@ export default class ProfileView extends Component {
 
         let { navigate } = this.props.navigation;
         return (
-            <ScrollView contentContainerStyle={styles.container}>
+            <ScrollView style={{backgroundColor: '#fff'}} contentContainerStyle={styles.container}>
+                <View style={{marginBottom: 30}}/>
+
                 <Image
-                    style={styles.profileLogo}
+                    style={{alignContent:'center',
+                    justifyContent: 'center',
+                    width: 200,
+                    height: 200,
+                    borderRadius: 100}}
                     source={require('../../images/Login-Signup/Profile-Pic-Cropped.png')}/>
-                <Text style={styles.nameFont}>{userFirstName + " " + userLastName}</Text>
-                <Text style={styles.subHeading}>
-                    <Image
-                        style={styles.imageLogo}
-                        source={require('../../images/Login-Signup/YES-logo.png')}/>
-                    YES! Vancouver Member
+
+                <View style={{marginBottom: 30}}/>
+
+                <Text style={styles.nameFont}>
+                    {userFirstName + " " + userLastName}
                 </Text>
-                <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate.substring(0, 10)}</Text>
+
+                <View style={{marginBottom: 30}}/>
+                
+                <View style={{flexDirection: 'row'}}>
+                    <Image style={styles.imageLogo}
+                        source={require('../../images/Login-Signup/YES-logo.png')}/>
+                    <View style={{marginRight: 10}}/>
+                    <View style={{flexDirection: 'column'}}>
+                        <Text style={styles.subHeading}>
+                            YES! Vancouver Member
+                        </Text>
+                        <Text style={styles.paragraphWithMargin}>First joined on : {userCreationDate.substring(0, 10)}</Text>
+                    </View>
+                </View>
+
+                <View style={{marginBottom: 30}}/>
+                
                 <Text style={styles.subHeading}>Current Membership:</Text>
                 <Text style={styles.paragraph}>Since : {userMemberSince.substring(0, 10)}</Text>
                 <Text style={styles.paragraph}>Upto : {userRenewalDue.substring(0, 10)} </Text>

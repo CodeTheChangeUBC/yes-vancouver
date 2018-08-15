@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
     activityIndicator: {
@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginHorizontal: 20
     },
     editProfileContainer:{
         backgroundColor: '#fff'
@@ -24,16 +25,16 @@ export const styles = StyleSheet.create({
     },
     profileLogo:{
         alignContent:'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 40
     },
     editTextTitles:{
         textAlign: 'center',
         fontSize: 20
     },
     imageLogo:{
-        width:30,
-        height:30,
-        marginRight : 30
+        width: 50,
+        height: 50
     },
     input: {
         height: 30,
@@ -45,15 +46,16 @@ export const styles = StyleSheet.create({
         marginRight: 10
     },
     nameFont:{
-        marginTop : 20,
-        marginBottom: 15,
-        fontSize:25,
-        fontWeight:'bold'
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: 'bold',
+        fontFamily: 'alternate-gothic-no3-d-regular'
     },
     subHeading:{
-        fontSize:28,
         textAlign: 'center',
-        marginBottom: 20
+        fontSize: 28,
+        fontWeight: 'bold',
+        fontFamily: 'alternate-gothic-no3-d-regular'
     },
     paragraph:{
         fontSize:16

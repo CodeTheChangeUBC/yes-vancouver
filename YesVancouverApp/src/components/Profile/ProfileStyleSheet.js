@@ -63,8 +63,7 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        marginVertical: 20
+        alignItems: 'center'
     },
     button: {
         backgroundColor: '#EA4B6C',

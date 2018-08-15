@@ -132,7 +132,7 @@ export default class ProfileView extends Component {
                 <View style={{marginBottom: 30}}/>
 
                 <Text style={styles.subHeading}>
-                    My contact information
+                    My Contact Information
                 </Text>
 
                 <View style={{marginBottom: 15}}/>
@@ -262,27 +262,40 @@ export default class ProfileView extends Component {
 
                 <View style={{marginBottom: 30}}/>
 
-                <View style={styles.buttonView}>
-                    <Button color="#ED4969" title="Edit Contact Information" onPress={
-                        ()=> navigate('EditProfile', {'userID' : userID,
-                                                      'userFirstName' : userFirstName,
-                                                      'userLastName' : userLastName,
-                                                      'userEmail': userEmail,
-                                                      'userPhone' : userPhone,
-                                                      'userLinkedIn' : userLinkedIn})
-                    }/>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.buttonSpacer} />
+                    <TouchableOpacity style={styles.button}
+                        onPress={()=> navigate('EditProfile', {'userID' : userID,
+                        'userFirstName' : userFirstName,
+                        'userLastName' : userLastName,
+                        'userEmail': userEmail,
+                        'userPhone' : userPhone,
+                        'userLinkedIn' : userLinkedIn})}>
+
+                        <Text style={styles.buttonText}>Edit Contact Info</Text>
+                    </TouchableOpacity>
+                    <View style={styles.buttonSpacer} />
                 </View>
-                <View style={styles.buttonView}>
-                    <Button color="#ED4969" title="Change Password" onPress={
-                        ()=> Alert.alert(
+
+                <View style={{marginBottom: 15}}/>
+
+                <View style={styles.buttonContainer}>
+                    <View style={styles.buttonSpacer} />
+                    <TouchableOpacity style={styles.button}
+                        onPress={()=> Alert.alert(
                             'Password Changed',
                             'Your password has been changed',
                             [
                                 {text: "Ok", style:'cancel'}
                             ]
-                        )
-                    }/>
+                        )}>
+                        <Text style={styles.buttonText}>Change Password</Text>
+                    </TouchableOpacity>
+                    <View style={styles.buttonSpacer} />
                 </View>
+
+                <View style={{marginBottom: 30}}/>
+
                 <Text style={styles.dropDown}>
                     <Image
                         style={styles.imageLogo}

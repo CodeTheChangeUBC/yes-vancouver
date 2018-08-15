@@ -170,7 +170,97 @@ export default class ProfileView extends Component {
                             {userLinkedIn}
                         </Text>
                     </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-company.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Company
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-user16.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Job title
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-info.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Other info
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-facebook.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Facebook
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-instagram-6-3x.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Instagram
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-twitter-1-3x.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Twitter
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-globe-5.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Website
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-info.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            Other info
+                        </Text>
+                    </View>
                 </View>
+
+                <View style={{marginBottom: 30}}/>
 
                 <View style={styles.buttonView}>
                     <Button color="#ED4969" title="Edit Contact Information" onPress={

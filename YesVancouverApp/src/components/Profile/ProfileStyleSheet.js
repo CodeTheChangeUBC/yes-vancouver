@@ -80,8 +80,16 @@ export const styles = StyleSheet.create({
     buttonSpacer: {
         flex: 0.2
     },
-    contactInfo: {
-        fontSize:18
+    contactInfoRow: {
+        flexDirection: 'row',
+        marginVertical: 5
+    },
+    contactInfoRowImage: {
+        width: 20,
+        height: 20
+    },
+    contactInfoRowSpacer: {
+        marginRight: 15
     },
     dropDown: {
         fontSize: 22,

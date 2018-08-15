@@ -131,25 +131,47 @@ export default class ProfileView extends Component {
 
                 <View style={{marginBottom: 30}}/>
 
-                <Text style={styles.nameFont}>My contact information</Text>
-                <Text style={styles.contactInfo}>
-                    <Image
-                        style={styles.imageLogo}
-                        source={require('../../images/Settings/iconmonstr-email-4.png')}/>
-                    |     {userEmail}
+                <Text style={styles.subHeading}>
+                    My contact information
                 </Text>
-                <Text style={styles.contactInfo}>
-                    <Image
-                        style={styles.imageLogo}
-                        source={require('../../images/Settings/iconmonstr-phone-1.png')}/>
-                    |     {userPhone}
-                </Text>
-                <Text style={styles.contactInfo}>
-                    <Image
-                        style={styles.imageLogo}
-                        source={require('../../images/Settings/iconmonstr-linkedin-1.png')}/>
-                    |     {userLinkedIn}
-                </Text>
+
+                <View style={{marginBottom: 15}}/>
+
+                <View style={{flexDirection: 'column'}}>
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-email-4.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            {userEmail}
+                        </Text>
+                    </View>
+
+                    <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-phone-1.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            {userPhone}
+                        </Text>
+                    </View>
+
+                   <View style={styles.contactInfoRow}>
+                        <Image
+                            style={styles.contactInfoRowImage}
+                            resizeMode='contain'
+                            source={require('../../images/Settings/iconmonstr-linkedin-1.png')}/>
+                        <View style={styles.contactInfoRowSpacer}/>
+                        <Text style={styles.paragraph}>
+                            {userLinkedIn}
+                        </Text>
+                    </View>
+                </View>
+
                 <View style={styles.buttonView}>
                     <Button color="#ED4969" title="Edit Contact Information" onPress={
                         ()=> navigate('EditProfile', {'userID' : userID,

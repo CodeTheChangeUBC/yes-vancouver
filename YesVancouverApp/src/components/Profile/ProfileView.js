@@ -11,17 +11,7 @@ export default class ProfileView extends Component {
         this.state = {
             isProfileLoading: true,
             contactDetails: null,
-            upcomingEvents: null,
-            sections: [
-                {
-                    title: 'My Upcoming Events',
-                    content: 'Lorem ipsum...'
-                },
-                {
-                    title: 'Second',
-                    content: 'Lorem ipsum...'
-                }
-            ]
+            upcomingEvents: null
         }
     }
 
@@ -104,13 +94,7 @@ export default class ProfileView extends Component {
         return (
             <FlatList
                 style = {styles.flatList}
-                data = {[
-                    {
-                        key: 123,
-                        name: "Name of event",
-                        date: "Date of event"
-                    }
-                    ]}
+                data = {section.content}
                 renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
             />
         );
@@ -358,7 +342,16 @@ export default class ProfileView extends Component {
                 <View style={{marginBottom: 30}}/>
 
                 <Accordion
-                    sections={this.state.sections}
+                    sections={[
+                        {
+                            title: 'My Upcoming Events',
+                            content: upcomingEventsList
+                        },
+                        {
+                            title: 'Second',
+                            content: upcomingEventsList
+                        }
+                    ]}
                     renderHeader={this._renderHeader}
                     renderContent={this._renderContent}
                 />

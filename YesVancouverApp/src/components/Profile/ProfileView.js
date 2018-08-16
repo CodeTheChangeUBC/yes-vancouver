@@ -59,12 +59,19 @@ export default class ProfileView extends Component {
         }
     }
 
-    _renderEventsHeader(section) {
+    _renderEventsHeader(section, _, isActive) {
         return (
             <View style={{flexDirection: 'row', justifyContent:'flex-start', marginVertical: 10}}>
-                <Image
-                    style={{width:20, height: 20}}
-                    source={require('../../images/Settings/Arrow-open.png')}/>
+                {(isActive) ? 
+                    <Image
+                        style={{width:20, height: 20}}
+                        source={require('../../images/Settings/Arrow-open.png')}
+                        transform={[{rotate: '90deg'}]}/>
+                : 
+                    <Image
+                        style={{width:20, height: 20}}
+                        source={require('../../images/Settings/Arrow-open.png')}/>
+                }
                 <View style={{marginRight: 10}}/>
                 <Text style={styles.subHeading}>
                     {section.title}
@@ -76,7 +83,7 @@ export default class ProfileView extends Component {
     _renderEventsContent(section) {
         if(section.content.length == 0) {
             return (
-                <Text>No events</Text>
+                <Text style={styles.paragraph}>No events</Text>
             )
         }
         else {
@@ -84,7 +91,11 @@ export default class ProfileView extends Component {
                 <FlatList
                     style = {styles.flatList}
                     data = {section.content}
-                    renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
+                    renderItem={({item}) => 
+                        <Text style={styles.paragraph}>
+                            {item.date} | {item.name}
+                        </Text>
+                    }
                 />
             )
         }
@@ -339,9 +350,10 @@ export default class ProfileView extends Component {
                         }]}
                         renderHeader={this._renderEventsHeader}
                         renderContent={this._renderEventsContent}
+                        underlayColor='#fff'
                     />
 
-                    <View style={{marginBottom: 30}}/>
+                    <View style={{marginBottom: 15}}/>
 
                     <Accordion
                         sections={[{
@@ -350,8 +362,11 @@ export default class ProfileView extends Component {
                         }]}
                         renderHeader={this._renderEventsHeader}
                         renderContent={this._renderEventsContent}
+                        underlayColor='#fff'
                     />
                 </View>
+
+                <View style={{marginBottom: 60}}/>
 
             </ScrollView>
         );

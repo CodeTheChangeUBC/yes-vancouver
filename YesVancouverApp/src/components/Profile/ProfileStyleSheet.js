@@ -11,8 +11,7 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 20
+        justifyContent: 'center'
     },
     editProfileContainer: {
         backgroundColor: '#fff'

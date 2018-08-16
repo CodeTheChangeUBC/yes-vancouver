@@ -59,48 +59,36 @@ export default class ProfileView extends Component {
         }
     }
 
-    static Sections = [
-            {
-                title: 'My Upcoming Events',
-                content: 'Lorem ipsum...'
-            },
-            {
-                title: 'Second',
-                content: 'Lorem ipsum...'
-            }
-    ];
-
-    _renderSectionTitle(section) {
+    _renderEventsHeader(section) {
         return (
-          <View style={styles.content}>
-            <Text>{section.content}</Text>
-          </View>
-        );
-      }
-     
-      _renderHeader(section) {
-        return (
-          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', justifyContent:'flex-start', marginVertical: 10}}>
                 <Image
-                    style={{width:25, height: 25}}
+                    style={{width:20, height: 20}}
                     source={require('../../images/Settings/Arrow-open.png')}/>
+                <View style={{marginRight: 10}}/>
                 <Text style={styles.subHeading}>
                     {section.title}
                 </Text>
-          </View>
+            </View>
         );
-      }
+    }
      
-      _renderContent(section) {
-        return (
-            <FlatList
-                style = {styles.flatList}
-                data = {section.content}
-                renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
-            />
-        );
-      }
-
+    _renderEventsContent(section) {
+        if(section.content.length == 0) {
+            return (
+                <Text>No events</Text>
+            )
+        }
+        else {
+            return (
+                <FlatList
+                    style = {styles.flatList}
+                    data = {section.content}
+                    renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
+                />
+            )
+        }
+    }
 
     returnProfileScreenView(){
         
@@ -114,6 +102,7 @@ export default class ProfileView extends Component {
         let userLinkedIn = this.state.contactDetails.linkedIn
         let userCreationDate = "NO VALUE"
         let upcomingEventsList = this.state.upcomingEvents
+        let pastEventsList = this.state.pastEvents
         let userProfilePictureUrl = this.state.contactDetails.profilePhoto
 
         let { navigate } = this.props.navigation;
@@ -342,32 +331,28 @@ export default class ProfileView extends Component {
 
                 <View style={{marginBottom: 30}}/>
 
-                <Accordion
-                    sections={[
-                        {
+                <View style={{flexDirection:'column', justifyContent:'flex-start'}}>
+                    <Accordion
+                        sections={[{
                             title: 'My Upcoming Events',
                             content: upcomingEventsList
-                        },
-                        {
-                            title: 'Second',
-                            content: upcomingEventsList
-                        }
-                    ]}
-                    renderHeader={this._renderHeader}
-                    renderContent={this._renderContent}
-                />
+                        }]}
+                        renderHeader={this._renderEventsHeader}
+                        renderContent={this._renderEventsContent}
+                    />
 
-                <Text style={styles.dropDown}>
-                    <Image
-                        style={{width:25, height: 25}}
-                        source={require('../../images/Settings/Arrow-open.png')}/>
-                    My events
-                </Text>
-                <FlatList
-                    style = {styles.flatList}
-                    data = {upcomingEventsList}
-                    renderItem={({item}) => <Text>{item.date} | {item.name}</Text>}
-                />
+                    <View style={{marginBottom: 30}}/>
+
+                    <Accordion
+                        sections={[{
+                            title: 'My Past Events',
+                            content: pastEventsList
+                        }]}
+                        renderHeader={this._renderEventsHeader}
+                        renderContent={this._renderEventsContent}
+                    />
+                </View>
+
             </ScrollView>
         );
     }

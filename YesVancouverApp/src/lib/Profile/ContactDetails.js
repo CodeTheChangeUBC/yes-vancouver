@@ -18,11 +18,15 @@ class ContactDetailsObj {
         this.renewalDue = ContactDetailsJson["RenewalDue"]
 
         this.company = ContactDetailsObj.getCustomField(customContactFields, "Company")
-        this.otherInfo = ContactDetailsObj.getCustomField(customContactFields, "OtherInfo")
-        this.facebook = ContactDetailsObj.getCustomField(customContactFields, "Facebook")
-        this.twitter = ContactDetailsObj.getCustomField(customContactFields, "Twitter")
-        this.instagram = ContactDetailsObj.getCustomField(customContactFields, "Instagram")
+        this.jobTitle = ContactDetailsObj.getCustomField(customContactFields, "JobTitle")
+
         this.linkedIn = ContactDetailsObj.getCustomField(customContactFields, "LinkedIn")
+        this.facebook = ContactDetailsObj.getCustomField(customContactFields, "Facebook")
+        this.instagram = ContactDetailsObj.getCustomField(customContactFields, "Instagram")
+        this.twitter = ContactDetailsObj.getCustomField(customContactFields, "Twitter")
+        this.website = ContactDetailsObj.getCustomField(customContactFields, "Website")
+
+        this.otherInfo = ContactDetailsObj.getCustomField(customContactFields, "OtherInfo")
         this.profilePhoto = ContactDetailsObj.getProfilePic(customContactFields)
     }
 

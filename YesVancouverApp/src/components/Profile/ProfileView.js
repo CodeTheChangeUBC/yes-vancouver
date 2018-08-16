@@ -107,13 +107,68 @@ export default class ProfileView extends Component {
         let userLastName = this.state.contactDetails.lastName
         let userEmail = this.state.contactDetails.email       
         let userPhone = this.state.contactDetails.phone
+
         let userMemberSince = this.state.contactDetails.memberSince
         let userRenewalDue = this.state.contactDetails.renewalDue
+
+        let userCompany = this.state.contactDetails.company
+        let userJobTitle = this.state.contactDetails.jobTitle
         let userLinkedIn = this.state.contactDetails.linkedIn
+        let userFacebook = this.state.contactDetails.facebook
+        let userInstagram = this.state.contactDetails.instagram
+        let userTwitter = this.state.contactDetails.twitter
+        let userWebsite = this.state.contactDetails.website
+
+        let userOtherInfo = this.state.contactDetails.otherInfo
+
         let userCreationDate = "NO VALUE"
+
         let upcomingEventsList = this.state.upcomingEvents
         let pastEventsList = this.state.pastEvents
         let userProfilePictureUrl = this.state.contactDetails.profilePhoto
+
+        let contactInfoRows = [
+            {
+                icon: require('../../images/Settings/iconmonstr-email-4.png'),
+                value: userEmail
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-phone-1.png'),
+                value: userPhone
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-company.png'),
+                value: userCompany
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-user16.png'),
+                value: userJobTitle
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-linkedin-1.png'),
+                value: userLinkedIn
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-facebook.png'),
+                value: userFacebook
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-instagram-6-3x.png'),
+                value: userInstagram
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-twitter-1-3x.png'),
+                value: userTwitter
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-globe-5.png'),
+                value: userWebsite
+            },
+            {
+                icon: require('../../images/Settings/iconmonstr-info.png'),
+                value: userOtherInfo
+            }
+        ]
 
         let { navigate } = this.props.navigation;
         return (
@@ -183,126 +238,22 @@ export default class ProfileView extends Component {
                 <View style={{marginBottom: 15}}/>
 
                 <View style={{flexDirection: 'column'}}>
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-email-4.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            {userEmail}
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-phone-1.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            {userPhone}
-                        </Text>
-                    </View>
-
-                   <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-linkedin-1.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            {userLinkedIn}
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-company.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Company
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-user16.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Job title
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-info.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Other info
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-facebook.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Facebook
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-instagram-6-3x.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Instagram
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-twitter-1-3x.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Twitter
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-globe-5.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Website
-                        </Text>
-                    </View>
-
-                    <View style={styles.contactInfoRow}>
-                        <Image
-                            style={styles.contactInfoRowImage}
-                            resizeMode='contain'
-                            source={require('../../images/Settings/iconmonstr-info.png')}/>
-                        <View style={styles.contactInfoRowSpacer}/>
-                        <Text style={styles.paragraph}>
-                            Other info
-                        </Text>
-                    </View>
+                {
+                    contactInfoRows.map((row, index) => {
+                        return (
+                            <View key={index} style={styles.contactInfoRow}>
+                                <Image
+                                    style={styles.contactInfoRowImage}
+                                    resizeMode='contain'
+                                    source={row.icon}/>
+                                <View style={styles.contactInfoRowSpacer}/>
+                                <Text style={styles.paragraph}>
+                                    {row.value}
+                                </Text>
+                            </View>
+                        )
+                    })
+                }
                 </View>
 
                 <View style={{marginBottom: 30}}/>
@@ -368,6 +319,6 @@ export default class ProfileView extends Component {
                 <View style={{marginBottom: 60}}/>
 
             </ScrollView>
-        );
+        )
     }
 }

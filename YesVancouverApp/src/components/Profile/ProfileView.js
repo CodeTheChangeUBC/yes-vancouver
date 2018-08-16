@@ -61,15 +61,15 @@ export default class ProfileView extends Component {
 
     _renderEventsHeader(section, _, isActive) {
         return (
-            <View style={{flexDirection: 'row', justifyContent:'flex-start', marginVertical: 10}}>
+            <View style={styles.eventsHeaderContainer}>
                 {(isActive) ? 
                     <Image
-                        style={{width:20, height: 20}}
+                        style={styles.eventsHeaderIcon}
                         source={require('../../images/Settings/Arrow-open.png')}
                         transform={[{rotate: '90deg'}]}/>
-                : 
+                    : 
                     <Image
-                        style={{width:20, height: 20}}
+                        style={styles.eventsHeaderIcon}
                         source={require('../../images/Settings/Arrow-open.png')}/>
                 }
                 <View style={{marginRight: 10}}/>
@@ -89,7 +89,6 @@ export default class ProfileView extends Component {
         else {
             return (
                 <FlatList
-                    style = {styles.flatList}
                     data = {section.content}
                     renderItem={({item}) => 
                         <Text style={styles.paragraph}>
@@ -342,7 +341,7 @@ export default class ProfileView extends Component {
 
                 <View style={{marginBottom: 30}}/>
 
-                <View style={{flexDirection:'column', justifyContent:'flex-start'}}>
+                <View style={styles.eventsAccordianContainer}>
                     <Accordion
                         sections={[{
                             title: 'My Upcoming Events',

@@ -89,16 +89,17 @@ export const styles = StyleSheet.create({
     contactInfoRowSpacer: {
         marginRight: 15
     },
-    dropDown: {
-        fontSize: 22,
-        fontWeight:"bold",
-        marginTop: 16,
-        marginBottom:10
+    eventsAccordianContainer: {
+        flexDirection:'column',
+        justifyContent:'flex-start'
     },
-    imageButtonView: {
-        marginRight:30
+    eventsHeaderContainer: {
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+        marginVertical: 10
     },
-    flatList: {
-        marginBottom: 20
+    eventsHeaderIcon: {
+        width:20,
+        height: 20
     }
 })

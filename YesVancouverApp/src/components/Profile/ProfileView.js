@@ -11,6 +11,7 @@ export default class ProfileView extends Component {
         this.state = {
             isProfileLoading: true,
             contactDetails: null,
+            pastEvents: null,
             upcomingEvents: null
         }
     }
@@ -35,12 +36,12 @@ export default class ProfileView extends Component {
         const givenUserDetails = params ? params.userData : null;
 
         let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
-        let contactUpcomingEvents = await contactDetailsObj.getContactEventRegistrationList()
-        console.log(contactUpcomingEvents)
+        let contactRegisteredEvents = await contactDetailsObj.getContactEventRegistrationList()
 
         this.setState({
             contactDetails: contactDetailsObj,
-            upcomingEvents: contactUpcomingEvents,
+            pastEvents: contactRegisteredEvents.pastEvents,
+            upcomingEvents: contactRegisteredEvents.upcomingEvents,
             isProfileLoading: false,
         })
     }

@@ -1,5 +1,6 @@
 import { getBearerToken } from "../../apicalls/Authentication/AuthToken"
 import { getEventRegistrationList } from "../../apicalls/Profile/ProfileDetails"
+import { DateTimeUtil } from "../../lib/Utils/DateTimeUtil"
 
 
 class ContactDetailsObj {
@@ -69,22 +70,45 @@ class ContactDetailsObj {
     }
 
     /**
-     * Parses the data for the upcoming events for a contact
+     * Parses the data for the registered events for a contact
      * into a FlatList readable format
      *
-     * @param upcomingEventsList
-     * @returns upcoming events formatted in a FlatList format
+     * @param the registered events of a contact
+     * @returns an object with the pastEvents property containing
+     *      the past registered events and the upcomingEvents property
+     *      containing the upcoming registered events
      */
-    async getUpcomingEvents(upcomingEventsList){
-        let upcomingEventsDictionaryList = [];
-        await upcomingEventsList.forEach(function (value) {
-            upcomingEventsDictionaryList.push({
-                key: value["Id"],
-                name: value["Event"]["Name"],
-                date: value["Event"]["StartDate"].substring(0, 10)
-            });
+    async getUpcomingEvents(registeredEventsList){
+        let upcomingEventsList = [];
+        let pastEventsList = [];
+        let currentDate = Date.now();
+
+        await registeredEventsList.forEach(function (value) {
+            let startDateObj = new Date(Date.parse(value["Event"]["StartDate"]))
+            let startDateStr = DateTimeUtil.monthsAbbrevMixedCase()[startDateObj.getMonth()]
+                + " " + startDateObj.getDate().toString()
+                + ", " + startDateObj.getFullYear().toString()
+
+            if(startDateObj.getTime() < currentDate) {
+                pastEventsList.push({
+                    key: value["Id"],
+                    name: value["Event"]["Name"],
+                    date: startDateStr
+                })
+            }
+            else {
+                upcomingEventsList.push({
+                    key: value["Id"],
+                    name: value["Event"]["Name"],
+                    date: startDateStr
+                });
+            }
         });
-        return upcomingEventsDictionaryList;
+
+        return {
+            pastEvents: pastEventsList,
+            upcomingEvents: upcomingEventsList
+        };
     }
 }
 

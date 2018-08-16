@@ -34,8 +34,9 @@ export default class ProfileView extends Component {
     async componentDidMount(){
         const { params } = this.props.navigation.state;
         const givenUserDetails = params ? params.userData : null;
+        const userPassword = params ? params.userPassword : null;
 
-        let contactDetailsObj = new ContactDetailsObj(givenUserDetails)
+        let contactDetailsObj = new ContactDetailsObj(givenUserDetails, userPassword)
         let contactRegisteredEvents = await contactDetailsObj.getContactEventRegistrationList()
 
         this.setState({
@@ -107,6 +108,7 @@ export default class ProfileView extends Component {
         let userLastName = this.state.contactDetails.lastName
         let userEmail = this.state.contactDetails.email       
         let userPhone = this.state.contactDetails.phone
+        let userPassword = this.state.contactDetails.userPassword
 
         let userMembershipLevel = this.state.contactDetails.membershipLevel
         let userMemberSince = this.state.contactDetails.memberSince
@@ -122,13 +124,11 @@ export default class ProfileView extends Component {
         let userWebsite = this.state.contactDetails.website
 
         let userOtherInfo = this.state.contactDetails.otherInfo
-
-        let userCreationDate = "NO VALUE"
+        let userProfilePhotoUrl = this.state.contactDetails.profilePhoto
 
         let upcomingEventsList = this.state.upcomingEvents
         let pastEventsList = this.state.pastEvents
-        let userProfilePictureUrl = this.state.contactDetails.profilePhoto
-
+        
         let contactInfoRows = [
             {
                 icon: require('../../images/Settings/iconmonstr-email-4.png'),
@@ -212,7 +212,7 @@ export default class ProfileView extends Component {
                 <Text style={styles.subHeading}>
                     Membership Information
                 </Text>
-                
+
                 <Text style={styles.paragraph}>Level: {userMembershipLevel}</Text>
                 <Text style={styles.paragraph}>Status: {userMemberStatus}</Text>
                 <Text style={styles.paragraph}>Renewal due: {userRenewalDue} </Text>

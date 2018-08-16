@@ -4,7 +4,7 @@ import { DateTimeUtil } from "../../lib/Utils/DateTimeUtil"
 
 
 class ContactDetailsObj {
-    constructor(ContactDetailsJson) {
+    constructor(ContactDetailsJson, ContactPassword) {
         let customContactFields = ContactDetailsObj.createCustomFieldDict(ContactDetailsJson)
 
         this.id = ContactDetailsJson["Id"]
@@ -12,6 +12,7 @@ class ContactDetailsObj {
         this.lastName = ContactDetailsJson["LastName"]
         this.email = ContactDetailsJson["Email"]
         this.phone = ContactDetailsJson["Phone"]
+        this.password = ContactPassword
 
         this.membershipLevel = ContactDetailsObj.getMembershipLevel(ContactDetailsJson)
         this.memberSince = ContactDetailsObj.getDate(ContactDetailsJson["MemberSince"]) 
@@ -77,7 +78,7 @@ class ContactDetailsObj {
         if(!bearerToken) {
             console.log("Failed to get bearer token");
             this.setState({isEventListLoading: false});
-            return
+            return null
         }
         let eventRegistrationList = await getEventRegistrationList(bearerToken, this.id);
         let upcomingEventsList = await this.getUpcomingEvents(eventRegistrationList);

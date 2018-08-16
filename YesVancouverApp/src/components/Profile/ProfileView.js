@@ -108,7 +108,9 @@ export default class ProfileView extends Component {
         let userEmail = this.state.contactDetails.email       
         let userPhone = this.state.contactDetails.phone
 
+        let userMembershipLevel = this.state.contactDetails.membershipLevel
         let userMemberSince = this.state.contactDetails.memberSince
+        let userMemberStatus = this.state.contactDetails.memberStatus
         let userRenewalDue = this.state.contactDetails.renewalDue
 
         let userCompany = this.state.contactDetails.company
@@ -200,17 +202,20 @@ export default class ProfileView extends Component {
                             YES! Vancouver Member
                         </Text>
                         <Text style={styles.paragraph}>
-                            First joined on : {userCreationDate.substring(0, 10)}
+                            First joined on: {userMemberSince}
                         </Text>
                     </View>
                 </View>
 
                 <View style={{marginBottom: 30}}/>
 
-                <Text style={styles.subHeading}>Membership Information</Text>
-                <Text style={styles.paragraph}>Level: membershiplevel</Text>
-                <Text style={styles.paragraph}>Status: {userMemberSince.substring(0, 10)}</Text>
-                <Text style={styles.paragraph}>Renewal due: {userRenewalDue.substring(0, 10)} </Text>
+                <Text style={styles.subHeading}>
+                    Membership Information
+                </Text>
+                
+                <Text style={styles.paragraph}>Level: {userMembershipLevel}</Text>
+                <Text style={styles.paragraph}>Status: {userMemberStatus}</Text>
+                <Text style={styles.paragraph}>Renewal due: {userRenewalDue} </Text>
 
                 <View style={{marginBottom: 30}}/>
 

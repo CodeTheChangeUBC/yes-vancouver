@@ -13,9 +13,10 @@ class ContactDetailsObj {
         this.email = ContactDetailsJson["Email"]
         this.phone = ContactDetailsJson["Phone"]
 
-        this.memberSince = ContactDetailsJson["MemberSince"]
         this.membershipLevel = ContactDetailsObj.getMembershipLevel(ContactDetailsJson)
-        this.renewalDue = ContactDetailsJson["RenewalDue"]
+        this.memberSince = ContactDetailsObj.getDate(ContactDetailsJson["MemberSince"]) 
+        this.memberStatus = ContactDetailsJson["Status"]
+        this.renewalDue = ContactDetailsObj.getDate(ContactDetailsJson["RenewalDue"])
 
         this.company = ContactDetailsObj.getCustomField(customContactFields, "Company")
         this.jobTitle = ContactDetailsObj.getCustomField(customContactFields, "JobTitle")
@@ -57,6 +58,16 @@ class ContactDetailsObj {
         return "No profile pic"
     }
 
+    static getDate(dateString){
+        try {
+            let dateObj = new Date(Date.parse(dateString))
+            return DateTimeUtil.formatDate(dateObj)
+        }
+        catch(err){
+            return null
+        }
+    }
+
     /**
      * Returns the upcoming event registration data for a given contact
      * in a FlatList readable format
@@ -89,10 +100,7 @@ class ContactDetailsObj {
 
         await registeredEventsList.forEach(function (value) {
             let startDateObj = new Date(Date.parse(value["Event"]["StartDate"]))
-            let startDateStr = DateTimeUtil.monthsAbbrevMixedCase()[startDateObj.getMonth()]
-                + " " + startDateObj.getDate().toString()
-                + ", " + startDateObj.getFullYear().toString()
-
+            let startDateStr = DateTimeUtil.formatDate(startDateObj)
             if(startDateObj.getTime() < currentDate) {
                 pastEventsList.push({
                     key: value["Id"],

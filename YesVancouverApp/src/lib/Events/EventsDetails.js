@@ -74,7 +74,6 @@ class EventDetailsObj {
         let xmlDoc = null
         parseString(xmlString, {trim: true}, function (err, result) {
             if(!err){
-                console.dir(result)
                 xmlDoc = result
             }
         })

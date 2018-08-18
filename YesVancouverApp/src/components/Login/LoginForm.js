@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {getIndividualContactsList, authenticateContactLogin, getContactEventRegistrationList,
-    retrieveCurrentContactDetails} from '../Profile/FetchUserDetails'
+import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
+import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 
 let clientEmail = "";
 let clientPassword = "";
@@ -16,12 +16,11 @@ export default class LoginForm extends Component {
     async authenticateLogin(){
         let {navigate} = this.props.navigation;
         let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
+        console.log(contactAuthenticationToken)
         if (contactAuthenticationToken !== null){
-            let currentUserDetails = await retrieveCurrentContactDetails(contactAuthenticationToken);
-            let contactsListArray = await getIndividualContactsList(currentUserDetails["Id"]);
-            let contactEventRegistrationDetails = await getContactEventRegistrationList(currentUserDetails["Id"]);
-            await navigate("NavBar", {'userData' : contactsListArray[0],
-                                'upcomingEvents' : contactEventRegistrationDetails});
+            let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
+            await navigate("NavBar", {'userData' : currentContactDetails,
+                                    'userPassword' : clientPassword});
         }
         else{
             Alert.alert(

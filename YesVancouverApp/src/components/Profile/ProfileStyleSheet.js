@@ -1,32 +1,39 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    },
     container: {
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    editProfileContainer:{
+    editProfileContainer: {
         backgroundColor: '#fff'
     },
-    internalView:{
+    internalView: {
         width: '100%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    profileLogo:{
+    profileLogo: {
         alignContent:'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 40
     },
-    editTextTitles:{
+    editTextTitles: {
         textAlign: 'center',
         fontSize: 20
     },
-    imageLogo:{
-        width:30,
-        height:30,
-        marginRight : 30
+    imageLogo: {
+        width: 50,
+        height: 50
     },
     input: {
         height: 30,
@@ -38,44 +45,61 @@ export const styles = StyleSheet.create({
         marginRight: 10
     },
     nameFont:{
-        marginTop : 20,
-        marginBottom: 15,
-        fontSize:25,
-        fontWeight:'bold'
-    },
-    subHeading:{
-        fontSize:28,
         textAlign: 'center',
-        marginBottom: 20
+        fontSize: 25,
+        fontWeight: 'bold',
+        fontFamily: 'alternate-gothic-no3-d-regular'
     },
-    paragraph:{
-        fontSize:16
+    subHeading: {
+        textAlign: 'center',
+        fontSize: 28,
+        fontWeight: 'bold',
+        fontFamily: 'alternate-gothic-no3-d-regular'
     },
-    paragraphWithMargin:{
-        fontSize:16,
-        marginBottom: 15
+    paragraph: {
+        fontSize: 16,
+        fontFamily: 'source-sans-pro-regular'
     },
-    extendMembershipButtonView:{
-        marginBottom: 30,
-        marginTop: 20
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
-    buttonView:{
-        marginBottom: 30,
-        marginTop: 10
+    button: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 0.6
     },
-    contactInfo:{
-        fontSize:18
+    buttonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
     },
-    dropDown:{
-        fontSize: 22,
-        fontWeight:"bold",
-        marginTop: 16,
-        marginBottom:10
+    buttonSpacer: {
+        flex: 0.2
     },
-    imageButtonView:{
-        marginRight:30
+    contactInfoRow: {
+        flexDirection: 'row',
+        marginVertical: 5
     },
-    flatList:{
-        marginBottom: 20
+    contactInfoRowImage: {
+        width: 20,
+        height: 20
+    },
+    contactInfoRowSpacer: {
+        marginRight: 15
+    },
+    eventsAccordianContainer: {
+        flexDirection:'column',
+        justifyContent:'flex-start'
+    },
+    eventsHeaderContainer: {
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+        marginVertical: 10
+    },
+    eventsHeaderIcon: {
+        width:20,
+        height: 20
     }
-});
+})

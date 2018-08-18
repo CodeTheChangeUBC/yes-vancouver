@@ -1,40 +1,33 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Header, StackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'
 import EventsRegistration from './EventsRegistration'
-import CustomHeader from '../Navigation/Header'
+import CustomHeader, { headerStyles } from '../Navigation/Header'
 
-const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 1
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    }
-})
 
 const EventsView = StackNavigator({
     EventsList: {
         screen: EventsList,
         navigationOptions:({navigation}) => ({
             title: 'Events',
-            headerLeft: (<View></View>)
+            headerTitleStyle: headerStyles.headerTitle,
+            headerLeft: (<View></View>),
         })
     },
     EventsDetails: {
         screen: EventsDetails,
         navigationOptions: ({navigation}) => ({
             title: navigation.getParam('eventTitle', 'Event Details'),
+            headerTitleStyle: headerStyles.headerTitle
         })
     },
     EventsRegistration: {
         screen: EventsRegistration,
         navigationOptions: ({navigation}) => ({
             title: navigation.getParam('eventTitle', 'Event Registration'),
+            headerTitleStyle: headerStyles.headerTitle
         })
     }
 },
@@ -60,10 +53,7 @@ const EventsView = StackNavigator({
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTransparent: false,
-        headerBackground: 
-            <View style={styles.headerContainer}>
-                <CustomHeader style={styles.header}/>
-            </View>,
+        headerBackground: <CustomHeader />,
         headerRight: (<View></View>)
     }
 })

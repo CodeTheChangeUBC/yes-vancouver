@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
 import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
+import { headerStyles } from '../Navigation/Header'
 
 let clientEmail = "";
 let clientPassword = "";
@@ -10,7 +11,8 @@ let clientPassword = "";
 export default class LoginForm extends Component {
 
     static navigationOptions = {
-        title:"Login",
+        title: "Login",
+        headerTitleStyle: headerStyles.headerTitle
     };
 
     async authenticateLogin(){

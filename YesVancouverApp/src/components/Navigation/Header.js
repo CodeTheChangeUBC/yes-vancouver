@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 
 
 const Header = () => {
     return (
-        <View style={styles.imageContainer}>
+        <View style={headerStyles.imageContainer}>
             <Image 
-                style={styles.headerImage}
+                style={headerStyles.headerImage}
                 resizeMode='stretch'
                 source={require('../../images/Header/Top-header-bar-3x.png')}
             />
@@ -14,7 +14,7 @@ const Header = () => {
     );
 };
 
-const styles = StyleSheet.create({
+export const headerStyles = StyleSheet.create({
     imageContainer: {
         flex: 1
     },
@@ -22,6 +22,14 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null
+    },
+    headerTitle: {
+        flex: 1,
+        textAlign: 'center',
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontWeight: 'normal',
+        lineHeight: 24,
+        fontSize: 24
     }
 });
 

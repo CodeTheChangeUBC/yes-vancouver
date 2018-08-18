@@ -104,14 +104,14 @@ class ContactDetailsObj {
             let startDateStr = DateTimeUtil.formatDate(startDateObj)
             if(startDateObj.getTime() < currentDate) {
                 pastEventsList.push({
-                    key: value["Id"],
+                    key: value["Id"].toString(),
                     name: value["Event"]["Name"],
                     date: startDateStr
                 })
             }
             else {
                 upcomingEventsList.push({
-                    key: value["Id"],
+                    key: value["Id"].toString(),
                     name: value["Event"]["Name"],
                     date: startDateStr
                 });

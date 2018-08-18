@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Header, StackNavigator } from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'
 import EventsRegistration from './EventsRegistration'
@@ -31,10 +31,7 @@ const EventsView = StackNavigator({
 {
     navigationOptions: {
         headerMode: 'screen',
-        headerStyle: {
-            paddingVertical: (Header.HEIGHT - 24) / 2,
-            paddingLeft: 10
-        },
+        headerStyle: headerStyles.headerContainer,
         headerVisible: true,
         headerTitleStyle: headerStyles.headerTitle,
         headerBackImage: require('../../images/Header/White-arrow-3x.png'),

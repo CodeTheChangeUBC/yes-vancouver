@@ -1,8 +1,9 @@
-import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import React from 'react'
+import { StyleSheet, View, Image } from 'react-native'
+import { Header } from 'react-navigation'
 
 
-const Header = () => {
+const CustomHeader = () => {
     return (
         <View style={headerStyles.imageContainer}>
             <Image 
@@ -23,6 +24,10 @@ export const headerStyles = StyleSheet.create({
         width: null,
         height: null
     },
+    headerContainer: {
+        paddingVertical: (Header.HEIGHT - 24) / 2,
+        paddingLeft: 10
+    },
     headerTitle: {
         flex: 1,
         textAlign: 'center',
@@ -33,7 +38,7 @@ export const headerStyles = StyleSheet.create({
     }
 });
 
-export default Header;
+export default CustomHeader;
 
 
 {/* <View style={styles.headerContainer}>

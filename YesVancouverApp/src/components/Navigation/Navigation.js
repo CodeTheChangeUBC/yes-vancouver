@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { View } from 'react-native'
-import { Header, StackNavigator } from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
 
 import Login from '../Login/LoginForm'
 import HomeScreen from '../HomeScreen/HomeScreen'
@@ -38,10 +38,7 @@ const Navigation = StackNavigator({
 {
     navigationOptions: ({ navigation }) => ({
         headerMode: 'screen',
-        headerStyle: {
-            paddingVertical: (Header.HEIGHT - 24) / 2,
-            paddingLeft: 10
-        },
+        headerStyle: headerStyles.headerContainer,
         headerVisible: true,
         headerTitleStyle: headerStyles.headerTitle,
         headerBackImage: require('../../images/Header/White-arrow-3x.png'),

@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { Header, StackNavigator } from 'react-navigation'
 
 import Login from '../Login/LoginForm'
@@ -18,7 +18,7 @@ import Aveda from '../Perks/aveda'
 import PerksView from '../Perks/PerksView'
 import PerksList from '../Perks/PerksList'
 import EditProfile from "../Profile/EditProfile"
-import CustomHeader from './Header'
+import CustomHeader, { headerStyles } from './Header'
 
 
 const Navigation = StackNavigator({
@@ -43,38 +43,14 @@ const Navigation = StackNavigator({
             paddingLeft: 10
         },
         headerVisible: true,
-        headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center',
-            alignSelf: 'center',
-            fontFamily: 'alternate-gothic-no3-d-regular',
-            fontWeight: 'normal',
-            lineHeight: 24,
-            fontSize: 24,
-            padding: 30
-        },
+        headerTitleStyle: headerStyles.headerTitle,
         headerBackImage: require('../../images/Header/White-arrow-3x.png'),
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTransparent: false,
-        headerBackground: 
-            <View style={styles.headerContainer}>
-                <CustomHeader style={styles.header}/>
-            </View>,
+        headerBackground: <CustomHeader />,
         headerRight: (<View></View>)
     })
 })
 
 export default Navigation
-
-
-const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 1
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    }
-})

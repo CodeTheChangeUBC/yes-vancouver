@@ -5,7 +5,9 @@ import { DateTimeUtil } from "../../lib/Utils/DateTimeUtil"
 
 class ContactDetailsObj {
     constructor(ContactDetailsJson, ContactPassword) {
-        let customContactFields = ContactDetailsObj.createCustomFieldDict(ContactDetailsJson)
+        let customFields = ContactDetailsObj.createCustomFieldDict(ContactDetailsJson)
+        let customContactFields = customFields.fieldValues
+        this.customContactFieldsSystemCode = customFields.fieldSystemCodes
 
         this.id = ContactDetailsJson["Id"]
         this.firstName = ContactDetailsJson["FirstName"]
@@ -33,11 +35,16 @@ class ContactDetailsObj {
     }
 
     static createCustomFieldDict(ContactDetailsJson){
-        let profileDictionary = {};
+        let customFieldValueDict = {}
+        let customFieldSystemCodeDict = {}
         ContactDetailsJson["FieldValues"].forEach(function (miniObject) {
-            profileDictionary[miniObject["FieldName"].toString()] = miniObject["Value"]
+            customFieldValueDict[miniObject["FieldName"].toString()] = miniObject["Value"]
+            customFieldSystemCodeDict[miniObject["FieldName"].toString()] = miniObject["SystemCode"]
         });
-        return profileDictionary;
+        return {
+            fieldValues: customFieldValueDict, 
+            fieldSystemCodes: customFieldSystemCodeDict
+        }
     }
     
     static getCustomField(dictionary, key){

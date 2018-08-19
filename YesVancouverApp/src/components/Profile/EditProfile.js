@@ -59,47 +59,47 @@ export default class EditProfile extends Component{
                 {
                     "FieldName": "Phone",
                     "Value": newContactDetails.phone,
-                    "SystemCode": "Phone"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Phone"]
                 },
                 {
                     "FieldName": "Company",
                     "Value": newContactDetails.company,
-                    "SystemCode": "custom-10381084"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Company"]
                 },
                 {
                     "FieldName": "JobTitle",
                     "Value": newContactDetails.jobTitle,
-                    "SystemCode": "custom-10381083"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["JobTitle"]
                 },
                 {
                     "FieldName": "Linkedin",
                     "Value": newContactDetails.linkedIn,
-                    "SystemCode": "custom-10381090"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["LinkedIn"]
                 },
                 {
                     "FieldName": "Facebook",
                     "Value": newContactDetails.facebook,
-                    "SystemCode": "custom-10381086"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Facebook"]
                 },
                 {
                     "FieldName": "Instagram",
                     "Value": newContactDetails.instagram,
-                    "SystemCode": "custom-10381088"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Instagram"]
                 },
                 {
                     "FieldName": "Twitter",
                     "Value": newContactDetails.twitter,
-                    "SystemCode": "custom-10381087"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Twitter"]
                 },
                 {
                     "FieldName": "Website",
                     "Value": newContactDetails.website,
-                    "SystemCode": "custom-10381089"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Website"]
                 },
                 {
                     "FieldName": "OtherInfo",
                     "Value": newContactDetails.otherInfo,
-                    "SystemCode": "custom-10381085"
+                    "SystemCode": newContactDetails.customContactFieldsSystemCode["OtherInfo"]
                 }
             ]
         };
@@ -113,11 +113,11 @@ export default class EditProfile extends Component{
                     {text: "Ok", style:'cancel'}
                 ]
             );
-            let contact = await getIndividualContactsList(this.userID);
-            contact = contact[0];
-            let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
-            navigate("NavBar", {'userData' : contact,
-                                'upcomingEvents' : contactEventRegistrationDetails});
+            // let contact = await getIndividualContactsList(this.userID);
+            // contact = contact[0];
+            // let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
+            // navigate("NavBar", {'userData' : contact,
+            //                     'upcomingEvents' : contactEventRegistrationDetails});
         }
         else{
             Alert.alert(

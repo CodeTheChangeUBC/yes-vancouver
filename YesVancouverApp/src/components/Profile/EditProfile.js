@@ -110,7 +110,7 @@ export default class EditProfile extends Component{
 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -133,7 +133,7 @@ export default class EditProfile extends Component{
 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -179,7 +179,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-phone-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -202,7 +202,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-company.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -225,7 +225,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -248,7 +248,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-linkedin-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -271,7 +271,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-facebook.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -294,7 +294,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-instagram-6-3x.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -317,7 +317,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-twitter-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -340,7 +340,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-globe-5.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>
@@ -363,7 +363,7 @@ export default class EditProfile extends Component{
                 
                 <View style={editProfileStyles.inputRow}>
                     <View style={editProfileStyles.inputHeader}>
-                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                        <Image source={require('../../images/Settings/iconmonstr-info.png')}
                                 style={editProfileStyles.inputIcon} />
                         <View style={{width: 10}} />
                         <Text style={editProfileStyles.inputHeaderText}>

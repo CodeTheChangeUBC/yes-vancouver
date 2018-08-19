@@ -112,11 +112,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             First Name
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -135,11 +136,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Last Name
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -158,11 +160,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Email
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -181,11 +184,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-phone-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Phone
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -204,11 +208,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-company.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Company
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -227,11 +232,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-user16.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Job Title
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -250,11 +256,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-linkedin-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             LinkedIn
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -273,11 +280,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-facebook.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Facebook
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -296,11 +304,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-instagram-6-3x.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Instagram
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -319,11 +328,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-twitter-1-3x.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Twitter
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -342,11 +352,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-globe-5.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Website
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -365,11 +376,12 @@ export default class EditProfile extends Component{
                     <View style={editProfileStyles.inputHeader}>
                         <Image source={require('../../images/Settings/iconmonstr-info.png')}
                                 style={editProfileStyles.inputIcon} />
-                        <View style={{width: 10}} />
+                        <View style={editProfileStyles.inputHeaderVerticalSpacer} />
                         <Text style={editProfileStyles.inputHeaderText}>
                             Other Info
                         </Text>
                     </View>
+                    <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
@@ -432,10 +444,16 @@ const editProfileStyles = StyleSheet.create({
         height: 30,
         resizeMode: 'contain'
     },
+    inputHeaderVerticalSpacer: {
+        width: 10
+    },
     inputHeaderText: {
         fontFamily: 'alternate-gothic-no3-d-regular',
         fontSize: 24,
         color: 'black'
+    },
+    inputVerticalSpacer: {
+        height: 10
     },
     inputText: {
         borderBottomWidth: 1,

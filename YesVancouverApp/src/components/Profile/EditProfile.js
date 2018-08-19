@@ -105,167 +105,299 @@ export default class EditProfile extends Component{
         return (
             <ScrollView style={editProfileStyles.scrollView} 
                         contentContainerStyle={editProfileStyles.scrollViewContentContainer}>
-                <View>
-                    <View style={{height: 50}} />
+                
+                <View style={editProfileStyles.contentTopSpacer} />
 
-                    <View style={editProfileStyles.inputRow}>
-                        <View style={editProfileStyles.inputHeader}>
-                            <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
-                                    style={editProfileStyles.inputIcon} />
-                            <View style={{width: 10}} />
-                            <Text style={editProfileStyles.inputHeaderText}>
-                                First Name
-                            </Text>
-                        </View>
-                    
-                        <TextInput
-                            underlineColorAndroid='transparent'
-                            returnKeyType="next"
-                            keyboardType="default"
-                            autoCapitalize="words"
-                            autoCorrect={false}
-                            defaultValue = {this.state.contactDetails.firstName}
-                            style={editProfileStyles.inputText}
-                            onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
-                        />
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            First Name
+                        </Text>
                     </View>
-
-                    <View style={{height: 25}} />
-
-                    <Text>Last Name: </Text>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
-                        autoCapitalize="none"
+                        autoCapitalize="words"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
+                        defaultValue = {this.state.contactDetails.firstName}
+                        onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
+                    />
+                </View>
+
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Last Name
+                        </Text>
+                    </View>
+                    <TextInput
+                        underlineColorAndroid='transparent'
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="words"
+                        autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.lastName}
-                        style={styles.input}
                         onChangeText={(newContactLastName)=> this.setState({newContactLastName})}
                     />
-                    <Text>Email: </Text>
+                </View>
+
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+        
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Email
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.email}
-                        style={styles.input}
                         onChangeText={(newContactEmail)=> this.setState({newContactEmail})}
                     />
-                    <Text>Phone: </Text>
+                </View>
+
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Phone
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="phone-pad"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.phone}
-                        style={styles.input}
                         onChangeText={(newContactPhone)=> this.setState({newContactPhone})}
                     />
+                </View>
 
-                    <Text>Company: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Company
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
-                        autoCapitalize="none"
+                        autoCapitalize="words"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.company}
-                        style={styles.input}
                         onChangeText={(newContactCompany)=> this.setState({newContactCompany})}
                     />
+                </View>
 
-                    <Text>Job Title: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Job Title
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
-                        autoCapitalize="none"
+                        autoCapitalize="words"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.jobTitle}
-                        style={styles.input}
                         onChangeText={(newContactJobTitle)=> this.setState({newContactJobTitle})}
                     />
+                </View>
 
-                    <Text>LinkedIn: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            LinkedIn
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.linkedIn}
-                        style={styles.input}
                         onChangeText={(newContactLinkedIn)=> this.setState({newContactLinkedIn})}
                     />
+                </View>
 
-                    <Text>Facebook: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Facebook
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.facebook}
-                        style={styles.input}
                         onChangeText={(newContactFacebook)=> this.setState({newContactFacebook})}
                     />
+                </View>
 
-                    <Text>Instagram: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Instagram
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.instagram}
-                        style={styles.input}
                         onChangeText={(newContactInstagram)=> this.setState({newContactInstagram})}
                     />
+                </View>
 
-                    <Text>Twitter: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Twitter
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.twitter}
-                        style={styles.input}
                         onChangeText={(newContactTwitter)=> this.setState({newContactTwitter})}
                     />
+                </View>
 
-                    <Text>Website: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Website
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.website}
-                        style={styles.input}
                         onChangeText={(newContactWebsite)=> this.setState({newContactWebsite})}
                     />
+                </View>
 
-                    <Text>Other Info: </Text>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+                
+                <View style={editProfileStyles.inputRow}>
+                    <View style={editProfileStyles.inputHeader}>
+                        <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                style={editProfileStyles.inputIcon} />
+                        <View style={{width: 10}} />
+                        <Text style={editProfileStyles.inputHeaderText}>
+                            Other Info
+                        </Text>
+                    </View>
                     <TextInput
+                        underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
+                        style={editProfileStyles.inputText}
                         defaultValue = {this.state.contactDetails.otherInfo}
-                        style={styles.input}
                         onChangeText={(newContactOtherInfo)=> this.setState({newContactOtherInfo})}
                     />
+                </View>
 
-                    <View style={styles.buttonView}>
-                        <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
-                        onPress={() => this.submitDetails()}/>
-                    </View>
-                    <View>
-                        <Button color="#ED4969" title="Cancel" style={styles.buttonView} onPress={
-                            ()=> Alert.alert(
-                                'Click Back',
-                                'Click the back button',
-                                [
-                                    {text: "Ok", style:'cancel'}
-                                ]
-                            )
-                        }/>
-                    </View>
+                <View style={editProfileStyles.contentHorizontalSpacer} />
+
+                <View style={styles.buttonView}>
+                    <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
+                    onPress={() => this.submitDetails()}/>
+                </View>
+                <View>
+                    <Button color="#ED4969" title="Cancel" style={styles.buttonView} onPress={
+                        ()=> Alert.alert(
+                            'Click Back',
+                            'Click the back button',
+                            [
+                                {text: "Ok", style:'cancel'}
+                            ]
+                        )
+                    }/>
                 </View>
             </ScrollView>
         )
@@ -279,6 +411,12 @@ const editProfileStyles = StyleSheet.create({
     scrollViewContentContainer: {
         paddingHorizontal: 25,
         backgroundColor: 'white'
+    },
+    contentTopSpacer: {
+        height: 50
+    },
+    contentHorizontalSpacer: {
+        height: 50
     },
     inputRow: {
         flexDirection:'column',
@@ -302,7 +440,7 @@ const editProfileStyles = StyleSheet.create({
     inputText: {
         borderBottomWidth: 1,
         fontFamily: 'alternate-gothic-no3-d-regular',
-        color: 'black',
+        color: '#979797',
         fontSize: 24,
         height: 30
     }

@@ -13,6 +13,7 @@ export default class EditProfile extends Component{
         }
     }
 
+    userId = ''
     newContactFirstName = ''
     newContactLastName = ''
     newContactEmail = ''
@@ -31,6 +32,7 @@ export default class EditProfile extends Component{
         let contactDetails = params ? params.contactDetails : null
         console.log(contactDetails)
 
+        this.userID = contactDetails.id
         this.newContactFirstName = contactDetails.firstName
         this.newContactLastName = contactDetails.lastName
         this.newContactEmail = contactDetails.email
@@ -51,7 +53,7 @@ export default class EditProfile extends Component{
     }
 
     async updateProfileDetails(){
-        let {navigate} = this.props.navigation;
+        let { navigate } = this.props.navigation;
         let apiDetails = {
             "Id" : this.userID,
             "FirstName": this.newContactFirstName,
@@ -60,11 +62,13 @@ export default class EditProfile extends Component{
             "FieldValues": [
                 {
                     "FieldName": "Phone",
-                    "Value": this.newContactPhone
+                    "Value": this.newContactPhone,
+                    "SystemCode": "Phone"
                 },
                 {
                     "FieldName": "Linkedin",
-                    "Value": this.newContactLinkedIn
+                    "Value": this.newContactLinkedIn,
+                    "SystemCode": "custom-10381090"
                 }
             ]
         };

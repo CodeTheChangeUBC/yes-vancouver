@@ -139,12 +139,13 @@ async function updateContactDetails(contactId, newContactDetails){
             {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + bearerToken
                 },
-                body: ApiUtils.constructFormUrlEncodedBody(newContactDetails)
+                body: JSON.stringify(newContactDetails)
             });
-
+            console.log(response)
+            console.log("HIE")
         if(response.status !== 200) {
             console.log(response.status);
             return null

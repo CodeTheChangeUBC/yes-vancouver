@@ -9,106 +9,102 @@ export default class EditProfile extends Component{
         super(props)
         this.state = {
             isEditProfileLoading: true,
-            contactDetails: null
+            contactDetails: null,
+            newContactFirstName: '',
+            newContactLastName: '',
+            newContactEmail: '',
+            newContactPhone: '',
+            newContactCompany: '',
+            newContactJobTitle: '',
+            newContactLinkedIn: '',
+            newContactFacebook: '',
+            newContactInstagram: '',
+            newContactTwitter: '',
+            newContactWebsite: '',
+            newContactOtherInfo: ''
         }
     }
-
-    userId = ''
-    newContactFirstName = ''
-    newContactLastName = ''
-    newContactEmail = ''
-    newContactPhone = ''
-    newContactCompany = ''
-    newContactJobTitle = ''
-    newContactLinkedIn = ''
-    newContactFacebook = ''
-    newContactInstagram = ''
-    newContactTwitter = ''
-    newContactWebsite = ''
-    newContactOtherInfo = ''
 
     async componentDidMount(){
         let { params } = this.props.navigation.state;
         let contactDetails = params ? params.contactDetails : null
         console.log(contactDetails)
 
-        this.userID = contactDetails.id
-        this.newContactFirstName = contactDetails.firstName
-        this.newContactLastName = contactDetails.lastName
-        this.newContactEmail = contactDetails.email
-        this.newContactPhone = contactDetails.phone
-        this.newContactCompany = contactDetails.company
-        this.newContactJobTitle = contactDetails.jobTitle
-        this.newContactLinkedIn = contactDetails.linkedIn
-        this.newContactFacebook = contactDetails.facebook
-        this.newContactInstagram = contactDetails.instagram
-        this.newContactTwitter = contactDetails.twitter
-        this.newContactWebsite = contactDetails.website
-        this.newContactOtherInfo = contactDetails.otherInfo
-
         this.setState({
             contactDetails: contactDetails,
+            newContactFirstName: contactDetails.firstName,
+            newContactLastName: contactDetails.lastName,
+            newContactEmail: contactDetails.email,
+            newContactPhone: contactDetails.phone,
+            newContactCompany: contactDetails.company,
+            newContactJobTitle: contactDetails.jobTitle,
+            newContactLinkedIn: contactDetails.linkedIn,
+            newContactFacebook: contactDetails.facebook,
+            newContactInstagram: contactDetails.instagram,
+            newContactTwitter: contactDetails.twitter,
+            newContactWebsite: contactDetails.website,
+            newContactOtherInfo: contactDetails.otherInfo,
             isEditProfileLoading: false,
         })
     }
 
-    async updateProfileDetails(){
+    async updateProfileDetails(newContactDetails){
         let { navigate } = this.props.navigation;
         let apiDetails = {
-            "Id" : this.userID,
-            "FirstName": this.newContactFirstName,
-            "LastName": this.newContactLastName,
-            "Email": this.newContactEmail,
+            "Id" : newContactDetails.id,
+            "FirstName": newContactDetails.firstName,
+            "LastName": newContactDetails.lastName,
+            "Email": newContactDetails.email,
             "FieldValues": [
                 {
                     "FieldName": "Phone",
-                    "Value": this.newContactPhone,
+                    "Value": newContactDetails.phone,
                     "SystemCode": "Phone"
                 },
                 {
                     "FieldName": "Company",
-                    "Value": this.newContactCompany,
+                    "Value": newContactDetails.company,
                     "SystemCode": "custom-10381084"
                 },
                 {
                     "FieldName": "JobTitle",
-                    "Value": this.newContactJobTitle,
+                    "Value": newContactDetails.jobTitle,
                     "SystemCode": "custom-10381083"
                 },
                 {
                     "FieldName": "Linkedin",
-                    "Value": this.newContactLinkedIn,
+                    "Value": newContactDetails.linkedIn,
                     "SystemCode": "custom-10381090"
                 },
                 {
                     "FieldName": "Facebook",
-                    "Value": this.newContactFacebook,
+                    "Value": newContactDetails.facebook,
                     "SystemCode": "custom-10381086"
                 },
                 {
                     "FieldName": "Instagram",
-                    "Value": this.newContactInstagram,
+                    "Value": newContactDetails.instagram,
                     "SystemCode": "custom-10381088"
                 },
                 {
                     "FieldName": "Twitter",
-                    "Value": this.newContactTwitter,
+                    "Value": newContactDetails.twitter,
                     "SystemCode": "custom-10381087"
                 },
                 {
                     "FieldName": "Website",
-                    "Value": this.newContactWebsite,
+                    "Value": newContactDetails.website,
                     "SystemCode": "custom-10381089"
                 },
                 {
                     "FieldName": "OtherInfo",
-                    "Value": this.newContactOtherInfo,
+                    "Value": newContactDetails.otherInfo,
                     "SystemCode": "custom-10381085"
                 }
             ]
         };
 
-        let updateResult = await updateContactDetails(this.userID, apiDetails);
+        let updateResult = await updateContactDetails(newContactDetails.id, apiDetails);
         if (updateResult !== null){
             Alert.alert(
                 'Details Updated',
@@ -147,24 +143,25 @@ export default class EditProfile extends Component{
         }
     }
 
-    returnEditProfileView(){
-        // return (
-        //     <View>
-        //         <Text>{this.newContactFirstName}</Text>
-        //         <Text>{this.newContactLastName}</Text>
-        //         <Text>{this.newContactEmail}</Text>
-        //         <Text>{this.newContactPhone}</Text>
-        //         <Text>{this.newContactCompany}</Text>
-        //         <Text>{this.newContactJobTitle}</Text>
-        //         <Text>{this.newContactLinkedIn}</Text>
-        //         <Text>{this.newContactFacebook}</Text>
-        //         <Text>{this.newContactInstagram}</Text>
-        //         <Text>{this.newContactTwitter}</Text>
-        //         <Text>{this.newContactWebsite}</Text>
-        //         <Text>{this.newContactOtherInfo}</Text>
-        //     </View>
-        // )
+    async submitDetails() {
+        let newContactDetails = JSON.parse(JSON.stringify(this.state.contactDetails))
+        newContactDetails.firstName = this.state.newContactFirstName
+        newContactDetails.lastName = this.state.newContactLastName
+        newContactDetails.email = this.state.newContactEmail
+        newContactDetails.phone = this.state.newContactPhone
+        newContactDetails.company = this.state.newContactCompany
+        newContactDetails.jobTitle = this.state.newContactJobTitle
+        newContactDetails.linkedIn = this.state.newContactLinkedIn
+        newContactDetails.facebook = this.state.newContactFacebook
+        newContactDetails.instagram = this.state.newContactInstagram
+        newContactDetails.twitter = this.state.newContactTwitter
+        newContactDetails.website = this.state.newContactWebsite
+        newContactDetails.otherInfo = this.state.newContactOtherInfo
 
+        await this.updateProfileDetails(newContactDetails)
+    }
+
+    returnEditProfileView(){
         return (
             <ScrollView contentContainerStyle={styles.editProfileContainer}>
                 <View>
@@ -177,7 +174,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.firstName}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactFirstName = text}
+                        onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
                     />
                     <Text>Last Name: </Text>
                     <TextInput
@@ -187,7 +184,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.lastName}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactLastName = text}
+                        onChangeText={(newContactLastName)=> this.setState({newContactLastName})}
                     />
                     <Text>Email: </Text>
                     <TextInput
@@ -197,7 +194,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.email}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactEmail = text}
+                        onChangeText={(newContactEmail)=> this.setState({newContactEmail})}
                     />
                     <Text>Phone: </Text>
                     <TextInput
@@ -207,7 +204,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.phone}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactPhone = text}
+                        onChangeText={(newContactPhone)=> this.setState({newContactPhone})}
                     />
 
                     <Text>Company: </Text>
@@ -218,7 +215,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.company}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactCompany = text}
+                        onChangeText={(newContactCompany)=> this.setState({newContactCompany})}
                     />
 
                     <Text>Job Title: </Text>
@@ -229,7 +226,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.jobTitle}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactJobTitle = text}
+                        onChangeText={(newContactJobTitle)=> this.setState({newContactJobTitle})}
                     />
 
                     <Text>LinkedIn: </Text>
@@ -240,7 +237,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.linkedIn}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactLinkedIn = text}
+                        onChangeText={(newContactLinkedIn)=> this.setState({newContactLinkedIn})}
                     />
 
                     <Text>Facebook: </Text>
@@ -251,7 +248,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.facebook}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactFacebook = text}
+                        onChangeText={(newContactFacebook)=> this.setState({newContactFacebook})}
                     />
 
                     <Text>Instagram: </Text>
@@ -262,7 +259,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.instagram}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactInstagram = text}
+                        onChangeText={(newContactInstagram)=> this.setState({newContactInstagram})}
                     />
 
                     <Text>Twitter: </Text>
@@ -273,7 +270,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.twitter}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactTwitter = text}
+                        onChangeText={(newContactTwitter)=> this.setState({newContactTwitter})}
                     />
 
                     <Text>Website: </Text>
@@ -284,7 +281,7 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.website}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactWebsite = text}
+                        onChangeText={(newContactWebsite)=> this.setState({newContactWebsite})}
                     />
 
                     <Text>Other Info: </Text>
@@ -295,14 +292,12 @@ export default class EditProfile extends Component{
                         autoCorrect={false}
                         defaultValue = {this.state.contactDetails.otherInfo}
                         style={styles.input}
-                        onChangeText={(text)=> this.newContactOtherInfo = text}
+                        onChangeText={(newContactOtherInfo)=> this.setState({newContactOtherInfo})}
                     />
 
                     <View style={styles.buttonView}>
                         <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
-                        onPress={
-                            ()=> this.updateProfileDetails()
-                        }/>
+                        onPress={() => this.submitDetails()}/>
                     </View>
                     <View>
                         <Button color="#ED4969" title="Cancel" style={styles.buttonView} onPress={

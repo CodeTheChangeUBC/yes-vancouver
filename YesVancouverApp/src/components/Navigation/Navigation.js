@@ -3,8 +3,8 @@
  */
 
 import React from 'react'
-import { View } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { Image, View } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
 
 import Login from '../Login/LoginForm'
 import HomeScreen from '../HomeScreen/HomeScreen'
@@ -18,13 +18,18 @@ import Aveda from '../Perks/aveda'
 import PerksView from '../Perks/PerksView'
 import PerksList from '../Perks/PerksList'
 import EditProfile from "../Profile/EditProfile"
-import CustomHeader, { headerStyles } from './Header'
+import CustomHeader, { CustomHeaderBackButton, headerStyles } from './Header'
 
 
-const Navigation = StackNavigator({
-    HomeScreen : {screen : HomeScreen},
-    Login : {screen : Login},
-    NavBar : {screen : NavBar},
+const Navigation = createStackNavigator({
+    HomeScreen: {screen : HomeScreen},
+    Login: {screen : Login},
+    NavBar: {
+        screen: NavBar,
+        navigationOptions: {
+            header: null
+        }
+    },
     SignUp : {screen : SignUp},
     ProfileSetupPhoto : {screen : ProfileSetupPhoto},
     EditProfile : {screen : EditProfile},
@@ -41,7 +46,7 @@ const Navigation = StackNavigator({
         headerStyle: headerStyles.headerContainer,
         headerVisible: true,
         headerTitleStyle: headerStyles.headerTitle,
-        headerBackImage: require('../../images/Header/White-arrow-3x.png'),
+        headerBackImage: <CustomHeaderBackButton />,
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTransparent: false,

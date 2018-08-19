@@ -1,13 +1,13 @@
 import React from 'react'
-import { View } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { Image, View } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'
 import EventsRegistration from './EventsRegistration'
-import CustomHeader, { headerStyles } from '../Navigation/Header'
+import CustomHeader, { CustomHeaderBackButton, headerStyles } from '../Navigation/Header'
 
 
-const EventsView = StackNavigator({
+const EventsView = createStackNavigator({
     EventsList: {
         screen: EventsList,
         navigationOptions:({navigation}) => ({
@@ -34,7 +34,7 @@ const EventsView = StackNavigator({
         headerStyle: headerStyles.headerContainer,
         headerVisible: true,
         headerTitleStyle: headerStyles.headerTitle,
-        headerBackImage: require('../../images/Header/White-arrow-3x.png'),
+        headerBackImage: <CustomHeaderBackButton />,
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTransparent: false,

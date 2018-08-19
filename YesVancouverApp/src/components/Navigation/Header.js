@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { Header } from 'react-navigation'
+import { styles } from '../Profile/ProfileStyleSheet';
 
 
 const CustomHeader = () => {
@@ -15,6 +16,13 @@ const CustomHeader = () => {
     );
 };
 
+export const CustomHeaderBackButton = () => {
+    return (
+        <Image source={require('../../images/Header/White-arrow-3x.png')} 
+            style={headerStyles.headerBackButtonImage} />
+    )
+}
+
 export const headerStyles = StyleSheet.create({
     imageContainer: {
         flex: 1
@@ -26,7 +34,6 @@ export const headerStyles = StyleSheet.create({
     },
     headerContainer: {
         paddingVertical: (Header.HEIGHT - 24) / 2,
-        paddingLeft: 10
     },
     headerTitle: {
         flex: 1,
@@ -35,6 +42,11 @@ export const headerStyles = StyleSheet.create({
         fontWeight: 'normal',
         lineHeight: 24,
         fontSize: 24
+    },
+    headerBackButtonImage: {
+        width: 30,
+        height: 30,
+        resizeMode: 'contain'
     }
 });
 

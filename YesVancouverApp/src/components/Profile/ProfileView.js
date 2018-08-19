@@ -32,11 +32,10 @@ export default class ProfileView extends Component {
     };
 
     async componentDidMount(){
-        const { params } = this.props.navigation.state;
-        const givenUserDetails = params ? params.userData : null;
-        const userPassword = params ? params.userPassword : null;
+        let contactDetailsJson = JSON.parse(await Expo.SecureStore.getItemAsync("contactDetailsJson"))
+        let contactPassword = await Expo.SecureStore.getItemAsync("contactPassword")
+        let contactDetailsObj = new ContactDetailsObj(contactDetailsJson, contactPassword)
 
-        let contactDetailsObj = new ContactDetailsObj(givenUserDetails, userPassword)
         let contactRegisteredEvents = await contactDetailsObj.getContactEventRegistrationList()
 
         this.setState({

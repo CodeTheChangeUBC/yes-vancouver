@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Expo from 'expo'
 import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
 import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 import { headerStyles } from '../Navigation/Header'
@@ -16,13 +17,16 @@ export default class LoginForm extends Component {
     };
 
     async authenticateLogin(){
-        let {navigate} = this.props.navigation;
-        let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
-        console.log(contactAuthenticationToken)
+        let { navigate } = this.props.navigation
+        let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword)
+
         if (contactAuthenticationToken !== null){
             let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
-            await navigate("NavBar", {'userData' : currentContactDetails,
-                                    'userPassword' : clientPassword});
+            
+            await Expo.SecureStore.setItemAsync('contactDetailsJson', JSON.stringify(currentContactDetails))
+            await Expo.SecureStore.setItemAsync('contactPassword', clientPassword)
+
+            await navigate("NavBar")
         }
         else{
             Alert.alert(

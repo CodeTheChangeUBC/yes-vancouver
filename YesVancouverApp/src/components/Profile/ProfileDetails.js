@@ -3,6 +3,8 @@ import { ActivityIndicator, Alert, FlatList, Image, ScrollView, Text, TouchableO
 import { styles } from './ProfileStyleSheet'
 import { ContactDetailsObj } from '../../lib/Profile/ContactDetails'
 import Accordion from 'react-native-collapsible/Accordion'
+import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
+import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 
 
 export default class ProfileDetails extends Component {
@@ -16,9 +18,26 @@ export default class ProfileDetails extends Component {
         }
     }
 
-    async componentDidMount(){
-        let contactDetailsJson = JSON.parse(await Expo.SecureStore.getItemAsync("contactDetailsJson"))
+    async refreshProfileDetails() {
+        let contactEmail = await Expo.SecureStore.getItemAsync("contactEmail")
         let contactPassword = await Expo.SecureStore.getItemAsync("contactPassword")
+        let contactAuthenticationToken = await authenticateContactLogin(contactEmail, contactPassword)
+        
+        let contactDetailsJson = await getCurrentContactDetails(contactAuthenticationToken)
+        let contactDetailsObj = new ContactDetailsObj(contactDetailsJson, contactPassword)
+        
+        this.setState({
+            contactDetails: contactDetailsObj,
+            isProfileLoading: false
+        })
+    }
+
+    async componentDidMount(){
+        let contactEmail = await Expo.SecureStore.getItemAsync("contactEmail")
+        let contactPassword = await Expo.SecureStore.getItemAsync("contactPassword")
+        let contactAuthenticationToken = await authenticateContactLogin(contactEmail, contactPassword)
+        
+        let contactDetailsJson = await getCurrentContactDetails(contactAuthenticationToken)
         let contactDetailsObj = new ContactDetailsObj(contactDetailsJson, contactPassword)
 
         let contactRegisteredEvents = await contactDetailsObj.getContactEventRegistrationList()
@@ -250,7 +269,9 @@ export default class ProfileDetails extends Component {
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonSpacer} />
                     <TouchableOpacity style={styles.button}
-                        onPress={()=> navigate('EditProfile', {'contactDetails' : this.state.contactDetails})}>
+                        onPress={()=> navigate('EditProfile', 
+                            {'contactDetails' : this.state.contactDetails,
+                             refreshProfileDetails: () => this.refreshProfileDetails()})}>
                         <Text style={styles.buttonText}>Edit Contact Info</Text>
                     </TouchableOpacity>
                     <View style={styles.buttonSpacer} />

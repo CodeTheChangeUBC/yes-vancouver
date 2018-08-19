@@ -49,7 +49,7 @@ export default class EditProfile extends Component{
     }
 
     async updateProfileDetails(newContactDetails){
-        let { navigate } = this.props.navigation;
+        let { navigation } = this.props;
         let apiDetails = {
             "Id" : newContactDetails.id,
             "FirstName": newContactDetails.firstName,
@@ -113,11 +113,9 @@ export default class EditProfile extends Component{
                     {text: "Ok", style:'cancel'}
                 ]
             );
-            // let contact = await getIndividualContactsList(this.userID);
-            // contact = contact[0];
-            // let contactEventRegistrationDetails = await getContactEventRegistrationList(contact["Id"]);
-            // navigate("NavBar", {'userData' : contact,
-            //                     'upcomingEvents' : contactEventRegistrationDetails});
+            await Expo.SecureStore.setItemAsync('contactEmail', newContactDetails.email)
+            navigation.state.params.refreshProfileDetails()
+            navigation.goBack()
         }
         else{
             Alert.alert(

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Expo from 'expo'
 import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
-import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 import { headerStyles } from '../Navigation/Header'
 
 
@@ -26,11 +25,8 @@ export default class LoginForm extends Component {
         let contactAuthenticationToken = await authenticateContactLogin(this.state.clientEmail, this.state.clientPassword)
 
         if (contactAuthenticationToken !== null){
-            let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
-            
-            await Expo.SecureStore.setItemAsync('contactDetailsJson', JSON.stringify(currentContactDetails))
+            await Expo.SecureStore.setItemAsync('contactEmail', this.state.clientEmail)
             await Expo.SecureStore.setItemAsync('contactPassword', this.state.clientPassword)
-
             await navigate("NavBar")
         }
         else{

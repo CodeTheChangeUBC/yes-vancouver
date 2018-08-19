@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import EventsList from './EventsList'
 import EventsDetails from './EventsDetails'

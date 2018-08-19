@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Alert, Button, ScrollView, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, Alert, Button, Image, ScrollView, Text, TextInput, View } from 'react-native'
 import { styles } from './ProfileStyleSheet'
 
 
@@ -103,19 +103,45 @@ export default class EditProfile extends Component{
 
     returnEditProfileView(){
         return (
-            <ScrollView contentContainerStyle={styles.editProfileContainer}>
+            <ScrollView style={{backgroundColor: 'white'}} 
+                    contentContainerStyle={{paddingHorizontal:25, backgroundColor: 'white'}}>
                 <View>
-                    <Text style = {styles.subHeading}>Edit Profile</Text>
-                    <Text>First Name: </Text>
-                    <TextInput
-                        returnKeyType="next"
-                        keyboardType="default"
-                        autoCapitalize="words"
-                        autoCorrect={false}
-                        defaultValue = {this.state.contactDetails.firstName}
-                        style={styles.input}
-                        onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
-                    />
+                    <View style={{height: 50}} />
+
+                    <View style={{flexDirection:'column', justifyContent: 'flex-start'}}>
+                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-end'}}>
+                            <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
+                                    style={{width:30, height: 30, resizeMode: 'contain'}} />
+                            <View style={{width: 10}} />
+                            <Text style={{
+                                    fontFamily: 'alternate-gothic-no3-d-regular',
+                                    fontSize: 24,
+                                    color: 'black'}}>First Name</Text>
+                        </View>
+                    
+                        <TextInput
+                            underlineColorAndroid='transparent'
+                            returnKeyType="next"
+                            keyboardType="default"
+                            autoCapitalize="words"
+                            autoCorrect={false}
+                            defaultValue = {this.state.contactDetails.firstName}
+                            style={{
+
+                                    borderBottomWidth: 1,
+                                    fontFamily: 'alternate-gothic-no3-d-regular',
+                                    color: 'black',
+                                    fontSize: 24,
+                                    height: 30
+                                    
+                            
+                            }}
+                            onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
+                        />
+                    </View>
+
+                    <View style={{height: 25}} />
+
                     <Text>Last Name: </Text>
                     <TextInput
                         returnKeyType="next"

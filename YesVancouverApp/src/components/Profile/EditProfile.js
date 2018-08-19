@@ -66,9 +66,44 @@ export default class EditProfile extends Component{
                     "SystemCode": "Phone"
                 },
                 {
+                    "FieldName": "Company",
+                    "Value": this.newContactCompany,
+                    "SystemCode": "custom-10381084"
+                },
+                {
+                    "FieldName": "JobTitle",
+                    "Value": this.newContactJobTitle,
+                    "SystemCode": "custom-10381083"
+                },
+                {
                     "FieldName": "Linkedin",
                     "Value": this.newContactLinkedIn,
                     "SystemCode": "custom-10381090"
+                },
+                {
+                    "FieldName": "Facebook",
+                    "Value": this.newContactFacebook,
+                    "SystemCode": "custom-10381086"
+                },
+                {
+                    "FieldName": "Instagram",
+                    "Value": this.newContactInstagram,
+                    "SystemCode": "custom-10381088"
+                },
+                {
+                    "FieldName": "Twitter",
+                    "Value": this.newContactTwitter,
+                    "SystemCode": "custom-10381087"
+                },
+                {
+                    "FieldName": "Website",
+                    "Value": this.newContactWebsite,
+                    "SystemCode": "custom-10381089"
+                },
+                {
+                    "FieldName": "OtherInfo",
+                    "Value": this.newContactOtherInfo,
+                    "SystemCode": "custom-10381085"
                 }
             ]
         };
@@ -174,6 +209,29 @@ export default class EditProfile extends Component{
                         style={styles.input}
                         onChangeText={(text)=> this.newContactPhone = text}
                     />
+
+                    <Text>Company: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.company}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactCompany = text}
+                    />
+
+                    <Text>Job Title: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.jobTitle}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactJobTitle = text}
+                    />
+
                     <Text>LinkedIn: </Text>
                     <TextInput
                         returnKeyType="next"
@@ -184,6 +242,62 @@ export default class EditProfile extends Component{
                         style={styles.input}
                         onChangeText={(text)=> this.newContactLinkedIn = text}
                     />
+
+                    <Text>Facebook: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.facebook}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactFacebook = text}
+                    />
+
+                    <Text>Instagram: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.instagram}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactInstagram = text}
+                    />
+
+                    <Text>Twitter: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.twitter}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactTwitter = text}
+                    />
+
+                    <Text>Website: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.website}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactWebsite = text}
+                    />
+
+                    <Text>Other Info: </Text>
+                    <TextInput
+                        returnKeyType="next"
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        defaultValue = {this.state.contactDetails.otherInfo}
+                        style={styles.input}
+                        onChangeText={(text)=> this.newContactOtherInfo = text}
+                    />
+
                     <View style={styles.buttonView}>
                         <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
                         onPress={

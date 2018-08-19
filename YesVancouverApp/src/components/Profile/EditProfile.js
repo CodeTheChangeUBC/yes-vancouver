@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Alert, Button, Image, ScrollView, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, Alert, Button, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { styles } from './ProfileStyleSheet'
 
 
@@ -103,20 +103,19 @@ export default class EditProfile extends Component{
 
     returnEditProfileView(){
         return (
-            <ScrollView style={{backgroundColor: 'white'}} 
-                    contentContainerStyle={{paddingHorizontal:25, backgroundColor: 'white'}}>
+            <ScrollView style={editProfileStyles.scrollView} 
+                        contentContainerStyle={editProfileStyles.scrollViewContentContainer}>
                 <View>
                     <View style={{height: 50}} />
 
-                    <View style={{flexDirection:'column', justifyContent: 'flex-start'}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-end'}}>
+                    <View style={editProfileStyles.inputRow}>
+                        <View style={editProfileStyles.inputHeader}>
                             <Image source={require('../../images/Settings/iconmonstr-email-4.png')}
-                                    style={{width:30, height: 30, resizeMode: 'contain'}} />
+                                    style={editProfileStyles.inputIcon} />
                             <View style={{width: 10}} />
-                            <Text style={{
-                                    fontFamily: 'alternate-gothic-no3-d-regular',
-                                    fontSize: 24,
-                                    color: 'black'}}>First Name</Text>
+                            <Text style={editProfileStyles.inputHeaderText}>
+                                First Name
+                            </Text>
                         </View>
                     
                         <TextInput
@@ -126,16 +125,7 @@ export default class EditProfile extends Component{
                             autoCapitalize="words"
                             autoCorrect={false}
                             defaultValue = {this.state.contactDetails.firstName}
-                            style={{
-
-                                    borderBottomWidth: 1,
-                                    fontFamily: 'alternate-gothic-no3-d-regular',
-                                    color: 'black',
-                                    fontSize: 24,
-                                    height: 30
-                                    
-                            
-                            }}
+                            style={editProfileStyles.inputText}
                             onChangeText={(newContactFirstName)=> this.setState({newContactFirstName})}
                         />
                     </View>
@@ -281,3 +271,39 @@ export default class EditProfile extends Component{
         )
     }
 }
+
+const editProfileStyles = StyleSheet.create({
+    scrollView: {
+        backgroundColor: 'white'
+    },
+    scrollViewContentContainer: {
+        paddingHorizontal: 25,
+        backgroundColor: 'white'
+    },
+    inputRow: {
+        flexDirection:'column',
+        justifyContent: 'flex-start'
+    },
+    inputHeader: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end'
+    },
+    inputIcon: {
+        width: 30,
+        height: 30,
+        resizeMode: 'contain'
+    },
+    inputHeaderText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'black'
+    },
+    inputText: {
+        borderBottomWidth: 1,
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        color: 'black',
+        fontSize: 24,
+        height: 30
+    }
+})

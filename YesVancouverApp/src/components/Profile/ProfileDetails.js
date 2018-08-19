@@ -250,13 +250,7 @@ export default class ProfileDetails extends Component {
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonSpacer} />
                     <TouchableOpacity style={styles.button}
-                        onPress={()=> navigate('EditProfile', {'userID' : userID,
-                        'userFirstName' : userFirstName,
-                        'userLastName' : userLastName,
-                        'userEmail': userEmail,
-                        'userPhone' : userPhone,
-                        'userLinkedIn' : userLinkedIn})}>
-
+                        onPress={()=> navigate('EditProfile', {'contactDetails' : this.state.contactDetails})}>
                         <Text style={styles.buttonText}>Edit Contact Info</Text>
                     </TouchableOpacity>
                     <View style={styles.buttonSpacer} />

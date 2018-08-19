@@ -1,16 +1,54 @@
-import React, { Component } from 'react';
-import {ScrollView, View, Text, TextInput, Button, Alert} from 'react-native';
-import {styles} from './ProfileStyleSheet'
+import React, { Component } from 'react'
+import { ActivityIndicator, Alert, Button, ScrollView, Text, TextInput, View } from 'react-native'
+import { styles } from './ProfileStyleSheet'
 import {updateContactDetails, getContactEventRegistrationList, getIndividualContactsList} from './FetchUserDetails'
 
-export default class EditProfile extends Component{
 
-    userID = '';
-    newContactFirstName = '';
-    newContactLastName = '';
-    newContactEmail = '';
-    newContactPhone = '';
-    newContactLinkedIn = '';
+export default class EditProfile extends Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            isEditProfileLoading: true,
+            contactDetails: null
+        }
+    }
+
+    newContactFirstName = ''
+    newContactLastName = ''
+    newContactEmail = ''
+    newContactPhone = ''
+    newContactCompany = ''
+    newContactJobTitle = ''
+    newContactLinkedIn = ''
+    newContactFacebook = ''
+    newContactInstagram = ''
+    newContactTwitter = ''
+    newContactWebsite = ''
+    newContactOtherInfo = ''
+
+    async componentDidMount(){
+        let { params } = this.props.navigation.state;
+        let contactDetails = params ? params.contactDetails : null
+        console.log(contactDetails)
+
+        this.newContactFirstName = contactDetails.firstName
+        this.newContactLastName = contactDetails.lastName
+        this.newContactEmail = contactDetails.email
+        this.newContactPhone = contactDetails.phone
+        this.newContactCompany = contactDetails.company
+        this.newContactJobTitle = contactDetails.jobTitle
+        this.newContactLinkedIn = contactDetails.linkedIn
+        this.newContactFacebook = contactDetails.facebook
+        this.newContactInstagram = contactDetails.instagram
+        this.newContactTwitter = contactDetails.twitter
+        this.newContactWebsite = contactDetails.website
+        this.newContactOtherInfo = contactDetails.otherInfo
+
+        this.setState({
+            contactDetails: contactDetails,
+            isEditProfileLoading: false,
+        })
+    }
 
     async updateProfileDetails(){
         let {navigate} = this.props.navigation;
@@ -58,21 +96,35 @@ export default class EditProfile extends Component{
     }
 
     render(){
+        if(this.state.isEditProfileLoading) {
+            return (
+                <View style={styles.activityIndicator}>
+                    <ActivityIndicator size="large" color="#ED4969" />
+                </View>
+            )
+        }
+        else {
+            return this.returnEditProfileView()
+        }
+    }
 
-        const { params } = this.props.navigation.state;
-        const userID = params ? params.userID : '';
-        const oldFirstName = params ? params.userFirstName: '';
-        const oldLastName = params ? params.userLastName: '';
-        const oldEmail = params ? params.userEmail : '';
-        const oldPhone = params ? params.userPhone : '';
-        const oldLinkedIn = params ? params.userLinkedIn : '';
-
-        this.userID = userID;
-        this.newContactFirstName = oldFirstName;
-        this.newContactLastName = oldLastName;
-        this.newContactEmail = oldEmail;
-        this.newContactPhone = oldPhone;
-        this.newContactLinkedIn = oldLinkedIn;
+    returnEditProfileView(){
+        // return (
+        //     <View>
+        //         <Text>{this.newContactFirstName}</Text>
+        //         <Text>{this.newContactLastName}</Text>
+        //         <Text>{this.newContactEmail}</Text>
+        //         <Text>{this.newContactPhone}</Text>
+        //         <Text>{this.newContactCompany}</Text>
+        //         <Text>{this.newContactJobTitle}</Text>
+        //         <Text>{this.newContactLinkedIn}</Text>
+        //         <Text>{this.newContactFacebook}</Text>
+        //         <Text>{this.newContactInstagram}</Text>
+        //         <Text>{this.newContactTwitter}</Text>
+        //         <Text>{this.newContactWebsite}</Text>
+        //         <Text>{this.newContactOtherInfo}</Text>
+        //     </View>
+        // )
 
         return (
             <ScrollView contentContainerStyle={styles.editProfileContainer}>
@@ -84,7 +136,7 @@ export default class EditProfile extends Component{
                         keyboardType="default"
                         autoCapitalize="words"
                         autoCorrect={false}
-                        defaultValue = {oldFirstName}
+                        defaultValue = {this.state.contactDetails.firstName}
                         style={styles.input}
                         onChangeText={(text)=> this.newContactFirstName = text}
                     />
@@ -94,7 +146,7 @@ export default class EditProfile extends Component{
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
-                        defaultValue = {oldLastName}
+                        defaultValue = {this.state.contactDetails.lastName}
                         style={styles.input}
                         onChangeText={(text)=> this.newContactLastName = text}
                     />
@@ -104,7 +156,7 @@ export default class EditProfile extends Component{
                         keyboardType="email-address"
                         autoCapitalize="none"
                         autoCorrect={false}
-                        defaultValue = {oldEmail}
+                        defaultValue = {this.state.contactDetails.email}
                         style={styles.input}
                         onChangeText={(text)=> this.newContactEmail = text}
                     />
@@ -114,7 +166,7 @@ export default class EditProfile extends Component{
                         keyboardType="phone-pad"
                         autoCapitalize="none"
                         autoCorrect={false}
-                        defaultValue = {oldPhone}
+                        defaultValue = {this.state.contactDetails.phone}
                         style={styles.input}
                         onChangeText={(text)=> this.newContactPhone = text}
                     />
@@ -124,12 +176,13 @@ export default class EditProfile extends Component{
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
-                        defaultValue = {oldLinkedIn}
+                        defaultValue = {this.state.contactDetails.linkedIn}
                         style={styles.input}
                         onChangeText={(text)=> this.newContactLinkedIn = text}
                     />
                     <View style={styles.buttonView}>
-                        <Button color="#ED4969" title="Update Profile" style={styles.buttonView} onPress={
+                        <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
+                        onPress={
                             ()=> this.updateProfileDetails()
                         }/>
                     </View>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, Alert, Button, ScrollView, Text, TextInput, View } from 'react-native'
 import { styles } from './ProfileStyleSheet'
-import {updateContactDetails, getContactEventRegistrationList, getIndividualContactsList} from './FetchUserDetails'
 
 
 export default class EditProfile extends Component{
@@ -48,86 +47,6 @@ export default class EditProfile extends Component{
         })
     }
 
-    async updateProfileDetails(newContactDetails){
-        let { navigation } = this.props;
-        let apiDetails = {
-            "Id" : newContactDetails.id,
-            "FirstName": newContactDetails.firstName,
-            "LastName": newContactDetails.lastName,
-            "Email": newContactDetails.email,
-            "FieldValues": [
-                {
-                    "FieldName": "Phone",
-                    "Value": newContactDetails.phone,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Phone"]
-                },
-                {
-                    "FieldName": "Company",
-                    "Value": newContactDetails.company,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Company"]
-                },
-                {
-                    "FieldName": "JobTitle",
-                    "Value": newContactDetails.jobTitle,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["JobTitle"]
-                },
-                {
-                    "FieldName": "Linkedin",
-                    "Value": newContactDetails.linkedIn,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["LinkedIn"]
-                },
-                {
-                    "FieldName": "Facebook",
-                    "Value": newContactDetails.facebook,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Facebook"]
-                },
-                {
-                    "FieldName": "Instagram",
-                    "Value": newContactDetails.instagram,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Instagram"]
-                },
-                {
-                    "FieldName": "Twitter",
-                    "Value": newContactDetails.twitter,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Twitter"]
-                },
-                {
-                    "FieldName": "Website",
-                    "Value": newContactDetails.website,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["Website"]
-                },
-                {
-                    "FieldName": "OtherInfo",
-                    "Value": newContactDetails.otherInfo,
-                    "SystemCode": newContactDetails.customContactFieldsSystemCode["OtherInfo"]
-                }
-            ]
-        };
-
-        let updateResult = await updateContactDetails(newContactDetails.id, apiDetails);
-        if (updateResult !== null){
-            Alert.alert(
-                'Details Updated',
-                'Your profile details have been updated',
-                [
-                    {text: "Ok", style:'cancel'}
-                ]
-            );
-            await Expo.SecureStore.setItemAsync('contactEmail', newContactDetails.email)
-            navigation.state.params.refreshProfileDetails()
-            navigation.goBack()
-        }
-        else{
-            Alert.alert(
-                'Update Failed',
-                'Please try to update your details again',
-                [
-                    {text: "Ok", style:'cancel'}
-                ]
-            );
-        }
-    }
-
     render(){
         if(this.state.isEditProfileLoading) {
             return (
@@ -142,21 +61,44 @@ export default class EditProfile extends Component{
     }
 
     async submitDetails() {
-        let newContactDetails = JSON.parse(JSON.stringify(this.state.contactDetails))
-        newContactDetails.firstName = this.state.newContactFirstName
-        newContactDetails.lastName = this.state.newContactLastName
-        newContactDetails.email = this.state.newContactEmail
-        newContactDetails.phone = this.state.newContactPhone
-        newContactDetails.company = this.state.newContactCompany
-        newContactDetails.jobTitle = this.state.newContactJobTitle
-        newContactDetails.linkedIn = this.state.newContactLinkedIn
-        newContactDetails.facebook = this.state.newContactFacebook
-        newContactDetails.instagram = this.state.newContactInstagram
-        newContactDetails.twitter = this.state.newContactTwitter
-        newContactDetails.website = this.state.newContactWebsite
-        newContactDetails.otherInfo = this.state.newContactOtherInfo
+        let { navigation } = this.props
 
-        await this.updateProfileDetails(newContactDetails)
+        let newContactDetailsObj = this.state.contactDetails.clone()
+        newContactDetailsObj.firstName = this.state.newContactFirstName
+        newContactDetailsObj.lastName = this.state.newContactLastName
+        newContactDetailsObj.email = this.state.newContactEmail
+        newContactDetailsObj.phone = this.state.newContactPhone
+        newContactDetailsObj.company = this.state.newContactCompany
+        newContactDetailsObj.jobTitle = this.state.newContactJobTitle
+        newContactDetailsObj.linkedIn = this.state.newContactLinkedIn
+        newContactDetailsObj.facebook = this.state.newContactFacebook
+        newContactDetailsObj.instagram = this.state.newContactInstagram
+        newContactDetailsObj.twitter = this.state.newContactTwitter
+        newContactDetailsObj.website = this.state.newContactWebsite
+        newContactDetailsObj.otherInfo = this.state.newContactOtherInfo
+
+        let updateResult = await newContactDetailsObj.updateContactDetails()
+        if (updateResult !== null) {
+            Alert.alert(
+                'Details Updated',
+                'Your profile details have been updated',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            )
+            await Expo.SecureStore.setItemAsync('contactEmail', newContactDetailsObj.email)
+            navigation.state.params.refreshProfileDetails()
+            navigation.goBack()
+        }
+        else {
+            Alert.alert(
+                'Update Failed',
+                'Please try to update your details again',
+                [
+                    {text: "Ok", style:'cancel'}
+                ]
+            )
+        }
     }
 
     returnEditProfileView(){
@@ -310,6 +252,6 @@ export default class EditProfile extends Component{
                     </View>
                 </View>
             </ScrollView>
-        );
+        )
     }
 }

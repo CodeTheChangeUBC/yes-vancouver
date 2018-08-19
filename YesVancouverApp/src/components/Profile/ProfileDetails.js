@@ -24,8 +24,11 @@ export default class ProfileDetails extends Component {
         let contactAuthenticationToken = await authenticateContactLogin(contactEmail, contactPassword)
         
         let contactDetailsJson = await getCurrentContactDetails(contactAuthenticationToken)
-        let contactDetailsObj = new ContactDetailsObj(contactDetailsJson, contactPassword)
-        
+
+        let contactDetailsObj = new ContactDetailsObj()
+        contactDetailsObj.setCustomFields(contactDetailsJson)
+        contactDetailsObj.setPassword(contactPassword)
+
         this.setState({
             contactDetails: contactDetailsObj,
             isProfileLoading: false
@@ -38,7 +41,9 @@ export default class ProfileDetails extends Component {
         let contactAuthenticationToken = await authenticateContactLogin(contactEmail, contactPassword)
         
         let contactDetailsJson = await getCurrentContactDetails(contactAuthenticationToken)
-        let contactDetailsObj = new ContactDetailsObj(contactDetailsJson, contactPassword)
+        let contactDetailsObj = new ContactDetailsObj()
+        contactDetailsObj.setCustomFields(contactDetailsJson)
+        contactDetailsObj.setPassword(contactPassword)
 
         let contactRegisteredEvents = await contactDetailsObj.getContactEventRegistrationList()
 

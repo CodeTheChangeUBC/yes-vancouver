@@ -3,8 +3,8 @@
  */
 
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Header, StackNavigator } from 'react-navigation'
+import { Image, View } from 'react-native'
+import { createStackNavigator } from 'react-navigation'
 
 import Login from '../Login/LoginForm'
 import HomeScreen from '../HomeScreen/HomeScreen'
@@ -18,13 +18,18 @@ import Aveda from '../Perks/aveda'
 import PerksView from '../Perks/PerksView'
 import PerksList from '../Perks/PerksList'
 import EditProfile from "../Profile/EditProfile"
-import CustomHeader from './Header'
+import CustomHeader, { CustomHeaderBackButton, headerStyles } from './Header'
 
 
-const Navigation = StackNavigator({
-    HomeScreen : {screen : HomeScreen},
-    Login : {screen : Login},
-    NavBar : {screen : NavBar},
+const Navigation = createStackNavigator({
+    HomeScreen: {screen : HomeScreen},
+    Login: {screen : Login},
+    NavBar: {
+        screen: NavBar,
+        navigationOptions: {
+            header: null
+        }
+    },
     SignUp : {screen : SignUp},
     ProfileSetupPhoto : {screen : ProfileSetupPhoto},
     EditProfile : {screen : EditProfile},
@@ -38,43 +43,16 @@ const Navigation = StackNavigator({
 {
     navigationOptions: ({ navigation }) => ({
         headerMode: 'screen',
-        headerStyle: {
-            paddingVertical: (Header.HEIGHT - 24) / 2,
-            paddingLeft: 10
-        },
+        headerStyle: headerStyles.headerContainer,
         headerVisible: true,
-        headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center',
-            alignSelf: 'center',
-            fontFamily: 'alternate-gothic-no3-d-regular',
-            fontWeight: 'normal',
-            lineHeight: 24,
-            fontSize: 24,
-            padding: 30
-        },
-        headerBackImage: require('../../images/Header/White-arrow-3x.png'),
+        headerTitleStyle: headerStyles.headerTitle,
+        headerBackImage: <CustomHeaderBackButton />,
         headerBackTitle: null,
         headerTintColor: 'white',
         headerTransparent: false,
-        headerBackground: 
-            <View style={styles.headerContainer}>
-                <CustomHeader style={styles.header}/>
-            </View>,
+        headerBackground: <CustomHeader />,
         headerRight: (<View></View>)
     })
 })
 
 export default Navigation
-
-
-const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 1
-    },
-    header: {
-        flex: 1,
-        width: null,
-        height: null
-    }
-})

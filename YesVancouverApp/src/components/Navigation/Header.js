@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import React from 'react'
+import { StyleSheet, View, Image } from 'react-native'
+import { Header } from 'react-navigation'
+import { styles } from '../Profile/ProfileStyleSheet';
 
 
-const Header = () => {
+const CustomHeader = () => {
     return (
-        <View style={styles.imageContainer}>
+        <View style={headerStyles.imageContainer}>
             <Image 
-                style={styles.headerImage}
+                style={headerStyles.headerImage}
                 resizeMode='stretch'
                 source={require('../../images/Header/Top-header-bar-3x.png')}
             />
@@ -14,7 +16,14 @@ const Header = () => {
     );
 };
 
-const styles = StyleSheet.create({
+export const CustomHeaderBackButton = () => {
+    return (
+        <Image source={require('../../images/Header/White-arrow-3x.png')} 
+            style={headerStyles.headerBackButtonImage} />
+    )
+}
+
+export const headerStyles = StyleSheet.create({
     imageContainer: {
         flex: 1
     },
@@ -22,10 +31,26 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null
+    },
+    headerContainer: {
+        paddingVertical: (Header.HEIGHT - 24) / 2,
+    },
+    headerTitle: {
+        flex: 1,
+        textAlign: 'center',
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontWeight: 'normal',
+        lineHeight: 24,
+        fontSize: 24
+    },
+    headerBackButtonImage: {
+        width: 30,
+        height: 30,
+        resizeMode: 'contain'
     }
 });
 
-export default Header;
+export default CustomHeader;
 
 
 {/* <View style={styles.headerContainer}>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image } from 'react-native'
-import { TabBarBottom, TabNavigator } from 'react-navigation'
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
 import EventsView from '../Events/EventsView'
 import PerksView from '../Perks/PerksView'
 import NewsFeedView from '../NewsFeed/NewsFeedView'
@@ -8,13 +8,11 @@ import NewsFeedView from '../NewsFeed/NewsFeedView'
 import ProfileView from '../Profile/ProfileView'
 
 
-const NavBar = TabNavigator({
+const NavBar = createBottomTabNavigator({
     EventsView: { 
         screen: EventsView,
         navigationOptions: {
-            header: null,
             tabBarLabel: 'EventsView',
-            title: 'EventsView',
             tabBarIcon: ({ focused }) => { 
                 if(focused){
                     return ( <Image 
@@ -43,10 +41,10 @@ const NavBar = TabNavigator({
             backgroundColor: '#ED4969'
         }
     },
-    tabBarComponent: TabBarBottom,
+    tabBarComponent: BottomTabBar,
     tabBarPosition: 'bottom',
     initialRouteName: 'NewsFeedView',
-    drawUnderTabBar: true,
+    drawUnderTabBar: true
 })
 
 export default NavBar

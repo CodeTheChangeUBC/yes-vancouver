@@ -198,10 +198,10 @@ export default class ProfileView extends Component {
                         source={require('../../images/Login-Signup/YES-logo.png')}/>
                     <View style={{marginRight: 10}}/>
                     <View style={{flexDirection: 'column'}}>
-                        <Text style={styles.subHeading}>
+                        <Text style={[styles.subHeading, {textAlign:'center'}]}>
                             YES! Vancouver Member
                         </Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={[styles.paragraph, {textAlign:'center'}]}>
                             First joined on: {userMemberSince}
                         </Text>
                     </View>

@@ -67,22 +67,24 @@ const styles = StyleSheet.create({
     },
     dateMonthTextContainer: {
         flex: 1,
-        flexDirection:'column',
-        paddingTop: 13
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
     },
     dateMonthText: {
         fontFamily: 'source-sans-pro-semibold',
         fontSize: 30,
+        lineHeight: 30,
         color: '#464647'
     },
     dateDayTextContainer: {
         flex: 1,
-        flexDirection:'column',
-        paddingBottom: 43
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     },
     dateDayText: {
         fontFamily: 'source-sans-pro-semibold',
         fontSize: 46,
+        lineHeight: 46,
         color: '#464647'
     },
     detailsColumn: {
@@ -104,4 +106,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#464647'
     }
-});
+})

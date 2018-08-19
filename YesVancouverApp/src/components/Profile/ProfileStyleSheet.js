@@ -96,6 +96,7 @@ export const styles = StyleSheet.create({
     eventsHeaderContainer: {
         flexDirection: 'row',
         justifyContent:'flex-start',
+        alignItems: 'center',
         marginVertical: 10
     },
     eventsHeaderIcon: {

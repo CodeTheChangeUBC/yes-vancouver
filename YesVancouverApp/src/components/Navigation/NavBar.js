@@ -13,26 +13,39 @@ const NavBar = createBottomTabNavigator({
         screen: EventsView,
         navigationOptions: {
             tabBarLabel: 'EventsView',
-            tabBarIcon: ({ focused }) => { 
-                if(focused){
-                    return ( <Image 
-                        source={require('../../images/NavBar/Calendar-icon-white-3x.png')}
-                        resizeMode="contain"
-                        style={{height:30}}/> 
-                    )
-                } else {
-                    return ( <Image 
-                        source={require('../../images/NavBar/Calendar-icon-orange-3x.png')}
-                        resizeMode="contain"
-                    style={{height:30}}/> )
-                }
-            }
+            tabBarIcon: ({ focused }) => focused ?
+            ( <Image 
+                source={require('../../images/NavBar/Calendar-icon-white-3x.png')}
+                resizeMode="contain"
+                style={{height:30}}/> 
+            ) :
+            ( <Image 
+                source={require('../../images/NavBar/Calendar-icon-orange-3x.png')}
+                resizeMode="contain"
+                style={{height:30}}/> 
+            )
         }
     },
     PerksView: { screen: PerksView },
     NewsFeedView: { screen: NewsFeedView },
     // MessagingView: { screen: MessagingView },
-    ProfileView: { screen: ProfileView },
+    ProfileView: {
+        screen: ProfileView,
+        navigationOptions: {
+            tabBarLabel: 'ProfileDetails',
+            tabBarIcon: ({ focused }) => focused ?
+            ( <Image 
+                source={require('../../images/NavBar/Profile-icon-white-3x.png')}
+                resizeMode="contain"
+                style={{height:30}}/> 
+            ) :
+            ( <Image 
+                source={require('../../images/NavBar/Profile-icon-orange-3x.png')}
+                resizeMode="contain"
+                style={{height:30}}/>
+            )
+        }
+    }
 }, {
     tabBarOptions: {
         showIcon: true,

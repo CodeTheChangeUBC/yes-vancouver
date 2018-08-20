@@ -1,14 +1,19 @@
 
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Expo from 'expo'
 import { authenticateContactLogin } from '../../apicalls/Authentication/AuthToken'
-import { getCurrentContactDetails } from '../../apicalls/Profile/ProfileDetails'
 import { headerStyles } from '../Navigation/Header'
 
-let clientEmail = "";
-let clientPassword = "";
 
 export default class LoginForm extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            clientEmail : "",
+            clientPassword : ""
+        }
+    }
 
     static navigationOptions = {
         title: "Login",
@@ -16,13 +21,13 @@ export default class LoginForm extends Component {
     };
 
     async authenticateLogin(){
-        let {navigate} = this.props.navigation;
-        let contactAuthenticationToken = await authenticateContactLogin(clientEmail, clientPassword);
-        console.log(contactAuthenticationToken)
+        let { navigate } = this.props.navigation
+        let contactAuthenticationToken = await authenticateContactLogin(this.state.clientEmail, this.state.clientPassword)
+
         if (contactAuthenticationToken !== null){
-            let currentContactDetails = await getCurrentContactDetails(contactAuthenticationToken)
-            await navigate("NavBar", {'userData' : currentContactDetails,
-                                    'userPassword' : clientPassword});
+            await Expo.SecureStore.setItemAsync('contactEmail', this.state.clientEmail)
+            await Expo.SecureStore.setItemAsync('contactPassword', this.state.clientPassword)
+            await navigate("NavBar")
         }
         else{
             Alert.alert(
@@ -48,7 +53,7 @@ export default class LoginForm extends Component {
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        onChangeText={(text)=> clientEmail = text}
+                        onChangeText={(clientEmail)=> this.setState({clientEmail})}
                         underlineColorAndroid='transparent'
                     />
                 </View>
@@ -59,7 +64,7 @@ export default class LoginForm extends Component {
                         placeholderTextColor='#979797'
                         returnKeyType="go"
                         secureTextEntry
-                        onChangeText={(text)=> clientPassword = text}
+                        onChangeText={(clientPassword)=> this.setState({clientPassword})}
                         style={styles.input}
                         underlineColorAndroid='transparent'
                     />

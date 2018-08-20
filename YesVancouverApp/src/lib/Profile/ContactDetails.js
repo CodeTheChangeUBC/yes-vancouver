@@ -1,43 +1,114 @@
 import { getBearerToken } from "../../apicalls/Authentication/AuthToken"
-import { getEventRegistrationList } from "../../apicalls/Profile/ProfileDetails"
+import { getEventRegistrationList, updateContactDetails } from "../../apicalls/Profile/ProfileDetails"
 import { DateTimeUtil } from "../../lib/Utils/DateTimeUtil"
 
 
 class ContactDetailsObj {
-    constructor(ContactDetailsJson, ContactPassword) {
-        let customContactFields = ContactDetailsObj.createCustomFieldDict(ContactDetailsJson)
+    constructor() {
+        this.customContactFields = {}
+        this.customContactFieldsSystemCode = {}
+
+        this.id = ""
+        this.firstName = ""
+        this.lastName = ""
+        this.email = ""
+        this.phone = ""
+        this.password = ""
+
+        this.membershipLevel = ""
+        this.memberSince = ""
+        this.memberStatus = ""
+        this.renewalDue = ""
+
+        this.company = ""
+        this.jobTitle = ""
+
+        this.linkedIn = ""
+        this.facebook = ""
+        this.instagram = ""
+        this.twitter = ""
+        this.website = ""
+
+        this.otherInfo = ""
+        this.profilePhoto = ""
+    }
+
+    setCustomFields(ContactDetailsJson){
+        let customFields = ContactDetailsObj.createCustomFieldDict(ContactDetailsJson)
+        this.customContactFields = customFields.fieldValues
+        this.customContactFieldsSystemCode = customFields.fieldSystemCodes
 
         this.id = ContactDetailsJson["Id"]
         this.firstName = ContactDetailsJson["FirstName"]
         this.lastName = ContactDetailsJson["LastName"]
         this.email = ContactDetailsJson["Email"]
         this.phone = ContactDetailsJson["Phone"]
-        this.password = ContactPassword
 
         this.membershipLevel = ContactDetailsObj.getMembershipLevel(ContactDetailsJson)
         this.memberSince = ContactDetailsObj.getDate(ContactDetailsJson["MemberSince"]) 
         this.memberStatus = ContactDetailsJson["Status"]
         this.renewalDue = ContactDetailsObj.getDate(ContactDetailsJson["RenewalDue"])
 
-        this.company = ContactDetailsObj.getCustomField(customContactFields, "Company")
-        this.jobTitle = ContactDetailsObj.getCustomField(customContactFields, "JobTitle")
+        this.company = ContactDetailsObj.getCustomField(this.customContactFields, "Company")
+        this.jobTitle = ContactDetailsObj.getCustomField(this.customContactFields, "JobTitle")
 
-        this.linkedIn = ContactDetailsObj.getCustomField(customContactFields, "LinkedIn")
-        this.facebook = ContactDetailsObj.getCustomField(customContactFields, "Facebook")
-        this.instagram = ContactDetailsObj.getCustomField(customContactFields, "Instagram")
-        this.twitter = ContactDetailsObj.getCustomField(customContactFields, "Twitter")
-        this.website = ContactDetailsObj.getCustomField(customContactFields, "Website")
+        this.linkedIn = ContactDetailsObj.getCustomField(this.customContactFields, "LinkedIn")
+        this.facebook = ContactDetailsObj.getCustomField(this.customContactFields, "Facebook")
+        this.instagram = ContactDetailsObj.getCustomField(this.customContactFields, "Instagram")
+        this.twitter = ContactDetailsObj.getCustomField(this.customContactFields, "Twitter")
+        this.website = ContactDetailsObj.getCustomField(this.customContactFields, "Website")
 
-        this.otherInfo = ContactDetailsObj.getCustomField(customContactFields, "OtherInfo")
-        this.profilePhoto = ContactDetailsObj.getProfilePic(customContactFields)
+        this.otherInfo = ContactDetailsObj.getCustomField(this.customContactFields, "OtherInfo")
+        this.profilePhoto = ContactDetailsObj.getProfilePic(this.customContactFields)
+    }
+
+    setPassword(ContactPassword){
+        this.password = ContactPassword
+    }
+
+    clone(){
+        let newContactDetailsObj = new ContactDetailsObj()
+
+        newContactDetailsObj.customContactFields = this.customContactFields
+        newContactDetailsObj.customContactFieldsSystemCode = this.customContactFieldsSystemCode
+
+        newContactDetailsObj.id = this.id
+        newContactDetailsObj.firstName = this.firstName
+        newContactDetailsObj.lastName = this.lastName
+        newContactDetailsObj.email = this.email
+        newContactDetailsObj.phone = this.phone
+
+        newContactDetailsObj.membershipLevel = this.membershipLevel
+        newContactDetailsObj.memberSince = this.memberSince
+        newContactDetailsObj.memberStatus = this.memberStatus
+        newContactDetailsObj.renewalDue = this.renewalDue
+
+        newContactDetailsObj.company = this.company
+        newContactDetailsObj.jobTitle = this.jobTitle
+
+        newContactDetailsObj.linkedIn = this.linkedIn
+        newContactDetailsObj.facebook = this.facebook
+        newContactDetailsObj.instagram = this.instagram
+        newContactDetailsObj.twitter = this.twitter
+        newContactDetailsObj.website = this.website
+
+        newContactDetailsObj.otherInfo = this.otherInfo
+        newContactDetailsObj.profilePhoto = this.profilePhoto
+
+        return newContactDetailsObj
     }
 
     static createCustomFieldDict(ContactDetailsJson){
-        let profileDictionary = {};
+        let customFieldValueDict = {}
+        let customFieldSystemCodeDict = {}
         ContactDetailsJson["FieldValues"].forEach(function (miniObject) {
-            profileDictionary[miniObject["FieldName"].toString()] = miniObject["Value"]
+            customFieldValueDict[miniObject["FieldName"].toString()] = miniObject["Value"]
+            customFieldSystemCodeDict[miniObject["FieldName"].toString()] = miniObject["SystemCode"]
         });
-        return profileDictionary;
+        return {
+            fieldValues: customFieldValueDict, 
+            fieldSystemCodes: customFieldSystemCodeDict
+        }
     }
     
     static getCustomField(dictionary, key){
@@ -122,6 +193,23 @@ class ContactDetailsObj {
             pastEvents: pastEventsList,
             upcomingEvents: upcomingEventsList
         };
+    }
+
+    /**
+     * Update contact details
+     * 
+     * @returns The update contact details in JSON format if successful,
+     *          otherwise returns null
+     */
+    async updateContactDetails(){
+        let bearerToken = await getBearerToken();
+        if(!bearerToken) {
+            console.log("Failed to get bearer token")
+            return null
+        }
+
+        let updateResult = await updateContactDetails(bearerToken, this)
+        return updateResult
     }
 }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Alert, Button, Image, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import { styles } from './ProfileStyleSheet'
+import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 
 export default class EditProfile extends Component{
@@ -50,7 +49,7 @@ export default class EditProfile extends Component{
     render(){
         if(this.state.isEditProfileLoading) {
             return (
-                <View style={styles.activityIndicator}>
+                <View style={editProfileStyles.activityIndicator}>
                     <ActivityIndicator size="large" color="#ED4969" />
                 </View>
             )
@@ -81,7 +80,7 @@ export default class EditProfile extends Component{
         if (updateResult !== null) {
             Alert.alert(
                 'Details Updated',
-                'Your profile details have been updated',
+                'Your profile details have been updated.',
                 [
                     {text: "Ok", style:'cancel'}
                 ]
@@ -93,7 +92,7 @@ export default class EditProfile extends Component{
         else {
             Alert.alert(
                 'Update Failed',
-                'Please try to update your details again',
+                'Please try to update your details again.',
                 [
                     {text: "Ok", style:'cancel'}
                 ]
@@ -102,6 +101,7 @@ export default class EditProfile extends Component{
     }
 
     returnEditProfileView(){
+        let { navigation } = this.props
         return (
             <ScrollView style={editProfileStyles.scrollView} 
                         contentContainerStyle={editProfileStyles.scrollViewContentContainer}>
@@ -396,27 +396,49 @@ export default class EditProfile extends Component{
 
                 <View style={editProfileStyles.contentHorizontalSpacer} />
 
-                <View style={styles.buttonView}>
-                    <Button color="#ED4969" title="Update Profile" style={styles.buttonView} 
-                    onPress={() => this.submitDetails()}/>
+                <View style={editProfileStyles.buttonContainer}>
+                    <View style={editProfileStyles.buttonSpacer} />
+                    <TouchableOpacity style={editProfileStyles.button}
+                        onPress={() => this.submitDetails()}>
+                        <Text style={editProfileStyles.buttonText}>Update Profile</Text>
+                    </TouchableOpacity>
+                    <View style={editProfileStyles.buttonSpacer} />
                 </View>
-                <View>
-                    <Button color="#ED4969" title="Cancel" style={styles.buttonView} onPress={
-                        ()=> Alert.alert(
-                            'Click Back',
-                            'Click the back button',
-                            [
-                                {text: "Ok", style:'cancel'}
-                            ]
-                        )
-                    }/>
+
+                <View style={editProfileStyles.spacerBetweenButtons} />
+
+                <View style={editProfileStyles.buttonContainer}>
+                    <View style={editProfileStyles.buttonSpacer} />
+                    <TouchableOpacity style={editProfileStyles.button}
+                        onPress={
+                            ()=> Alert.alert(
+                                'Exit Edit Profile',
+                                'Are you sure you want to go back? Unsaved changes will be lost.',
+                                [
+                                    {text: 'Yes', onPress: () => navigation.goBack()},
+                                    {text: 'No'}
+                                ]
+                        )}>
+                        <Text style={editProfileStyles.buttonText}>Cancel</Text>
+                    </TouchableOpacity>
+                    <View style={editProfileStyles.buttonSpacer} />
                 </View>
+
+                <View style={editProfileStyles.contentTopSpacer}></View>
+
             </ScrollView>
         )
     }
 }
 
 const editProfileStyles = StyleSheet.create({
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    },
     scrollView: {
         backgroundColor: 'white'
     },
@@ -461,5 +483,26 @@ const editProfileStyles = StyleSheet.create({
         color: '#979797',
         fontSize: 24,
         height: 30
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    button: {
+        backgroundColor: '#EA4B6C',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flex: 0.6
+    },
+    buttonText: {
+        fontFamily: 'alternate-gothic-no3-d-regular',
+        fontSize: 24,
+        color: 'white'
+    },
+    buttonSpacer: {
+        flex: 0.2
+    },
+    spacerBetweenButtons: {
+        height: 20
     }
 })

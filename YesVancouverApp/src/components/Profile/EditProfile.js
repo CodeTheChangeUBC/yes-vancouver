@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 export default class EditProfile extends Component{
@@ -111,8 +112,12 @@ export default class EditProfile extends Component{
     returnEditProfileView(){
         let { navigation } = this.props
         return (
-            <ScrollView style={editProfileStyles.scrollView} 
-                        contentContainerStyle={editProfileStyles.scrollViewContentContainer}>
+            <KeyboardAwareScrollView style={editProfileStyles.scrollView} 
+                contentContainerStyle={editProfileStyles.scrollViewContentContainer}
+                enableAutomaticScroll={true}
+                extraScrollHeight={20}
+                enableOnAndroid={true}
+                enableResetScrollToCoords={false}>
                 
                 <View style={editProfileStyles.contentTopSpacer} />
 
@@ -469,7 +474,7 @@ export default class EditProfile extends Component{
 
                 <View style={editProfileStyles.contentTopSpacer}></View>
 
-            </ScrollView>
+            </KeyboardAwareScrollView>
         )
     }
 }

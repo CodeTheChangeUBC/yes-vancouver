@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 export default class EditProfile extends Component{
@@ -21,6 +22,14 @@ export default class EditProfile extends Component{
             newContactWebsite: '',
             newContactOtherInfo: ''
         }
+
+        // For determining the next field to focus on when user clicks next on the keyboard
+        this.focusNextField = this.focusNextField.bind(this)
+        this.inputs = {}
+    }
+
+    focusNextField(id) {
+        this.inputs[id].focus();
     }
 
     async componentDidMount(){
@@ -103,8 +112,12 @@ export default class EditProfile extends Component{
     returnEditProfileView(){
         let { navigation } = this.props
         return (
-            <ScrollView style={editProfileStyles.scrollView} 
-                        contentContainerStyle={editProfileStyles.scrollViewContentContainer}>
+            <KeyboardAwareScrollView style={editProfileStyles.scrollView} 
+                contentContainerStyle={editProfileStyles.scrollViewContentContainer}
+                enableAutomaticScroll={true}
+                extraScrollHeight={20}
+                enableOnAndroid={true}
+                enableResetScrollToCoords={false}>
                 
                 <View style={editProfileStyles.contentTopSpacer} />
 
@@ -119,6 +132,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['FirstName'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('LastName')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -143,6 +159,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['LastName'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Email')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -167,6 +186,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Email'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Phone')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="email-address"
@@ -191,6 +213,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Phone'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Company')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="phone-pad"
@@ -215,6 +240,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Company'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('JobTitle')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -239,6 +267,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['JobTitle'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('LinkedIn')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -263,6 +294,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['LinkedIn'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Facebook')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -287,6 +321,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Facebook'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Instagram')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -311,6 +348,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Instagram'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Twitter')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -335,6 +375,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Twitter'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('Website')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -359,6 +402,9 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['Website'] = input}}
+                        onSubmitEditing={() => {this.focusNextField('OtherInfo')}}
+                        blurOnSubmit={false}
                         underlineColorAndroid='transparent'
                         returnKeyType="next"
                         keyboardType="default"
@@ -383,8 +429,10 @@ export default class EditProfile extends Component{
                     </View>
                     <View style={editProfileStyles.inputVerticalSpacer} />
                     <TextInput
+                        ref={input => {this.inputs['OtherInfo'] = input}}
+                        blurOnSubmit={true}
                         underlineColorAndroid='transparent'
-                        returnKeyType="next"
+                        returnKeyType="done"
                         keyboardType="default"
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -426,7 +474,7 @@ export default class EditProfile extends Component{
 
                 <View style={editProfileStyles.contentTopSpacer}></View>
 
-            </ScrollView>
+            </KeyboardAwareScrollView>
         )
     }
 }

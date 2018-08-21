@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation'
 import CustomHeader, { CustomHeaderBackButton, headerStyles } from '../Navigation/Header'
 import ProfileDetails from './ProfileDetails'
 import EditProfile from './EditProfile'
+import ChangePassword from './ChangePassword'
 
 
 const EventsView = createStackNavigator({
@@ -20,12 +21,12 @@ const EventsView = createStackNavigator({
             title: 'Edit Profile'
         })
     },
-    // EventsRegistration: {
-    //     screen: EventsRegistration,
-    //     navigationOptions: ({navigation}) => ({
-    //         title: navigation.getParam('eventTitle', 'Event Registration')
-    //     })
-    // }
+    ChangePassword: {
+        screen: ChangePassword,
+        navigationOptions: ({navigation}) => ({
+            title: 'Change Password'
+        })
+    }
 },
 {
     navigationOptions: {

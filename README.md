@@ -8,7 +8,25 @@ Development repo for YES! Vancouver cross-platform mobile app.
 - [Getting Started](#getting-started)
 
 ## Description
-TODO
+This cross-platform mobile app (iOS, Android) is developed for [Yes Vancouver](http://yesvancouver.org/) and aims to provide the following functionalities:
+
+- **Editable User Profile:**  
+A user can create a profile on the Wild Apricot Membership Management site through the app. The user can then login to (and logout of) their profile in the app. Inside the app, the user can renew their membership and modify their profile details and settings.
+
+- **Events Calendar:**  
+A user can view a list of upcoming events as well as previous events. When a user clicks on an item in the events list, they will be navigated to a new screen that displays more details about the event and a link to the registration page.
+
+- **Partner Perks:**  
+A user with a valid membership can view a list of perks offered by Yes Vancouver's sponsors. When a user clicks on an item in the perks list, they will be navigated to a new screen that displays more details about the offer (eg. offer details, expiry date, discount code)
+
+- **News Feed:**  
+A user can read the recent news and blog posts published by Yes Vancouver.
+
+- **Messaging:**  
+A user can message other members that are registered with Yes Vancouver.
+
+- **Push Notfications**  
+A user can get push notifications to alert them of new events, new offers from sponsors, or renew their membership.
 
 ## Tech Stack
 

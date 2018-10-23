@@ -287,13 +287,7 @@ export default class ProfileDetails extends Component {
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonSpacer} />
                     <TouchableOpacity style={styles.button}
-                        onPress={()=> Alert.alert(
-                            'Password Changed',
-                            'Your password has been changed',
-                            [
-                                {text: "Ok", style:'cancel'}
-                            ]
-                        )}>
+                        onPress={()=> navigate('ChangePassword')}>
                         <Text style={styles.buttonText}>Change Password</Text>
                     </TouchableOpacity>
                     <View style={styles.buttonSpacer} />

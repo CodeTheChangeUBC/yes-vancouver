@@ -1,4 +1,4 @@
-// https://help.wildapricot.com/display/DOC/Events+API+V2+call
+// https://gethelp.wildapricot.com/en/articles/502-contacts-admin-api-call
 
 // GET
 // https://api.wildapricot.org/v2/Accounts/<ACCOUNT_NUM>/Contacts?$async=false

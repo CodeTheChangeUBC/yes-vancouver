@@ -1,4 +1,4 @@
-// https://help.wildapricot.com/display/DOC/Events+API+V2+call
+// https://gethelp.wildapricot.com/en/articles/499-events-admin-api-call
 
 // GET
 // https://api.wildapricot.org/v2/Accounts/<ACCOUNT_NUM>/Events/<EVENT_ID>

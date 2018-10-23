@@ -1,15 +1,15 @@
-# React Native Resources
+# React Native Learning Resources
 This page lists some resources for learning React Native and tools for working with React Native.
 
 Tutorial on Official React Native Website
-- https://facebook.github.io/react-native/releases/next/docs/tutorial.html
+- https://facebook.github.io/react-native/
 
 Codecademy
 - https://www.codecademy.com/
 - JavaScript course good for learning basic programming concepts
 - ReactJS I & II courses good for learning about how components work and the best practices for writing components
 
-Lyndia
+Lynda
 - Contains some React Native courses
 - https://www.vpl.ca/lynda - requires Vancouver Library Card
 - http://rpl.yourlibrary.ca/learning_hub/online_education - requires Richmond Library Card
@@ -24,7 +24,6 @@ React Native Elements
 - https://github.com/react-native-training/react-native-elements
 
 React Native App Examples
-- https://github.com/vctrysam
 - https://github.com/fbsamples/f8app
 - https://react.rocks/tag/ReactNative
 

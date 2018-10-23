@@ -1,38 +1,58 @@
-# yes-vancouver
+# Yes Vancouver Mobile App
+
 Development repo for YES! Vancouver cross-platform mobile app. 
 
+## Table of Contents
+- [Description](#description)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
 
-Installation instructions for Node.js:
+## Description
+TODO
 
-1. Windows:  
-   Install Node.js: https://nodejs.org/dist/v6.11.1/node-v6.11.1-x64.msi
+## Tech Stack
 
-   Mac:  
-   Install Homebrew:  
-   - Open Terminal:  
-   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"  
-   brew update  
-   brew install node  
+- Frontend: React Native
+- Backend: [Wild Apricot](https://www.wildapricot.com/)
+
+## Getting Started
+
+1.  Install Node.js:  
+    https://nodejs.org/en/
    
 
-2. Install Expo app:  
-   https://expo.io/  
-   Connect your phone to the same network as your computer  
+1.  Install Expo command line tool:  
+    ```
+    npm install expo-cli --global
+    ```
+
+1.  Install Expo Client app on phone:  
+    Android: https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en  
+    iOS:
+    https://itunes.apple.com/ca/app/expo-client/id982107779?mt=8
+
+1.  Install git:  
+    https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
    
 
-3. Clone the repository.  In Git Bash or Mac Terminal, run:  
-   `git clone https://github.com/CodeTheChangeUBC/yes-vancouver.git`
+1. Clone the repository:
+   ```
+   git clone https://github.com/CodeTheChangeUBC/yes-vancouver.git
+   ```
    
-4. Navigate into the project's root directory:  
-   `cd yes-vancouver/YesVancouverApp/`
+1. Navigate into the project's root directory:  
+   ```
+   cd yes-vancouver/YesVancouverApp/
+   ```
    
-5. Install node modules:  
-   `npm install`
+1. Install node modules:  
+   ```
+   npm install
+   ```
 
-6. For Windows use PowerShell:  
-   For Mac use Terminal:
+1.  Start the app:
+    ```
+    expo start
+    ```
 
-   `npm start`
-
-7. Open Expo app and scan the QR code in the shell.
-
+1.  Open the app by scanning the QR code with the Expo Client app on your phone or open using an emulator.

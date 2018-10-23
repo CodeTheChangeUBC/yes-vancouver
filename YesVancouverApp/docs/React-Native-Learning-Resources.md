@@ -24,7 +24,6 @@ React Native Elements
 - https://github.com/react-native-training/react-native-elements
 
 React Native App Examples
-- https://github.com/vctrysam
 - https://github.com/fbsamples/f8app
 - https://react.rocks/tag/ReactNative
 

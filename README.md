@@ -13,37 +13,37 @@ This cross-platform mobile app (iOS, Android) is developed for [Yes Vancouver](h
 - **Editable User Profile:**  
 A user can create a profile on the Wild Apricot Membership Management site through the app. The user can then login to (and logout of) their profile in the app. Inside the app, the user can renew their membership and modify their profile details and settings.
 
-    <img src="YesVancouverApp/docs/images/Screenshot-Profile-Signup.png" width="250px"/>
-    <img src="YesVancouverApp/docs/images/Screenshot-Profile-Details.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Profile-Signup.png" height="500px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Profile-Details.png" height="500px"/>
 
 - **Events Calendar:**  
 A user can view a list of upcoming events as well as previous events. When a user clicks on an item in the events list, they will be navigated to a new screen that displays more details about the event and a link to the registration page.
 
-    <img src="YesVancouverApp/docs/images/Screenshot-Events-List.png" width="250px"/>
-    <img src="YesVancouverApp/docs/images/Screenshot-Events-Details.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Events-List.png" height="500px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Events-Details.png" height="500px"/>
 
 - **Partner Perks:**  
 A user with a valid membership can view a list of perks offered by Yes Vancouver's sponsors. When a user clicks on an item in the perks list, they will be navigated to a new screen that displays more details about the offer (eg. offer details, expiry date, discount code)
 
-    <img src="YesVancouverApp/docs/images/Screenshot-PerkPartners-List.png" width="250px"/>
-    <img src="YesVancouverApp/docs/images/Screenshot-PerkPartners-Details.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-PerkPartners-List.png" height="500px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-PerkPartners-Details.png" height="500px"/>
 
 - **News Feed:**  
 A user can read the recent news and blog posts published by Yes Vancouver.
 
-    <img src="YesVancouverApp/docs/images/Screenshot-Newsfeed.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Newsfeed.png" height="500px"/>
 
 - **Messaging:**  
 A user can message other members that are registered with Yes Vancouver.
 
-    <img src="YesVancouverApp/docs/images/Screenshot-Messaging-List.png" width="250px"/>
-    <img src="YesVancouverApp/docs/images/Screenshot-Messaging-Conversation.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Messaging-List.png" height="500px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Messaging-Conversation.png" height="500px"/>
 
 - **Push Notfications**  
 A user can get push notifications to alert them of new events, new offers from sponsors, or renew their membership.
 
-    <img src="YesVancouverApp/docs/images/Screenshot-Settings.png" width="250px"/>
-    <img src="YesVancouverApp/docs/images/Screenshot-Push-Notifications.png" width="250px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Settings.png" height="500px"/>
+    <img src="YesVancouverApp/docs/images/Screenshot-Push-Notifications.png" height="500px"/>
 
 ## Tech Stack
 

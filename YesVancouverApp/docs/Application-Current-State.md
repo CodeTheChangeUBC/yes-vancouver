@@ -31,13 +31,70 @@ Not all of the application follow this structure. The `Login` and `Signup` compo
     When a user clicks on the calendar icon on the bottom navigation bar, they will see a list of upcoming and past events. Currently, there is no logic to sort the list of events by data and this should be implemented in the future. This screen can also handle edge cases like displaying multi-day events and displaying and 'Failed to retrieve events' message when the server cannot be reached.
 
 -   `src/components/Events/EventsDetails.js`  
-    When a user clicks on an event listed on the EventsList screen, they will be navigated into the EventsDetails screen that displays a more details about an event. The way this page is rendered depends on how the event was created in Wild Apricot
+    When a user clicks on an event listed on the EventsList screen, they will be navigated into the EventsDetails screen that displays a more details about an event. Clicking on the register button navigates the user to the event registration webpage on Wild Apricot. Clicking on the 'Discussion Board' currently does nothing. Clicking on the share icons copies the event registration link to the clipboard where it may be shared in other applications. The way this page is rendered depends on how the event was created in Wild Apricot
 
     - **Basic Event**  
     When an admin on Wild Apricot creates an event by filling in the system's mandatory fields (eg. location, date, time) for events and adding HTML to the event description, the EventsDetails screen on the app will display the mandatory fields on the top and below that render the HTML in using the `react-native-render-html` library.
 
+    <img src="images/Event-Basic-1.png" height="500px"/>
+    <img src="images/Event-Basic-2.png" height="500px"/>
+
+    *Figure 2. Event containing only the basic details. Banner image is currently static. Date, time and location are fetched from Wild Apricot. 'Discussion Board' does nothing. Event description HTML is rendered as an HTML element at the bottom of the screen.*
+
     - **Event with Additional Details**  
     In the Yes Vancouver app prototype, the EventsDetails screen contains a banner image, text description of the event, speakers, and sponsors. However, Wild Apricot does not support custom fields for Events. The challenge is finding a solution that keeps all the information about an event together in that Event entry on Wild Apricot, while not impacting the way the event is displayed on a Web browser. The current implementation requires an admin to add an XML document as an HTML comment to the end of the HTML description in an event entry on Wild Apricot. In the mobile app, this XML document is retrieved from the `DescriptionHtml` field of the events API response and then parsed for the banner image, event text description, speaker details, and sponsors.
+
+    <img src="images/Event-Additional-Details-1.png" height="500px"/>
+    <img src="images/Event-Additional-Details-2.png" height="500px"/>
+
+    *Figure 3. Event containing additional details (banner image, custom text description, speaker details, sponsors) that are fetched from the event description HTML in Wild Apricot.*
+
+    ```xml
+    <additionaldetails>
+        <eventbannerimageurl>
+            https://yvsuper.wildapricot.org/resources/Pictures/Events/Event-Detail-Banner.png
+        </eventbannerimageurl>
+        <eventdetails>
+            Event Description
+        </eventdetails>
+        <speaker>
+            <firstname>FirstA</firstname>
+            <lastname>LastA</lastname>
+            <title>TitleA</title>
+            <company>CompanyA</company>
+            <role>RoleA</role>
+            <imageurl>https://yvsuper.wildapricot.org/resources/Pictures/Events/Blank-Profile-Picture.png</imageurl>
+        </speaker>
+        <speaker>
+            <firstname>FirstB</firstname>
+            <lastname>LastB</lastname>
+            <title>TitleB</title>
+            <company>CompanyB</company>
+            <role>RoleB</role>
+            <imageurl>https://yvsuper.wildapricot.org/resources/Pictures/Events/Blank-Profile-Picture.png</imageurl>
+        </speaker>
+        <sponsorimageurl>https://hootsuite.com/uploads/images/craft/components/polaroid-images/HootsuiteLogo-Black.png</sponsorimageurl>
+        <sponsorimageurl>https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg</sponsorimageurl>
+    </additionaldetails>
+    ```
+        
+    *Figure 4. Sample XML document describing additional details for events. This document can also be found in `src/components/Events/EventsAdditionalDetails.xml`. Document can contain zero or multiple speaker and sponsor items.*
+
+    <img src="images/Event-Additional-Details-Wild-Apricot-Instructions-1.png" height="500px"/>
+
+    *Figure 5. Click the 'Edit' button of the Wild Apricot event to edit the event.*
+
+    <img src="images/Event-Additional-Details-Wild-Apricot-Instructions-2.png" height="500px"/>
+
+    *Figure 6. Click 'HTML' button under the description section of the event to edit the HTML of the event.*
+
+    <img src="images/Event-Additional-Details-Wild-Apricot-Instructions-3.png" height="500px"/>
+
+    *Figure 7. Paste the XML document describing the event's additional details as an HTML comment at the end of the event description's HTML. It is added as a comment so this extra information will not affect the way the event is rendered on a web browser. Then click Save to save the modified event description.*
+
+    <img src="images/Event-Additional-Details-Wild-Apricot-Instructions-4.png" height="500px"/>
+
+    *Figure 8. Click the 'Save' button to save the changes made to the event.*
 
 #### Perks Screen
 

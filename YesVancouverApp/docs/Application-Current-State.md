@@ -1,12 +1,27 @@
 # Current Status of the Application
 as of the last commit `03fbe4465cc1998a5a749640423ebeb94fae67ca` on August 20, 2018
 
+## Table of Contents
+
+- [High Level Architecture Diagram](#high-level-architecture-diagram)
+- [Description of System Components](#description-of-system-components)
+    - [Backend Server and Database](#backend-server-and-database) 
+    - [Frontend React Native Mobile Application](#frontend-react-native-mobile-application)
+        - [Basic Layout](#basic-layout)
+        - [Events Screen](#events-screen)
+        - [Perks Screen](#perks-screen)
+        - [NewsFeed Screen](#newsfeed-screen)
+        - [Messaging Screen](#messaging-screen)
+        - [Profile Screen](#profile-screen)
+        - [Sign Up](#sign-up)
+        - [Authentication](#authentication)
+
 ## High Level Architecture Diagram
 <img src="images/High-Level-Architecture-Diagram.png" height="500px"/>
 
 *Figure 1. High level architecture diagram that illustrates the relationships between different system components (as of August 20, 2018).*
 
-## Description of system components
+## Description of System Components
 
 ### Backend Server and Database
 

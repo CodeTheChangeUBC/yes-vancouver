@@ -58,3 +58,22 @@ When a user logins into the app, the NewsFeed screen will be initially displayed
 This feature was discussed with Yes Vancouver and will not be implemented due to its complexity. The tab on the bottom navigation bar for messaging has been commented out. Wild Apricot currently does not contain the functionality for messaging between members. To implement this feature in the app, an external database will be required. 
 
 #### Profile Screen
+
+`src/components/Profile/ProfileDetails.js`  
+This view can fetch both the essential and custom fields for a contact from Wild Apricot and display them. The profile picture is currently static. Work needs to be done to dynamically fetch the profile picture from Wild Apricot. This screen currently has two buttons that navigate to the `EditProfile` and `ChangePassword` screens.
+
+`src/components/Profile/EditProfile.js`  
+This view allows a user to edit both the essential and custom text fields for a contact. When the form is submitted, Wild Apricot will be updated. Then the user will be navigated back to the `ProfileDetails` page, where they will see their updated details. Currently, uploading or editing a profile picture are not implemented.
+
+`src/components/Profile/ChangePassword.js`  
+The visual layout of the ChangePassword screen is implemented but does not do anything. The PUT call to change the password has not been implemented. This call is very similar to the one done in `EditProfile`.
+
+#### Sign Up
+
+`src/components/SignUp/SignUp.js`  
+This view allows a user to create an account on Wild Apricot inside the app. Currently there is basic email validation and the component does make an API call to Wild Apricot to create an account. After creating an account, the user will be navigated to screens where they are prompted to fill in custom profile details (eg.company, title, Linkedin, Facebook). Only the visual layout of these screens are implemented. Submitting these custom profile details to Wild Apricot has not been implemented yet.
+
+#### Authentication
+
+`src/components/Login/LoginForm.js`  
+Currently, a user can login with their Wild Apricot credentials in the app and see their own profile information. Log out functionality has not been implemented yet.

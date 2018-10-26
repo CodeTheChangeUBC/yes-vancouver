@@ -16,7 +16,7 @@
 
 - Perks
     - Currently list of sponsors are static. Need to find way to store sponsors on Wild Apricot (or on separate database) and fetch them from there.
-    - Need to implement functionality to sort the sponsor alphabetically and categorically and favorite them.
+    - Need to implement functionality to sort the sponsors alphabetically and categorically and favorite them.
     - PerksDetails also static. Need to find way to store and fetch them from the server.
 
 - Newsfeed
@@ -39,7 +39,7 @@
 - Refactor activity loading screen, and custom buttons into their own components (custom button is used since the default React Button component looks different on iOS and Android)
 
 ## Suggestions
-- [Redux](#https://redux.js.org/) - helps manage state.
+- [Redux](https://redux.js.org/) - helps manage state.
 - Separate database - may be needed for storing sponsors and sponsor offers. Try looking into [Firebase](https://firebase.google.com/).
 - Refresh mechanism for the bearer token - Currently a new authentication token is requested for every API call. This token is valid for a certain amount of time and can be re-used. To improve performance, try caching this token to avoid the extra API call and only requesting a new token when the old token has expired.
 - Write test cases - Currently there are no tests, perhaps look into [Jest](https://jestjs.io/).
